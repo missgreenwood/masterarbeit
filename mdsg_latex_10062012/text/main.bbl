@@ -1,0 +1,136 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{STT{\etalchar{+}}09}
+
+\bibitem[ADI{\etalchar{+}}12]{Ahlgren2012}
+Bengt Ahlgren, Christian Dannewitz, Claudio Imbrenda, Dirk Kutscher, and
+  B{\"o}rje Ohlman.
+\newblock A survey of information-centric networking.
+\newblock {\em {C}ommunications {M}agazine, {IEEE}}, 50(7):26--36, 2012.
+
+\bibitem[AT06]{Agarwal2006}
+S.~Agarwal and A.~Trachtenberg.
+\newblock Approximating the number of differences between remote sets.
+\newblock In {\em {I}nformation {T}heory {W}orkshop, 2006. {ITW} '06 {P}unta
+  del {E}ste. {IEEE}}, pages 217--221, March 2006.
+
+\bibitem[BCM02]{Byers2002}
+John Byers, Jeffrey Considine, and Michael Mitzenmacher.
+\newblock {F}ast {A}pproximate {R}econciliation of {S}et {D}ifferences.
+\newblock In {\em {BU} {C}omputer {S}cience {TR}}, pages 2002--2019, 2002.
+
+\bibitem[BM04]{Broder2004}
+Andrei Broder and Michael Mitzenmacher.
+\newblock {N}etwork applications of bloom filters: {A} survey.
+\newblock {\em {I}nternet {M}athematics}, 1(4):485--509, 2004.
+
+\bibitem[BMS07]{Bayardo2007}
+Roberto~J. Bayardo, Yiming Ma, and Ramakrishnan Srikant.
+\newblock Scaling up all pairs similarity search.
+\newblock In {\em Proceedings of the 16th international conference on {W}orld
+  {W}ide {W}eb}, pages 131--140. ACM, 2007.
+
+\bibitem[DWM10]{Duerr2010}
+Michael D{\"u}rr, Martin Werner, and Marco Maier.
+\newblock Re-socializing online social networks.
+\newblock In {\em Green Computing and Communications (GreenCom), 2010 IEEE/ACM
+  International Conference on \& International Conference on Cyber, Physical
+  and Social Computing (CPSCom)}, pages 786--791. IEEE, 2010.
+
+\bibitem[HP94]{Hellerstein1994}
+Joseph~M. Hellerstein and Avi Pfeffer.
+\newblock The {RD}-{T}ree: {A}n {I}ndex {S}tructure for {S}ets.
+\newblock Technical report, University of {W}isconsin-{M}adison, {C}omputer
+  {S}ciences {D}epartment, 1994.
+
+\bibitem[LC86]{Lehman1986}
+Tobin~J. Lehman and Michael~J. Carey.
+\newblock A study of index structures for main memory database management
+  systems.
+\newblock In {\em Proc. {VLDB}}, 1986.
+
+\bibitem[Mit02]{Mitzenmacher2002}
+Michael Mitzenmacher.
+\newblock Compressed bloom filters.
+\newblock {\em IIEEE/ACM Transactions on Networking (TON)}, 10(5):604--612,
+  2002.
+
+\bibitem[Naf05]{Nafe2005}
+Clemens Nafe.
+\newblock Indexierung lokaler {D}aten in {P}eer-to-{P}eer-{N}etzwerken.
+\newblock Master's thesis, Universit{\"a}t Rostock, 2005.
+
+\bibitem[QLC14]{Qiao2014}
+Yan Qiao, Tao Li, and Shigang Chen.
+\newblock {F}ast {B}loom {F}ilters and their {G}eneralization.
+\newblock {\em Parallel and Distributed Systems, IEEE Transactions on},
+  25(1):93--103, January 2014.
+
+\bibitem[RK14]{Ruppel2014}
+Peter Ruppel and Axel K{\"u}pper.
+\newblock Geocookie: a space-efficient representation of geographic location
+  sets.
+\newblock {\em Journal of Information Processing}, 22(3):418--424, 2014.
+
+\bibitem[SBE{\etalchar{+}}12]{Sarwat2012}
+Mohamed Sarwat, Jie Bao, Ahmed Eldawy, Justin~J Levandoski, Amr Magdy, and
+  Mohamed~F Mokbel.
+\newblock Sindbad: a location-based social networking system.
+\newblock In {\em Proceedings or the 2012 ACM SIGMOD International Conference
+  on Management of Data}, pages 649--652. ACM, 2012.
+
+\bibitem[Sch13]{Schnell2013}
+Rainer Schnell.
+\newblock {G}etting {B}ig {D}ata but avoiding {B}ig {B}rother.
+\newblock {\em WP-GRLC}, 2, 2013.
+
+\bibitem[SS11]{Sakuma2011}
+H.~Sakuma and F.~Sato.
+\newblock {E}valuation of the {S}tructured {B}loom {F}ilters {B}ased on
+  {S}imilarity.
+\newblock In {\em {A}dvanced {I}nformation {N}etworking and {A}pplications
+  {(AINA)}, 2011 {IEEE} {I}nternational {C}onference on}, pages 316--323, March
+  2011.
+
+\bibitem[STT{\etalchar{+}}09]{Shiraki2009}
+Toru Shiraki, Yuichi Teranishi, Susumu Takeuchi, Kaname Harumoto, and Shojiro
+  Nishio.
+\newblock {A} {B}loom {F}ilter-{B}ased {U}ser {S}earch {M}ethod {B}ased on
+  {M}ovement {R}ecords for {P2P} {N}etwork.
+\newblock In {\em {A}pplications and the {I}nternet, 2009. {SAINT} '09. {N}inth
+  {I}nternational {S}ymposium on}, pages 177--180. IEEE, July 2009.
+
+\bibitem[SW14]{Schoenfeld2014}
+Mirco Sch{\"o}nfeld and Martin Werner.
+\newblock Node wake-up via ovsf-coded bloom filters in wireless sensor
+  networks.
+\newblock In {\em {A}d {H}oc {N}etworks}, pages 119--134. Springer, 2014.
+
+\bibitem[WDS15]{Werner2015}
+Martin Werner, Florian Dorfmeister, and Mirco Sch{\"o}nfeld.
+\newblock {AMBIENCE}: {A} {C}ontext-{C}entric {O}nline {S}ocial {N}etwork.
+\newblock In {\em {12th {IEEE} {W}orkshop on {P}ositioning, {N}avigation and
+  {C}ommunications ({WPNC} {\rq}15)}}, 2015.
+
+\bibitem[YL02]{Yang2002}
+Congjun Yang and King-Ip Lin.
+\newblock An index structure for improving closest pairs and related join
+  queries in spatial databases.
+\newblock In {\em Database {E}ngineering and {A}pplications {S}ymposium, 2002.
+  {P}roceedings. {I}nternational}, pages 140--149. IEEE, 2002.
+
+\bibitem[Zha12]{Zhang2012}
+Zhenghao Zhang.
+\newblock {A}nalog {B}loom {F}ilter: {E}fficient simultaneous query for
+  wireless networks.
+\newblock In {\em {G}lobal {C}ommunications {C}onference ({GLOBECOM}), 2012
+  {IEEE}}, pages 3340--3346. {IEEE}, 2012.
+
+\bibitem[ZJW04]{Zhu2004}
+Yifeng Zhu, Hong Jiang, and Jun Wang.
+\newblock {H}ierarchical {B}loom {F}ilter {A}rrays ({HBA}): {A} {N}ovel,
+  {S}calable {M}etadata {M}anagement {S}ystem for {L}arge {C}luster-based
+  {S}torage.
+\newblock In {\em {C}luster {C}omputing, 2004 {IEEE} {I}nternational
+  {C}onference on}, pages 165--174. IEEE, 2004.
+
+\end{thebibliography}
