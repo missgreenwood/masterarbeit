@@ -5,7 +5,7 @@ Zusammenfassung Byers2002 _(referenziert in AMBIENCE)_
 
 - Ziel: Neue, effiziente u. einfache Datenstrukturen z. Approximation v. Mengenabgleich -> "useful standalone primitive for peer-to-peer networks and a natural subroutine in methods for exact reconciliation" (S. 1)
 - "reconciliation": "Abgleich, Ausgleich, Verbindung"
-- Beschreibung des "approximate reconciliation problem" [Achtung, wichtig!]: "peers A and aB respectively have subsets of elements S_A and S_B of a large universe U. Peer A wishes to send a short message M to peer B with the goal that B should use M to determine as many elements in the set S_B - S_A as possible. [...] we focus on the situation where a single message M is sent" (S. 1)
+- Beschreibung des "approximate reconciliation problem" [Achtung, wichtig!]: "peers A and B respectively have subsets of elements S_A and S_B of a large universe U. Peer A wishes to send a short message M to peer B with the goal that B should use M to determine as many elements in the set S_B - S_A as possible. [...] we focus on the situation where a single message M is sent" (S. 1)
 - Erster Ansatz mit Bloom-Filtern -> dienen als Benchmark für "performance tradeoffs bewtween message size, accuracy and computation time" (S. 1)
 - Dann Einführung einer neuen Datenstruktur: "approximation reconciliation trees" (S. 1) -> kombiniert "Patricia tries", "Merkle trees" u. Bloom-Filter (S. 1)
 - Außerdem Vgl. d. unterschiedl. Datenstrukturen u. ihrer Performance

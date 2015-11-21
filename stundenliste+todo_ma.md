@@ -73,7 +73,7 @@ Mi, 18.11. (4 h 15 min)
 Do, 19.11. 
 - Termin mit Zweitbetreuer
 
-Fr, 20.11. 
+Fr, 20.11. (30 min)
 - Papers lesen und zusammenfassen, Versionskontrolle, Entwurf Exposé 
 
 
