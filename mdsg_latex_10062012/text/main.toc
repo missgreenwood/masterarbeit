@@ -11,4 +11,4 @@
 \contentsline {subsection}{\numberline {2.3.3}R*-Trees}{3}{subsection.2.3.3}
 \contentsline {subsection}{\numberline {2.3.4}Heaps}{3}{subsection.2.3.4}
 \contentsline {section}{\numberline {2.4}AMBIENCE}{3}{section.2.4}
-\contentsline {chapter}{Literaturverzeichnis}{5}{appendix*.2}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{5}{appendix*.2}

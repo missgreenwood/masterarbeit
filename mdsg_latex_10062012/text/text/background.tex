@@ -4,6 +4,16 @@
 \cite{Sakuma2011}: 316 u. 318.
 \section{Mathematic Principles}
 \section{Query Processing and Index Structures in Database Systems}
+To support query processing and operations in an efficient manner the internal layer of a database system relies on certain data strucures and memory methods. These are called \textit{index structures}. They organize the data to support the required operations using its \textit{indices}.
+
+An \textit{index} (also called \textit{directory}) holds information about the structure of a file. A \textit{file} in this context refers to an entire data structure, i.e. an array, a search tree etc.. 
+
+One can differentiate between three classes of index structures depending on the manner in which the data is organized: 
+\begin{itemize}
+	\item \textit{Data-organizing index structures} are used to organize the actual amount of data. They heavily rely on \textit{search trees}. 
+	\item \textit{Space-organizing index structures} are used to organize the space that holds the data. They use \textit{dynamic hashing}. 
+	\item \textit{Hybrid index structures} are a combination of both classes.   
+\end{itemize}
 \cite{Ottmann2012}
 \subsection{B-Trees}	
 \cite{Knuth1998}	
