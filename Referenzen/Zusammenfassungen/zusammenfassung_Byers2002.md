@@ -19,7 +19,7 @@ Zusammenfassung Byers2002 _(referenziert in AMBIENCE)_
 	1. Schnelle Abschätzung für spätere exakte Berechnung -> reduziert #Elemente bereits vorab drastisch 
 	2. P2P-Anwendungen -> z.B. Abgleich von Musikdatenbanken ("song list") zw. Peers, "subroutine for informed content delivery of large data files protected with erasure-resilient codes" (S. 2, vgl. Byers, J., Considine, J., Mitzenmacher, M., and Rost, S.. Informed content delivery across adaptive overlay networks. IN Proc of ACM SIGCOMM '02 (August 2002).)
 - Unterschied zu früheren Arbeiten: nur eine Kommunikationsrunde, Approximation ("one round protocols reconciling differences between very large sets", S. 2)
-- Außerdem: Trennen von Preprocessing- und Mengenabgleichskosten ("carefully separate preprocessing costs from teh costs of reconciliation", S. 3) -> reconciliation immer in Echtzeit!
+- Außerdem: Trennen von Preprocessing- und Mengenabgleichskosten ("carefully separate preprocessing costs from the costs of reconciliation", S. 3) -> reconciliation immer in Echtzeit!
 - Resultat: "while we account for all costs, we focus on minimizing the work done once peer A has sent its message to peer B" (S. 3)
 
 2. Bloom Filters for Approximate Reconciliation 
@@ -83,7 +83,7 @@ Theorem 2: "There exists a one-round protocol with message size O(log|S_A|), con
 3.1.2 Merkle Trees
 
 - Prinzip: "method of signing and comparing large databases while allowing fast updates and identifying differences" (S. 6)
-- Konstruktion: Merkle tree wird auf dem Patricia trie gebildet durch "associating a value with each node of the underlying tree. At the leaves, the value is obtained by applying a hash function to the element represented by the leaf. The values of the internal nodes of a Merkle tree are then obtained by applying a hash function to the values of their children. Using this construction, the hash of a node is dependent upon all of the elements inits subtree" (S. 6f.) 
+- Konstruktion: Merkle tree wird auf dem Patricia trie gebildet durch "associating a value with each node of the underlying tree. At the leaves, the value is obtained by applying a hash function to the element represented by the leaf. The values of the internal nodes of a Merkle tree are then obtained by applying a hash function to the values of their children. Using this construction, the hash of a node is dependent upon all of the elements in its subtree" (S. 6f.) 
 - Eigenschaften: "Merkle trees on top of uncollapsed tries give a natural set reconciliation algorithm if the tree and its hashes are sent. [...] While this affords constant time comparisons, it now runs the risk of false positive matches due to hash collisions" (S. 7) -> jedoch nicht mögl. f. die kollabierten Patricia tries bzw. zu aufwändig! 
 - Daher jetzt: Kombination m. Bloom-Filtern als dritter Schritt 
 
@@ -99,7 +99,7 @@ Theorem 2: "There exists a one-round protocol with message size O(log|S_A|), con
 	5. "Internal Bloom filter" (S. 7) 
 	6. "Leaf Bloom filter" (S. 7)
 
-- Funktionsweise: "each peer starts by building a Patricia trie of their set along with the associated Merkle tree values. The message A then sends to B is a Bloom filter of the values from the Merkle tree. For B to perform approximate reconciliation, B uses the same recursive algorithm previously used to traverse an uncollapsed trie, to traverse its collapsed Patricia trei T_B" (S. 7)
+- Funktionsweise: "each peer starts by building a Patricia trie of their set along with the associated Merkle tree values. The message A then sends to B is a Bloom filter of the values from the Merkle tree. For B to perform approximate reconciliation, B uses the same recursive algorithm previously used to traverse an uncollapsed trie, to traverse its collapsed Patricia trie T_B" (S. 7)
 - Vorteile durch Verwendung des Bloom-Filters z. Zusammenfassung des Merkle-Baums: 
 	1. B sucht die Knotenwerte in T_B im Bloom-Filter von A -> d.h. falls irgendein Knoten T_A den gesuchten Wert enthält, wird er mit hoher W'keit gefunden 
 	2. Quasi keine Hash-Kollisionen in den Merkle-Bäumen mehr mögl., da der ART große #Bits für jeden Wert im Merkle-Tree verwenden kann -> werden nicht an den anderen Peer geschickt, sondern in Bloom-Filter zusammengefasst

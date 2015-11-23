@@ -14,8 +14,170 @@ Entwurf Abstract
 
 3. Kern der Arbeit/Thema genau definieren	
 
-4. Bisherige Quellen: 
+4. Bisherige Quellen
 
-	Byers2002 (referenziert auch in AMBIENCE)
+	Byers2002 (referenziert auch in AMBIENCE) -> weniger relevant!
 
-	* 
+	a. Ziel: Einführung einer neuen Datenstruktur z. einfachen u. effizienten Mengenabgleich: "approximation reconciliation tree" -> kombiniert Bloom-Filter, Patricia-Tries u. Merkle-Bäume 
+
+	* Beschreibung des Problems des approximativen Mengenabgleichs (Bestimmung des Durschnitts)
+	* Ansatz mit Bloom-Filtern hat hohe "reconciliation time" (d.h. Zeit, die aufgewendet werden muss, um die Elemente der Nachricht mit den Elementen der eigenen Menge zu vergleichen)
+	* M müsste also der Anfrage entsprechen (= Bloom-Filter), S_B der Menge aus den Bloom-Filtern aller Nachrichten -> das ist nicht der Fall, deswegen Paper nicht so relevant
+	* Aber: Darstellung d. grundlegenden Datenstrukturen: PATRICIA-Trie, Merkle-Baum 
+	* Merkle-Bäume werden hier aus den Patricia-Tries gebildet, indem jedem Knoten ein Wert zugeordnet wird (durch Hashing des Elements, das durch den Knoten repräsentiert wird)
+	* Patricia-Tries: "Datenstruktur, genauer eine spezielle Art eines Tries zur gleichzeitigen Speicherung von mehreren Zeichenketten. [...] Im Gegensatz zum normalen Trie [werden] die Daten komprimiert abgespeichert [...]. Dazu werden Zeichen, bei denen keine Verzweigung im Baum entsteht, einfach übersprungen und die Anzahl der ausgelassenen Knoten vor dem nächsten auftretenden Zeichen gespeichert. Somit wird gewährleistet, dass ein Suchbegriff eindeutig zugeordnet werden kann. Die Größe von Patricia-Tries hängt somit nicht von der Länge der gespeicherten Schlüsselwerte ab und jeder neue Eintrag kann durch Erstellen von nur einem neuen Knoten und einer neuen Kante eingefügt werden. Somit wachsen sie langsam, auch wenn eine große Anzahl neuer Elemente eingefügt wird." (vgl. https://de.wikipedia.org/wiki/Patricia-Trie)
+
+	b. Von Interesse: Kann nur verwendet werden, falls Nachrichten keine Rolle spielen -> ich betrachte nur Mengenabgleich auf ein und demselben Host!
+
+	c. Zusammenfassung: Vorstellung von approx. Mengenabgleich als Primitiv für P2P-Anwendungen; Vorstellung von ARTs mit minimierter Abgleichszeit ggü. Bloom-Filter-Ansatz, praktischer Nachweis d. Wirksamkeit 
+	
+	d. Referenz in AMBIENCE: "Bloom filters provide aggregation, merge and set reconciliation" (S. 3)
+
+
+	Sakuma2011
+
+	a. Ziel: Baumstruktur für Bloom-Filter, Evaluation der Performance des Query-Forwarding
+
+	* Management-Methoden f. den Baum beruhen auf Ähnlichkeitsverhältnis der Knoten -> reduziert Restrukturierungskosten
+	* Vergleich mit existierenden Filtermethoden bzgl. Filtergröße u. durchschnitt. #Hops b. Query-Forwarding
+	* Simulation d. "tree reconstruction cost" (S. 316)
+	* Beschreibung von AND/OR-Operationen auf Bloom-Filtern 
+	* Neue Methoden: 
+		i. Lookup-Methode f. Bloom-Filter, basierend auf B-Baum -> Query-Forwarding liegt in O(log_m N) ggü. Chord-Algo. (O(log_2 N)), #verwaltete Bloom-Filter liegt in O(1) ggü. Chord-Algo. (O(log_2 N))
+		ii. Baum-Management-Methode -> basiert auf Ähnlichkeit v. Bloom-Filtern ("similarity of Bloom filter", S. 316), reduziert Rekonstruktionskosten f. Baum 
+	* Bloom-Filter werden als B-Baum strukturiert ("Bloom filter management method based on a B-tree", S. 316)
+	* Management-Methoden: EInfügen + Löschen ("Participation"/"Secession", vgl. S. 319)
+	* Bloom-Filter-Management: Jeder Knoten managt einen vereinigten Bloom-Filter der darunter liegenden Knoten -> der Wurzelknoten hat damit Informationen über alle (vgl. Fig. 5 S. 320) 
+	* Insgesamt: Die physischen Knoten sind natürlich nicht selbst im Baum gespeichert, sondern ihre IDs bilden logische Knoten im Baum; unterscheide zw. Verwaltung d. logischen Knoten u. Verwaltung d. Bloom-Filter!
+	* Ähnlichkeitsbasiertes Baum-Management: Häufige Umstrukturierungen der B-Bäume sind teuer (vgl. S. 316)
+	* Daher jetzt: Baum-Management, das auf Ähnlichkeit d. Bloom-Filter aufbaut: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
+	* Definition Ähnlichkeit von Bloom-Filtern (hier): #1-Bits > #0-Bits (falls #1-Bits gleich, wird der Filter umgekehrt und die #0-Bits mit AND verglichen)
+	* "Node join": Ein neuer Filter kommt zu dem Knoten, mit dem er die größte Ähnlichkeit hat (vom Wurzelknoten nach unten bis zum niedrigsten inneren Knotenlevel, S. 321)
+	* Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
+	* Wichtigste Evaluationsergebnisse (vgl. S. 322f.): Durchschnittl. Forwarding-Zeit f. Query kann ggü. Chord im besten Fall um ~ 25% reduziert werden; Rekonstruktionskosten können m. ähnlichkeitsbasiertem Ansatz ggü. naivem Ansatz um 9-16% reduziert werden 
+
+	b. Von Interesse: 
+		i. Falls Baumstruktur sich auch auf ein und demselben Host realisieren lässt; Effizienzgewinn darf nicht von verteiltem System abhängen; Verfahren mit DHT für mich nicht interessant, da als Alterntive zu Bloom-Filtern verwendet; diese sind aber für meine Anwendung vorgegeben
+		ii. Natürlich nicht das Knotenmanagement, da ich immer nur einen Knoten habe; aber die Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)  
+
+	c. Zusammenfassung: 
+		i. Vorteil: obere Schranke f. #Schritte Query-Forwarding
+		ii. Nachteil: Baumstruktur muss aufgebaut werden 
+		iii. Baumhöhe ändert sich dynamisch je nach Knotenanzahl 
+		iv. Repräsentative Knoten managen Maintenance-Informationen u. propagieren die Queries 
+		v. #Rekonstruktionen -> werden durch Methode reduziert -> gut für Netzwerk mit häufigem join/leave von Knoten
+
+	
+	Shiraki2009 -> weniger relevant!
+
+	a. Ziel: P2P-Methode zur Suche von Nutzern basierend auf Bewegungsmeldungen ("P2P user search method based on movement records that can be automatically obtained by location detection services", S. 177)
+
+	* Einsatz der Bloom-Filter: Erweiterung von BFT, was wiederum Chord erweitert 
+	* Prinzip BFT: "To search multiple elements, a combined Bloom Filter of the elements is generated. Then the query is forwarded to the peer in the Finger Table when the Bloom Filter of the query is included in the corresponding Bloom Filter. [...] If the Bloom Filter of the peer is included by the Bloom Filter of the query, the peer is matched to the query However, all elements have to be tested again on the peer since the testing by Bloom Filter has false positive." (S. 178)
+
+	b. Von Interesse:  
+		i. Vergabe von Peer-IDs basierend auf einer geografischen Stütze/Ankerpunkt ("foothold", S. 179) -> näher beeinander liegende Peer-IDs haben nun tendenziell mehr besuchte Orte gemeinsam
+		ii. Ähnlichkeitsmaße: AND/OR
+		iii. Also höchstens das verwendete Ähnlichkeitsmaß interessant! 
+
+
+	Yang2002
+
+	a. Ziel: Neue Indexstruktur f. versch. Join-Anfragen auf mulitidimensionalen spatialen Daten ("k-closest pairs", "nearest neighbor joins") -> "bichromatic Rdnn-Tree [...] to solve the closest pair join problem" (S. 141)
+	
+	* Basiert auf "Rdnn-tree for the reverse nearest neighbor queries" (S. 140)
+	* Besonders effektiv f. "k-closest pair"-Anfragen, v. a. ggü. früheren Implementierungen wie R*-Baum
+	* Wichtige Anfragen (auf multidimensionalen spatialen Daten): "point location, range, nearest neighbor, reverse nearest neighbor" (S. 140) -> es werden behandelt: 
+		i. "(Distance-based) Spatial Joins" (S. 140) 
+		* Wichtigste/effizienteste Algorithmen basieren auf: R-Bäumen, Seed-Bäumen, Breadth-First-approach 
+		ii. "k Closest nearest neighbor pairs" (S. 140)
+		iii. "k Closest pairs"
+	* bRdnn-Tree verwendet Information über die nächsten Nachbarn, um Suchpfade abzuschneiden 
+	* Behandelte Probleme/Fragestellungen: "nearest neighbor related problems" (S. 141), also 
+		i. "Bichromatic Nearest Neighbor Query" (S. 141)
+		ii. "k Closest NN Pairs Query" (S. 141)
+		iii. "k-Closest Pair Join" (S. 141)
+	* Zusammenhang: Jedes "Closest Pair" in den "k-closest NN pairs" enthalten (vgl. S. 142)
+	* Neue Datenstruktur bRdnn-Tree: 
+		i. Grundidee: Verwende Lösung des k-closest NN pair-Problems, um k-closest pairs zu finden (vgl. Theorem 2.1, S. 141)
+		ii. Wichtigster Aspekt: Die Information über das NN pair wird dynamisch im Baum gespeichert 
+		iii. Beruht auf dem Rdnn-Baum, der das "Reverse Nearest Neighbor Problem" löst (S. 143) -> dieses Problem ist eigentlich bzgl. EINER Menge definiert: "Recall that the recerse nearest neighbor (RNN) of a point p in a data set S is a collection of points in S that have p as their nearest neighbor" (S. 143) -> also müsste ich eigentlich alle Algorithmen analog anwenden können, indem ich einfach nur EINEN Baum aufbaue und die Vergleiche im Inneren stattfinden lasse!
+		iv. Innere Knoten in beiden Bäumen enthalten Einträge der Form (ptr, Rect, max_dnn, min_dnn): ptr ist die Adresse eines Kindknotens; falls ptr auf ein Blatt verweist, ist Rect das MBR aller Punkte im Blattknoten/falls ptr auf einen weiteren inneren Knoten verweist, ist Rect das MBR aller MBRs im Kindknoten; max_dnn/min_dnn sind die maximale/minimale Distanz jedes Punktes zu seinem NN in der anderen Menge -> müsste ich also entsprechend anpassen
+	* Def. d. Kosten (f. Suche): Durchschnittliche #Blattknoten-Zugriffe  
+	* Beste Ergebnisse bei kleinem k (vgl. S. 145)
+	* Der R*-Baum wird vor allem übertroffen, da: "by storing the nearest neighbor distance, our method can prune each bRdnn-Tree index separately at high level" (S. 145)
+	* Lohnt sich eine Indexstruktur? -> höhere Kosten im bRdnn-Baum ggü. R*-Baum: Indexpflege, z.B. Einfügung; vgl. S. 148, Tabelle 3 f. Kostenübersicht 
+		i. Statische Datensätze: 	- falls obere Schranke f. k gegeben/bei kleinen Datensätzen
+									+ für sehr große Datensätze, weil die Kosten f. eine verschachtelte Schleife dann schneller wachsen als die Indexberechnung (hier: Datensätze mit bis zu 3000000 Datenpunkten)
+		ii. Dynamische Datensätze:	- Auch hier ist Vorberechnen möglich -> beim Einfügen eines neuen Datenpunkts muss dann ein Datensatz sequenziell gelesen werden (zum Update der Tabelle)
+									+ Auch hier wird bei großen Datensätzen der Index sehr viel billiger als sequenzieller Scan ohne Index (= Vergleich mit Tabellenwerten) 
+		-> Index v. a. f. große Datensätze wichtig!
+	
+
+	b. Von Interesse: 
+		i. Alternative Indexstrukturen (da keine relationale DB, keine spatialen Joins, keine Joinoperationen über mehrere Tabellen)
+		ii. "the index structure is also very efficient on [...] closest nearest neighbor pairs, and all pairs nearest neighbor" (S. 141)
+		iii. Im Prinzip geht es hier immer um den Vergleich von Elementen zweier Mengen; ich möchte aber Aussagen über Elemente aus EINER Menge treffen (hier nämlich das Ziel: "new indexing scheme for join queries over multiple data sets", S. 142)
+
+	c. Zusammenfassung:
+		i. "in a relatively static environment with a relatively small data set, it is appropriate to use the naive nested-loop algorithm and cache the closest pairs. However, in a dynamic environment or with large amount of data, it is preferable to use the bRdnn-tree" (S. 148)
+		ii. Vorstellung des bRdnn-Baums für Join-Queries
+		iii. Indexstruktur speichert die NN-Distanz f. jeden Datenpunkt 
+		iv. Liefert Pruning-Methode f. zahlreiche Anfragen (k-nächste Paare, k-NN-Paare)
+		v. Index ist robust sowohl f. unterschiedliche Verteilungen der Daten als auch begrenzte Ressourcen 
+
+
+	Bayardo2007
+
+	a. Ziel: 
+		i. Gegeben: Große Menge dünn verteilter Vektordaten in hochdimensionalem Raum 
+		ii. Problemstellung: Finde alle Paare mit Ähnlichkeitswert über einer bestimmten Schwelle (Ähnlichkeitsmaß: z.B. Kosinusdistanz)
+		iii. Lösung: Einfacher Algorithmus basierend auf neuer Indexstruktur und Optimierung, ohne Näherungsverfahren oder komplexes Parameter-Tuning
+		iv. "We show the approach efficiently handles a variety of datasets across a wide setting of similarity thresholds, with large speedups over previous state-of-the-art approaches" (S. 131)
+		v. Problembeschreibung: "Given a set of real-valued vectors V [...] of fixed dimensionality m, a similarity function sim(x,y) and a similarity threshold t, we wish to compute the set of all pairs (x,y) and their similarity values sim(x,y) such that x,y ∈ V and sim(x,y) ≥ t" (S. 131)
+
+	* Heute i.d.R.: Näherungsverfahren -> hohe Fehlerraten/exakte Lösungen, aber in DBMS-Framework!   
+	* Hier stattdessen: Keine DBMS-Integration, Fokus rein auf Performance 
+	* "The all-pairs similarity search problem is a generalization of the well-known nearest neighbor problem in which the goal is to find the nearest neighbors of a given point query" (S. 132)
+	* Lösungsansätze mit Näherungsverfahren: Reduktion d. Dimensionalität und/oder Länge d. Input-Vektoren 
+	* Das Problem wird in der DB-Community allgemein als "similarity join problem" bezeichnet (S. 132) -> zwei Ansätze: "inverted list solutions" u. "signature based solutions" (S. 132)
+	
+	1. Verbesserung des naiven Ansatzes: Berechne Index dynamisch [vgl. Sarawagi2004], speichere Gewichte der Vektoren im invertierten Index mit ab -> "Score accumulation can then be applied to compute the similarity function using the inverted index structure alone" (S. 132) -> All-Pairs-0
+
+	2. Verbesserung: Schwellwert kann verwendet werden, um Kandidatenpaare einzugrenzen; vermeide Aufbau des gesamten invertierten Index (wie z.B. [Sarawagi2004]) -> hier stattdessen: "exploit the threshold to reduce the amount of information indexed in the first place" (S. 132) -> All-Pairs-1 (viel schneller als All-Pairs-0, da drastische Reduzierung d. max. Größe d. invertierten Listen)
+	
+	3. Verbesserung: Ausnutzen von sortierten Listen (weitere Einschränkung d. Kandidatenmenge -> "a vector y must be produced as a candidate only when matched against those vectors that follow it in the order in which the dataset is processed" (S. 133); "The ordering over the vectors guarantees any vector x that is produced after a vector y has a lower maximum weight. Significantly fewer features of each vector can now be indexed while still guaranteeing candidacy of a vector when matched against those that follow it in the iteration order" (S. 134)) -> All-Pairs-2
+
+	4. Verbesserung: Ausnutzen des Schwellwerts während Abgleich/Berechne nicht das gesamte Skalarprodukt über x und y ("partial candidate vector"), sondern Schranke -> "Find-Matches-2" (vgl. S. 134 Fig. 3b)
+
+	5. Spezialisierung f. binäre Vektoren -> "All-Pairs-Binary" (vgl. S. 135 Fig. 4)
+		i. Man könnte die bisher vorgestellten Algorithmen direkt verwenden, indem man die Inputs auf Einheitslänge normalisiert und auf den resultierenden gewichteten Vektoren arbeitet
+		ii. Jedoch hier: Vermeide komplizierte Berechnungen + weitere Optimierungen möglich 
+		iii. Bsp.: "If the vectors are binary, there is no need to store vector weights within the inverted index as long as we can get at the vector sizes in order to appropriately compute the similarity function" (S. 135)
+		iv. "all vectors that fail to meet the minimum size constraint appear at the front of the list" (S. 135) -> alle diese Vektoren können sofort entfernt/übersprungen werden 
+		v. für alle weiteren Vektorenpaare (x,y), deren Kosinusähnlichkeit über einem best. Schwellenwert t liegt, wird folgender "minsize constraint" ausgenutzt: |y| ≥ |x|*t^2 (S. 136)
+		vi. Details u. Korrektheitsbeweis vgl. S. 135
+
+	* Verwendete Beispieldatensätze: U. a. "the Orkut social network, in which each user is represented by a binary vector over the space of all users" (S. 136) 
+	* Es wurden immer sortierte Datensätze verwendet
+	* Schwellwert f. Ähnlichkeitsmaß: Zwischen 0.5 und 0.9
+
+	b. Von Interesse: 
+		i. Nur die Variante f. binäre Daten
+		ii. Implementierung: vgl. https://code.google.com/archive/p/google-all-pairs-similarity-search/
+		iii. Wahrscheinlich soll ich nur Jaccard-Distanz verwenden -> vgl. (mögliche) Portierungen f. andere Ähnlichkeitsmaße 
+ 
+	c. Zusammenfassung/Ergebnisse: 
+		i. Vergleich mit Inverted-List-basiertem Ansatz ("ProbeOpt-sort"): All-Pairs immer deutlich besser als (mind. Faktor 2); Speedup wg. nur teilweiser Indexierung jedes Eingabevektors u. "hash-based score accumulation in place of queue-based merging" (S. 137); Weitere Verbesserungen durch Ausnutzen der sortierten Datensätze (bis Faktor 22)
+		ii. PE (Part Enum): "another signature based algorithm that like All-Pairs is guaranteed to generate all pairs that satisfy the similarity threshold" (S. 138); Verwendet Konversion von Jaccard-Distanz zu Hammingabstand! (S. 138)
+		ii. Vergleich mit signaturbasierten Methoden (LSH u. PartEnum): Verwendung von Jaccard-Distanz und Kosinusähnlichkeit (vgl. S. 139 Fig. 9); All-Pairs ist immer deutlich schneller: 
+		iii. LSH: Faktor 16-700 bei Kosinusähnlichkeit, mind. eine Größenordnung b. Jaccard-Distanz
+		iv. PE: Faktor 2-15 b. Kosinusähnlichkeit, Faktor 1.3-6 b. Jaccard-Distanz  
+		v. Verallgemeinerung d. Ergebnisse f. andere Ähnlichkeitsmetriken: Algo. kann auch für andere Ähnlichkeitsmaße angewendet werden, z.B. Jaccard mit binären Eingabevektoren; notwendige Anpassungen: "For an indexed vector y and any vector x following it in the ordering (|x|≥|y|) [...] we [...] only need to show that the unindexed portion of the vector y [...] contributes an amount to the similarity score that alone is not enough to meet the threshold" (S. 139) -> "Find-Matches-Binary" muss angepasst werden bzgl. "similarity score, upperbound the similarity score, and compute a monotone minimum size constraint on candidate vectors" (S. 139)
+		vi. Ergebnisse f. All-Pairs-Algo. m. anderen Ähnlichkeitsmaßen: Vgl. S. 140 Fig. 10 -> Jaccard performt immer am besten!!
+		vii.  "An inverted list based approach to the problem need not build a complete inverted index over the vector input" (S. 139)
+		viii. "Appropriately ordering the vectors in addition to the dimensions can vastly reduce the search space" (S. 139)
+		ix. "We aggressively exploited these insights to produce an algorithm, All-Pairs, that is easy to implement and does not require any parameter tuning" (S. 139) -> führt zu drastischen Performance-Steigerungen ggü. vergleichbaren Algorithmen 
+
+
+5. Grundlagen (vgl. Grundlagen-Kapitel)

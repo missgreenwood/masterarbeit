@@ -53,6 +53,18 @@
   Timestamp                = {2015.11.13}
 }
 
+@InProceedings{Boehm2000,
+  Title                    = {High performance clustering based on the similarity join},
+  Author                   = {Christian B{\"o}hm and Bernhard Braunm{\"u} and Markus Breunig and Hans-Peter Kriegel},
+  Booktitle                = {Proceedings of the ninth international conference on Information and knowledge management},
+  Year                     = {2000},
+  Organization             = {{ACM}},
+  Pages                    = {298--305},
+
+  Owner                    = {judith},
+  Timestamp                = {2015.11.18}
+}
+
 @InProceedings{Bayardo2007,
   Title                    = {Scaling up all pairs similarity search},
   Author                   = {Roberto J. Bayardo and Yiming Ma and Ramakrishnan Srikant},
@@ -256,6 +268,25 @@
 
   Owner                    = {judith},
   Timestamp                = {2015.11.07}
+}
+
+@Book{Knuth1998,
+  Title                    = {The art of computer programming, Volume 3, Sorting and searching},
+  Author                   = {Donald Knuth},
+  Publisher                = {Addison Wesley Longman},
+  Year                     = {1998},
+
+  Owner                    = {judith},
+  Timestamp                = {2015.11.22}
+}
+
+@Unpublished{Kriegel1994--2013,
+  Title                    = {Skript zur {V}orlesung {A}nfragebearbeitung und {I}ndexstrukturen in {D}atenbanksystemen},
+  Author                   = {Hans-Peter Kriegel},
+  Year                     = {1994--2014},
+
+  Owner                    = {judith},
+  Timestamp                = {2015.11.22}
 }
 
 @InProceedings{Kumar2003,

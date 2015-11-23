@@ -35,7 +35,7 @@ Zusammenfassung Sakuma2011
 	* Jeder Knoten generiert einen Bloom-Filter aus allen Schlüsselwörtern der Inhalte, die bei ihm gespeichert sind -> "Node Bloom filter [...] (NBf)" (S. 317)
 	* Damit kann bei jedem Knoten Lookup nach Schlüsselwörtern durchgeführt werden; Lookup aller NBfs ist aber ineffizient -> deswegen weiterer Bloom-Filter aus allen NBfs "of all nodes in the finger table within the range of each search path" (S. 317) -> "Finger Bloom filter [...] (FBf)" (S. 317)
 	* Der FBf enthält damit alle Schlüsselwörter aller Suchpfade!
-	* Beim Lookup von Daten wird der Bloom-Filter der Query generiert und mit der Finger table des Knoten verglichen; die Querx wird weitergeleitet an den Knoten, der den Query-Filter enthält
+	* Beim Lookup von Daten wird der Bloom-Filter der Query generiert und mit der Finger table des Knoten verglichen; die Query wird weitergeleitet an den Knoten, der den Query-Filter enthält
 	* Dabei müssen Ranges festgelegt werden, damit sich Suchbereiche nicht überlappen 
 
 2.3 Attenuated Bloom Filter
@@ -60,8 +60,8 @@ Zusammenfassung Sakuma2011
 	* Innere Knoten: Zweiginformationen, Versionsnr. d. Informationen 
 	* Informationsmanagement f. den B-Baum über physische Knoten; jeder physische Knoten hat partielle Informationen über den B-Baum
 	* Jeder physische Knoten managt die Information für seinen Zweig sowie Informationen über die Geschwisterknoten 
-	* Also für N physische Knoten: B-Baum der Höhe ~ log_m N, m-facher Baum [was wird mit m bezeichnet?]; "Each physical node has information on th enumber of nodes proportional to log_m N" (S. 319, [?])
-	* Der Knoten mit der kleinsten ID in der internen Knoten-Information heißt repräsentativeer Knoten; er managt die Informationen des korrespondierenden internen Knoten (vgl. Fig. 4 S. 319)
+	* Also für N physische Knoten: B-Baum der Höhe ~ log_m N, m-facher Baum [was wird mit m bezeichnet?]; "Each physical node has information on the number of nodes proportional to log_m N" (S. 319, [?])
+	* Der Knoten mit der kleinsten ID in der internen Knoten-Information heißt repräsentativer Knoten; er managt die Informationen des korrespondierenden internen Knoten (vgl. Fig. 4 S. 319)
 
 3.2 Management of the tree
 

@@ -1,2 +1,12 @@
 \BOOKMARK [0][]{chapter.1}{1 Einleitung}{}% 1
-\BOOKMARK [0][]{appendix*.2}{Literaturverzeichnis}{}% 2
+\BOOKMARK [0][]{chapter.2}{2 Background}{}% 2
+\BOOKMARK [1][]{section.2.1}{2.1 Bloom Filter Operations and Variants}{chapter.2}% 3
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Attenuated Bloom Filter}{section.2.1}% 4
+\BOOKMARK [1][]{section.2.2}{2.2 Mathematic Principles}{chapter.2}% 5
+\BOOKMARK [1][]{section.2.3}{2.3 Query Processing and Index Structures in Database Systems}{chapter.2}% 6
+\BOOKMARK [2][]{subsection.2.3.1}{2.3.1 B-Trees}{section.2.3}% 7
+\BOOKMARK [2][]{subsection.2.3.2}{2.3.2 R-Trees}{section.2.3}% 8
+\BOOKMARK [2][]{subsection.2.3.3}{2.3.3 R*-Trees}{section.2.3}% 9
+\BOOKMARK [2][]{subsection.2.3.4}{2.3.4 Heaps}{section.2.3}% 10
+\BOOKMARK [1][]{section.2.4}{2.4 AMBIENCE}{chapter.2}% 11
+\BOOKMARK [0][]{appendix*.2}{Literaturverzeichnis}{}% 12

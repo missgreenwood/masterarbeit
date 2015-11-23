@@ -74,7 +74,7 @@ Exzerpt Yang2002
 
 4.1 Uniformely distributed data sets (= 100% Überschneidung)
 
-- Besser als die früher vorgestellten Lösungen (DFS mit R*-Baum, Heap-Algo. mit R*-Baum) - sogar, wenn diese einen Seitenpuffer von 10 oder 80 Seiten erhalten 
+- Besser als die früher vorgestellten Lösungen (DFS mit R*-Baum, Heap-Algo. mit R*-Baum) -> sogar, wenn diese einen Seitenpuffer von 10 oder 80 Seiten erhalten 
 - "When k is small, our algorithm is most beneficial" (S. 145)
 - Der R*-Baum wird vor allem übertroffen, da: "by storing the nearest neighbor distance, our method can prune each bRdnn-Tree index separately at high level" (S. 145)
 - Der vorgestellte Algo. ist auch robust ggü. der Bufferkapazität

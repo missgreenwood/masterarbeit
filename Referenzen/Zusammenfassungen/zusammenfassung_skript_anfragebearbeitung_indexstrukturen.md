@@ -3,7 +3,7 @@ Exzerpt Skript Anfragebearbeitung und Indexstrukturen
 
 1.5 Indexstrukturen 
 
-- "Um Anfragen und Operationen efifzient druchführen zu können, setzt die interne Ebene des Datenbanksystems geeignete Datenstrukturen und Speicherungsverfahren (Indexstrukturen) ein." (S. 6)
+- "Um Anfragen und Operationen efifzient durchführen zu können, setzt die interne Ebene des Datenbanksystems geeignete Datenstrukturen und Speicherungsverfahren (Indexstrukturen) ein." (S. 6)
 - Index/Directory: "Strukturinformation zur Zuordnung von Suchschlüsseln und zur Organisation der Datei" (S. 7, Datei: Die gesamte Datenstruktur, sprich Suchbaum/Array/...)
 	* Unterscheide zw. Directoryseiten und Datenseiten 
 - Klassen: 

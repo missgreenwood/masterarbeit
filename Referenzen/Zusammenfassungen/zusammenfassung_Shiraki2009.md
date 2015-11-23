@@ -17,7 +17,7 @@ Zusammenfassung: Shiraki2009
 - Def. Bloom-Filter: "a simple space-efficient randomized data structure for representing a set in order to support membership queries" (S. 177)/"probabilistische Datenstruktur, mit deren Hilfe sehr schnell festgestellt werden kann, welche Daten in einem Datenstrom schon einmal vorgekommen sind und welche erstmals auftreten. Hierzu wird mit einer geeigneten Zahl von Hash-Funktionen ein 'Fingerabdruck' des gelesenen Datensatzes in einer einzeiligen Hashtabelle hinterlassen." (https://de.wikipedia.org/wiki/Bloomfilter)
 - Suchmethoden mit Bloom-Filtern für P2P-Netzwerke: "Bloom Finger Table", "Chord" (S. 177)
 - Hier vorgestellt: Suchverfahren basierend auf Bewegungsmeldungen ("movement records", S. 177), erweitert BFT
-- 2 Bloom-Filtern werden verwendet: besuchte Spot-IDs + korrespondierende Zeitstempel -> werden konkateniert, Suche von Nutzern kann dadurch inkl. o. exkl. Zeitstempel erfolgen 
+- 2 Bloom-Filtern werde verwendet: besuchte Spot-IDs + korrespondierende Zeitstempel -> werden konkateniert, Suche von Nutzern kann dadurch inkl. o. exkl. Zeitstempel erfolgen 
 - Reduzierung der #Nachrichten durch Assoziation von Nutzern mit Peer-IDs -> dadurch werden Nutzer, die sich am selben Ort befinden, im Chord-Netzwerk näher beeinander platziert 
 
 2. Bloom Finger Table (BFT)
@@ -59,5 +59,5 @@ Zusammenfassung: Shiraki2009
 
 5. Conclusion
 
-- Zusammenfassung: "Bloom Filter-based user search method based on movement recors in the P2P architecture. By applying Bloom Finger Table and geographical peer-ID assignment, the number of messages is vastly reduced compared to the naive implementation" (S. 181)
+- Zusammenfassung: "Bloom Filter-based user search method based on movement records in the P2P architecture. By applying Bloom Finger Table and geographical peer-ID assignment, the number of messages is vastly reduced compared to the naive implementation" (S. 181)
 

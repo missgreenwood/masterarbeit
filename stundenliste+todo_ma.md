@@ -76,15 +76,21 @@ Do, 19.11.
 Fr, 20.11. (30 min)
 - Papers lesen und zusammenfassen, Versionskontrolle, Entwurf Exposé 
 
+Sa, 21.11. (45 min)
+- Entwurf Exposé 
+
+So, 22.11. (4 h 30 min)
+- Entwurf Exposé
 
 
 ## TODO
 
 1. Exposé: 1/2 Seite Motivation, Ziel, Kern der Arbeit 
-3. Versionskontrolle
-4. Wiederholen/in Exposé: Byers2002, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Yang2002, Skript ADS2, Bayardo2007
-5. Termin mit Zweitbetreuer
-6. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007
+2. Versionskontrolle
+3. Wiederholen/in Exposé: Skript Anfragebearbeitung, Skript ADS2, Werner2015
+4. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
+5. Literaturverzeichnis einheitlich
+
 
 
 ## TODO Ausarbeitung 
@@ -101,14 +107,3 @@ Fr, 20.11. (30 min)
 - Kazuho Sato, Noriko Matsumoto and Norihiko Yoshida, Multi-Keyword Search for DHT P2P Networks, IPSJ/IEICE Forum on Information Technology (FIT)2006, (2006).
 
 - S. Tarkoma, C. Rothenberg, and E. Lagerspetz, “Theory and Practice of Bloom Filters for Distributed Systems,” IEEE Comm. Surveys & Tutorials, vol. 99, pp. 1-25, 2012.
-
-[- J. Bruck, J. Gao, and A. Jiang. Weighted Bloom Filter. In IEEE International Symposium on Information Theory (ISIT’06), July 2006.]
-
-[- I. Stoica,R. Morris,D. Kargery,M. F. Kaashoek, and H. Balakrishnan, Chord: A scalable peer-to-peer lookup service for internet applications. SIGCOMM Comput. Commun. pp.149-160, Aug. 2001.]
-
-[- P. Jokela et al., “LIPSIN: Line Speed Publish/Subscribe Inter-Networking,” ACM SIGCOMM Comp. Commun. Rev., vol. 39, no. 4, 2009, pp. 195–206.]
-
-[- J. Li, J. Jannotti, D. De Couto, D. Karger, and R. Morris. “A Scalable Location Service for Geographic Ad-Hoc Routing.” In Proceedings of the 6th Annual International Conference on Mobile Computing and Networking (MobiCom), pp. 120—130. New York: ACM Press, 2000.]
-
-[- G. Cormode and S. Muthukrishnan. “An Improved Data Stream Summary: The Count-Min Sketch and its Applications.” In LATIN 2004: Theoretical Informatics, edited by M. Farach-Colton, pp. 29—38. New York: ACM Press, 2004.]
-

@@ -90,7 +90,7 @@ Exzerpt Bayardo2007
 - Jetzt: Bessere Ausnutzung des Ähnlichkeits-Schwellwerts (zweimal ohne, einmal mit geordnetem Datensatz): 
 
 	1. "as we iterate over the features of x, we eventually get to the point where if a vector has not already been identified as a candidate of x, then there is no way it can meet the score threshold"	
-	2. Berechne nicht das gesamte Skalarprodukt über x und y' ("partial candidate vector"), sondern Schranke
+	2. Berechne nicht das gesamte Skalarprodukt über x und y ("partial candidate vector"), sondern Schranke
 	3. "for a vector x, [...] any vector y that satisfies the similarity score threshold must meet the [...] minimum size constraint: |y| ≥ t/maxweight(x)" (S. 135)
 
 	=> Ergebnis: "Find-Matches-2" (vgl. S. 134 Fig. 3b): 

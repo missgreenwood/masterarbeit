@@ -42,6 +42,12 @@ Joseph~M. Hellerstein and Avi Pfeffer.
 \newblock Technical report, University of {W}isconsin-{M}adison, {C}omputer
   {S}ciences {D}epartment, 1994.
 
+\bibitem[Knu98]{Knuth1998}
+Donald Knuth.
+\newblock {\em The art of computer programming, Volume 3, Sorting and
+  searching}.
+\newblock Addison Wesley Longman, 1998.
+
 \bibitem[LC86]{Lehman1986}
 Tobin~J. Lehman and Michael~J. Carey.
 \newblock A study of index structures for main memory database management
@@ -58,6 +64,11 @@ Michael Mitzenmacher.
 Clemens Nafe.
 \newblock Indexierung lokaler {D}aten in {P}eer-to-{P}eer-{N}etzwerken.
 \newblock Master's thesis, Universit{\"a}t Rostock, 2005.
+
+\bibitem[OW12]{Ottmann2012}
+Thomas Ottmann and Peter Widmayer.
+\newblock {\em Algorithmen und Datenstrukturen}.
+\newblock Spektrum Akademischer Verlag, 5 edition, 2012.
 
 \bibitem[QLC14]{Qiao2014}
 Yan Qiao, Tao Li, and Shigang Chen.
