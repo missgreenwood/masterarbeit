@@ -12,8 +12,14 @@ One can differentiate between three classes of index structures depending on the
 \begin{itemize}
 	\item \textit{Data-organizing index structures} are used to organize the actual amount of data. They heavily rely on \textit{search trees}. 
 	\item \textit{Space-organizing index structures} are used to organize the space that holds the data. They use \textit{dynamic hashing}. 
-	\item \textit{Hybrid index structures} are a combination of both classes.   
+	\item \textit{Hybrid index structures} are a combination of both classes. They are working with hash trees.   
 \end{itemize}
+There are some requirements for an index structure in order to meet its purpose. First of all, it should provide for \textit{efficient search}: A data query on the index structure should return an answer in optimal time, i.e. the query should be directed to the page or pages that contain the queried data set in as litlle steps as possible.
+
+The next requirement refers to dynamic \textit{insertion, deletion and modification} of data sets: Any of these operations may only lead to local changes. % Erklärung/Beleg!
+
+The most important feature regarding our context is the local preservation of order. This means that data sets with keys that are direct successors within the used order relation (i.e. the less-or-equal relation on non-negative integers) must be preserved within the index structure. This holds for search trees but it does not hold for linear hashing. 
+
 \cite{Ottmann2012}
 \subsection{B-Trees}	
 \cite{Knuth1998}	
