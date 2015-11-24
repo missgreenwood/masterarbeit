@@ -84,17 +84,15 @@ So, 22.11. (4 h 30 min)
 
 Mo, 23.11. (3 h 15 min)
 
-Di, 24.11. (12:35 - )
+Di, 24.11. (3 h)
 
 
 ## TODO
 
 1. Exposé: 1/2 Seite Motivation, Ziel, Kern der Arbeit 
-2. Versionskontrolle
-3. Wiederholen/in Exposé: Skript Anfragebearbeitung, Skript ADS2, Werner2015
-4. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
-5. Literaturverzeichnis einheitlich
-
+2. Wiederholen/in Exposé: Skript Anfragebearbeitung, Skript ADS2, Werner2015
+3. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
+4. Literaturverzeichnis einheitlich
 
 
 ## TODO Ausarbeitung 

@@ -1,33 +1,37 @@
-\chapter{Background}\label{sec:Background}
-\section{Bloom Filter Operations and Variants}
-\subsection{Attenuated Bloom Filter}
-\cite{Sakuma2011}: 316 u. 318.
-\section{Mathematic Principles}
-\section{Query Processing and Index Structures in Database Systems}
-To support query processing and operations in an efficient manner the internal layer of a database system relies on certain data strucures and memory methods. These are called \textit{index structures}. They organize the data to support the required operations using its \textit{indices}.
+\chapter{Background}\label{ch:background}
+\section{Bloom Filters}\label{sec:bloom}
+\subsection{Classic Bloom Filter}\label{subsec:classic_bloom}
+\cite{Bloom1970}
+\subsection{Bloom Filter Operations and Variants}\label{subsec:bloom_ops}
+\textit{Attenuated Bloom Filter:} \cite{Sakuma2011}: 316 and 318\\
+\textit{Counting Bloom Filter:} \cite{Fan2000}\\
+\textit{Compressed Bloom Filter:} \cite{Mitzenmacher2002}
+\section{Mathematic Principles}\label{sec:math}
+\section{Index Structures in Database Systems}\label{sec:index_structures}
+To support query processing and operations in an efficient manner, the internal layer of a database system uses specific data strucures and memory methods. These are called \textit{index structures}. They organize the data to support the required operations using its \textit{indices}.
 
-An \textit{index} (also called \textit{directory}) holds information about the structure of a file. A \textit{file} in this context refers to an entire data structure, i.e. an array, a search tree etc.. 
-
-One can differentiate between three classes of index structures depending on the manner in which the data is organized: 
+An \textit{index} (also called \textit{directory}) of a file holds information about its structure. A \textit{file} in this context refers to an entire data structure, i.e. an array, a search tree etc.. One can differentiate between three classes of index structures depending on the manner of organization: 
+\begin{enumerate}
+	\item \textbf{\textit{Data-organizing index structures}} are used to organize the actual amount of data. They mostly rely on \textit{search trees}. 
+	\item \textbf{\textit{Space-organizing index structures}} are used to organize the space that holds the data. They make use of \textit{dynamic hashing}. 
+	\item \textbf{\textit{Hybrid index structures}} are a combination of both classes. They are based on \textit{hash trees}.   
+\end{enumerate}
+There are several requirements for an index structure in order to meet its purpose. 
 \begin{itemize}
-	\item \textit{Data-organizing index structures} are used to organize the actual amount of data. They heavily rely on \textit{search trees}. 
-	\item \textit{Space-organizing index structures} are used to organize the space that holds the data. They use \textit{dynamic hashing}. 
-	\item \textit{Hybrid index structures} are a combination of both classes. They are working with hash trees.   
+	\item \textit{Efficient search:} A data query on the index structure should return an answer in optimal time, i.e. the query should be directed to the page or pages that contain the queried data using as little steps as possible.
+	\item \textit{Dynamic insertion, deletion and modification of data sets:} The amount of data to be organized changes over time, leading to alterations in the index structure as well. Any implementation requiring a complete reorganization of the index structure on insertion, deletion or modification of data sets is clearly unacceptable. Any of these operations may therefore only lead to local changes. 
+	\item \textit{Local preservation of order:} If there are some data sets the keys of which are successors within the applied order relation (i.e. the less-or-equal relation on non-negative integers), this order should be preserved within the index structure. This holds for search trees but it does not hold for linear hashing. It is clearly of great importance regarding the application scenario in question.
+	\item \textit{Efficient use of space:} This requirement is of great importance for real-world applications. So far the reference implementation \textit{AMBIENCE} has served as a proof of concept. Accordingly the number of messages, i.e. the amount of data to be queried, has been relatively small compared to a real-world scenario. Therefore the memory requirements of any index structure within the current scenario that represents the actual amount of data is unlikely to require vast amounts of memory. However, keeping in mind future application scenarios for \textit{AMBIENCE}, efficient use of space cannot be entirely discarded. 
 \end{itemize}
-There are some requirements for an index structure in order to meet its purpose. First of all, it should provide for \textit{efficient search}: A data query on the index structure should return an answer in optimal time, i.e. the query should be directed to the page or pages that contain the queried data set in as litlle steps as possible.
-
-The next requirement refers to dynamic \textit{insertion, deletion and modification} of data sets: Any of these operations may only lead to local changes. % Erklärung/Beleg!
-
-The most important feature regarding our context is the local preservation of order. This means that data sets with keys that are direct successors within the used order relation (i.e. the less-or-equal relation on non-negative integers) must be preserved within the index structure. This holds for search trees but it does not hold for linear hashing. 
-
+Further requirements include \textit{feasability} and \textit{implementation cost}. Any index structure aiming at a real-world implementation such as \textit{AMBIENCE} naturally has to be feasable, so this requirement will be overlooked in the following. As this work clearly has a scholarly background, not an industrial one, the implementation cost will be disregarded as well.\\ 
 \cite{Ottmann2012}
-\subsection{B-Trees}	
+\subsection{B-Tree}	
 \cite{Knuth1998}	
-\subsection{R-Trees}
+\subsection{R-Tree}
 % "Ein R-Baum (englisch R-tree) ist eine in Datenbanksystemen verwendete mehrdimensionale (räumliche) dynamische Indexstruktur. Ähnlich wie bei einem B-Baum handelt es sich hier um eine balancierte Indexstruktur" (vgl. https://de.wikipedia.org/wiki/R-Baum)
-\subsection{R*-Trees}
+\subsection{R*-Tree}
 % "Eine beliebte R-Baum-Variation ist der R*-Baum von Norbert Beckmann, Hans-Peter Kriegel, Ralf Schneider und Bernhard Seeger. Diese Variante versucht, durch eine weiterentwickelte Split-Strategie das Überlappen von Rechtecksregionen zu minimieren. Dadurch brauchen bei einer Suchanfrage meistens weniger Teilbäume durchsucht zu werden, und die Anfragen an den Baum werden dadurch effizienter. Zusätzlich können beim Überlauf einer Seite auch Elemente neu in den Baum eingefügt werden (re-insert), was eine Aufteilung (engl. "split") (und die damit unter Umständen steigende Höhe des Baumes) vermeiden kann. Dadurch wird ein höherer Füllgrad erreicht und dadurch ebenfalls eine verbesserte Effizienz. Der resultierende Baum ist aber stets auch ein R-Baum, die Anfragestrategie ist unverändert" (vgl. https://de.wikipedia.org/wiki/R-Baum\#R.2A-Baum)
-\subsection{Heaps}
+\subsection{Heap}
 % "Ein Heap (englisch wörtlich: Haufen oder Halde) in der Informatik ist eine zumeist auf Bäumen basierende abstrakte Datenstruktur. In einem Heap können Objekte oder Elemente abgelegt und aus diesem wieder entnommen werden. Sie dienen damit der Speicherung von Mengen. Den Elementen ist dabei ein Schlüssel zugeordnet, der die Priorität der Elemente festlegt. Häufig werden auch die Elemente selbst als Schlüssel verwendet. Über die Menge der Schlüssel muss daher eine totale Ordnung festgelegt sein, über welche die Reihenfolge der eingefügten Elemente festgelegt wird. Beispielsweise könnte die Menge der ganzen Zahlen zusammen mit der Kleinerrelation (<) als Schlüsselmenge fungieren. Der Begriff Heap wird häufig als bedeutungsgleich zu einem partiell geordneten Baum verstanden [...]. Gelegentlich versteht man einschränkend nur eine besondere Implementierungsform eines partiell geordneten Baums, nämlich die Einbettung in ein Array, als Heap" (vgl. https://de.wikipedia.org/wiki/Heap\_(Datenstruktur))
-\section{AMBIENCE}
+\section{AMBIENCE}\label{sec:ambience}
 \cite{Werner2015}. 

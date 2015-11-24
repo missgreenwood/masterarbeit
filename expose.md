@@ -14,6 +14,11 @@ Entwurf Abstract
 
 3. Kern der Arbeit/Thema genau definieren	
 
+a) Kontexterkennung durch Bloom-Filter optimieren/
+-> Optimierung der Nachrichtenauswahl durch Optimierung der Filtertechnik 
+-> paarweiser Vergleich
+b) Daten von einzelnem Nutzer 
+
 4. Bisherige Quellen
 
 	Byers2002 (referenziert auch in AMBIENCE) -> weniger relevant!
@@ -178,6 +183,12 @@ Entwurf Abstract
 		vii.  "An inverted list based approach to the problem need not build a complete inverted index over the vector input" (S. 139)
 		viii. "Appropriately ordering the vectors in addition to the dimensions can vastly reduce the search space" (S. 139)
 		ix. "We aggressively exploited these insights to produce an algorithm, All-Pairs, that is easy to implement and does not require any parameter tuning" (S. 139) -> führt zu drastischen Performance-Steigerungen ggü. vergleichbaren Algorithmen 
+
+
+	Skript Anfragebearbeitung u. Indexstrukturen 
+
+	b. Von Interesse: 
+		i. Evtl. eindimensionale dynamische Hashverfahren (da ordnungserhaltend), aber vermutlich sind Suchbäume generell besser/sinnvoller?   
 
 
 5. Grundlagen (vgl. Grundlagen-Kapitel)
