@@ -1,0 +1,13 @@
+1. Motivation 
+
+Ubiquitous computing, Context-Awareness und die stetig zunehmende Verbreitung von mobilen Endgeräten wie Smartphones und Tablets haben auch im Bereich von Sozialen Online-Netzwerken ("Online Social Networks"/ "OSNs") zu einem Paradigmenwechsel geführt. Traditionelle adressbasierte Netzwerke wurden zunächst durch P2P-Overlay-Strukturen ergänzt, die bessere Skalierbarkeit und Datenmobilität bereitstellen können. Kontextinformationen als Informationsquelle für Anwendungen und Netzwerke ermöglichen andererseits die Anpassung an die aktuellen Nutzerbedürfnisse, damit stärkere Personalisierung und letztlich eine höhere Dienstqualität. 
+
+Das Paradigma eines "Context-centric Online Social Network" hat das Ziel, ein OSN aufzubauen, dessen sozialer Graph einzig auf Kontextinformationen des Nutzers basiert. Im Gegensatz zu adressbasierten Netzwerken beruht die Kommunikation nicht mehr auf Online-Freundschaft, sondern allein auf Kontext-Ähnlichkeit. Design und Implementierung eines solchen Netzwerks wurden prototypisch in AMBIENCE realisiert. Im Unterschied zu klassischen Location-Based Services (LBS) ist AMBIENCE nicht an eine spezifische Kontextinformation gebunden. Als Ähnlichkeitsmaß für Kontextinformationen wird die Jaccard-Distanz zwischen Bloom-Filtern verwendet. Nachrichten werden im Netzwerk also versendet bzw. bereitgestellt, indem ihre Metadaten als Bloom-Filter codiert und dann an einen WiFi-Access-Point gebunden werden. Beim Absetzen einer Query mit bestimmten Kontextinformationen als Filterkriterien wird der Bloom-Filter dieser Query erstellt und mit den vorhandenen Bloom-Filtern am Access Point verglichen. Diejenigen Nachrichten, deren Bloom-Filter die Kriterien der Query erfüllen, werden dem Nutzer des Endgeräts, von dem die Query abgesetzt wurde, nach Ähnlichkeit sortiert zugestellt. 
+
+2. Ziel 
+
+In der aktuellen Implementierung von AMBIENCE sind die Bloom-Filter der Nachrichten einfach als unsortierte Liste auf dem Server gespeichert. Wird eine Query abgesetzt, wird die Jaccard-Distanz zu jedem Listenelement berechnet und die passenden Elemente zurückgegeben. Das mag ausreichend sein für eine kleine Zahl an Nutzern und Nachrichten im Netzwerk. In Hinblick auf die zukünftige Entwicklung müssen jedoch Anfrage- und Antwortzeiten für die Queries, Speicherverbrauch und Spezifizität der Antworten stärkere Beachtung finden. 
+
+Ziel dieser Arbeit ist es daher, das Anfrageverhalten und die Spezifizität der Antworten in AMBIENCE zu verbessern. Dazu soll ein Verfahren entwickelt werden, das auf der Jaccard-Distanz als Ähnlichkeitsmaß und der Repräsentation der Metadaten durch Bloom-Filter aufsetzt und die Anfrage- und Antwortzeiten sowie die Spezifizität der Antworten verbessert.  
+
+3. Fragestellung 
