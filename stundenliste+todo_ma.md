@@ -82,6 +82,10 @@ Sa, 21.11. (45 min)
 So, 22.11. (4 h 30 min)
 - Entwurf Exposé
 
+Mo, 23.11. (3 h 15 min)
+
+Di, 24.11. (12:35 - )
+
 
 ## TODO
 

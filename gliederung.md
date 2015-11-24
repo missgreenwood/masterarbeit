@@ -15,7 +15,6 @@ Entwurf Gliederung
 	b) Daten von einzelnem Nutzer 
 
 3. Implementierung
-
 	a) Implementierung + bisherige konkrete Arbeiten (nur Artikel gelesen, aber keine Ahnung von der Implementierung!)
 	b) Datenerhebung/Sammlung -> muss ich dann machen, brauche Testgeräte/Testpersonen (nur Android oder auch iOS?)
 
