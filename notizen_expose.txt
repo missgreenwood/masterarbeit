@@ -1,10 +1,6 @@
 Entwurf Abstract
 ----------------
-
 1. Motivation 
-
-	a. Darstellung Ist-Zustand (Ambience, Werner 2015)
-	b. Darstellung existierender Optimierungen/Systeme (Bloom-Filter/OSN)
 
 2. Ziel 
 	
@@ -19,7 +15,7 @@ a) Kontexterkennung durch Bloom-Filter optimieren/
 -> paarweiser Vergleich
 b) Daten von einzelnem Nutzer 
 
-4. Bisherige Quellen
+4. Quellen
 
 	Byers2002 (referenziert auch in AMBIENCE) -> weniger relevant!
 
@@ -189,6 +185,3 @@ b) Daten von einzelnem Nutzer
 
 	b. Von Interesse: 
 		i. Evtl. eindimensionale dynamische Hashverfahren (da ordnungserhaltend), aber vermutlich sind Suchbäume generell besser/sinnvoller?   
-
-
-5. Grundlagen (vgl. Grundlagen-Kapitel)
