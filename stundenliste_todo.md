@@ -88,12 +88,17 @@ Di, 24.11. (4 h 15 min)
 
 Mi, 25.11. (3 h)
 
+Mo, 30.11. (1 h)
+
+Di, 08.12. (17:20 - )
+
 
 ## TODO
 
-1. Treffen vorbereiten: Werner2015, Notizen Exposé wdh. 
+1. Treffen vorbereiten 
 2. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
 3. Literaturverzeichnis einheitlich
+4. Antrittsvortrag
 
 
 ## TODO Ausarbeitung 
