@@ -4,11 +4,11 @@
 \bibitem[ADI{\etalchar{+}}12]{Ahlgren2012}
 Bengt Ahlgren, Christian Dannewitz, Claudio Imbrenda, Dirk Kutscher, and
   B{\"o}rje Ohlman.
-\newblock A survey of information-centric networking.
+\newblock A {S}urvey of {I}nformation-{C}entric {N}etworking.
 \newblock {\em {C}ommunications {M}agazine, {IEEE}}, 50(7):26--36, 2012.
 
 \bibitem[AT06]{Agarwal2006}
-S.~Agarwal and A.~Trachtenberg.
+Sachin Agarwal and Ari Trachtenberg.
 \newblock Approximating the number of differences between remote sets.
 \newblock In {\em {I}nformation {T}heory {W}orkshop, 2006. {ITW} '06 {P}unta
   del {E}ste. {IEEE}}, pages 217--221, March 2006.
@@ -19,35 +19,37 @@ John Byers, Jeffrey Considine, and Michael Mitzenmacher.
 \newblock In {\em {BU} {C}omputer {S}cience {TR}}, pages 2002--2019, 2002.
 
 \bibitem[Blo70]{Bloom1970}
-Burton~H. Bloom.
-\newblock Space/time trade-offs in hash coding with allowable errors.
+Burton Bloom.
+\newblock Space/{T}ime {T}rade-offs in {H}ash {C}oding with {A}llowable
+  {E}rrors.
 \newblock {\em Communications of the ACM}, 13(7):422--426, 1970.
 
 \bibitem[BM04]{Broder2004}
 Andrei Broder and Michael Mitzenmacher.
-\newblock {N}etwork applications of bloom filters: {A} survey.
+\newblock {N}etwork {A}pplications of {B}loom {F}ilters: {A} {S}urvey.
 \newblock {\em {I}nternet {M}athematics}, 1(4):485--509, 2004.
 
 \bibitem[BMS07]{Bayardo2007}
-Roberto~J. Bayardo, Yiming Ma, and Ramakrishnan Srikant.
-\newblock Scaling up all pairs similarity search.
+Roberto Bayardo, Yiming Ma, and Ramakrishnan Srikant.
+\newblock Scaling {U}p {A}ll {P}airs {S}imilarity {S}earch.
 \newblock In {\em Proceedings of the 16th international conference on {W}orld
   {W}ide {W}eb}, pages 131--140. ACM, 2007.
 
 \bibitem[DWM10]{Duerr2010}
 Michael D{\"u}rr, Martin Werner, and Marco Maier.
-\newblock Re-socializing online social networks.
+\newblock Re-{S}ocializing {O}nline {S}ocial {N}etworks.
 \newblock In {\em Green Computing and Communications (GreenCom), 2010 IEEE/ACM
   International Conference on \& International Conference on Cyber, Physical
   and Social Computing (CPSCom)}, pages 786--791. IEEE, 2010.
 
 \bibitem[FCAB00]{Fan2000}
 Li~Fan, Pei Cao, Jussara Almeida, and Andrei Broder.
-\newblock Summary cache: a scalable wide-area web cache sharing protocol.
+\newblock Summary {C}ache: A {S}calable {W}ide-{A}rea {W}eb {C}ache {S}haring
+  {P}rotocol.
 \newblock {\em IEEE/ACM Transactions on Networking (TON)}, 8(3):281--293, 2000.
 
 \bibitem[HP94]{Hellerstein1994}
-Joseph~M. Hellerstein and Avi Pfeffer.
+Joseph Hellerstein and Avi Pfeffer.
 \newblock The {RD}-{T}ree: {A}n {I}ndex {S}tructure for {S}ets.
 \newblock Technical report, University of {W}isconsin-{M}adison, {C}omputer
   {S}ciences {D}epartment, 1994.
@@ -59,14 +61,14 @@ Donald Knuth.
 \newblock Addison Wesley Longman, 1998.
 
 \bibitem[LC86]{Lehman1986}
-Tobin~J. Lehman and Michael~J. Carey.
-\newblock A study of index structures for main memory database management
-  systems.
+Tobin Lehman and Michael Carey.
+\newblock A {S}tudy of {I}ndex {S}tructures for {M}ain {M}emory {D}atabase
+  {M}anagement {S}ystems.
 \newblock In {\em Proc. {VLDB}}, 1986.
 
 \bibitem[Mit02]{Mitzenmacher2002}
 Michael Mitzenmacher.
-\newblock Compressed bloom filters.
+\newblock Compressed {B}loom {F}ilters.
 \newblock {\em IIEEE/ACM Transactions on Networking (TON)}, 10(5):604--612,
   2002.
 
@@ -88,24 +90,24 @@ Yan Qiao, Tao Li, and Shigang Chen.
 
 \bibitem[RK14]{Ruppel2014}
 Peter Ruppel and Axel K{\"u}pper.
-\newblock Geocookie: a space-efficient representation of geographic location
-  sets.
+\newblock Geocookie: {A} {S}pace-{E}fficient {R}epresentation of {G}eographic
+  {L}ocation {S}ets.
 \newblock {\em Journal of Information Processing}, 22(3):418--424, 2014.
 
 \bibitem[SBE{\etalchar{+}}12]{Sarwat2012}
-Mohamed Sarwat, Jie Bao, Ahmed Eldawy, Justin~J Levandoski, Amr Magdy, and
-  Mohamed~F Mokbel.
-\newblock Sindbad: a location-based social networking system.
+Mohamed Sarwat, Jie Bao, Ahmed Eldawy, Justin Levandoski, Amr Magdy, and
+  Mohamed Mokbel.
+\newblock Sindbad: {A} {L}ocation-(b)ased {S}ocial {N}etworking {S}ystem.
 \newblock In {\em Proceedings or the 2012 ACM SIGMOD International Conference
   on Management of Data}, pages 649--652. ACM, 2012.
 
 \bibitem[Sch13]{Schnell2013}
 Rainer Schnell.
-\newblock {G}etting {B}ig {D}ata but avoiding {B}ig {B}rother.
+\newblock {G}etting {B}ig {D}ata {B}ut {A}voiding {B}ig {B}rother.
 \newblock {\em WP-GRLC}, 2, 2013.
 
 \bibitem[SS11]{Sakuma2011}
-H.~Sakuma and F.~Sato.
+Hiroshi Sakuma and Fumiako Sato.
 \newblock {E}valuation of the {S}tructured {B}loom {F}ilters {B}ased on
   {S}imilarity.
 \newblock In {\em {A}dvanced {I}nformation {N}etworking and {A}pplications
@@ -122,8 +124,8 @@ Toru Shiraki, Yuichi Teranishi, Susumu Takeuchi, Kaname Harumoto, and Shojiro
 
 \bibitem[SW14]{Schoenfeld2014}
 Mirco Sch{\"o}nfeld and Martin Werner.
-\newblock Node wake-up via ovsf-coded bloom filters in wireless sensor
-  networks.
+\newblock Node {W}ake-(u)p via {OVSF}-{C}oded {B}loom {F}ilters in {W}ireless
+  {S}ensor {N}etworks.
 \newblock In {\em {A}d {H}oc {N}etworks}, pages 119--134. Springer, 2014.
 
 \bibitem[WDS15]{Werner2015}
@@ -134,8 +136,8 @@ Martin Werner, Florian Dorfmeister, and Mirco Sch{\"o}nfeld.
 
 \bibitem[YL02]{Yang2002}
 Congjun Yang and King-Ip Lin.
-\newblock An index structure for improving closest pairs and related join
-  queries in spatial databases.
+\newblock An {I}ndex {S}tructure for {I}mproving {C}losest {P}airs and
+  {R}elated {J}oin {Q}ueries in {S}patial {D}atabases.
 \newblock In {\em Database {E}ngineering and {A}pplications {S}ymposium, 2002.
   {P}roceedings. {I}nternational}, pages 140--149. IEEE, 2002.
 

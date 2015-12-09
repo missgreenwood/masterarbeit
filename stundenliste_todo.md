@@ -93,26 +93,25 @@ Mo, 30.11. (1 h)
 Di, 08.12. (1 h 45 min)
 - Recherche, Treffen vorbereiten
 
+Mi, 09.12. (2 h 30 min)
+- Recherche, Treffen vorbereiten, Literaturverzeichnis einheitlich, 
+
 
 ## TODO
 
 1. Treffen vorbereiten 
-2. In Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
-3. Literaturverzeichnis einheitlich
-4. Antrittsvortrag
+
+	* Wie arbeitet stress tool?
+	* Wie bringe ich meine Daten in Cassandra? 
+	* Wie werden die Bloom-Filter in Cassandra generiert/eingesetzt?
+
+	* Notizen Exposé (auch in Ausarbeitung)
+
+2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
+
+3. Antrittsvortrag
 
 
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
-
-
-## Mögliche weitere Quellen 
-
-- Minsky, Y., and Trachtenberg, A.. Practical set reconciliation. Tech. Perp. BU ECE 2002-01, Boston University, 2002.
-
-- A. Goel and P. Gupta. Small subset queries and Bloom filters using ternary associative memories. In ACM Sigmetrics, 2010.
-
-- Kazuho Sato, Noriko Matsumoto and Norihiko Yoshida, Multi-Keyword Search for DHT P2P Networks, IPSJ/IEICE Forum on Information Technology (FIT)2006, (2006).
-
-- S. Tarkoma, C. Rothenberg, and E. Lagerspetz, “Theory and Practice of Bloom Filters for Distributed Systems,” IEEE Comm. Surveys & Tutorials, vol. 99, pp. 1-25, 2012.

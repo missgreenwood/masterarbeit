@@ -534,7 +534,7 @@
 }
 
 @InProceedings{Yang2002,
-  Title                    = {An {I}ndex {S}tructure for {I}mproving {C}losest {P}airs and {R}elated {J}oin {Q}ueries in {S}patial {D}atabases},
+  Title                    = {An index structure for improving closest pairs and related join queries in spatial databases},
   Author                   = {Congjun Yang and King-Ip Lin},
   Booktitle                = {Database {E}ngineering and {A}pplications {S}ymposium, 2002. {P}roceedings. {I}nternational},
   Year                     = {2002},
