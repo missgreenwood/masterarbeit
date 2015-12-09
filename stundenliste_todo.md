@@ -90,7 +90,8 @@ Mi, 25.11. (3 h)
 
 Mo, 30.11. (1 h)
 
-Di, 08.12. (17:20 - )
+Di, 08.12. (1 h 45 min)
+- Recherche, Treffen vorbereiten
 
 
 ## TODO
