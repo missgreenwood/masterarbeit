@@ -73,7 +73,7 @@ Mi, 18.11. (4 h 15 min)
 Do, 19.11. 
 - Termin mit Zweitbetreuer
 
-Fr, 20.11. (30 min)
+Fr, 20.11. (1 h 15 min)
 - Papers lesen und zusammenfassen, Versionskontrolle, Entwurf Exposé 
 
 Sa, 21.11. (45 min)
@@ -94,22 +94,23 @@ Di, 08.12. (1 h 45 min)
 - Recherche, Treffen vorbereiten
 
 Mi, 09.12. (2 h 30 min)
-- Recherche, Treffen vorbereiten, Literaturverzeichnis einheitlich, 
+- Recherche, Treffen vorbereiten, Literaturverzeichnis einheitlich
+
+Sa, 12.12. (45 min)
+- Recherche, Treffen vorbereiten 
 
 
 ## TODO
 
 1. Treffen vorbereiten 
 
-	* Wie arbeitet stress tool?
-	* Wie bringe ich meine Daten in Cassandra? 
-	* Wie werden die Bloom-Filter in Cassandra generiert/eingesetzt?
-
-	* Notizen Exposé (auch in Ausarbeitung)
-
 2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
 
 3. Antrittsvortrag
+
+4. Notizen Stand in Ausarbeitung
+
+5. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 
 ## TODO Ausarbeitung 
