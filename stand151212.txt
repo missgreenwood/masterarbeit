@@ -127,8 +127,24 @@ III. Evaluation
 ---------------
 
 	1. Wie arbeitet Cassandra stress tool?
+
 	* "cassandra-stress supports testing arbitrary CQL tables and queries to allow users to benchmark their data model" (vgl. https://github.com/apache/cassandra/tree/trunk/tools/stress): command "user"
-	* "To make testing data models simpler, we have extended the cassandra-stress tool in Cassandra 2.1 to support stress testing arbitrary CQL tables and arbitrary queries on that table.  We think it will be a very useful tool for users who want to quickly see how a schema will perform." (vgl. http://www.datastax.com/dev/blog/improved-cassandra-2-1-stress-tool-benchmark-any-schema)
+	* "To make testing data models simpler, we have extended the cassandra-stress tool in Cassandra 2.1 to support stress testing arbitrary CQL tables and arbitrary queries on that table. We think it will be a very useful tool for users who want to quickly see how a schema will perform." (vgl. http://www.datastax.com/dev/blog/improved-cassandra-2-1-stress-tool-benchmark-any-schema)
+	* YAML: "Yet Another Multicolumn Layout" (a modular CSS framework for truly flexible, accessible and responsive websites)
 
 	2. Wie bringe ich meine Daten in Cassandra? 
+
 	3. Wie werden die Bloom-Filter in Cassandra generiert/eingesetzt?
+
+	* "Cassandra uses bloom filters to save IO when performing a key lookup: each SSTable has a bloom filter associated with it that Cassandra checks before doing any disk seeks, making queries for keys that don't exist almost free" (http://spyced.blogspot.de/2009/01/all-you-ever-wanted-to-know-about.html)
+	* 
+
+	4. Cassandra Howto 
+
+	* Launch: launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist
+	* Stop: launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist
+	* Properties: /usr/local/etc/cassandra
+	* Logs: /usr/local/var/log/cassandra
+	* Data: /usr/local/var/lib/cassandra/data
+
+

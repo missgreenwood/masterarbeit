@@ -99,6 +99,9 @@ Mi, 09.12. (2 h 30 min)
 Sa, 12.12. (45 min)
 - Recherche, Treffen vorbereiten 
 
+So, 13.12. (2 h 30 min)
+- Recherche, Treffen vorbereiten
+
 
 ## TODO
 
