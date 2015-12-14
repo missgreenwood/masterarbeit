@@ -151,9 +151,8 @@ III. Evaluation
 	* Logs: /usr/local/var/log/cassandra
 	* Data: /usr/local/var/lib/cassandra/data
 
-	5. Cassandra Basics
+	5. Cassandra Basics (vgl. http://de.slideshare.net/AndreasFinke/apache-cassandra-einfhrung)
 
-	* Vgl. http://de.slideshare.net/AndreasFinke/apache-cassandra-einfhrung:
 	* "Einfaches Datenmodell: row-key -> columns (keine Relationen)" -> d.h. für mich: höchstens sortierte/unsortierte Listen von Bloom-Filtern in Cassandra bringen 
 	* "Logische Strukturierung in ColumnFamilies (analog SQL: Tabelle)"
 	* "Caching pro ColumnFamily: Scan Cache: Index über Spalten in SSTable[/]Block Cache: Ganze Zeile im RAM" 
@@ -164,9 +163,6 @@ III. Evaluation
 		b. In-Memory Speicherung in Memtables
 		c. Frequentielle Persistenz in SSTables (Flush)
 		d. Asynchrone frequentielle Komprimierung (Compaction)"	
-
-	* Vgl. http://de.slideshare.net/mikiobraun/cassandra-eine-einfhrung?next_slideshow=1: 
-
 	* 
 
 
