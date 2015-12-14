@@ -137,7 +137,11 @@ III. Evaluation
 	3. Wie werden die Bloom-Filter in Cassandra generiert/eingesetzt?
 
 	* "Cassandra uses bloom filters to save IO when performing a key lookup: each SSTable has a bloom filter associated with it that Cassandra checks before doing any disk seeks, making queries for keys that don't exist almost free" (http://spyced.blogspot.de/2009/01/all-you-ever-wanted-to-know-about.html)
+	* Cassandra uses bloom filters to save IO when performing a key lookup: each [Sorted String Table] has a bloom filter associated with it that Cassandra checks before doing any disk seeks, making queries for keys that don't exist almost free (http://www.maxburstein.com/blog/creating-a-simple-bloom-filter/)
+	* "Cassandra only uses the bloom filter, to find out the SST (Sorted String Table) which most likely contains the key [(a]s there might be several SSTs. [T]o speed this up looking in all SSTs bloomfilters are used" (http://stackoverflow.com/questions/5849283/bloomfilter-and-cassandra-why-used-and-why-hashed-several-times)
+	* "The columns of a key may be spread out in several sstables. If it wasn't for bloom filters, every read of a key would have to read every sstable, which is prohibitively expensive. By using bloom filters, cassandra almost always only has to look in the sstables which contain data for that key" (ebd.)
 	* 
+
 
 	4. Cassandra Howto 
 

@@ -99,7 +99,10 @@ Mi, 09.12. (2 h 30 min)
 Sa, 12.12. (45 min)
 - Recherche, Treffen vorbereiten 
 
-So, 13.12. (2 h 30 min)
+So, 13.12. (4 h
+- Recherche, Treffen vorbereiten
+
+Mo, 14.12. (4 h)
 - Recherche, Treffen vorbereiten
 
 
