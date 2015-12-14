@@ -102,13 +102,13 @@ Sa, 12.12. (45 min)
 So, 13.12. (4 h
 - Recherche, Treffen vorbereiten
 
-Mo, 14.12. (3 h 45 min)
+Mo, 14.12. (4 h)
 - Recherche, Treffen vorbereiten
 
 
 ## TODO
 
-1. Treffen vorbereiten 
+1. Wie arbeitet Cassandra stress tool? 
 
 2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
 
@@ -117,6 +117,12 @@ Mo, 14.12. (3 h 45 min)
 4. Notizen Stand in Ausarbeitung
 
 5. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
+
+6. Wie werden Bloom Filter in Cassandra generiert/eingesetzt?
+
+7. Wie bringe ich meine Daten in Cassandra? 
+
+8. Cassandra-Testinstallationen fertig 
 
 
 ## TODO Ausarbeitung 
