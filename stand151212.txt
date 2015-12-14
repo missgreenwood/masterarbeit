@@ -169,4 +169,12 @@ III. Evaluation
 
 	* 
 
+	5. Software installieren CIP-Pool Howto
+
+	* mkdir /tmp/package && cd /tmp/package
+	* apt-get download package
+	* ar x *.deb
+	* tar xvzf data.tar.gz
+	* Die Executables sind dann in: /usr/share/package (oder so ähnlich, z.B. für JNA: /usr/share/java/jna*)
+
 
