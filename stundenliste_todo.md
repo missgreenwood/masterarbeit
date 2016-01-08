@@ -105,6 +105,9 @@ So, 13.12. (4 h
 Mo, 14.12. (4 h)
 - Recherche, Treffen vorbereiten
 
+Do, 07.01. (1 h 45 min)
+- Cassandra lokal installieren + testen
+
 
 ## TODO
 
@@ -123,6 +126,8 @@ Mo, 14.12. (4 h)
 7. Wie bringe ich meine Daten in Cassandra? 
 
 8. Cassandra-Testinstallationen fertig 
+
+9. Titelvorschlag
 
 
 ## TODO Ausarbeitung 

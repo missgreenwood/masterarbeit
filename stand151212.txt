@@ -141,14 +141,17 @@ III. Evaluation
 	* "Cassandra only uses the bloom filter, to find out the SST (Sorted String Table) which most likely contains the key [(a]s there might be several SSTs. [T]o speed this up looking in all SSTs bloomfilters are used" (http://stackoverflow.com/questions/5849283/bloomfilter-and-cassandra-why-used-and-why-hashed-several-times)
 	* "The columns of a key may be spread out in several sstables. If it wasn't for bloom filters, every read of a key would have to read every sstable, which is prohibitively expensive. By using bloom filters, cassandra almost always only has to look in the sstables which contain data for that key" (ebd.)
 
-
 	4. Cassandra Howto 
 
-	* Launch: launchctl load ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist
-	* Stop: launchctl unload ~/Library/LaunchAgents/homebrew.mxcl.cassandra.plist
-	* Properties: /usr/local/etc/cassandra
-	* Logs: /usr/local/var/log/cassandra
-	* Data: /usr/local/var/lib/cassandra/data
+	* Launch: cassandra -f (foreground) oder cassandra
+	* Run in background: CTRL + C 
+	* Exit: 
+		$ ps auwx | grep cassandra
+		$ sudo  kill <pid>
+	* Properties: ~/opt/cassandra
+	* Logs: ~/opt/cassandra/logs
+	* Data: ~/opt/cassandra/data
+	* CQL-Daemon: ~/opt/cassandra/bin/cqlsh
 
 	5. Cassandra Basics
 
@@ -163,7 +166,6 @@ III. Evaluation
 		b. In-Memory Speicherung in Memtables
 		c. Frequentielle Persistenz in SSTables (Flush)
 		d. Asynchrone frequentielle Komprimierung (Compaction)"	
-
 
 	5. Software installieren CIP-Pool Howto
 
