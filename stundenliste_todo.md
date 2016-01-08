@@ -108,6 +108,9 @@ Mo, 14.12. (4 h)
 Do, 07.01. (1 h 45 min)
 - Cassandra lokal installieren + testen
 
+Fr, 08.01. (2 h)
+- Cassandra + Stress-Tool testen
+
 
 ## TODO
 
@@ -125,9 +128,7 @@ Do, 07.01. (1 h 45 min)
 
 7. Wie bringe ich meine Daten in Cassandra? 
 
-8. Cassandra-Testinstallationen fertig 
-
-9. Titelvorschlag
+8. Titelvorschlag
 
 
 ## TODO Ausarbeitung 
