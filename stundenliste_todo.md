@@ -123,11 +123,7 @@ So, 10.01. (3 h 45 min)
 
 3. Antrittsvortrag
 
-4. Notizen Stand in Ausarbeitung + 
-
-"Zu deiner Mail: Dein Plan klingt soweit ganz gut. Mir ist nur noch nicht klar, was Du mit Mengenvergleich auf BF meinst. Um die Ähnlichkeit zwischen zwei Mengen anhand der BF abzuschätzen, kann man zB den Jaccard-Abstand der BF berechnen. 
-In deiner Arbeit geht es meiner Meinung nach auch eher um die Organisation der BF, sodass die k nächsten Nachbarn effizient bestimmt werden können. 
-Einen Testdatensatz gibt es nicht. Das ist aus meiner Sicht auch nicht schlimm, weil Du dir einfach selbst zufällige Daten erzeugen kannst."
+4. Notizen Stand in Ausarbeitung 
 
 "1. Du hattest ja die Idee, Cassandra bzw. das Cassandra stress tool für die Evaluation meiner Implementierungen der Indexstrukturen und Algorithmen zum Mengenvergleich einzusetzen. Dazu hatten wir zwei Möglichkeiten in Betracht gezogen: 
 
