@@ -3,4 +3,22 @@ Antrittsvortrag Masterarbeit
 
 (10 Min. Vortrag + Diskussion)
 
+Folie 1: Titel
+
+Folie 2: Gliederung 
+
+Folie 3: Ambience
+
+Folie 4: Mengenvergleich mit Bloom-Filtern 
+
+Folie 5: Indexstrukturen
+
+Folie 6: k nächste Nachbarn 
+
+Folie 7: Cassandra
+
+Folie 8: Cassandra Stress Tool
+
+Folie 9: Zusammenfassung 
+
 

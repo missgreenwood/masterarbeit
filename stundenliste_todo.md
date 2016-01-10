@@ -108,8 +108,13 @@ Mo, 14.12. (4 h)
 Do, 07.01. (1 h 45 min)
 - Cassandra lokal installieren + testen
 
-Fr, 08.01. (2 h)
+Fr, 08.01. (3 h)
 - Cassandra + Stress-Tool testen
+
+So, 10.01. (11:15 - )
+- Präsentation vorbereiten, Terminabsprache, Titel 
+
+
 
 
 ## TODO
@@ -120,7 +125,29 @@ Fr, 08.01. (2 h)
 
 3. Antrittsvortrag
 
-4. Notizen Stand in Ausarbeitung
+4. Notizen Stand in Ausarbeitung + 
+
+"Zu deiner Mail: Dein Plan klingt soweit ganz gut. Mir ist nur noch nicht klar, was Du mit Mengenvergleich auf BF meinst. Um die Ähnlichkeit zwischen zwei Mengen anhand der BF abzuschätzen, kann man zB den Jaccard-Abstand der BF berechnen. 
+In deiner Arbeit geht es meiner Meinung nach auch eher um die Organisation der BF, sodass die k nächsten Nachbarn effizient bestimmt werden können. 
+Einen Testdatensatz gibt es nicht. Das ist aus meiner Sicht auch nicht schlimm, weil Du dir einfach selbst zufällige Daten erzeugen kannst."
+
+"1. Du hattest ja die Idee, Cassandra bzw. das Cassandra stress tool für die Evaluation meiner Implementierungen der Indexstrukturen und Algorithmen zum Mengenvergleich einzusetzen. Dazu hatten wir zwei Möglichkeiten in Betracht gezogen: 
+
+a) Meine Daten in Cassandra bringen und das stress tool darauf anwenden 
+b) Das stress tool rausziehen und für meine Implementierungen anwenden/umschreiben 
+
+Prinzipiell ist der Quellcode von beidem (Cassandra/stress tool) frei verfügbar. Das Prinzip von Cassandra ist zwar eine verteilte Datenbank, aber man kann natürlich auch nur einen Knoten spezifizieren. Die Bloom-Filter werden in Cassandra werden für index scans auf den SSTables eingesetzt, nicht aber für range scans. Das stress tool testet Geschwindigkeit von Einfügen und Löschen von Datensätzen in einer Cassandra-Datenbank. Alles, was mit dem Verteilen und Spiegeln der Daten auf unterschiedliche Knoten zu tun hat, kann ich vernachlässigen, d.h. alles, was das Einfügen von Datensätzen in Cassandra betrifft. Ich würde mich also auf die Lookup-Funktion in Cassandra beschränken sowie auf die Organisation der Daten, die mit meinen angedachten Indexstrukturen natürlich ganz anders aussehen muss als in Cassandra. Bei mir sind außerdem die Bloom-Filter selbst die Daten, die möglichst gut organisiert/möglichst schnell gefunden werden sollen. 
+
+Damit würde ich also vier Teilbereiche ausmachen, die man zwar kombinieren kann, aber nicht vermischen sollte: 
+
+1. Indexstrukturen mit Bloom-Filtern als Datensätzen
+2. Algorithmen zum Mengenvergleich auf Bloom-Filtern
+3. Evaluation mit Cassandra
+4. Evaluation mit Cassandra stress tool  
+
+Punkt 3 ist mE nur für Punkt 2 relevant. D.h. ich könnte also versuchen, die Daten (die Bloom-Filter selbst) ohne Anpassungen in Cassandra zu bringen, den Lookup-Algorithmus verändern und das dann mit dem stress tool evaluieren. Punkt 1 hat mit der Organisation der Daten in Cassandra überhaupt nichts zu tun. D.h. ich würde nur das stress tool nehmen ohne die Datenbank und die Daten anders organisieren. ich würde also einmal die Code-Basis von Cassandra und einmal die des stress tools nehmen und für meine Anwendungsfälle umschreiben. 
+
+Die Bloom-Filter werden in Cassandra anders verwendet als bei mir, wenn ich das richtig sehe. Der Schwerpunkt von Cassandra ist außerdem gerade die verteilte Datenbank, was bei mir keine Rolle spielt. Ich würde also Cassandra und das stress tool eher als Codebasis sehen, damit ich von irgendwas Existierendem und Funktionierendem ausgehen kann. Ich werde mir bis Dienstag den Code noch genauer anschauen. Was ich dann bald bräuchte, sind die aktuell verwendeten Testdaten bzw. Zugang zum Server. "
 
 5. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
@@ -128,7 +155,7 @@ Fr, 08.01. (2 h)
 
 7. Wie bringe ich meine Daten in Cassandra? 
 
-8. Titelvorschlag
+8. Titelvorschlag (bisher: "Optimierung von Indexstrukturen und Algorithmen zum Mengenvergleich für Bloom-Filter in einem kontext-zentrierten sozialen Online-Netzwerk")
 
 
 ## TODO Ausarbeitung 
