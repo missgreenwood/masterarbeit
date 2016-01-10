@@ -10,11 +10,6 @@ Entwurf Abstract
 
 3. Kern der Arbeit/Thema genau definieren	
 
-a) Kontexterkennung durch Bloom-Filter optimieren/
--> Optimierung der Nachrichtenauswahl durch Optimierung der Filtertechnik 
--> paarweiser Vergleich
-b) Daten von einzelnem Nutzer 
-
 4. Quellen
 
 	Byers2002 (referenziert auch in AMBIENCE) -> weniger relevant!
@@ -47,7 +42,7 @@ b) Daten von einzelnem Nutzer
 		i. Lookup-Methode f. Bloom-Filter, basierend auf B-Baum -> Query-Forwarding liegt in O(log_m N) ggü. Chord-Algo. (O(log_2 N)), #verwaltete Bloom-Filter liegt in O(1) ggü. Chord-Algo. (O(log_2 N))
 		ii. Baum-Management-Methode -> basiert auf Ähnlichkeit v. Bloom-Filtern ("similarity of Bloom filter", S. 316), reduziert Rekonstruktionskosten f. Baum 
 	* Bloom-Filter werden als B-Baum strukturiert ("Bloom filter management method based on a B-tree", S. 316)
-	* Management-Methoden: EInfügen + Löschen ("Participation"/"Secession", vgl. S. 319)
+	* Management-Methoden: Einfügen + Löschen ("Participation"/"Secession", vgl. S. 319)
 	* Bloom-Filter-Management: Jeder Knoten managt einen vereinigten Bloom-Filter der darunter liegenden Knoten -> der Wurzelknoten hat damit Informationen über alle (vgl. Fig. 5 S. 320) 
 	* Insgesamt: Die physischen Knoten sind natürlich nicht selbst im Baum gespeichert, sondern ihre IDs bilden logische Knoten im Baum; unterscheide zw. Verwaltung d. logischen Knoten u. Verwaltung d. Bloom-Filter!
 	* Ähnlichkeitsbasiertes Baum-Management: Häufige Umstrukturierungen der B-Bäume sind teuer (vgl. S. 316)
@@ -58,7 +53,7 @@ b) Daten von einzelnem Nutzer
 	* Wichtigste Evaluationsergebnisse (vgl. S. 322f.): Durchschnittl. Forwarding-Zeit f. Query kann ggü. Chord im besten Fall um ~ 25% reduziert werden; Rekonstruktionskosten können m. ähnlichkeitsbasiertem Ansatz ggü. naivem Ansatz um 9-16% reduziert werden 
 
 	b. Von Interesse: 
-		i. Falls Baumstruktur sich auch auf ein und demselben Host realisieren lässt; Effizienzgewinn darf nicht von verteiltem System abhängen; Verfahren mit DHT für mich nicht interessant, da als Alterntive zu Bloom-Filtern verwendet; diese sind aber für meine Anwendung vorgegeben
+		i. Falls Baumstruktur sich auch auf ein und demselben Host realisieren lässt; Effizienzgewinn darf nicht von verteiltem System abhängen; Verfahren mit DHT für mich nicht interessant, da als Alternative zu Bloom-Filtern verwendet; diese sind aber für meine Anwendung vorgegeben
 		ii. Natürlich nicht das Knotenmanagement, da ich immer nur einen Knoten habe; aber die Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)  
 
 	c. Zusammenfassung: 
