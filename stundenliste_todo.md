@@ -111,7 +111,7 @@ Do, 07.01. (1 h 45 min)
 Fr, 08.01. (3 h)
 - Cassandra + Stress-Tool testen
 
-So, 10.01. (3 h)
+So, 10.01. (3 h 45 min)
 - Präsentation vorbereiten, Terminabsprache, Titel 
 
 

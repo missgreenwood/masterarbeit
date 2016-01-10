@@ -29,7 +29,7 @@ Entwurf Abstract
 	
 	d. Referenz in AMBIENCE: "Bloom filters provide aggregation, merge and set reconciliation" (S. 3)
 
-
+	
 	Sakuma2011
 
 	a. Ziel: Baumstruktur für Bloom-Filter, Evaluation der Performance des Query-Forwarding
@@ -97,7 +97,7 @@ Entwurf Abstract
 	* Neue Datenstruktur bRdnn-Tree: 
 		i. Grundidee: Verwende Lösung des k-closest NN pair-Problems, um k-closest pairs zu finden (vgl. Theorem 2.1, S. 141)
 		ii. Wichtigster Aspekt: Die Information über das NN pair wird dynamisch im Baum gespeichert 
-		iii. Beruht auf dem Rdnn-Baum, der das "Reverse Nearest Neighbor Problem" löst (S. 143) -> dieses Problem ist eigentlich bzgl. EINER Menge definiert: "Recall that the recerse nearest neighbor (RNN) of a point p in a data set S is a collection of points in S that have p as their nearest neighbor" (S. 143) -> also müsste ich eigentlich alle Algorithmen analog anwenden können, indem ich einfach nur EINEN Baum aufbaue und die Vergleiche im Inneren stattfinden lasse!
+		iii. Beruht auf dem Rdnn-Baum, der das "Reverse Nearest Neighbor Problem" löst (S. 143) -> dieses Problem ist eigentlich bzgl. EINER Menge definiert: "Recall that the reverse nearest neighbor (RNN) of a point p in a data set S is a collection of points in S that have p as their nearest neighbor" (S. 143) -> also müsste ich eigentlich alle Algorithmen analog anwenden können, indem ich einfach nur EINEN Baum aufbaue und die Vergleiche im Inneren stattfinden lasse!
 		iv. Innere Knoten in beiden Bäumen enthalten Einträge der Form (ptr, Rect, max_dnn, min_dnn): ptr ist die Adresse eines Kindknotens; falls ptr auf ein Blatt verweist, ist Rect das MBR aller Punkte im Blattknoten/falls ptr auf einen weiteren inneren Knoten verweist, ist Rect das MBR aller MBRs im Kindknoten; max_dnn/min_dnn sind die maximale/minimale Distanz jedes Punktes zu seinem NN in der anderen Menge -> müsste ich also entsprechend anpassen
 	* Def. d. Kosten (f. Suche): Durchschnittliche #Blattknoten-Zugriffe  
 	* Beste Ergebnisse bei kleinem k (vgl. S. 145)

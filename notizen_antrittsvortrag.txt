@@ -11,14 +11,15 @@ Folie 3: Ambience
 
 Folie 4: Mengenvergleich mit Bloom-Filtern 
 
-Folie 5: Indexstrukturen
+Folie 5: Baumstruktur
 
-Folie 6: k nächste Nachbarn 
+Folie 6: Indexstruktur
 
-Folie 7: Cassandra
+Folie 7: k nächste Nachbarn-Algo. 
 
-Folie 8: Cassandra Stress Tool
+Folie 8: Cassandra
 
-Folie 9: Zusammenfassung 
+Folie 9: Cassandra Stress Tool
 
+Folie 10: Zusammenfassung
 
