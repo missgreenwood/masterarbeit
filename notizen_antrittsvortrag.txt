@@ -19,7 +19,7 @@ Folie 7: k nächste Nachbarn-Algo.
 
 Folie 8: Cassandra
 
-Folie 9: Cassandra Stress Tool
+Folie 9: Cassandra Stress-Tool
 
 Folie 10: Zusammenfassung
 

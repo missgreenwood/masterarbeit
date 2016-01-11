@@ -114,6 +114,9 @@ Fr, 08.01. (3 h)
 So, 10.01. (3 h 45 min)
 - Präsentation vorbereiten, Terminabsprache, Titel 
 
+Mo, 11.01. (1 h)
+- Präsentation vorbereiten
+
 
 ## TODO
 
