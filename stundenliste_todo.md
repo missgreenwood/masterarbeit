@@ -117,7 +117,7 @@ So, 10.01. (3 h 45 min)
 Mo, 11.01. (1 h)
 - Präsentation vorbereiten
 
-Di, 12.01. (2 h 15 min)
+Di, 12.01. (3 h 15 min)
 - Präsentation vorbereiten + üben, Titel, MA-Besprechung
 
 
@@ -125,7 +125,7 @@ Di, 12.01. (2 h 15 min)
 
 1. Wie arbeitet Cassandra stress tool? 
 
-2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Werner2015
+2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007
 
 3. Antrittsvortrag + Notizen fertig
 
@@ -133,9 +133,7 @@ Di, 12.01. (2 h 15 min)
 
 5. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
-6. Antrittsvortrag üben 
-
-7. Titelvorschlag (bisher: "Optimierung von Indexstrukturen und Algorithmen zum Mengenvergleich für Bloom-Filter in einem kontext-zentrierten sozialen Online-Netzwerk")
+6. Antrittsvortrag üben
 
 
 ## TODO Ausarbeitung 
