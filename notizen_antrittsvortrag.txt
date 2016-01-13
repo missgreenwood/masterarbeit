@@ -11,14 +11,12 @@ Folie 1: Titel
 - Mobilitätsverhalten der Nutzer beeinflusst Struktur und Kommunikation in OSNs
 - Andererseits kann Dienstgüte von OSNs durch Kontextinformationen verändert und verbessert werden 
 
-Folie 2: Gliederung 
-
-Folie 3: Ambience
+Folie 2: Ambience
 
 - Beim Absetzen einer Query nach bestimmten Metadaten wird der Bloom-Filter dieser Query erstellt und mit den vorhandenen Bloom-Filtern verglichen 
 - Diejenigen Nachrichten, deren Bloom-Filter die Kriterien erfüllen, werden dem Nutzer, von dessen Gerät die Query abgesetzt wurde, nach Ähnlichkeit sortiert zugestellt
 
-Folie 4: Mengenvergleich mit Bloom-Filtern 
+Folie 3: Mengenvergleich mit Bloom-Filtern 
 
 - Die Bloom-Filter der Nachrichten werden als unsortierte Liste auf einem Host gespeichert
 - Wird eine Query an den Host abgesetzt, wird ihre Jaccard-Distanz zu jedem Listenelement berechnet bzw. approximiert und die passenden Elemente werden zurückgegeben
@@ -26,7 +24,7 @@ Folie 4: Mengenvergleich mit Bloom-Filtern
 - Jaccard-Distanz: #Elemente Schnitt/#Elemente Vereinigung
 - Kosinus-Ähnlichkeit zweier Vektoren a und b ist der Kosinus des eingeschlossenen Winkels θ
 
-Folie 5: Baumstruktur, Indexstruktur
+Folie 4: Baumstruktur, Indexstruktur
 
 - Die prototypische Implementierung von AMBIENCE legt keinen Schwerpunkt auf Optimierung des Anfrageverhaltens für Queries
 - So stellt sich z.B. die Frage, was geschieht, wenn eine hohe Anzahl von Queries an einen Host abgesetzt wird oder eine große Anzahl an Nachrichten (bzw. ihre Bloom-Filter) auf einem Host gespeichert werden sollen
@@ -35,9 +33,9 @@ Folie 5: Baumstruktur, Indexstruktur
 - bRdnn: "bichromatic Reverse [...] nearest neighbor"
 - bRdnn-Baum: löst das "Reverse nearest neighbor problem (RNN)": Für einen Punkt p aus S, finde "a collection of points in S that have p as their nearest neighbor"
 
-Folie 6: k nächste Nachbarn-Algo. 
+Folie 5: k nächste Nachbarn-Algo. 
 
-- Nice to have!
+Folie 6: 
 
 Folie 7: Evaluation, Cassandra
 
@@ -61,7 +59,6 @@ Folie 8: Cassandra Stress-Tool, Einsatz
 - Ich würde also einmal die Code-Basis von Cassandra und einmal die des stress tools nehmen und für meine Anwendungsfälle umschreiben
 - Schwerpunkt von Cassandra ist verteilte Datenbank, was bei mir keine Rolle spielt
 - Cassandra und stress tool als Codebasis
-
 
 Folie 9: Zusammenfassung
 
