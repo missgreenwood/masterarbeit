@@ -5,16 +5,15 @@ Antrittsvortrag Masterarbeit
 
 Folie 1: Titel
 
-- Ubiquitous computing, Context-Awareness u. zunehmende Verbreitung von mobilen Endgeräten haben in sozialen Online-Netzwerken ("Online Social Networks"/ "OSNs") zu Paradigmenwechsel geführt
-- Traditionelle adressbasierte Netzwerke wurden zunächst durch P2P-Overlay-Strukturen ergänzt, um bessere Skalierbarkeit und Datenmobilität zu erreichen
-- Kontextinformationen als Informationsquelle für Anwendungen und Netzwerke ermöglichen Anpassung an die aktuellen Nutzerbedürfnisse, stärkere Personalisierung, höhere Dienstqualität
-- Mobilitätsverhalten der Nutzer beeinflusst Struktur und Kommunikation in OSNs
-- Andererseits kann Dienstgüte von OSNs durch Kontextinformationen verändert und verbessert werden 
-
 Folie 2: Ambience
 
+- Ubiquitous computing, Context-Awareness u. zunehmende Verbreitung von mobilen Endgeräten haben in sozialen Online-Netzwerken ("Online Social Networks"/ "OSNs") zu Paradigmenwechsel geführt
+- Traditionelle adressbasierte Netzwerke wurden zunächst durch P2P-Overlay-Strukturen ergänzt, um bessere Skalierbarkeit und Datenmobilität zu erreichen
+- Kontextinformationen: Informationsquelle f. Anwendungen und Netzwerke -> ermöglichen Anpassung an aktuelle Nutzerbedürfnisse, Personalisierung, höhere Dienstqualität
+- Mobilitätsverhalten der Nutzer beeinflusst Struktur und Kommunikation in OSNs
+- Andererseits kann Dienstgüte von OSNs durch Kontextinformationen verbessert werden 
 - Beim Absetzen einer Query nach bestimmten Metadaten wird der Bloom-Filter dieser Query erstellt und mit den vorhandenen Bloom-Filtern verglichen 
-- Diejenigen Nachrichten, deren Bloom-Filter die Kriterien erfüllen, werden dem Nutzer, von dessen Gerät die Query abgesetzt wurde, nach Ähnlichkeit sortiert zugestellt
+- Die Nachrichten, deren Bloom-Filter die Kriterien erfüllen, werden dem Nutzer nach Ähnlichkeit sortiert zugestellt
 
 Folie 3: Mengenvergleich mit Bloom-Filtern 
 
@@ -22,43 +21,35 @@ Folie 3: Mengenvergleich mit Bloom-Filtern
 - Wird eine Query an den Host abgesetzt, wird ihre Jaccard-Distanz zu jedem Listenelement berechnet bzw. approximiert und die passenden Elemente werden zurückgegeben
 - Mathematisch betrachtet handelt es sich dabei um einen Mengenvergleich ("set reconciliation")
 - Jaccard-Distanz: #Elemente Schnitt/#Elemente Vereinigung
-- Kosinus-Ähnlichkeit zweier Vektoren a und b ist der Kosinus des eingeschlossenen Winkels θ
 
 Folie 4: Baumstruktur, Indexstruktur
 
-- Die prototypische Implementierung von AMBIENCE legt keinen Schwerpunkt auf Optimierung des Anfrageverhaltens für Queries
+- Ambience legt keinen Schwerpunkt auf Optimierung des Anfrageverhaltens für Queries
 - So stellt sich z.B. die Frage, was geschieht, wenn eine hohe Anzahl von Queries an einen Host abgesetzt wird oder eine große Anzahl an Nachrichten (bzw. ihre Bloom-Filter) auf einem Host gespeichert werden sollen
-- Bestehende Lösungsansätze finden im Umfeld von Datenbanksystemen, P2P-Netzwerken und Location-Based Services
-- Beruhen auf abweichenden Ähnlichkeitsmaßen Mengenvergleich zwischen unterschiedlichen Hosts, auf Geodaten und ihren spezifischen Charakteristika oder der Location als einziger Kontextinformation 
+- Bestehende Lösungsansätze im Bereich Datenbanksysteme, P2P-Netzwerken, LBS
+- Beruhen aber auf abweichenden Ähnlichkeitsmaßen, Mengenvergleich zw. unterschiedlichen Hosts, Geodaten u. ihren spezifischen Charakteristika oder Location als einziger Kontextinformation 
 - bRdnn: "bichromatic Reverse [...] nearest neighbor"
 - bRdnn-Baum: löst das "Reverse nearest neighbor problem (RNN)": Für einen Punkt p aus S, finde "a collection of points in S that have p as their nearest neighbor"
 
-Folie 5: k nächste Nachbarn-Algo. 
+Folie 5: k-nächste-Nachbarn-Suche
 
-Folie 6: 
+- Kosinus-Ähnlichkeit zweier Vektoren a und b ist der Kosinus des eingeschlossenen Winkels θ 
+
+Folie 6: Fragestellung
 
 Folie 7: Evaluation, Cassandra
 
-Folie 8: Cassandra Stress-Tool, Einsatz
+Folie 8: Cassandra Stress-Tool, Verwendung
 
-- k nächste Nachbarn: Nice to have!
-- Das Prinzip von Cassandra ist zwar eine verteilte Datenbank, aber man kann natürlich auch nur einen Knoten spezifizieren
-- Die Bloom-Filter werden in Cassandra werden für index scans auf den SSTables eingesetzt, nicht aber für range scans
-- Alles, was mit dem Verteilen und Spiegeln der Daten auf unterschiedliche Knoten zu tun hat, kann ich vernachlässigen, d.h. alles, was das Einfügen von Datensätzen in Cassandra betrifft
-- Auf die Lookup-Funktion in Cassandra beschränken sowie auf die Organisation der Daten, die mit meinen angedachten Indexstrukturen natürlich ganz anders aussehen muss als in Cassandra
-- Bloom-Filter selbst die Daten, die möglichst gut organisiert/möglichst schnell gefunden werden sollen
-- Vier Teilbereiche ausmachen, die man zwar kombinieren kann, aber nicht vermischen sollte: 
+- Prinzip von Cassandra ist zwar verteilte Datenbank, aber man kann auch nur einen Knoten spezifizieren (verteilt spielt bisher keine Rolle in Ambience!)
+- Bloom-Filter in Cassandra: Für index scans auf den SSTables, nicht für range scans
+- Bloom-Filter sind in Ambience selbst die Daten!
+- Vier Teilbereiche: 
 
 1. Indexstrukturen mit Bloom-Filtern als Datensätzen
-2. Algorithmen zum Mengenvergleich auf Bloom-Filtern
+2. Algorithmen zur k-nächste-Nachbarn-Suche
 3. Evaluation mit Cassandra
 4. Evaluation mit Cassandra stress tool  
-
-- 3. ist nur für 2. relevant. D.h. ich könnte also versuchen, die Daten (die Bloom-Filter selbst) ohne Anpassungen in Cassandra zu bringen, den Lookup-Algorithmus verändern und das dann mit dem stress tool evaluieren. 
-- 1. hat mit der Organisation der Daten in Cassandra überhaupt nichts zu tun. D.h. ich würde nur das stress tool nehmen ohne die Datenbank und die Daten anders organisieren
-- Ich würde also einmal die Code-Basis von Cassandra und einmal die des stress tools nehmen und für meine Anwendungsfälle umschreiben
-- Schwerpunkt von Cassandra ist verteilte Datenbank, was bei mir keine Rolle spielt
-- Cassandra und stress tool als Codebasis
 
 Folie 9: Zusammenfassung
 
