@@ -123,6 +123,8 @@ Di, 12.01. (6 h)
 Mi, 13.01. (1 h 45 min)
 - Präsentation vorbereiten + üben
 
+Do, 14.01. ()
+
 
 ## TODO
 
