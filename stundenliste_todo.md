@@ -123,7 +123,10 @@ Di, 12.01. (6 h)
 Mi, 13.01. (1 h 45 min)
 - Präsentation vorbereiten + üben
 
-Do, 14.01. ()
+Do, 14.01. (4 h)
+- Präsentation 
+
+Mo, 11.04. (3 h, 21:00 - )
 
 
 ## TODO
@@ -135,8 +138,6 @@ Do, 14.01. ()
 3. Stand in Ausarbeitung 
 
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
-
-5. Antrittsvortrag üben
 
 
 ## TODO Ausarbeitung 
