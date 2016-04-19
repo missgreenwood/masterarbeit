@@ -124,9 +124,32 @@ Mi, 13.01. (1 h 45 min)
 - Präsentation vorbereiten + üben
 
 Do, 14.01. (4 h)
-- Präsentation 
+- Präsentation vorbereiten + vorstellen 
 
-Mo, 11.04. (3 h, 21:00 - )
+Mo, 11.04. (3 h 30 min)
+- C++
+
+Di, 12.04. (5 h 15 min)
+- C++
+
+Mi, 13.04. (5 h 30 min)
+- C++
+
+Do, 14.04. (6 h 15 min)
+- C++
+
+Fr, 15.04. (1 h 30 min)
+- C++, XCode
+
+So, 17.04. (6 h)
+- C++ (OO examples, classes), XCode (debugging, project structure), Unit testing 
+
+# KW 16 (noch 29)
+
+Mo, 18.04. (1 h 15 min)
+
+Di, 19.04. (7 h)
+- XCode, Mac OS, Unit testing
 
 
 ## TODO
