@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BC5861FE1CCAC508007CDEC0 /* bloom_filter_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F01CCABB31007CDEC0 /* bloom_filter_test.cpp */; };
 		BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F81CCABB5C007CDEC0 /* tests.cpp */; };
 		BC5862091CCAD8CE007CDEC0 /* bloomtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */; };
+		BC96D20B1CCB5C5E0017D8AF /* bloom_filter_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,12 +35,12 @@
 
 /* Begin PBXFileReference section */
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC5861EF1CCABB31007CDEC0 /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bloom_filter.hpp; path = ../../../bloom_filter.hpp; sourceTree = "<group>"; };
-		BC5861F01CCABB31007CDEC0 /* bloom_filter_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bloom_filter_test.cpp; path = ../../../bloom_filter_test.cpp; sourceTree = "<group>"; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
 		BC5862041CCACC55007CDEC0 /* bloomtest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloomtest.hpp; sourceTree = "<group>"; };
 		BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloomtest.cpp; sourceTree = "<group>"; };
+		BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloom_filter_test.cpp; sourceTree = "<group>"; };
+		BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +82,8 @@
 		BC5861E71CCABB13007CDEC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BC5861EF1CCABB31007CDEC0 /* bloom_filter.hpp */,
-				BC5861F01CCABB31007CDEC0 /* bloom_filter_test.cpp */,
+				BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */,
+				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
 				BC5862041CCACC55007CDEC0 /* bloomtest.hpp */,
 				BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */,
 			);
@@ -175,8 +175,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC5861FE1CCAC508007CDEC0 /* bloom_filter_test.cpp in Sources */,
 				BC5862091CCAD8CE007CDEC0 /* bloomtest.cpp in Sources */,
+				BC96D20B1CCB5C5E0017D8AF /* bloom_filter_test.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +325,7 @@
 				BC5861EE1CCABB13007CDEC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BC5861FA1CCABB5C007CDEC0 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
@@ -333,6 +334,7 @@
 				BC5861FC1CCABB5C007CDEC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

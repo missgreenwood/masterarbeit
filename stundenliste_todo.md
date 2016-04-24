@@ -174,8 +174,7 @@ C++, XCode
 C++ (OO examples, classes), XCode (debugging, project structure), Unit testing 
 
 
-KW 16 (noch 10.5 h)
-
+KW 16 (noch 3 h)
 * Mo, 18.04. (1.25 h)
 
 * Di, 19.04. (10 h)
@@ -190,8 +189,11 @@ XCode, Mac OS, Unit testing, VCS, Bloom-Filter Basisimplementierung
 * Fr, 22.04. (7 h)
 Entwicklungsumgebung, Bloom-Filter Basisimplementierung 
 
-* Sa, 23.04. (09:20 -)
+* Sa, 23.04. (1.5 h)
 Bloom-Filter Basisimplementierung
+
+* So, 24.04. (6 h)
+Bloom-Filter Basisimplementierung 
 
 
 ## TODO
