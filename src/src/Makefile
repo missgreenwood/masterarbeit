@@ -2,11 +2,11 @@ CC=g++-4.8
 CFLAGS=-w
 
 # list all .cpp files 
-SOURCES=bloomtest.cpp bloom_filter_test.cpp
+SOURCES=main.cpp bloom_filter_tree.cpp
 OBJECTS=$(SOURCES:.c=.o)
 
 # provide name of executable	
-EXECUTABLE=bloomtest
+EXECUTABLE=bloomfilters
 
 build: $(FILES)
 	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES) 

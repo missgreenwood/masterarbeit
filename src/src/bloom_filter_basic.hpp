@@ -1,8 +1,8 @@
-//  bloomtest.hpp, Judith Greif
+//  bloom_filter_basic.hpp, Judith Greif
 //  Description: Header for Bloom filter test implementation, including method declarations for unit tests
 
-#ifndef bloomtest_h
-#define bloomtest_h
+#ifndef bloom_filter_basic_h
+#define bloom_filter_basic_h
 
 #include <iostream>
 #include <vector>
@@ -123,9 +123,10 @@ public:
         for (int i=0; i<m; i++) {
             filters.push_back(BloomFilter(32, i));
         }
-        cout << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
         arrSize = size * 32;
         filtersArr = new int[arrSize];
+        cout << endl;
         for (int i=0; i<size; i++) {
             cout << "Array filter at index " << i << ": ";
             for (int j=0; j<32; j++) {
@@ -139,9 +140,10 @@ public:
         for (int i=0; i<size; i++) {
             filters.push_back(BloomFilter(32, i));
         }
-        cout << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
         arrSize = size * 32;
         filtersArr = new int[arrSize];
+        cout << endl;
         for (int i=0; i<size; i++) {
             cout << "Array filter at index " << i << ": ";
             for (int j=0; j<32; j++) {
@@ -162,6 +164,7 @@ void BloomFilterVec::initRandom() {
         filters[i].initRandom();
         filters[i].printData();
     }
+    cout << endl; 
     for (int i=0; i<size; i++) {
         cout << "Array filter at index " << i << ": ";
             for (int j=0; j<32; j++) {

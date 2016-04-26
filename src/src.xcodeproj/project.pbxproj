@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F81CCABB5C007CDEC0 /* tests.cpp */; };
-		BC5862091CCAD8CE007CDEC0 /* bloomtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */; };
-		BC96D20B1CCB5C5E0017D8AF /* bloom_filter_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */; };
+		BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* main.cpp */; };
+		BC7F28211CCF5D2500045F37 /* bloom_filter_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,10 +36,11 @@
 /* Begin PBXFileReference section */
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
-		BC5862041CCACC55007CDEC0 /* bloomtest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloomtest.hpp; sourceTree = "<group>"; };
-		BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloomtest.cpp; sourceTree = "<group>"; };
-		BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloom_filter_test.cpp; sourceTree = "<group>"; };
+		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tests.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = bloom_filter_basic.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BC5862081CCAD8CE007CDEC0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter_tree.hpp; sourceTree = "<group>"; };
+		BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloom_filter_tree.cpp; sourceTree = "<group>"; };
 		BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,10 +83,11 @@
 		BC5861E71CCABB13007CDEC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BC96D2091CCB5C5E0017D8AF /* bloom_filter_test.cpp */,
 				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
-				BC5862041CCACC55007CDEC0 /* bloomtest.hpp */,
-				BC5862081CCAD8CE007CDEC0 /* bloomtest.cpp */,
+				BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */,
+				BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */,
+				BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */,
+				BC5862081CCAD8CE007CDEC0 /* main.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -175,8 +177,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC5862091CCAD8CE007CDEC0 /* bloomtest.cpp in Sources */,
-				BC96D20B1CCB5C5E0017D8AF /* bloom_filter_test.cpp in Sources */,
+				BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */,
+				BC7F28211CCF5D2500045F37 /* bloom_filter_tree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

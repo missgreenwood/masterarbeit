@@ -4,7 +4,7 @@
 #include <iostream>
 #include "gtest/gtest.h"
 #include "bloom_filter.hpp"
-#include "bloomtest.hpp"
+#include "bloom_filter_basic.hpp"
 
 int main(int argc, char * argv[]) {
     ::testing::InitGoogleTest(&argc, argv);
