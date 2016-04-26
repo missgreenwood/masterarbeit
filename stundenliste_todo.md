@@ -193,7 +193,11 @@ Entwicklungsumgebung, Bloom-Filter Basisimplementierung
 Bloom-Filter Basisimplementierung
 
 * So, 24.04. (6 h)
-Bloom-Filter Basisimplementierung 
+Bloom-Filter Basisimplementierung
+
+
+KW 17 (noch 35 h) 
+* Di, 26.04. (09:25 - )
 
 
 ## TODO

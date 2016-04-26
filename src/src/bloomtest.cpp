@@ -13,15 +13,19 @@ int main(int argc, const char *argv[]) {
     cout << "Id of Bloom filter f1: " << f1.getId() << endl;
     cout << "Size of Bloom filter f1: " << f1.getSize() << endl;
     f1.printData();
+    f1.printArr();
+    f1.initRandom();
+    f1.printData();
+    f1.printArr(); 
     
     // Create Bloom filter vectors with and test all methods
-    BloomFilterVec v1;
+    /* BloomFilterVec v1;
     BloomFilterVec v2(20);
     v1.initRandom();
     v1.print(); 
     v2.initRandom();
     v2.print();
     cout << v1.getSize() << endl;
-    cout << v2.getSize() << endl;
+    cout << v2.getSize() << endl; */
     return 0;
 }
