@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
+
 using namespace std;
 
 const int n = 32;   // number of bits in the Bloom filter
@@ -14,8 +16,10 @@ const int m = 100;  // number of Bloom filters in array
 // Basic Bloom filter
 class BloomFilter {
 private:
-    const int size;
-    const int id;
+    // const int size;
+    int size;
+    // const int id;
+    int id; 
     vector<int> data;
 public:
     int *dataArr;
