@@ -17,8 +17,8 @@ private:
     const int size;
     const int id;
     vector<int> data;
-    int *dataArr;
 public:
+    int *dataArr;
     // Constructor with no arguments
     BloomFilter(): size(n), id(rand()), data(vector<int>(size)) {
         for (int i=0; i<size; i++) {
@@ -113,34 +113,61 @@ private:
     int size;
     vector<BloomFilter> filters;
     int *filtersArr;
+    int arrSize;
 public:
     BloomFilterVec(): size(m) {
         for (int i=0; i<m; i++) {
             filters.push_back(BloomFilter(32, i));
         }
-        filtersArr = NULL;
         cout << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        arrSize = size * 32;
+        filtersArr = new int[arrSize];
+        for (int i=0; i<size; i++) {
+            cout << "Array filter at index " << i << ": ";
+            for (int j=0; j<32; j++) {
+                filtersArr[j] = filters[i].dataArr[j];
+                cout << filtersArr[j];
+            }
+            cout << endl; 
+        }
     };
     BloomFilterVec(int s): size(s) {
         for (int i=0; i<size; i++) {
             filters.push_back(BloomFilter(32, i));
         }
         cout << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        arrSize = size * 32;
+        filtersArr = new int[arrSize];
+        for (int i=0; i<size; i++) {
+            cout << "Array filter at index " << i << ": ";
+            for (int j=0; j<32; j++) {
+                filtersArr[j] = filters[i].dataArr[j];
+                cout << filtersArr[j];
+            }
+            cout << endl;
+        }
     };
     int getSize();
     void initRandom();
     void print();
-    int *createFiltersArr();
+    int *getFiltersArr();
 };
 
 void BloomFilterVec::initRandom() {
     for (int i=0; i<size; i++) {
-        for (int j=0; j<filters[i].getSize(); j++) {
-            filters[i].setValue((rand()%2), j);
-        }
-        filters[i].printData(); 
+        filters[i].initRandom();
+        filters[i].printData();
+    }
+    for (int i=0; i<size; i++) {
+        cout << "Array filter at index " << i << ": ";
+            for (int j=0; j<32; j++) {
+                filtersArr[j] = filters[i].dataArr[j];
+                cout << filtersArr[j];
+            }
+        cout << endl;
     }
 }
+
 
 int BloomFilterVec::getSize() {
     return size;
@@ -153,8 +180,7 @@ void BloomFilterVec::print() {
     }
 }
 
-int * BloomFilterVec::createFiltersArr() {
-    // filtersArr = new int[size][filters[0].getSize()];
+int * BloomFilterVec::getFiltersArr() {
     return filtersArr;
 }
 #endif
