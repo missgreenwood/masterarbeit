@@ -2,7 +2,7 @@ CC=g++-4.8
 CFLAGS=-w
 
 # list all .cpp files 
-SOURCES=main.cpp bloom_filter_tree.cpp
+SOURCES=main.cpp 
 OBJECTS=$(SOURCES:.c=.o)
 
 # provide name of executable	

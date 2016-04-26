@@ -20,6 +20,7 @@ using namespace std;
 
 int main(int argc, const char *argv[]) {
     
+    // Test driver for class BloomFilter
     // Instantiate one Bloom filter and call its methods
     
     cout << "CLASS BloomFilter" << endl;
@@ -39,6 +40,8 @@ int main(int argc, const char *argv[]) {
     f1.printArr();
     cout << endl << endl << endl;
     
+    
+    // Test driver for class BloomFilterVec
     // Instantiate Bloom filter vectors and and call their methods
     
     cout << "CLASS BloomFilterVec (VECTOR OF BloomFilter OBJECTS)" << endl;
@@ -53,8 +56,10 @@ int main(int argc, const char *argv[]) {
     v1.initRandom();
     cout << endl << endl << endl;
     
-    // Test Bloom filter library methods (bloom_filter.h)
-    cout << "CLASS bloom_filter from LIBRARY bloom_filter.hpp" << endl;
+    
+    // Test driver for Bloom filter library (bloom_filter.h)
+    
+    cout << "CLASS bloom_filter FROM LIBRARY bloom_filter.hpp" << endl;
     cout << "------------------------------------------------" << endl << endl;
     
     cout << "Choose parameters: ";
@@ -92,7 +97,14 @@ int main(int argc, const char *argv[]) {
             cout << "f2 contains: " << str_list[i] << endl;
         }
     }
-    cout << endl;
+    cout << endl << endl << endl;
+    
+    
+    // Test driver for class BTree
+    cout << "CLASS BTree" << endl;
+    cout << "-----------" << endl << endl;
+    cout << "Create instance of BTree with minimum degree 3 (t1)" << endl << endl;
+    BTree t1(3);
     
     return 0;
 }

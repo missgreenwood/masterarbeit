@@ -65,6 +65,8 @@ public:
     int *getArr();
     void printArr();
     void initRandom();
+    
+    friend class BloomFilterVec; 
 };
 
 void BloomFilter::printData() {

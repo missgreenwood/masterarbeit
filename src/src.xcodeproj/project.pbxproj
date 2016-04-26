@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F81CCABB5C007CDEC0 /* tests.cpp */; };
 		BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* main.cpp */; };
-		BC7F28211CCF5D2500045F37 /* bloom_filter_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +39,6 @@
 		BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; path = bloom_filter_basic.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BC5862081CCAD8CE007CDEC0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter_tree.hpp; sourceTree = "<group>"; };
-		BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bloom_filter_tree.cpp; sourceTree = "<group>"; };
 		BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,7 +84,6 @@
 				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
 				BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */,
 				BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */,
-				BC7F28201CCF5D2500045F37 /* bloom_filter_tree.cpp */,
 				BC5862081CCAD8CE007CDEC0 /* main.cpp */,
 			);
 			path = src;
@@ -178,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */,
-				BC7F28211CCF5D2500045F37 /* bloom_filter_tree.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
