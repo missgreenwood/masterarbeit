@@ -196,10 +196,13 @@ Bloom-Filter Basisimplementierung
 Bloom-Filter Basisimplementierung
 
 
-KW 17 (noch 29.25 h) 
+KW 17 (noch 25.75 h) 
 * Di, 26.04. (5.75 h)
 Bloom-Filter Basisimplementierung 
 Bloom-Filter-Baum
+
+* Mi, 27.04. (3.5 h)
+Bloom-Filter-Baum 
 
 
 ## TODO

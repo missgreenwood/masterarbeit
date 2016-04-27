@@ -1,5 +1,5 @@
 //  bloom_filter_basic.hpp, Judith Greif
-//  Description: Header for Bloom filter test implementation, including method declarations for unit tests
+//  Description: Header for basic Bloom filter classes
 
 #ifndef bloom_filter_basic_h
 #define bloom_filter_basic_h
@@ -10,20 +10,21 @@
 
 using namespace std;
 
-const int n = 32;   // number of bits in the Bloom filter
-const int m = 100;  // number of Bloom filters in array
+const int n = 32;   // # of bits in Bloom filter
+const int m = 100;  // default # of Bloom filters in array
 
-// Basic Bloom filter
+
+// Basic Bloom filter with constructors
 class BloomFilter {
+
 private:
-    // const int size;
     int size;
-    // const int id;
-    int id; 
+    int id;
     vector<int> data;
+
 public:
     int *dataArr;
-    // Constructor with no arguments
+    // Default constructor with no parameters
     BloomFilter(): size(n), id(rand()), data(vector<int>(size)) {
         for (int i=0; i<size; i++) {
             data[i] = 0;
@@ -34,7 +35,7 @@ public:
         printValue();
     };
     
-    // Constructor with id
+    // Constructor with parameter id
     BloomFilter(int i): size(n), id(i), data(vector<int>(size)) {
         for (int i=0; i<size; i++) {
             data[i] = 0;
@@ -46,7 +47,7 @@ public:
         printValue();
     }
     
-    // Constructor with size and id
+    // Constructor with parameters size and id
     BloomFilter(int s, int i): size(s), id(i), data(vector<int>(s)) {
         for (int i=0; i<size; i++) {
             data[i] = 0; 
@@ -57,6 +58,7 @@ public:
         copy(data.begin(), data.end(), dataArr);
         printValue();
     };
+    
     void printData();
     void printValue();
     int getId();
@@ -66,9 +68,69 @@ public:
     void printArr();
     void initRandom();
     
-    friend class BloomFilterVec; 
+    friend class BloomFilterVec;
+    
 };
 
+
+// Vector of Bloom filters with constructors
+class BloomFilterVec {
+    
+private:
+    int size;
+    vector<BloomFilter> filters;
+    int *filtersArr;
+    int arrSize;
+    
+public:
+    
+    // Default constructor with no parameters
+    BloomFilterVec(): size(m) {
+        for (int i=0; i<m; i++) {
+            filters.push_back(BloomFilter(32, i));
+        }
+        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        arrSize = size * 32;
+        filtersArr = new int[arrSize];
+        cout << endl;
+        for (int i=0; i<size; i++) {
+            cout << "Array filter at index " << i << ": ";
+            for (int j=0; j<32; j++) {
+                filtersArr[j] = filters[i].dataArr[j];
+                cout << filtersArr[j];
+            }
+            cout << endl; 
+        }
+    };
+    
+    // Constructor with parameter size
+    BloomFilterVec(int s): size(s) {
+        for (int i=0; i<size; i++) {
+            filters.push_back(BloomFilter(32, i));
+        }
+        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
+        arrSize = size * 32;
+        filtersArr = new int[arrSize];
+        cout << endl;
+        for (int i=0; i<size; i++) {
+            cout << "Array filter at index " << i << ": ";
+            for (int j=0; j<32; j++) {
+                filtersArr[j] = filters[i].dataArr[j];
+                cout << filtersArr[j];
+            }
+            cout << endl;
+        }
+    };
+    
+    int getSize();
+    void initRandom();
+    void print();
+    int *getFiltersArr();
+    
+};
+
+
+// Functions of class BloomFilter
 void BloomFilter::printData() {
     cout << "Bloom filter " << getId() << ": ";
     for (int i=0; i<size; i++) {
@@ -103,7 +165,7 @@ int * BloomFilter::getArr() {
 
 void BloomFilter::printArr() {
     for (int i=0; i<getSize(); i++) {
-        cout << dataArr[i]; 
+        cout << dataArr[i];
     }
     cout << endl;
 }
@@ -114,53 +176,8 @@ void BloomFilter::initRandom() {
     }
 }
 
-class BloomFilterVec {
-private:
-    int size;
-    vector<BloomFilter> filters;
-    int *filtersArr;
-    int arrSize;
-public:
-    BloomFilterVec(): size(m) {
-        for (int i=0; i<m; i++) {
-            filters.push_back(BloomFilter(32, i));
-        }
-        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
-        arrSize = size * 32;
-        filtersArr = new int[arrSize];
-        cout << endl;
-        for (int i=0; i<size; i++) {
-            cout << "Array filter at index " << i << ": ";
-            for (int j=0; j<32; j++) {
-                filtersArr[j] = filters[i].dataArr[j];
-                cout << filtersArr[j];
-            }
-            cout << endl; 
-        }
-    };
-    BloomFilterVec(int s): size(s) {
-        for (int i=0; i<size; i++) {
-            filters.push_back(BloomFilter(32, i));
-        }
-        cout << endl << "Created Bloom filter vector with size = " << size << ", ids = " << filters[0].getId() << " - " << filters[size-1].getId() << endl;
-        arrSize = size * 32;
-        filtersArr = new int[arrSize];
-        cout << endl;
-        for (int i=0; i<size; i++) {
-            cout << "Array filter at index " << i << ": ";
-            for (int j=0; j<32; j++) {
-                filtersArr[j] = filters[i].dataArr[j];
-                cout << filtersArr[j];
-            }
-            cout << endl;
-        }
-    };
-    int getSize();
-    void initRandom();
-    void print();
-    int *getFiltersArr();
-};
 
+// Functions of class BloomFilterVec
 void BloomFilterVec::initRandom() {
     for (int i=0; i<size; i++) {
         filters[i].initRandom();
@@ -177,7 +194,6 @@ void BloomFilterVec::initRandom() {
     }
 }
 
-
 int BloomFilterVec::getSize() {
     return size;
 }
@@ -192,4 +208,5 @@ void BloomFilterVec::print() {
 int * BloomFilterVec::getFiltersArr() {
     return filtersArr;
 }
+
 #endif
