@@ -15,3 +15,5 @@ I. Indexstrukturen
 			// Use subset and similarity queries to select messages
 
 		ii. Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) 
+
+		* memory management 
