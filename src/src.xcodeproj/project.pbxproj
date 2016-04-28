@@ -40,7 +40,6 @@
 		BC5862081CCAD8CE007CDEC0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter_tree.hpp; sourceTree = "<group>"; };
 		BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter.hpp; sourceTree = "<group>"; };
-		BCB9DB581CD10C3100987F1D /* b-tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "b-tree.hpp"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +81,6 @@
 		BC5861E71CCABB13007CDEC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BCB9DB581CD10C3100987F1D /* b-tree.hpp */,
 				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
 				BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */,
 				BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */,

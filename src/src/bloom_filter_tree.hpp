@@ -35,7 +35,7 @@ private:
 
 public:
 
-    // Constructor with parameters t and leaf
+    // Constructor with parameters minimum degree and leaf
     BTreeNode(int _t, bool _leaf): t(_t), leaf(_leaf), n(0) {
         
         // Allocate memory for maximum number of possible keys and child pointers
@@ -43,21 +43,53 @@ public:
         C = new BTreeNode *[2*t];
     };
     
-    // Traverse all nodes in a subtree rooted with this node
+    // Function to traverse all nodes in a subtree rooted with this node
     void traverse();
     
-    // Search a key in a subtree rooted with this node
+    // Function to search key in a subtree rooted with this node
     // Returns NULL if key is not present
     BTreeNode *search(int k);
     
-    // Insert new key in subtree rooted with this node
+    // Function to insert new key in subtree rooted with this node
     // Node must be non-full when this function is called
     void insertNonFull(int k);
     
-    // Split child y of this node
+    // Function to split child y of this node
     // i is index of y in child array C[]
     // Child y must be full when this function is called
     void splitChild(int i, BTreeNode *y);
+    
+    // Functions for key deletion
+    
+    // Function to return index of first key >= k
+    int findKey(int k);
+    
+    // Wrapper function to remove key k in subtree rooted with this node
+    void remove(int k);
+    
+    // Function to remove the key present in idx-th position in leaf node
+    void removeFromLeaf(int idx);
+    
+    // Function to remove key present in idx-th position from non-leaf node
+    void removeFromNonLeaf(int idx);
+    
+    // Function to get predecessor of key present in idx-th position of node
+    int getPred(int idx);
+    
+    // Function to get successor of key present in idx-th position of node
+    int getSucc(int idx);
+    
+    // Function to fill up child node present in idx-th position of C[]-array of node if it has < t-1 keys
+    void fill(int idx);
+    
+    // Function to borrow key from C[idx-1]-th node and place it in C[idx]-th node
+    void borrowFromPrev(int idx);
+    
+    // Function to borrow key from C[idx+1]-th node and place it in C[idx]-th node
+    void borrowFromNext(int idx);
+    
+    // Function to merge idx-th child of node with (idx+1)-th child
+    void merge(int idx);
     
     friend class BTree;
     
@@ -85,6 +117,9 @@ public:
     
     // Insert new key
     void insert(int k);
+    
+    // Remove key
+    void remove(int k);
     
 };
 
@@ -229,6 +264,17 @@ void BTreeNode::splitChild(int i, BTreeNode *y) {
     
     // Increment # of keys
     n++; 
+}
+
+void BTreeNode::removeFromLeaf(int idx) {
+    
+    // Shift all keys after idx-th position one place backward
+    for (int i=idx+1; i<n; i++) {
+        keys[i-1] = keys[i];
+    }
+    // Update # of keys
+    n--;
+    return;
 }
 
 

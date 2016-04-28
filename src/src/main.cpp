@@ -117,7 +117,7 @@ int main(int argc, const char *argv[]) {
     t1.insert(70);
     t1.insert(80);
     t1.insert(90);
-    cout << "\n\nTraverse the constructed tree. Start with leftmost child, recursively print leftmost child, repeat process for remaining children and keys. Print rightmost child last:" ;
+    cout << "\n\nTraverse the constructed tree (start with leftmost child, recursively print leftmost child, repeat process for remaining children and keys, print rightmost child last):" ;
     t1.traverse();
     cout << "\n\nSearch for existing key 10 in t1: ";
     BTreeNode *tmp = t1.search(10);
