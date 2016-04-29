@@ -33,7 +33,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BC4B73C51CD38D71000C96C6 /* b-tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = "b-tree.hpp"; sourceTree = "<group>"; };
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tests.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -82,7 +81,6 @@
 		BC5861E71CCABB13007CDEC0 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BC4B73C51CD38D71000C96C6 /* b-tree.hpp */,
 				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
 				BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */,
 				BC7F281F1CCF5B4C00045F37 /* bloom_filter_tree.hpp */,
