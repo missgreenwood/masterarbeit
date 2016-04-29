@@ -69,6 +69,8 @@ public:
     void initRandom();
     
     friend class BloomFilterVec;
+    friend class BloomFilterNode;
+    friend class BloomFilterTree;
     
 };
 

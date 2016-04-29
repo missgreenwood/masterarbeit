@@ -3,9 +3,7 @@
 //  References: http://touc.org/btree.html
 //              http://www.geeksforgeeks.org/
 //  B-Tree properties:
-//  * Only logical nodes
 //  * All leaves at same level
-//  * IDs of physical nodes are stored in the leaves
 //  * Defined by minimum degree t
 //  * Every node except root must contain at least t-1 keys
 //  * All nodes contain at most 2t-1 keys
@@ -124,7 +122,29 @@ public:
 };
 
 
-// BTree of Bloom filters
+// BloomFilterNode - Bloom filter in a B-Tree
+// Differences from normal B-Tree:
+//  * Only logical nodes
+//  * The leaves hold the IDs of all physical nodes -> each internal node is also stored in leaf
+//  * Leaves have pointers to physical nodes
+
+class BloomFilterNode {
+    
+private:
+    int *keys;              // Array of keys
+    int t;                  // Minimum degree
+    BloomFilterNode **C;    // Array of child pointers
+    int n;                  // Current # of keys
+    bool leaf;
+    int *filtersArr;        // The associated data of this logical node (physical nodes)
+    
+public:
+    BloomFilterNode(int _t, bool _leaf): t(_t), leaf(_leaf) {
+    
+        // If this is no leave, retrieve the keys of all parent nodes 
+    }
+};
+
 class BloomFilterTree {
     
 };
