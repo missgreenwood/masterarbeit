@@ -128,7 +128,7 @@ public:
 //  * The leaves hold the IDs of all physical nodes -> each internal node is also stored in leaf
 //  * Leaves have pointers to physical nodes
 
-class BloomFilterNode {
+class BloomFilterNode : public BTreeNode {
     
 private:
     int *keys;              // Array of keys
@@ -139,13 +139,36 @@ private:
     int *filtersArr;        // The associated data of this logical node (physical nodes)
     
 public:
-    BloomFilterNode(int _t, bool _leaf): t(_t), leaf(_leaf) {
-    
-        // If this is no leave, retrieve the keys of all parent nodes 
+    BloomFilterNode(int _t, bool _leaf): BTreeNode(_t, _leaf) {
+        // Allocate memory for maximum # of possible keys, child pointers and data of physical nodes
+        // Set maximum # of keys to # of Bloom filters, i.e. m (default) -> TODO for custom Bloom filter vector
+        
+        keys = new int[m];
+        C = new BloomFilterNode *[2*t];
+        filtersArr = new int[m];
+        
+        // Initialize # of keys as 0
+        n=0;
     }
+    
+    // Function to traverse all nodesin a subtree rooted with this node
+    // It suffices to only print keys present in leaf nodes
+    void traverse();
+    
+    // Inherit function to search key in a subtree rooted with this node
+    // Returns NULL if key is not present
+    // Returns first occurence if key is present, so no difference from BTreeNode
+    
+    friend class BloomFilterTree;
 };
 
-class BloomFilterTree {
+class BloomFilterTree : public BTree {
+    
+private:
+    BloomFilterNode *root;  // Pointer to root node
+    int t;                  // Minimum degree
+    
+public:
     
 };
 
@@ -634,6 +657,27 @@ void BTree::remove(int k) {
         delete tmp;
     }
     return;
+}
+
+// Functions of class BloomFilterNode
+void BloomFilterNode::traverse() {
+    
+    // Node has n keys, n+1 children
+    // Traverse through n keys and first n children
+    int i;
+    for (i=0; i<n; i++) {
+        // If no leaf, traverse subtree rooted with child C[i]
+        if (leaf == false) {
+            C[i]->traverse();
+        }
+        cout << " " << keys[i]; // TODO ()
+    }
+    
+    // Print subtree rooted with last child
+    // i == n after for loop
+    if (leaf == false) {
+        C[i]->traverse();
+    }
 }
 
 #endif
