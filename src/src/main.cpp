@@ -12,14 +12,13 @@
 #include <set>
 
 #include <iostream>
-#include "bloom_filter_basic.hpp"
-#include "bloom_filter_tree.hpp"
 #include "bloom_filter.hpp"
-#include "b_tree.hpp"
-#include "bplus_tree.hpp"
+#include "BloomFilterVec.hpp"
+#include "BTree.hpp"
+#include "BPlusTree.hpp"
+#include "BloomFilterTree.hpp"
 
-using namespace std;
-
+using namespace std; 
 
 int main(int argc, const char *argv[]) {
     

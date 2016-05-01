@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F81CCABB5C007CDEC0 /* tests.cpp */; };
 		BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* main.cpp */; };
+		BCC968341CD6693000FFE9BE /* BTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC968331CD6693000FFE9BE /* BTree.cpp */; };
+		BCC968371CD669AF00FFE9BE /* BTreeNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC968351CD669AF00FFE9BE /* BTreeNode.cpp */; };
+		BCC9683A1CD66B2600FFE9BE /* BPlusNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC968381CD66B2600FFE9BE /* BPlusNode.cpp */; };
+		BCC9683C1CD66B4A00FFE9BE /* BPlusTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC9683B1CD66B4A00FFE9BE /* BPlusTree.cpp */; };
+		BCC9683F1CD66BC900FFE9BE /* BPlusLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC9683D1CD66BC900FFE9BE /* BPlusLeaf.cpp */; };
+		BCC968421CD66BD800FFE9BE /* BPlusIndexNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCC968401CD66BD800FFE9BE /* BPlusIndexNode.cpp */; };
+		BCCE1F2E1CD64815004382A8 /* BloomFilterNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCE1F2C1CD64815004382A8 /* BloomFilterNode.cpp */; };
+		BCCE1F301CD648D2004382A8 /* BloomFilterTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCE1F2F1CD648D2004382A8 /* BloomFilterTree.cpp */; };
+		BCCE1F331CD64B56004382A8 /* BloomFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCE1F311CD64B56004382A8 /* BloomFilter.cpp */; };
+		BCCE1F351CD64CCB004382A8 /* BloomFilterVec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCCE1F341CD64CCB004382A8 /* BloomFilterVec.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,12 +46,28 @@
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tests.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; name = bloom_filter_basic.hpp; path = src/bloom_filter_basic.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BC5862041CCACC55007CDEC0 /* BloomFilterVec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; name = BloomFilterVec.hpp; path = src/BloomFilterVec.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BC5862081CCAD8CE007CDEC0 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = main.cpp; path = src/main.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
-		BC6876E61CD4F90F00F63314 /* bloom_filter_tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bloom_filter_tree.hpp; path = src/bloom_filter_tree.hpp; sourceTree = "<group>"; };
-		BC7F281F1CCF5B4C00045F37 /* b_tree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = b_tree.hpp; path = src/b_tree.hpp; sourceTree = "<group>"; };
+		BC6876E61CD4F90F00F63314 /* BloomFilterTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BloomFilterTree.hpp; path = src/BloomFilterTree.hpp; sourceTree = "<group>"; };
+		BC7F281F1CCF5B4C00045F37 /* BTree.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = BTree.hpp; path = src/BTree.hpp; sourceTree = "<group>"; };
 		BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bloom_filter.hpp; path = src/bloom_filter.hpp; sourceTree = "<group>"; };
-		BCCE1F281CD6214D004382A8 /* bplus_tree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = bplus_tree.hpp; path = src/bplus_tree.hpp; sourceTree = "<group>"; };
+		BCC968331CD6693000FFE9BE /* BTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BTree.cpp; sourceTree = "<group>"; };
+		BCC968351CD669AF00FFE9BE /* BTreeNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BTreeNode.cpp; sourceTree = "<group>"; };
+		BCC968361CD669AF00FFE9BE /* BTreeNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BTreeNode.hpp; sourceTree = "<group>"; };
+		BCC968381CD66B2600FFE9BE /* BPlusNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusNode.cpp; sourceTree = "<group>"; };
+		BCC968391CD66B2600FFE9BE /* BPlusNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BPlusNode.hpp; sourceTree = "<group>"; };
+		BCC9683B1CD66B4A00FFE9BE /* BPlusTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusTree.cpp; sourceTree = "<group>"; };
+		BCC9683D1CD66BC900FFE9BE /* BPlusLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusLeaf.cpp; sourceTree = "<group>"; };
+		BCC9683E1CD66BC900FFE9BE /* BPlusLeaf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BPlusLeaf.hpp; sourceTree = "<group>"; };
+		BCC968401CD66BD800FFE9BE /* BPlusIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusIndexNode.cpp; sourceTree = "<group>"; };
+		BCC968411CD66BD800FFE9BE /* BPlusIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BPlusIndexNode.hpp; sourceTree = "<group>"; };
+		BCCE1F281CD6214D004382A8 /* BPlusTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BPlusTree.hpp; path = src/BPlusTree.hpp; sourceTree = "<group>"; };
+		BCCE1F2C1CD64815004382A8 /* BloomFilterNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterNode.cpp; sourceTree = "<group>"; };
+		BCCE1F2D1CD64815004382A8 /* BloomFilterNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterNode.hpp; sourceTree = "<group>"; };
+		BCCE1F2F1CD648D2004382A8 /* BloomFilterTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterTree.cpp; sourceTree = "<group>"; };
+		BCCE1F311CD64B56004382A8 /* BloomFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilter.cpp; sourceTree = "<group>"; };
+		BCCE1F321CD64B56004382A8 /* BloomFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilter.hpp; sourceTree = "<group>"; };
+		BCCE1F341CD64CCB004382A8 /* BloomFilterVec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterVec.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,11 +118,27 @@
 			isa = PBXGroup;
 			children = (
 				BC96D20A1CCB5C5E0017D8AF /* bloom_filter.hpp */,
-				BC5862041CCACC55007CDEC0 /* bloom_filter_basic.hpp */,
-				BC7F281F1CCF5B4C00045F37 /* b_tree.hpp */,
-				BCCE1F281CD6214D004382A8 /* bplus_tree.hpp */,
+				BCCE1F321CD64B56004382A8 /* BloomFilter.hpp */,
+				BCCE1F311CD64B56004382A8 /* BloomFilter.cpp */,
+				BC5862041CCACC55007CDEC0 /* BloomFilterVec.hpp */,
+				BCCE1F341CD64CCB004382A8 /* BloomFilterVec.cpp */,
+				BCC968361CD669AF00FFE9BE /* BTreeNode.hpp */,
+				BCC968351CD669AF00FFE9BE /* BTreeNode.cpp */,
+				BC7F281F1CCF5B4C00045F37 /* BTree.hpp */,
+				BCC968331CD6693000FFE9BE /* BTree.cpp */,
+				BCC968391CD66B2600FFE9BE /* BPlusNode.hpp */,
+				BCC968381CD66B2600FFE9BE /* BPlusNode.cpp */,
+				BCC9683E1CD66BC900FFE9BE /* BPlusLeaf.hpp */,
+				BCC9683D1CD66BC900FFE9BE /* BPlusLeaf.cpp */,
+				BCC968411CD66BD800FFE9BE /* BPlusIndexNode.hpp */,
+				BCC968401CD66BD800FFE9BE /* BPlusIndexNode.cpp */,
+				BCCE1F281CD6214D004382A8 /* BPlusTree.hpp */,
+				BCC9683B1CD66B4A00FFE9BE /* BPlusTree.cpp */,
+				BCCE1F2C1CD64815004382A8 /* BloomFilterNode.cpp */,
+				BCCE1F2D1CD64815004382A8 /* BloomFilterNode.hpp */,
+				BC6876E61CD4F90F00F63314 /* BloomFilterTree.hpp */,
+				BCCE1F2F1CD648D2004382A8 /* BloomFilterTree.cpp */,
 				BC5862081CCAD8CE007CDEC0 /* main.cpp */,
-				BC6876E61CD4F90F00F63314 /* bloom_filter_tree.hpp */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -179,6 +221,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */,
+				BCCE1F351CD64CCB004382A8 /* BloomFilterVec.cpp in Sources */,
+				BCC9683F1CD66BC900FFE9BE /* BPlusLeaf.cpp in Sources */,
+				BCC9683A1CD66B2600FFE9BE /* BPlusNode.cpp in Sources */,
+				BCC968421CD66BD800FFE9BE /* BPlusIndexNode.cpp in Sources */,
+				BCCE1F2E1CD64815004382A8 /* BloomFilterNode.cpp in Sources */,
+				BCC9683C1CD66B4A00FFE9BE /* BPlusTree.cpp in Sources */,
+				BCCE1F301CD648D2004382A8 /* BloomFilterTree.cpp in Sources */,
+				BCC968341CD6693000FFE9BE /* BTree.cpp in Sources */,
+				BCCE1F331CD64B56004382A8 /* BloomFilter.cpp in Sources */,
+				BCC968371CD669AF00FFE9BE /* BTreeNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
