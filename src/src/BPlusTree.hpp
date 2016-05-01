@@ -22,13 +22,8 @@ private:
     int t;                  // Minimum degree
     
 public:
-    // Constructor with parameter t
-    // Initializes tree as empty
-    BPlusTree(int _t): t(_t), root(NULL) {};
-    
-    ~BPlusTree() {
-        delete root;
-    }
+    BPlusTree(int _t);
+    ~BPlusTree();
     
     void traverse();
     
@@ -36,6 +31,7 @@ public:
     // Return NULL if key is not present
     // Return leaf node if key is present
     BPlusNode *search(int k);
+    
     void insert(int k);
     void remove(int k);
     

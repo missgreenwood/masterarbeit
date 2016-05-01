@@ -14,6 +14,4 @@ I. Indexstrukturen
 			// The address of a message is defined to be a small set of strings represented as a Bloom filter of previuosly known configuration
 			// Use subset and similarity queries to select messages
 
-		ii. Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) 
-
-		* memory management 
+		ii. Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)

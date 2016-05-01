@@ -17,12 +17,16 @@ public:
     BPlusLeaf(int _t);
     BPlusLeaf(int _t, BPlusLeaf *prev, BPlusLeaf *next);
     ~BPlusLeaf();
-    void insert(int k);
+    BPlusLeaf *getPrev();
+    BPlusLeaf *getNext();
+    void setPrev(BPlusLeaf *prev);
+    void setNext(BPlusLeaf *next);
+    virtual void insert(int k);
+    virtual void remove(int k);
     BPlusNode *search(int k);
     BPlusLeaf * split(int k);
     void traverse();
     bool contains(int k);
-    void remove(int k);
     BPlusNode *leftMost(int k);
 };
 

@@ -28,7 +28,7 @@ private:
 public:
     // Constructor with parameter t
     // Initializes tree as empty
-    BloomFilterTree(int _t): t(_t), root(NULL) {};
+    BloomFilterTree(int _t);
     
     // TODO: Constructor with parameters t and *filtersvec
     // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree

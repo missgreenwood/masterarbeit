@@ -71,3 +71,11 @@ void BPlusNode::insert(int k, BPlusNode *oldNode, BPlusNode *newNode) {
 BPlusNode * BPlusNode::leftMost(int k) {
     return NULL; 
 }
+
+void BPlusNode::increment() {
+    n++;
+}
+
+void BPlusNode::decrement() {
+    n--;
+}

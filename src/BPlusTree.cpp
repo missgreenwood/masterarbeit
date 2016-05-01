@@ -3,6 +3,15 @@
 
 #include "BPlusTree.hpp"
 
+// Constructor with parameter t
+// Initializes tree as empty
+BPlusTree::BPlusTree(int _t): t(_t), root(NULL) {};
+
+BPlusTree::~BPlusTree() {
+    delete root;
+}
+
+
 void BPlusTree::traverse() {
     if (root != NULL) {
         root->traverse();

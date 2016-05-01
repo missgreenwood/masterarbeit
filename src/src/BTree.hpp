@@ -25,13 +25,8 @@ private:
     int t;              // Minimum degree
     
 public:
-    // Constructor with parameter t
-    // Initializes tree as empty
-    BTree(int _t): t(_t), root(NULL) {};
-    
-    ~BTree() {
-        delete root; 
-    }
+    BTree(int _t);
+    ~BTree();
     
     // Traverse tree
     void traverse();

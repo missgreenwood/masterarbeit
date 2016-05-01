@@ -5,6 +5,23 @@
 
 using namespace std;
 
+
+// Constructor with parameters minimum degree and leaf
+BTreeNode::BTreeNode(int _t, bool _leaf): t(_t), leaf(_leaf), n(0) {
+    
+    // Allocate memory for maximum number of possible keys and child pointers
+    keys = new int[2*t-1];
+    C = new BTreeNode *[2*t];
+};
+
+BTreeNode::~BTreeNode() {
+    delete[] keys;
+    for (int i=0; i<2*t; i++) {
+        delete C[i]; 
+    }
+    delete[] C;
+}
+
 void BTreeNode::traverse() {
     
     // Node has n keys, n+1 children

@@ -8,6 +8,7 @@
 
 using namespace std; 
 
+
 // B-Tree-Node with constructors
 class BTreeNode {
     
@@ -21,12 +22,9 @@ private:
 public:
     
     // Constructor with parameters minimum degree and leaf
-    BTreeNode(int _t, bool _leaf): t(_t), leaf(_leaf), n(0) {
-        
-        // Allocate memory for maximum number of possible keys and child pointers
-        keys = new int[2*t-1];
-        C = new BTreeNode *[2*t];
-    };
+    BTreeNode(int _t, bool _leaf);
+    
+    ~BTreeNode(); 
     
     // Function to traverse all nodes in a subtree rooted with this node
     void traverse();

@@ -3,7 +3,16 @@
 
 #include "BTree.hpp"
 
-using namespace std; 
+using namespace std;
+
+
+// Constructor with parameter t
+// Initializes tree as empty
+BTree::BTree(int _t): t(_t), root(NULL) {};
+
+BTree::~BTree() {
+    delete root;
+}
 
 BTreeNode * BTree::search(int k) {
     // return (root == NULL)? NULL : root->search(k);
