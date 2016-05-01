@@ -15,7 +15,8 @@
 #include "bloom_filter_basic.hpp"
 #include "bloom_filter_tree.hpp"
 #include "bloom_filter.hpp"
-// #include "b-tree.hpp"
+#include "b_tree.hpp"
+#include "bplus_tree.hpp"
 
 using namespace std;
 
@@ -187,6 +188,12 @@ int main(int argc, const char *argv[]) {
     t2.remove(16);
     cout << "Traverse t2:";
     t2.traverse();
-    cout << endl;
+    cout << endl << endl << endl;
+    
+    // Test driver for class BloomFilterTree
+    cout << "CLASS BloomFilterTree";
+    cout << "\n---------------------\n\n";
+    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)";
+    BloomFilterTree b1(3);
     return 0;
 }

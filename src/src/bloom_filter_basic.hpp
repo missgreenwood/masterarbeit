@@ -129,6 +129,8 @@ public:
     void print();
     int *getFiltersArr();
     
+    friend class BloomFilterNode; 
+    friend class BloomFilterTree;
 };
 
 
