@@ -68,6 +68,10 @@ void BPlusNode::insert(int k, BPlusNode *oldNode, BPlusNode *newNode) {
     assert(false);
 }
 
+int BPlusNode::getMax() {
+    return 2*t;
+}
+
 BPlusNode * BPlusNode::leftMost(int k) {
     return NULL; 
 }

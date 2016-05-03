@@ -194,5 +194,6 @@ int main(int argc, const char *argv[]) {
     cout << "\n---------------------\n\n";
     cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)";
     BloomFilterTree b1(3);
+    cout << endl;
     return 0;
 }

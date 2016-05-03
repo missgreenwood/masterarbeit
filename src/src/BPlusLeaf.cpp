@@ -17,6 +17,22 @@ BPlusLeaf::~BPlusLeaf() {
     delete next;
 }
 
+BPlusLeaf * BPlusLeaf::getPrev() {
+    return prev;
+}
+
+BPlusLeaf * BPlusLeaf::getNext() {
+    return next;
+}
+
+void BPlusLeaf::setPrev(BPlusLeaf *_prev) {
+    prev = _prev;
+}
+
+void BPlusLeaf::setNext(BPlusLeaf *_next) {
+    next = _next; 
+}
+
 void BPlusLeaf::insert(int k) {
     if (getCount() < getMax()) {
         shiftAndInsert(k);

@@ -15,10 +15,6 @@ BTreeNode::BTreeNode(int _t, bool _leaf): t(_t), leaf(_leaf), n(0) {
 };
 
 BTreeNode::~BTreeNode() {
-    delete[] keys;
-    for (int i=0; i<2*t; i++) {
-        delete C[i]; 
-    }
     delete[] C;
 }
 

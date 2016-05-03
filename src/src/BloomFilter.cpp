@@ -39,9 +39,7 @@ BloomFilter::BloomFilter(int s, int i): size(s), id(i), data(vector<int>(s)) {
     printValue();
 };
 
-BloomFilter::~BloomFilter() {
-    delete[] dataArr;
-}
+BloomFilter::~BloomFilter() {}
 
 void BloomFilter::printData() {
     cout << "Bloom filter " << getId() << ": ";
