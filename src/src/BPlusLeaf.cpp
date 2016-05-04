@@ -94,8 +94,6 @@ void BPlusLeaf::traverse() {
     cout << "|";
 }
 
-
-
 bool BPlusLeaf::contains(int k) {
     bool result = false;
     int *keys = getKeys();
@@ -108,8 +106,15 @@ bool BPlusLeaf::contains(int k) {
     return result;
 }
 
-void BPlusLeaf::remove(int key) {
-    // BIG TODO
+// void BPlusLeaf::remove(int key) {}
+
+void BPlusLeaf::removeEntry(int k) {
+    int *keys = this->getKeys();
+    int index = indexOfKey(k);
+    for (int i=index; i<(this->getCount() - index); i++) {
+        keys[i] = keys[i+1];
+    }
+    this->decrement();
 }
 
 BPlusNode *BPlusLeaf::leftMost(int k) {

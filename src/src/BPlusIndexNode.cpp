@@ -124,10 +124,10 @@ bool BPlusIndexNode::contains(int k) {
     return result;
 }
 
-void BPlusIndexNode::remove(int k) {
+/* void BPlusIndexNode::remove(int k) {
     BPlusNode *node = search(k);
     node = node->leftMost(k);
     if(node) {
         node->remove(k);
     }
-}
+} */

@@ -22,7 +22,8 @@ public:
     void setPrev(BPlusLeaf *prev);
     void setNext(BPlusLeaf *next);
     virtual void insert(int k);
-    virtual void remove(int k);
+    // virtual void remove(int k);
+    void removeEntry(int k);
     BPlusNode *search(int k);
     BPlusLeaf * split(int k);
     void traverse();
