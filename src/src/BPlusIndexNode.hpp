@@ -19,6 +19,7 @@ public:
     BPlusNode *search(int k);
     virtual void insert(int k);
     virtual void insert(int k, BPlusNode *oldNode, BPlusNode *newNode);
+    virtual bool contains(int k);
     virtual void remove(int k);
     BPlusIndexNode *split(int k, BPlusNode *left, BPlusNode *right, int &middle);
     void traverse();

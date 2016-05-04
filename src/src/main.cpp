@@ -192,8 +192,56 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BloomFilterTree
     cout << "CLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)";
+    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n";
     BloomFilterTree b1(3);
+    
+    // TODO
+    
+    // Test driver for class BPlusTree
+    cout << "CLASS BPlusTree";
+    cout << "\n----------------\n\n";
+    cout << "Create instance of BPlusTree with degree 3 (b2)";
+    BPlusTree b2(3);
+    cout << "\n\nInsert keys into b2: 1, 3, 7, 10, 11, 13, 14, 15, 18, 16, 19, 24, 25, 26, 21, 4, 5, 20, 22, 2, 17, 12, 6";
+    b2.insert(1);
+    b2.insert(3);
+    b2.insert(7);
+    b2.insert(10);
+    b2.insert(11);
+    b2.insert(13);
+    b2.insert(14);
+    b2.insert(15);
+    b2.insert(18);
+    b2.insert(16);
+    b2.insert(19);
+    b2.insert(24);
+    b2.insert(25);
+    b2.insert(26);
+    b2.insert(21);
+    b2.insert(4);
+    b2.insert(5);
+    b2.insert(20);
+    b2.insert(22);
+    b2.insert(2);
+    b2.insert(17);
+    b2.insert(12);
+    b2.insert(6);
+    cout << "\n\nTraverse the constructed tree: ";
+    b2.traverse();
+    cout << "\n\nSearch for existing key 10 in b2: ";
+    if (b2.contains(10)) {
+        cout << "Key 10 is present in b2";
+    }
+    else {
+        cout << "Error! Key 10 should be present in b2";
+    }
+    cout << "\n\nSearch for non existing key 23 in b2: ";
+    if (b2.contains(23)) {
+        cout << "Error! Key 23 should not be present in b2";
+    }
+    else {
+        cout << "Key 23 is not present in b2";
+    }
     cout << endl;
     return 0;
 }

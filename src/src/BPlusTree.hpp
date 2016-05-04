@@ -19,7 +19,7 @@ using namespace std;
 class BPlusTree {
 private:
     BPlusNode *root;
-    int t;                  // Minimum degree
+    int t;                  // Order
     
 public:
     BPlusTree(int _t);
@@ -27,13 +27,12 @@ public:
     
     void traverse();
     
-    // Search key in tree
-    // Return NULL if key is not present
-    // Return leaf node if key is present
+    // Return leaf node to place k in
     BPlusNode *search(int k);
     
     void insert(int k);
     void remove(int k);
+    bool contains(int k);
     
     friend class BPlusNode;
     friend class BPlusIndexNode;

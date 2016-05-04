@@ -41,4 +41,16 @@ void BPlusTree::insert(int k) {
     }
 }
 
+void BPlusTree::remove(int k) {
+    // BIG TODO
+}
 
+bool BPlusTree::contains(int k) {
+    // If tree is empty return false
+    if (root == NULL) {
+        return false;
+    }
+    else {
+        return root->contains(k);
+    }
+}

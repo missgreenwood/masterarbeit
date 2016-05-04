@@ -113,6 +113,17 @@ void BPlusIndexNode::traverse() {
     }
 }
 
+bool BPlusIndexNode::contains(int k) {
+    bool result = false;
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->contains(k) == true) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
 void BPlusIndexNode::remove(int k) {
     BPlusNode *node = search(k);
     node = node->leftMost(k);

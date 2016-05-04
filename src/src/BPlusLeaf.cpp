@@ -51,6 +51,7 @@ void BPlusLeaf::insert(int k) {
     }
 }
 
+// Attention: No lookup function, but search for correct place in tree to insert key
 BPlusNode * BPlusLeaf::search(int k) {
     return this;
 }
@@ -86,11 +87,14 @@ BPlusLeaf * BPlusLeaf::split(int k) {
 void BPlusLeaf::traverse() {
     assert(getCount() <= getMax());
     int *keys = getKeys();
+    cout << "|";
     for (int i=0; i<getCount(); i++) {
-        cout << keys[i] << " ";
+        cout << " " << keys[i] << " ";
     }
-    cout << "\nEnd of node\n";
+    cout << "|";
 }
+
+
 
 bool BPlusLeaf::contains(int k) {
     bool result = false;

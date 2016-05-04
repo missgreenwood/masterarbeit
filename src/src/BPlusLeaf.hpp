@@ -26,7 +26,7 @@ public:
     BPlusNode *search(int k);
     BPlusLeaf * split(int k);
     void traverse();
-    bool contains(int k);
+    virtual bool contains(int k);
     BPlusNode *leftMost(int k);
 };
 

@@ -10,12 +10,12 @@
 
 class BPlusNode {
 private:
-    int *keys;              // Array of keys
     int t;                  // Order
     BPlusNode *parent;
     int n;                  // Current # of keys
     
 public:
+    int *keys;              // Array of keys
     BPlusNode(int _t);
     virtual ~BPlusNode();
     virtual void shiftAndInsert(int k);
@@ -30,6 +30,7 @@ public:
     int indexOfKey(int k);
     int *getKeys();
     virtual void traverse() = 0;
+    virtual bool contains(int k) = 0;
     int getMax();
     virtual void remove(int k) = 0;
     virtual BPlusNode *leftMost(int k);
