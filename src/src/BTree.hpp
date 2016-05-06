@@ -1,6 +1,7 @@
 //  BTree.hpp, Judith Greif
 //  Description: Header for class BTree
 //  Reference: http://www.geeksforgeeks.org/
+
 //  B-Tree properties:
 //  * All leaves at same level
 //  * Defined by minimum degree t
@@ -42,8 +43,5 @@ public:
     void remove(int k);
     
 };
-
-// Functions of class BTreeNode
-
 
 #endif

@@ -19,7 +19,6 @@
 #define BPlusTree_h
 
 #include "BPlusNode.hpp"
-#include "BPlusNode.hpp"
 #include "BPlusIndexNode.hpp"
 #include "BPlusLeaf.hpp"
 
@@ -28,7 +27,7 @@ using namespace std;
 
 class BPlusTree {
 private:
-    BPlusNode *root;
+    BPlusNode *root;        // Pointer to root node
     int t;                  // Order = minimum degree
     
 public:
@@ -42,6 +41,9 @@ public:
     
     void insert(int k);
     void remove(int k);
+    
+    // Search key in tree
+    // Return false if key is not present
     bool contains(int k);
     
     friend class BPlusNode;

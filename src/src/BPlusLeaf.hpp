@@ -8,6 +8,7 @@
 #include "BPlusNode.hpp"
 #include "BPlusIndexNode.hpp"
 
+
 class BPlusLeaf : public BPlusNode {
 private:
     BPlusLeaf *prev;
@@ -27,7 +28,6 @@ public:
     BPlusLeaf *split(int k);
     void traverse();
     virtual bool contains(int k);
-    BPlusNode *leftMost(int k);
 };
 
 #endif

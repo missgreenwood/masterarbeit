@@ -3,32 +3,33 @@
 
 #include "BPlusTree.hpp"
 
-// Constructor with parameter t
-// Initializes tree as empty
-BPlusTree::BPlusTree(int _t): t(_t), root(NULL) {};
-
-BPlusTree::~BPlusTree() {
-    delete root;
+BPlusTree::BPlusTree(int _t): t(_t) {
+    root = NULL;
 }
 
+BPlusTree::~BPlusTree() {
+    delete root; 
+}
 
 void BPlusTree::traverse() {
-    if (root != NULL) {
-        root->traverse();
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return;
     }
+    else root->traverse();
 }
 
 BPlusNode * BPlusTree::search(int k) {
-    if(root != NULL) {
-        return root->search(k);
-    }
-    else {
+    if (root == NULL) {
+        cout << "Tree is empty!";
         return NULL;
     }
+    else return root->search(k);
 }
 
 void BPlusTree::insert(int k) {
     if (root == NULL) {
+        
         // Allocate memory for root
         root = new BPlusLeaf(t, NULL, NULL);
         root->insert(k);
@@ -36,7 +37,7 @@ void BPlusTree::insert(int k) {
     else {
         root->insert(k);
         if (root->getParent() != NULL) {
-            root = root->getParent();
+            root = root->getParent(); 
         }
     }
 }
@@ -44,23 +45,26 @@ void BPlusTree::insert(int k) {
 void BPlusTree::remove(int k) {
     
     // Check if root is empty or k is not present in tree
-    if (root != NULL) {
-        if (!contains(k)) {
-            cout << " Key " << k << " is not present in tree\n";
-            return;
-        }
-        else {
-            
-            // Find position of k
-            BPlusNode *target = search(k);
-            
-            // Recursively remove k from target
-            target->remove(k);
-        }
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return;
+    }
+    else if (!contains(k)) {
+        cout << "Key " << k << " is not present in tree";
+        return;
+    }
+    else {
+        
+        // Find correct leaf to place k in
+        BPlusNode *target = search(k);
+        
+        // Recursively remove k from target
+        target->remove(k);
     }
 }
 
 bool BPlusTree::contains(int k) {
+    
     // If tree is empty return false
     if (root == NULL) {
         return false;
