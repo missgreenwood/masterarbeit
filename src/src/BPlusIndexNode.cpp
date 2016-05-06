@@ -54,23 +54,24 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
     assert(getCount() == getMax());
     
     // Merge keys and children together
-    int t = getMax();
-    int *merged = new int[t+1];
+    int max = getMax();
+    int *merged = new int[max+1];
     int index = indexOfKey(k);
     int *keys = getKeys();
-    BPlusNode **mergedNodes = new BPlusNode *[t+2];
+    BPlusNode **mergedNodes = new BPlusNode *[max+2];
     for (int i=0; i<index; i++) {
         merged[i] = keys[i];
         mergedNodes[i] = C[i];
     }
     merged[index] = k;
     mergedNodes[index] = left;
-    mergedNodes[index] = right;
-    for (int i=index+1; i<t+1; i++) {
+    mergedNodes[index+1] = right;
+    for (int i=index+1; i<max+1; i++) {
         merged[i] = keys[i-1];
         mergedNodes[i+1] = C[i];
     }
-    int half = (t+1)/2;
+    mergedNodes[max+2] = C[max+1];
+    int half = (max+1)/2;
     
     // half is returned to be pushed up
     middle = merged[half];
@@ -81,7 +82,7 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
         C[i] = mergedNodes[i];
     }
     C[half] = mergedNodes[half];
-    for (int i=half+1; i<t+i; i++) {
+    for (int i=half+1; i<max+1; i++) {
         C[i] = NULL;
     }
  
@@ -91,16 +92,18 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
     BPlusIndexNode *sibling = new BPlusIndexNode(getOrder());
     int *siblingKeys = sibling->getKeys();
     BPlusNode **siblingChildren = sibling->C;
-    for (int i=half+1; i<t+1; i++) {
-        siblingKeys[i-(half+1)] = merged[i];
-        siblingChildren[i-(half+1)] = mergedNodes[i];
-        siblingChildren[i-(half+1)]->setParent(sibling);
+    // for (int i=half+1; i<max+1; i++) {
+    for (int i=half; i<=max; i++) {
+        int pos = i-half;
+        siblingKeys[pos] = merged[i];
+        siblingChildren[pos] = mergedNodes[i+1];
+        siblingChildren[pos]->setParent(sibling);
         sibling->increment();
     }
-    siblingChildren[t+1-(half+1)] = mergedNodes[t+1];
-    siblingChildren[t+1-(half+1)]->setParent(sibling);
+    siblingChildren[max+1-half] = mergedNodes[max+1];
+    siblingChildren[max+1-half]->setParent(sibling);
     delete[] merged;
-    for (int i=0; i<t+2; i++) {
+    for (int i=0; i<max+2; i++) {
         delete mergedNodes[i];
     }
     delete[] mergedNodes;
@@ -108,15 +111,15 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
 }
 
 void BPlusIndexNode::traverse() {
-    for (int i=0; i<getCount()+1; i++) {
+    for (int i=0; i<getCount(); i++) {
         C[i]->traverse();
     }
 }
 
 bool BPlusIndexNode::contains(int k) {
     bool result = false;
-    for (int i=0; i<getCount()+1; i++) {
-        if (C[i]->contains(k) == true) {
+    for (int i=0; i<getCount(); i++) {
+        if (C[i]->contains(k)) {
             result = true;
             break;
         }
@@ -124,10 +127,22 @@ bool BPlusIndexNode::contains(int k) {
     return result;
 }
 
-/* void BPlusIndexNode::remove(int k) {
-    BPlusNode *node = search(k);
-    node = node->leftMost(k);
-    if(node) {
-        node->remove(k);
-    }
-} */
+
+// TODO RECURSIVELY
+
+// 1. Remove key from target
+
+// 2. UNDERFLOW?
+// 3.     NO -> DONE
+// 4.     YES -> ROOT?
+// 5.           YES -> Collapse root -> DONE
+// 6.           NO -> Check neighbors -> MINIMAL?
+// 7.                 NO -> Borrow from neighbor -> DONE
+// 8.                 YES -> Merge with neighbor
+// 9. Unwind to parent node
+// Continue steps 1. - 9. as long as neccessary
+
+
+void BPlusIndexNode::remove(int k) {
+
+}

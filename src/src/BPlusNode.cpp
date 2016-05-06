@@ -34,12 +34,13 @@ void BPlusNode::setParent(BPlusNode *node) {
     parent = node;
 }
 
+// Attention: Returns actual array index, i.e. "0" for key 1!
 int BPlusNode::indexOfKey(int k) {
     if (n == 0) {
         return 0;
     }
     int i=0;
-    while (i<n && keys[i] <= k) {
+    while (i<n && keys[i] < k) {
         i++;
     }
     return i;
@@ -69,7 +70,7 @@ void BPlusNode::insert(int k, BPlusNode *oldNode, BPlusNode *newNode) {
 }
 
 int BPlusNode::getMax() {
-    return 2*t;
+    return 2*t - 1;
 }
 
 BPlusNode * BPlusNode::leftMost(int k) {

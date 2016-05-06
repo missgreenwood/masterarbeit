@@ -212,23 +212,35 @@ Bloom-Filter-Baum, Recherche
 * So, 01.05. (6.25 h)
 
 
-KW 18 (noch 24.5 h)
+KW 18 (noch 19 h)
 * Mo, 02.05. (1.25 h)
 
 * Di, 03.05. (3.5 h)
 
 * Mi, 04.05. (3 h)
 
+* Do, 05.05. (0.5 h)
+
+* Fr, 06.05. (5 h)
+
 
 ## TODO
 
 1. Wie arbeitet Cassandra stress tool? 
 
-2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007
+2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
 
 3. Stand in Ausarbeitung 
 
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
+
+	a. Sakuma2011: 
+		* Baumstruktur für Bloom-Filter auf EINEM Host -> B+-Baum deletion, Libraries für Bloom-Filter und B+-Baum
+		* Bloomfilter zufällig erzeugen 
+		* In Baumstruktur einfügen 
+		* Ausgeben mit subset and similarity queries
+		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)
+
 
 
 ## TODO Ausarbeitung 

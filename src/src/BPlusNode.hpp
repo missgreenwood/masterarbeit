@@ -10,7 +10,7 @@
 
 class BPlusNode {
 private:
-    int t;                  // Order
+    int t;                  // Order/minimum degree
     BPlusNode *parent;
     int n;                  // Current # of keys
     
@@ -32,7 +32,7 @@ public:
     virtual void traverse() = 0;
     virtual bool contains(int k) = 0;
     int getMax();
-    // virtual void remove(int k) = 0;
+    virtual void remove(int k) = 0;
     virtual BPlusNode *leftMost(int k);
     void increment();
     void decrement();

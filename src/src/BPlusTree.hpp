@@ -2,7 +2,17 @@
 //  Description: Header for class BPlusTree
 //  Reference: https://github.com/JamesAn88/B-Tree/tree/master/B%2BTree
 
-//  Difference to normal B-Tree:
+//  B+-Tree properties (same as B-Tree):
+//  * All leaves at same level
+//  * Defined by minimum degree t
+//  * All nodes contain at most 2t-1 keys (maximum degree)
+//  * Every node has keys+1 children
+//  * Keys are sorted in increasing order
+//  * Grows and shrinks from root
+
+//  B+-Tree properties (different from B-Tree):
+//  * Every node except root must contain at least t keys
+//  * Child between keys k1 and k2 contains all keys >= k1 and < k2
 //  * All keys are also stored in leaves
 
 #ifndef BPlusTree_h
@@ -19,7 +29,7 @@ using namespace std;
 class BPlusTree {
 private:
     BPlusNode *root;
-    int t;                  // Order
+    int t;                  // Order = minimum degree
     
 public:
     BPlusTree(int _t);

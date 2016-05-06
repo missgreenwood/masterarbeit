@@ -42,27 +42,20 @@ void BPlusTree::insert(int k) {
 }
 
 void BPlusTree::remove(int k) {
+    
     // Check if root is empty or k is not present in tree
     if (root != NULL) {
         if (!contains(k)) {
-            cout << "\nKey " << k << " is not present in tree\n";
+            cout << " Key " << k << " is not present in tree\n";
             return;
         }
         else {
+            
             // Find position of k
             BPlusNode *target = search(k);
-            // DO RECURSIVELY
             
-            // 1. Remove key from leaf
-            // 2. UNDERFLOW?
-            // 3.     NO -> DONE
-            // 4.     YES -> ROOT?
-            // 5.           YES -> Collapse root -> DONE
-            // 6.           NO -> Check neighbors -> MINIMAL?
-            // 7.                 NO -> Borrow from neighbor -> DONE
-            // 8.                 YES -> Merge with neighbor
-            // 9. Unwind to parent node
-            // Continue steps 1. - 9. as long as neccessary
+            // Recursively remove k from target
+            target->remove(k);
         }
     }
 }

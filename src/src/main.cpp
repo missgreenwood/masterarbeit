@@ -198,7 +198,7 @@ int main(int argc, const char *argv[]) {
     // TODO
     
     // Test driver for class BPlusTree
-    cout << "CLASS BPlusTree";
+    cout << "\nCLASS BPlusTree";
     cout << "\n----------------\n\n";
     cout << "Create instance of BPlusTree with degree 3 (b2)";
     BPlusTree b2(3);
@@ -242,6 +242,56 @@ int main(int argc, const char *argv[]) {
     else {
         cout << "Key 23 is not present in b2";
     }
+    cout << "\n\nTry to remove non existing key 23 from b2:";
+    b2.remove(23);
+    cout << "\nCreate leaf with degree 3 (l1)";
+    BPlusLeaf l1(3);
+    cout << "\n\nInsert keys into l1: 1, 3, 7, 8, 9, 10";
+    l1.insert(1);
+    l1.insert(3);
+    l1.insert(7);
+    l1.insert(8);
+    l1.insert(9);
+    cout << "\nTraverse l1:";
+    l1.traverse();
+    cout << "\n\nRemove key 1 from l1";
+    l1.remove(1);
+    cout << "\nTraverse l1:";
+    l1.traverse();
+    cout << "\n\nTry to remove non existing key 1 from l1:";
+    l1.remove(1);
+    cout << "\n\nRemove keys 3 and 7 from l1";
+    l1.remove(3);
+    l1.remove(7);
+    cout << "\nTraverse l1:";
+    l1.traverse();
+    cout << "\n\nRemove key 8 from l1, should not create underflow: ";
+    l1.remove(8);
+    cout << "\nTraverse l1:";
+    l1.traverse();
+    cout << "\n\nRemove last remaining key 9 from l1, should not create underflow: ";
+    l1.remove(9);
+    cout << "\nTraverse l1:";
+    l1.traverse();
+    cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
+    BPlusTree b3(2);
+    cout << "\n\nInsert keys into b2: 1, 2, 3, 4, 7, 8, 9, 10, 11, 12";
+    b3.insert(1);
+    b3.insert(2);
+    b3.insert(3);
+    b3.insert(4);
+    b3.insert(7);
+    b3.insert(8);
+    b3.insert(9);
+    b3.insert(10);
+    b3.insert(11);
+    /* b3.insert(12);
+    cout << "\nTraverse b3:";
+    b3.traverse();
+    cout << "\nRemove key 9 from b3:";
+    b3.remove(9);
+    cout << "\nTraverse b3:";
+    b3.traverse(); */
     cout << endl;
     return 0;
 }
