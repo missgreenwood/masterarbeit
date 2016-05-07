@@ -204,7 +204,7 @@ int main(int argc, const char *argv[]) {
     BPlusTree b2(3);
     cout << "\n\nInsert keys into b2: 1, 3, 7, 10, 11, 13, 14, 15, 18, 16, 19, 24, 25, 26, 21, 4, 5, 20, 22, 2, 17, 12, 6";
     b2.insert(1);
-    /* b2.insert(3);
+    b2.insert(3);
     b2.insert(7);
     b2.insert(10);
     b2.insert(11);
@@ -226,27 +226,27 @@ int main(int argc, const char *argv[]) {
     b2.insert(17);
     b2.insert(12);
     b2.insert(6);
-    cout << "\n\nTraverse the constructed tree: "; */
+    cout << "\nTraverse b2: ";
     b2.traverse();
-    /* cout << "\n\nSearch for existing key 10 in b2: ";
+    cout << "\nSearch for existing key 10 in b2: ";
     if (b2.contains(10)) {
         cout << "Key 10 is present in b2";
     }
     else {
         cout << "Error! Key 10 should be present in b2";
     }
-    cout << "\n\nSearch for non existing key 23 in b2: ";
+    cout << "\nSearch for non existing key 23 in b2: ";
     if (b2.contains(23)) {
         cout << "Error! Key 23 should not be present in b2";
     }
     else {
         cout << "Key 23 is not present in b2";
     }
-    cout << "\n\nTry to remove non existing key 23 from b2:";
-    b2.remove(23);
-    cout << "\nCreate leaf with degree 3 (l1)";
+    // cout << "\n\nTry to remove non existing key 23 from b2:";
+    // b2.remove(23);
+    cout << "\n\nCreate leaf with minimum degree 3/max. elements 5 (l1)";
     BPlusLeaf l1(3);
-    cout << "\n\nInsert keys into l1: 1, 3, 7, 8, 9, 10";
+    cout << "\n\nInsert keys into l1: 1, 3, 7, 8, 9";
     l1.insert(1);
     l1.insert(3);
     l1.insert(7);
@@ -254,7 +254,12 @@ int main(int argc, const char *argv[]) {
     l1.insert(9);
     cout << "\nTraverse l1:";
     l1.traverse();
-    cout << "\n\nRemove key 1 from l1";
+    cout << "\nCheck index function:" << endl;
+    int *keys = l1.getKeys();
+    for (int i=0; i<l1.getCount(); i++) {
+        cout << "Key: " << keys[i] << ", index: " << l1.indexOfKey(keys[i]) << endl; 
+    }
+    /* cout << "\n\nRemove key 1 from l1";
     l1.remove(1);
     cout << "\nTraverse l1:";
     l1.traverse();
@@ -272,7 +277,7 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nRemove last remaining key 9 from l1, should not create underflow: ";
     l1.remove(9);
     cout << "\nTraverse l1:";
-    l1.traverse();
+    l1.traverse(); */
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
     cout << "\n\nInsert keys into b2: 1, 2, 3, 4, 7, 8, 9, 10, 11, 12\n";
@@ -285,11 +290,10 @@ int main(int argc, const char *argv[]) {
     b3.insert(9);
     b3.insert(10);
     b3.insert(11);
-    b3.traverse();
     b3.insert(12);
-    cout << "\nTraverse b3:";
+    cout << "Traverse b3: ";
     b3.traverse();
-    cout << "\nRemove key 9 from b3:";
+    /* cout << "\nRemove key 9 from b3:";
     b3.remove(9);
     cout << "\nTraverse b3:";
     b3.traverse(); */

@@ -33,7 +33,6 @@ public:
     virtual bool contains(int k) = 0;
     int getMax();
     virtual void remove(int k) = 0;
-    virtual BPlusNode *leftMost(int k);
     void increment();
     void decrement();
 };

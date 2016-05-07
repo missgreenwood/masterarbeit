@@ -165,7 +165,7 @@ BPlusLeaf * BPlusLeaf::split(int k) {
 void BPlusLeaf::traverse() {
     assert(getCount() <= getMax());
     int *keys = getKeys();
-    cout << "|";
+    cout << "| ";
     for (int i=0; i<getCount(); i++) {
         cout << keys[i] << " ";
     }

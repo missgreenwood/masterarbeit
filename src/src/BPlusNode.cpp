@@ -49,10 +49,31 @@ void BPlusNode::insert(int k, BPlusNode *oldNode, BPlusNode *newNode) {
     assert(false);
 }
 
-// TODO
+// TODO TEST
+
+int BPlusNode::indexOfKey(int k) {
+    if (n == 0) {
+        return 0;
+    }
+    int i = 0;
+    while (i<n && keys[i]<k) {
+        i++;
+    }
+    return i;
+}
+
+int * BPlusNode::getKeys() {
+    return keys;
+}
 
 int BPlusNode::getMax() {
     return 2*t-1;
 }
 
-// TODO
+void BPlusNode::increment() {
+    n++;
+}
+
+void BPlusNode::decrement() {
+    n--;
+}
