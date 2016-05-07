@@ -26,11 +26,11 @@ using namespace std;
 
 
 class BPlusTree {
-private:
-    BPlusNode *root;        // Pointer to root node
+private:    
     int t;                  // Order = minimum degree
     
 public:
+    BPlusNode *root;        // Pointer to root node
     BPlusTree(int _t);
     ~BPlusTree();
     

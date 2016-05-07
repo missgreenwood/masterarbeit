@@ -212,7 +212,7 @@ Bloom-Filter-Baum, Recherche
 * So, 01.05. (6.25 h)
 
 
-KW 18 (noch 10.75 h)
+KW 18 (noch 10.5 h)
 * Mo, 02.05. (1.25 h)
 
 * Di, 03.05. (3.5 h)
@@ -223,7 +223,7 @@ KW 18 (noch 10.75 h)
 
 * Fr, 06.05. (9 h)
 
-* Sa, 07.05. (4 h)
+* Sa, 07.05. (4.25 h)
 
 
 ## TODO
@@ -244,6 +244,7 @@ KW 18 (noch 10.75 h)
 		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)
 
 		* remove functions
+		* contain functions
 		* Evtl. Klasse BPlusLeaf anpassen, sodass bei Overflow neues BPlusTree-Objekt erzeugt wird
 
 

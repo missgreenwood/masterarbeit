@@ -5,6 +5,7 @@
 
 using namespace std;
 
+
 BPlusLeaf::BPlusLeaf(int _t) : BPlusNode(_t) {};
 
 BPlusLeaf::BPlusLeaf(int _t, BPlusLeaf *_prev, BPlusLeaf *_next) : BPlusNode(_t) {
@@ -51,11 +52,9 @@ void BPlusLeaf::insert(int k) {
     }
 }
 
-// TODO RECURSIVELY
-
 void BPlusLeaf::remove(int k) {
-    /* if (!contains(k)) {
-        cout << " Key " << k << " is not present in leaf";
+    if (!contains(k)) {
+        cout << " Key " << k << " not present in leaf ";
         return;
     }
     // 1. Remove key from target
@@ -66,23 +65,26 @@ void BPlusLeaf::remove(int k) {
     }
     this->decrement();
     // 2. UNDERFLOW?
-    int order = getMax();
-    if (getCount() >= order) {
+    int order = getOrder();
+    int count = getCount();
+    if (count >= order) {
         // 3. NO -> DONE
+        // cout << "No underflow!";
         return;
     }
     else {
         // 4. YES -> ROOT?
         // 5. YES -> Collapse root -> DONE
         if (getParent() == NULL) {
+            // cout << "This is root!";
             return;
         }
         else {
             // 6. NO -> Check neighbors -> MINIMAL?
             // 7. NO -> Borrow from neighbor -> DONE
             if (prev) {
-                if (getPrev()->getCount() > order) {
-                
+                /* if (getPrev()->getCount() > order) {
+                    
                     // Shift own keys and retrieve biggest key from previous
                     for (int i=1; i<=getCount(); i++) {
                         keys[i] = keys[i-1];
@@ -99,9 +101,12 @@ void BPlusLeaf::remove(int k) {
                     int *parentKeys = getParent()->getKeys();
                     int parentIndex = getParent()->indexOfKey(k);
                     parentKeys[parentIndex] = newKey;
-                }
-        }
-            else if (next) {
+                } */
+            }
+            else {
+                cout << "No previous sibling!";
+            }
+            /* else if (next) {
                 if (getNext()->getCount() > order) {
                     
                     // Retrieve smallest key from next
@@ -121,9 +126,10 @@ void BPlusLeaf::remove(int k) {
                     int parentIndex = getParent()->indexOfKey(k);
                     parentKeys[parentIndex] = newKey; 
                 }
-            }
-        }
-    } */
+            } */
+        } 
+    } 
+    return; 
 }
 
 // 8. YES -> Merge with neighbor

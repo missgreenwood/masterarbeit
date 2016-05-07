@@ -56,10 +56,9 @@ void BPlusIndexNode::insert(int k, BPlusNode *leftNode, BPlusNode *rightNode) {
 bool BPlusIndexNode::contains(int k) {
     bool result = false;
     int *keys = getKeys();
-    for (int i=0; i<getCount(); i++) {
-        if (keys[i] == k) {
-            result = true;
-            break;
+    for (int i=0; i<getMax()+1; i++) {
+        if (keys[i]<k && keys[i+1]>=k && i<getCount()) {
+            return C[i]->contains(k);
         }
     }
     return result;
