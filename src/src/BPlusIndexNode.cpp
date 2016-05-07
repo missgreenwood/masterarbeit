@@ -33,8 +33,6 @@ void BPlusIndexNode::insert(int k) {
     l->insert(k);
 }
 
-// EVTL. TODO IF NOT WORKING
-
 void BPlusIndexNode::insert(int k, BPlusNode *leftNode, BPlusNode *rightNode) {
     if (getCount() < getMax()) {
         int index = indexOfKey(k);
@@ -117,10 +115,8 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
     BPlusIndexNode *s = new BPlusIndexNode(getOrder());
     int *sKeys = s->getKeys();
     BPlusNode **sChildren = s->C;
-    for (int i=0; i<half+1; i++) {
-        sKeys[i] = merged[half+i];
-    }
     for (int i=half+1; i<max+1; i++) {
+        sKeys[i-(half+1)] = merged[i];
         sChildren[i-(half+1)] = mergedNodes[i];
         sChildren[i-(half+1)]->setParent(s);
         s->increment();
@@ -140,6 +136,7 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
     delete[] mergedNodes;
     return s;
 }
+
 
 void BPlusIndexNode::traverse() {
     for (int i=0; i<getCount()+1; i++) {

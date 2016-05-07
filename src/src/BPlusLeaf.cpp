@@ -66,7 +66,7 @@ void BPlusLeaf::remove(int k) {
     }
     this->decrement();
     // 2. UNDERFLOW?
-    int order = getOrder();
+    int order = getMax();
     if (getCount() >= order) {
         // 3. NO -> DONE
         return;
