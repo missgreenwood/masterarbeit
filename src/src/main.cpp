@@ -288,17 +288,25 @@ int main(int argc, const char *argv[]) {
     b3.insert(4);
     cout << "Traverse b3: ";
     b3.traverse();
-    if (b3.root->contains(2)) {
-        cout << "\nRoot of b3 contains key 2 ";
+    cout << "\nSearch for existing keys 2 and 3 in b3: ";
+    if (b3.contains(2)) {
+        cout << "\nb3 contains key 2 ";
     }
     else {
-        cout << "\nKey 2 not present in root of b3 ";
+        cout << "\nKey 2 not present in b3 ";
     }
-    if (b3.root->contains(3)) {
-        cout << "\nRoot of b3 contains key 3 ";
+    if (b3.contains(3)) {
+        cout << "\nb3 contains key 3 ";
     }
     else {
-        cout << "\nKey 3 not present in root of b3 ";
+        cout << "\nKey 3 not present in b3 ";
+    }
+    cout << "\nSearch for non existing key 5 in b3: ";
+    if (b3.contains(5)) {
+        cout << "\nError - b3 does not contain key 5, but it is said to be there ";
+    }
+    else {
+        cout << "\nKey 5 not present in b3 ";
     }
     /* cout << "\nRemove key 1 from b3: ";
     b3.remove(1);
