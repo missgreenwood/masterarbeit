@@ -23,6 +23,7 @@ public:
     virtual void remove(int k);
     BPlusIndexNode *split(int k, BPlusNode *left, BPlusNode *right, int &middle);
     void traverse();
+    BPlusNode *searchRemoveIndex(int k);
 };
 
 #endif

@@ -49,14 +49,23 @@ void BPlusNode::insert(int k, BPlusNode *oldNode, BPlusNode *newNode) {
     assert(false);
 }
 
-// TODO TEST
-
 int BPlusNode::indexOfKey(int k) {
     if (n == 0) {
         return 0;
     }
     int i = 0;
     while (i<n && keys[i]<k) {
+        i++;
+    }
+    return i;
+}
+
+int BPlusNode::removeIndex(int k) {
+    if (n == 0) {
+        return 0;
+    }
+    int i = 0;
+    while (i<n && keys[i]<=k) {
         i++;
     }
     return i;

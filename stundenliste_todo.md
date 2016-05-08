@@ -248,7 +248,6 @@ KW 19 (noch 40.5 h)
 		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)
 
 		* remove functions
-		* contain functions
 		* Evtl. Klasse BPlusLeaf anpassen, sodass bei Overflow neues BPlusTree-Objekt erzeugt wird
 
 

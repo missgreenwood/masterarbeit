@@ -3,6 +3,8 @@
 
 #include "BPlusIndexNode.hpp"
 
+using namespace std;
+
 
 BPlusIndexNode::BPlusIndexNode(int _t): BPlusNode(_t) {
     C = new BPlusNode *[2*_t];
@@ -18,6 +20,11 @@ BPlusIndexNode::~BPlusIndexNode() {
 BPlusNode * BPlusIndexNode::search(int k) {
     int index = indexOfKey(k);
     return C[index]->search(k);
+}
+
+BPlusNode * BPlusIndexNode::searchRemoveIndex(int k) {
+    int ridx = removeIndex(k);
+    return C[ridx]->searchRemoveIndex(k);
 }
 
 void BPlusIndexNode::shiftAndInsert(int k) {
@@ -65,10 +72,26 @@ bool BPlusIndexNode::contains(int k) {
 }
 
 void BPlusIndexNode::remove(int k) {
-
-    // TODO RECURSIVELY
+ 
+    // 1. Remove key from target
+    // Shift keys in parent and delete k
+    int index=0;
+    for (int i=0; i<getCount(); i++) {
+        if (keys[i] == k) {
+            index=i;
+            break;
+        }
+    }
+    cout << "\nParent's old keys:";
+    for (int i=0; i<getCount(); i++) {
+        cout << " " << keys[i];
+    }
+    for (int i=index; i<getCount(); i++) {
+        keys[i] = keys[i+1];
+    }
     
-    // 1. Remove key from target    
+    // Delete reference to child
+    
     // 2. UNDERFLOW?
     // 3.     NO -> DONE
     // 4.     YES -> ROOT?
@@ -79,6 +102,9 @@ void BPlusIndexNode::remove(int k) {
     // 9. Unwind to parent node
     // Continue steps 1. - 9. as long as neccessary
     
+   
+    // Update parent
+    // parent->decrement();
 }
 
 BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right, int &middle) {

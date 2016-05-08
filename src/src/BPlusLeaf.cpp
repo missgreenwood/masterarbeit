@@ -54,7 +54,7 @@ void BPlusLeaf::insert(int k) {
 
 void BPlusLeaf::remove(int k) {
     if (!contains(k)) {
-        cout << " Key " << k << " not present in leaf ";
+        cout << "Key " << k << " not present in leaf ";
         return;
     }
     // 1. Remove key from target
@@ -82,61 +82,121 @@ void BPlusLeaf::remove(int k) {
         else {
             // 6. NO -> Check neighbors -> MINIMAL?
             // 7. NO -> Borrow from neighbor -> DONE
-            if (prev) {
-                /* if (getPrev()->getCount() > order) {
-                    
-                    // Shift own keys and retrieve biggest key from previous
-                    for (int i=1; i<=getCount(); i++) {
-                        keys[i] = keys[i-1];
+            if ((prev) && (getPrev()->getCount() > order)) {
+                cout << "Borrowing key from previous sibling";
+                int *prevKeys = prev->getKeys();
+                
+                // Shift own keys and retrieve biggest key from previous
+                for (int i=1; i<=getCount(); i++) {
+                    keys[i] = keys[i-1];
+                }
+                int newKey = prevKeys[prev->getCount()-1];
+                keys[0] = newKey;
+                increment();
+                
+                // Decrement previous's keys
+                prev->decrement();
+                
+                // Update parent
+                BPlusNode *parent = getParent();
+                int *parentKeys = parent->getKeys();
+                int index=0;
+                cout << "\nOld parent keys:";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i];
+                }
+                cout << endl;
+                for (int i=0; i<parent->getCount(); i++) {
+                    if (parentKeys[i] == k) {
+                        index=i;
+                        break;
                     }
-                    int *prevKeys = prev->getKeys();
-                    int newKey = prevKeys[prev->getCount()-1];
-                    keys[0] = newKey;
-                    increment();
-                    
-                    // Decrement previous's keys
-                    prev->decrement();
-                    
-                    // Update parent
-                    int *parentKeys = getParent()->getKeys();
-                    int parentIndex = getParent()->indexOfKey(k);
-                    parentKeys[parentIndex] = newKey;
-                } */
+                }
+                parentKeys[index] = newKey;
+                cout << "New parent keys:";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i];
+                }
+                cout << endl;
+                return;
+            }
+            else if ((next) && (getNext()->getCount() > order)) {
+                cout << "Previous sibling has only minimal keys - borrowing key from next sibling";
+                int *nextKeys = next->getKeys();
+                
+                // Retrieve smallest key from next
+                increment();
+                int newKey = nextKeys[0];
+                int newParentKey = nextKeys[1];
+                keys[getCount()-1] = newKey;
+                
+                // Shift next's keys and decrement next's keys
+                for (int i=0; i < next->getCount(); i++) {
+                    nextKeys[i] = nextKeys[i+1];
+                }
+                
+                next->decrement();
+                
+                // Update parent
+                BPlusNode *parent = getParent();
+                int *parentKeys = parent->getKeys();
+                int index = 0;
+                cout << "\nParent's old keys:";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i]; 
+                }
+                cout << endl;
+                for (int i=0; i<parent->getCount(); i++) {
+                    if (parentKeys[i] == newKey) {
+                        index=i;
+                        break;
+                    }
+                }
+                parentKeys[index] = newParentKey;
+                cout << "Parent's new keys:";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i];
+                }
+                cout << endl;
+                return;
             }
             else {
-                cout << "No previous sibling!";
-            }
-            /* else if (next) {
-                if (getNext()->getCount() > order) {
-                    
-                    // Retrieve smallest key from next
-                    increment();
-                    int *nextKeys = next->getKeys();
-                    int newKey = nextKeys[0];
-                    keys[getCount()-1] = newKey;
-                    
-                    // Shift next's keys and decrement next's keys
-                    for (int i=0; i < next->getCount()-2; i++) {
-                        nextKeys[i] = nextKeys[i+1];
-                    }
-                    next->decrement();
-                    
-                    // Update parent
-                    int *parentKeys = getParent()->getKeys();
-                    int parentIndex = getParent()->indexOfKey(k);
-                    parentKeys[parentIndex] = newKey; 
+                // 8. YES -> Merge with neighbor
+                cout << "Both siblings are minimal - merge with previous";
+                
+                // Merge own keys into prev and update previous's counter
+                BPlusLeaf *prev = getPrev();
+                int *prevKeys = prev->getKeys();
+                cout << "\nPrevious's old keys:";
+                int prevCount = prev->getCount();
+                for (int i=0; i<prevCount; i++) {
+                    cout << " " << prevKeys[i];
                 }
-            } */
-        } 
-    } 
+                for (int i=0; i<getCount(); i++) {
+                    prevKeys[prevCount+i] = keys[i];
+                    prev->increment();
+                }
+                cout << "\nPrevious's new keys:";
+                for (int i=0; i<prev->getCount(); i++) {
+                    cout << " " << prevKeys[i];
+                }
+                
+                // 9. Unwind to parent node
+                BPlusNode *parent = getParent();
+                parent->remove(k);
+            }
+        }
+    }
     return; 
 }
 
-// 8. YES -> Merge with neighbor
-// 9. Unwind to parent node
 // Continue steps 1. - 9. as long as neccessary
 
 BPlusNode * BPlusLeaf::search(int k) {
+    return this;
+}
+
+BPlusNode * BPlusLeaf::searchRemoveIndex(int k) {
     return this;
 }
 

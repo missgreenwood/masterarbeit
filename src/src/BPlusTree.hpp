@@ -39,6 +39,9 @@ public:
     // Return leaf node to place k in
     BPlusNode *search(int k);
     
+    // Return correct leaf for index to be removed
+    BPlusNode *searchRemoveIndex(int k); 
+    
     void insert(int k);
     void remove(int k);
     

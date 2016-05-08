@@ -26,6 +26,7 @@ public:
     void setParent(BPlusNode *node);
     virtual void insert(int k) = 0;
     virtual BPlusNode *search(int k) = 0;
+    virtual BPlusNode *searchRemoveIndex(int k) = 0; 
     virtual void insert(int k, BPlusNode *oldNode, BPlusNode *newNode);
     int indexOfKey(int k);
     int *getKeys();
@@ -35,6 +36,7 @@ public:
     virtual void remove(int k) = 0;
     void increment();
     void decrement();
+    int removeIndex(int k);
 };
 
 #endif

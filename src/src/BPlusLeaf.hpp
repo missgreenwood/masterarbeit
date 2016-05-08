@@ -28,6 +28,7 @@ public:
     BPlusLeaf *split(int k);
     void traverse();
     bool contains(int k);
+    BPlusNode *searchRemoveIndex(int k);
 };
 
 #endif

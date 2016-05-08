@@ -27,6 +27,14 @@ BPlusNode * BPlusTree::search(int k) {
     else return root->search(k);
 }
 
+BPlusNode * BPlusTree::searchRemoveIndex(int k) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return NULL;
+    }
+    else return root->searchRemoveIndex(k);
+}
+
 void BPlusTree::insert(int k) {
     if (root == NULL) {
         
@@ -54,10 +62,11 @@ void BPlusTree::remove(int k) {
         return;
     }
     else {
-        
-        // Find correct leaf to place k in
+        // Find leaf where k is placed in
         BPlusNode *target = search(k);
-        
+        if (!(target->contains(k))) {
+            target = searchRemoveIndex(k);
+        }
         // Recursively remove k from target
         target->remove(k);
     }
