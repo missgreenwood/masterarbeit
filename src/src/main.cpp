@@ -295,7 +295,7 @@ int main(int argc, const char *argv[]) {
     b3.insert(13);
     cout << "Traverse b3: ";
     b3.traverse();
-    /* cout << "\nSearch for existing keys 2 and 3 in b3: ";
+    cout << "\nSearch for existing keys 2 and 3 in b3: ";
     if (b3.contains(2)) {
         cout << "\nb3 contains key 2 ";
     }
@@ -308,13 +308,13 @@ int main(int argc, const char *argv[]) {
     else {
         cout << "\nKey 3 not present in b3 ";
     }
-    cout << "\nSearch for non existing key 5 in b3: ";
-    if (b3.contains(5)) {
-        cout << "Error - b3 does not contain key 5, but it is said to be there ";
+    cout << "\nSearch for non existing key 23 in b3: ";
+    if (b3.contains(23)) {
+        cout << "Error - b3 does not contain key 23, but it is said to be there ";
     }
     else {
-        cout << "Key 5 not present in b3 ";
-    } */
+        cout << "Key 23 not present in b3 ";
+    } 
     cout << "\n\nRemove key 5 from b3: ";
     b3.remove(5);
     cout << endl; 

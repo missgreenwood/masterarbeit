@@ -250,12 +250,8 @@ BPlusLeaf * BPlusLeaf::split(int k) {
         l->increment();
     }
     
-    BPlusNode *next = getNext();
-    BPlusNode *prev = getPrev();
-    
-    if (next == NULL) {
-        cout << "No next element!"; 
-    }
+    // BPlusNode *next = getNext();
+    // BPlusNode *prev = getPrev();
     
     // Update sibling pointers
     if (keys[0] < newNodeKeys[0]) {

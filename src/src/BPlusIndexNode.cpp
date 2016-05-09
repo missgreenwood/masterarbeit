@@ -83,8 +83,8 @@ bool BPlusIndexNode::contains(int k) {
     if (C[index]->contains(k)) {
         return true;
     }
-    else if ((C[index+1]) && C[index+1]->contains(k)) {
-        return true;
+    else if (C[index+1] && keys[index+1]<=k) {
+        return C[index+1]->contains(k);
     }
     return false;
 }
