@@ -81,6 +81,10 @@ Zusammenfassung Sakuma2011
 	* Andernfalls: Element vom Bruderknoten wird geholt; falls immer noch Underflow, werden die beiden Knoten verschmolzen (notfalls bis zur Wurzel)
 	2. "notification of change information": analog zu 3.2.1 
 
+
+=== BIS HIER IMPLEMENTIERT ===
+
+
 3.3 Management of the Bloom filter 
 
 - Management d. physischen Knoten: 

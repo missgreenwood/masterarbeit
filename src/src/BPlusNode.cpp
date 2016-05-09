@@ -6,11 +6,15 @@
 
 BPlusNode::BPlusNode(int _t): t(_t), n(0) {
     parent = NULL;
+    next = NULL;
+    prev = NULL;
     keys = new int[2*_t-1];
 }
 
 BPlusNode::~BPlusNode() {
     delete parent;
+    delete prev;
+    delete next; 
     delete[] keys;
 }
 
@@ -86,3 +90,20 @@ void BPlusNode::increment() {
 void BPlusNode::decrement() {
     n--;
 }
+
+BPlusNode * BPlusNode::getPrev() {
+    return prev;
+}
+
+BPlusNode * BPlusNode::getNext() {
+    return next;
+}
+
+void BPlusNode::setPrev(BPlusNode *_prev) {
+    prev = _prev;
+}
+
+void BPlusNode::setNext(BPlusNode *_next) {
+    next = _next;
+}
+

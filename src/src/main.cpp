@@ -282,7 +282,7 @@ int main(int argc, const char *argv[]) {
     l1.traverse(); 
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
-    cout << "\n\nInsert keys into b2: 1, 2, 5, 6, 9, 10, 11\n";
+    cout << "\n\nInsert keys into b2: 1, 2, 5, 6, 9, 10, 11, 3, 12, 13\n";
     b3.insert(1);
     b3.insert(2);
     b3.insert(5);
@@ -290,6 +290,9 @@ int main(int argc, const char *argv[]) {
     b3.insert(9);
     b3.insert(10);
     b3.insert(11);
+    b3.insert(3);
+    b3.insert(12);
+    b3.insert(13);
     cout << "Traverse b3: ";
     b3.traverse();
     /* cout << "\nSearch for existing keys 2 and 3 in b3: ";
@@ -312,12 +315,18 @@ int main(int argc, const char *argv[]) {
     else {
         cout << "Key 5 not present in b3 ";
     } */
-    cout << "\n\nRemove key 6 from b3: ";
-    b3.remove(6);
-    b3.traverse();
     cout << "\n\nRemove key 5 from b3: ";
     b3.remove(5);
     cout << endl; 
+    b3.traverse();
+    cout << "\n\nRemove key 6 from b3: ";
+    b3.remove(6);
+    b3.traverse();
+    cout << "\n\nRemove key 1 from b3: ";
+    b3.remove(1);
+    b3.traverse();
+    cout << "\n\nRemove key 2 from b3: ";
+    b3.remove(2);
     b3.traverse();
     cout << endl;
     return 0;

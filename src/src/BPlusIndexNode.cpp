@@ -57,6 +57,24 @@ void BPlusIndexNode::insert(int k, BPlusNode *leftNode, BPlusNode *rightNode) {
         }
         s->setParent(p);
         p->insert(mid, this, s);
+        
+        // Set new sibling pointers
+        if (keys[0] < s->getKeys()[0]) {
+            s->setPrev(this);
+            if (next) {
+                s->setNext(next);
+                next->setPrev(this);
+            }
+            setNext(s);
+        }
+        else {
+            s->setNext(this);
+            if (prev) {
+                s->setPrev(prev);
+                prev->setNext(s);
+            }
+            setPrev(s);            
+        }
     }
 }
 
@@ -90,22 +108,83 @@ void BPlusIndexNode::remove(int k) {
         keys[i] = keys[i+1];
     }
     
-    // Delete reference to child
+    // Shift child pointers and delete dangeling child pointer
+    int childPointer=index+1;
+    for (int i=childPointer; i<getCount()+1; i++) {
+        C[i] = C[i+1];
+    }
+    
+    // Update count
+    decrement();
+    
+    cout << "\nParent's new keys:";
+    for (int i=0; i<getCount(); i++) {
+        cout << " " << keys[i];
+    }
+    cout << endl;
     
     // 2. UNDERFLOW?
-    // 3.     NO -> DONE
-    // 4.     YES -> ROOT?
-    // 5.           YES -> Collapse root -> DONE
-    // 6.           NO -> Check neighbors -> MINIMAL?
-    // 7.                 NO -> Borrow from neighbor -> DONE
+    int order = getOrder();
+    int count = getCount();
+    if (count >= order) {
+        // 3. NO -> DONE
+        cout << "Delete operation finished!" << endl;
+        return;
+    }
+    else {
+        // 4. YES -> ROOT?
+        // 5. YES -> Collapse root -> DONE
+        if (getParent() == NULL) {
+            return;
+        }
+        else {
+            // 6. NO -> Check neighbors -> MINIMAL?
+            // 7. NO -> Borrow from neighbor -> DONE
+            if((prev) && (getPrev()->getCount() > order)) {
+                cout << "Borrowing key from previous index node";
+                int *prevKeys = prev->getKeys();
+                for (int i=1; i<=getCount(); i++) {
+                    keys[i] = keys[i-1];
+                }
+                int newKey = prevKeys[prev->getCount()-1];
+                keys[0] = newKey;
+                int newParentKey = prevKeys[prev->getCount()-2];
+                increment();
+                prev->decrement();
+                BPlusNode *parent = getParent();
+                int *parentKeys = parent->getKeys();
+                int index = 0;
+                cout << "\nOld parent keys (index node):";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i];
+                }
+                cout << endl;
+                
+                // get index in parent keys
+                for (int i=0; i<-parent->getCount(); i++) {
+                    if (parentKeys[i] > newKey) {
+                        index=i;
+                        break;
+                    }
+                }
+                parentKeys[index] = newParentKey;
+                cout << "\nNew parent keys (index node):";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << parentKeys[i];
+                }
+                cout << endl;
+                return;
+            }
+        }
+    }
+}
+    
+    
+    //
     // 8.                 YES -> Merge with neighbor
     // 9. Unwind to parent node
     // Continue steps 1. - 9. as long as neccessary
-    
-   
-    // Update parent
-    // parent->decrement();
-}
+
 
 BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right, int &middle) {
     assert(getCount() == getMax());

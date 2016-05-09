@@ -15,6 +15,8 @@ private:
     int n;                  // Current # of keys
     
 public:
+    BPlusNode *next;
+    BPlusNode *prev;
     int *keys;              // Array of keys
     BPlusNode(int _t);
     virtual ~BPlusNode();
@@ -37,6 +39,10 @@ public:
     void increment();
     void decrement();
     int removeIndex(int k);
+    BPlusNode *getPrev();
+    BPlusNode *getNext();
+    void setPrev(BPlusNode *prev);
+    void setNext(BPlusNode *next);
 };
 
 #endif

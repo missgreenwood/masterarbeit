@@ -212,7 +212,7 @@ Bloom-Filter-Baum, Recherche
 * So, 01.05. (6.25 h)
 
 
-KW 18 (26.5 h)
+KW 18 (25.5 h)
 * Mo, 02.05. (1.25 h)
 
 * Di, 03.05. (3.5 h)
@@ -223,12 +223,15 @@ KW 18 (26.5 h)
 
 * Fr, 06.05. (9 h)
 
-* Sa, 07.05. (4.25 h)
+* Sa, 07.05. (3.25 h)
 
 * So, 08.05. (5 h)
 
 
-KW 19 (noch 40.5 h)
+KW 19 (noch 33.5 h)
+* Mo, 09.05. (5 h)
+
+
 
 ## TODO
 
@@ -241,17 +244,19 @@ KW 19 (noch 40.5 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* Baumstruktur für Bloom-Filter auf EINEM Host -> B+-Baum deletion, Libraries für Bloom-Filter und B+-Baum
-		* Bloomfilter zufällig erzeugen 
-		* In Baumstruktur einfügen 
-		* Ausgeben mit subset and similarity queries
-		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung)
+		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries
+		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
+		* Jeder physische Knoten managt die Information für seinen Zweig sowie Informationen über die Geschwisterknoten 
+		* Der Knoten mit der kleinsten ID in der internen Knoten-Information heißt repräsentativer Knoten; er managt die Informationen des korrespondierenden internen Knoten (vgl. Fig. 4 S. 319)
+		* Evtl.: "notification of change information": wird vom repräsentativen Knoten des höchsten Knoten in der Baumstruktur ausgeführt, der von der Änderung betroffen ist 
+		* Evtl.: "secession request": wird an den repräsentativen Knoten des niedrigsten internen Knoten gesendet, an dem der ausscheidende Knoten hängt (S. 319)
 
 		* remove functions
 		* Evtl. Klasse BPlusLeaf anpassen, sodass bei Overflow neues BPlusTree-Objekt erzeugt wird
+		* Physische Daten in die Blätter 
+		* next pointer richtig setzen in Indexknoten
 
-
-
+		
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
