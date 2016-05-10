@@ -79,12 +79,8 @@ void BPlusIndexNode::insert(int k, BPlusNode *leftNode, BPlusNode *rightNode) {
 }
 
 bool BPlusIndexNode::contains(int k) {
-    int index = indexOfKey(k);
-    if (C[index]->contains(k)) {
-        return true;
-    }
-    else if (C[index+1] && keys[index+1]<=k) {
-        return C[index+1]->contains(k);
+    for (int i=0; i<getCount()+1; i++) {
+        return C[i]->contains(k);
     }
     return false;
 }
@@ -128,7 +124,6 @@ void BPlusIndexNode::remove(int k) {
     int count = getCount();
     if (count >= order) {
         // 3. NO -> DONE
-        cout << "Delete operation finished!" << endl;
         return;
     }
     else {
@@ -154,7 +149,7 @@ void BPlusIndexNode::remove(int k) {
                 BPlusNode *parent = getParent();
                 int *parentKeys = parent->getKeys();
                 int index = 0;
-                cout << "\nOld parent keys (index node):";
+                cout << "\nParent's old keys (index node):";
                 for (int i=0; i<parent->getCount(); i++) {
                     cout << " " << parentKeys[i];
                 }
@@ -168,7 +163,7 @@ void BPlusIndexNode::remove(int k) {
                     }
                 }
                 parentKeys[index] = newParentKey;
-                cout << "\nNew parent keys (index node):";
+                cout << "\nParent's new keys (index node):";
                 for (int i=0; i<parent->getCount(); i++) {
                     cout << " " << parentKeys[i];
                 }

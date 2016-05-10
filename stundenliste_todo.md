@@ -251,10 +251,10 @@ KW 19 (noch 33.5 h)
 		* Evtl.: "notification of change information": wird vom repräsentativen Knoten des höchsten Knoten in der Baumstruktur ausgeführt, der von der Änderung betroffen ist 
 		* Evtl.: "secession request": wird an den repräsentativen Knoten des niedrigsten internen Knoten gesendet, an dem der ausscheidende Knoten hängt (S. 319)
 
-		* remove functions
+		* remove function BPlusIndexNode fertig
 		* Evtl. Klasse BPlusLeaf anpassen, sodass bei Overflow neues BPlusTree-Objekt erzeugt wird
-		* Physische Daten in die Blätter 
-		* next pointer richtig setzen in Indexknoten
+		* Physische Daten in die Blätter
+		* contains function BPlusIndexNode fertig
 
 		
 ## TODO Ausarbeitung 

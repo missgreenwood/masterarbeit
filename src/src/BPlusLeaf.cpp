@@ -85,7 +85,7 @@ void BPlusLeaf::remove(int k) {
                 BPlusNode *parent = getParent();
                 int *parentKeys = parent->getKeys();
                 int index=0;
-                cout << "\nOld parent keys:";
+                cout << "\nParent's old keys:";
                 for (int i=0; i<parent->getCount(); i++) {
                     cout << " " << parentKeys[i];
                 }
@@ -97,7 +97,7 @@ void BPlusLeaf::remove(int k) {
                     }
                 }
                 parentKeys[index] = newKey;
-                cout << "New parent keys:";
+                cout << "Parent's new keys:";
                 for (int i=0; i<parent->getCount(); i++) {
                     cout << " " << parentKeys[i];
                 }

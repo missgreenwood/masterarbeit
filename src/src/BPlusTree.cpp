@@ -60,7 +60,7 @@ void BPlusTree::remove(int k) {
     else if (!contains(k)) {
         cout << "Key " << k << " is not present in tree";
         return;
-    }
+    } 
     else {
         // Find leaf where k is placed in
         BPlusNode *target = search(k);
