@@ -79,10 +79,19 @@ void BPlusIndexNode::insert(int k, BPlusNode *leftNode, BPlusNode *rightNode) {
 }
 
 bool BPlusIndexNode::contains(int k) {
-    for (int i=0; i<getCount()+1; i++) {
+    int i=0;
+    while (keys[i]<k && i<getCount()-1) {
+        i++;
+    }
+    // cout << "\nSearching for key " << k <<", Index: " << i;
+    
+    if (k<keys[i]) {
         return C[i]->contains(k);
     }
-    return false;
+    else if (k>=keys[i] && (C[i+1])) {
+        return C[i+1]->contains(k);
+    }
+    else return false; 
 }
 
 void BPlusIndexNode::remove(int k) {

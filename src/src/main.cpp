@@ -282,42 +282,72 @@ int main(int argc, const char *argv[]) {
     l1.traverse(); 
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
-    cout << "\n\nInsert keys into b2: 1, 2, 5, 6, 9, 10, 11, 3, 12, 13\n";
+    cout << "\n\nInsert keys into b2: 1, 2, 5, 6, 9, 3, 4, 10, 11, 12\n";
     b3.insert(1);
     b3.insert(2);
     b3.insert(5);
     b3.insert(6);
     b3.insert(9);
+    b3.insert(3);
+    b3.insert(4);
     b3.insert(10);
     b3.insert(11);
-    b3.insert(3);
-    b3.insert(12);
-    b3.insert(13);
+    b3.insert(12); 
     cout << "Traverse b3: ";
     b3.traverse();
-    cout << "\nSearch for existing keys 2 and 3 in b3: ";
+    cout << "\nSearch for existing keys 1, 2, 5, 6, 9 in b3: ";
+    if (b3.contains(1)) {
+        cout << "\nb3 contains key 1 ";
+    }
+    else {
+        cout << "\nKey 1 not present in b3 ";
+    }
     if (b3.contains(2)) {
         cout << "\nb3 contains key 2 ";
     }
     else {
         cout << "\nKey 2 not present in b3 ";
     }
-    if (b3.contains(3)) {
-        cout << "\nb3 contains key 3 ";
+    if (b3.contains(5)) {
+        cout << "\nb3 contains key 5 ";
     }
     else {
-        cout << "\nKey 3 not present in b3 ";
+        cout << "\nKey 5 not present in b3 ";
     }
-    cout << "\nSearch for non existing key 23 in b3: ";
+    if (b3.contains(6)) {
+        cout << "\nb3 contains key 6 ";
+    }
+    else {
+        cout << "\nKey 6 not present in b3 ";
+    }
+    if (b3.contains(9)) {
+        cout << "\nb3 contains key 9 ";
+    }
+    else {
+        cout << "\nKey 9 not present in b3 ";
+    }
+    cout << "\nSearch for non existing key 8 in b3: ";
+    if (b3.contains(8)) {
+        cout << "\nError - b3 does not contain key 8, but it is said to be there ";
+    }
+    else {
+        cout << "\nKey 8 not present in b3 ";
+    }
+    cout << "\nSearch for non existing key 0 in b3: ";
+    if (b3.contains(0)) {
+        cout << "\nError - b3 does not contain key 0, but it is said to be there ";
+    }
+    else {
+        cout << "\nKey 0 not present in b3 ";
+    }cout << "\nSearch for non existing key 23 in b3: ";
     if (b3.contains(23)) {
-        cout << "Error - b3 does not contain key 23, but it is said to be there ";
+        cout << "\nError - b3 does not contain key 23, but it is said to be there ";
     }
     else {
-        cout << "Key 23 not present in b3 ";
-    } 
-    cout << "\n\nRemove key 5 from b3: ";
+        cout << "\nKey 23 not present in b3 ";
+    }
+    /* cout << "\n\nRemove key 5 from b3: ";
     b3.remove(5);
-    cout << endl; 
     b3.traverse();
     cout << "\n\nRemove key 6 from b3: ";
     b3.remove(6);
@@ -327,7 +357,7 @@ int main(int argc, const char *argv[]) {
     b3.traverse();
     cout << "\n\nRemove key 2 from b3: ";
     b3.remove(2);
-    b3.traverse();
+    b3.traverse(); */
     cout << endl;
     return 0;
 }

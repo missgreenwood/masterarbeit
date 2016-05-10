@@ -73,11 +73,13 @@ void BPlusTree::remove(int k) {
 }
 
 bool BPlusTree::contains(int k) {
+    
     // If tree is empty return false
     if (root == NULL) {
         cout << "Tree is empty!";
         return false;
     }
+    
     else {
         return root->contains(k);
     }
