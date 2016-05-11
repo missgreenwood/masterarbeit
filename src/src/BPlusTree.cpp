@@ -52,11 +52,12 @@ void BPlusTree::insert(int k) {
 
 void BPlusTree::remove(int k) {
     
-    // Check if root is empty or k is not present in tree
+    // Check if root is empty
     if (root == NULL) {
         cout << "Tree is empty!";
         return;
     }
+    
     else if (!contains(k)) {
         cout << "Key " << k << " is not present in tree";
         return;

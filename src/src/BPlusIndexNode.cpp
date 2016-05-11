@@ -83,7 +83,6 @@ bool BPlusIndexNode::contains(int k) {
     while (keys[i]<k && i<getCount()-1) {
         i++;
     }
-    // cout << "\nSearching for key " << k <<", Index: " << i;
     
     if (k<keys[i]) {
         return C[i]->contains(k);
@@ -119,76 +118,80 @@ void BPlusIndexNode::remove(int k) {
         C[i] = C[i+1];
     }
     
-    // Update count
-    decrement();
-    
-    cout << "\nParent's new keys:";
-    for (int i=0; i<getCount(); i++) {
-        cout << " " << keys[i];
-    }
-    cout << endl;
-    
-    // 2. UNDERFLOW?
+    BPlusNode *parent = getParent();
     int order = getOrder();
-    int count = getCount();
-    if (count >= order) {
-        // 3. NO -> DONE
-        return;
+    int count;
+    int min;
+    if (parent) {
+        min = order;
     }
     else {
-        // 4. YES -> ROOT?
-        // 5. YES -> Collapse root -> DONE
-        if (getParent() == NULL) {
+        min = 1;
+    }
+    
+    // NON ROOT
+    if (min>1) {
+        decrement();
+        count = getCount();
+        
+        // NO UNDERFLOW
+        if (count >= min) {
+            cout << "\nParent's new keys:";
+            for (int i=0; i<getCount(); i++) {
+                cout << " " << keys[i];
+            }
             return;
         }
+        
+        // UNDERFLOW
         else {
-            // 6. NO -> Check neighbors -> MINIMAL?
+      
+            // TODO
+            // 6. Check neighbors -> MINIMAL?
             // 7. NO -> Borrow from neighbor -> DONE
-            if((prev) && (getPrev()->getCount() > order)) {
-                cout << "Borrowing key from previous index node";
+            
+            if ((prev) && (prev->getCount() > order)) {
+                cout << "Underflow in parent - borrowing key from previous index node";
                 int *prevKeys = prev->getKeys();
-                for (int i=1; i<=getCount(); i++) {
-                    keys[i] = keys[i-1];
-                }
-                int newKey = prevKeys[prev->getCount()-1];
-                keys[0] = newKey;
-                int newParentKey = prevKeys[prev->getCount()-2];
-                increment();
-                prev->decrement();
-                BPlusNode *parent = getParent();
-                int *parentKeys = parent->getKeys();
-                int index = 0;
-                cout << "\nParent's old keys (index node):";
-                for (int i=0; i<parent->getCount(); i++) {
-                    cout << " " << parentKeys[i];
-                }
-                cout << endl;
                 
-                // get index in parent keys
-                for (int i=0; i<-parent->getCount(); i++) {
-                    if (parentKeys[i] > newKey) {
-                        index=i;
-                        break;
-                    }
-                }
-                parentKeys[index] = newParentKey;
-                cout << "\nParent's new keys (index node):";
-                for (int i=0; i<parent->getCount(); i++) {
-                    cout << " " << parentKeys[i];
-                }
-                cout << endl;
-                return;
+                // Shift own keys and retrieve biggest key from previous
             }
+            // 8. YES -> Merge with neighbor
+            // 9. Unwind to parent node
+            // Continue steps 1. - 9. as long as neccessary
+        
+      
+            return;
+            
+        }
+    }
+    
+    // ROOT
+    else if (min==1) {
+        count = getCount()-1;
+        
+        // NO UNDERFLOW
+        if (count >= min) {
+            decrement();
+            cout << "\nParent's new keys:";
+            for (int i=0; i<getCount(); i++) {
+                cout << " " << keys[i];
+            }
+            return;
+        }
+        
+        // UNDERFLOW
+        else {
+            // COLLAPSE ROOT -> DONE
+            decrement();
+            cout << "\nParent's new keys:";
+            for (int i=0; i<getCount(); i++) {
+                cout << " " << keys[i];
+            }
+            return;
         }
     }
 }
-    
-    
-    //
-    // 8.                 YES -> Merge with neighbor
-    // 9. Unwind to parent node
-    // Continue steps 1. - 9. as long as neccessary
-
 
 BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right, int &middle) {
     assert(getCount() == getMax());

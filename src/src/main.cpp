@@ -233,13 +233,15 @@ int main(int argc, const char *argv[]) {
     l1.traverse(); 
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
-    cout << "\n\nInsert keys into b2: 1, 4, 7, 10, 17, 25\n";
+    cout << "\n\nInsert keys into b2: 1, 4, 7, 10, 17, 25, 2, 8\n";
     b3.insert(1);
     b3.insert(4);
     b3.insert(7);
     b3.insert(10);
     b3.insert(17);
     b3.insert(25);
+    b3.insert(2);
+    b3.insert(8);
     cout << "Traverse b3: ";
     b3.traverse();
     cout << "\nSearch for existing keys 1, 4, 7, 10 in b3: ";
@@ -309,9 +311,118 @@ int main(int argc, const char *argv[]) {
     cout << "\nRight child's keys:";
     BPlusNode *leaf3 = b3.search(25);
     int *RightChildKeys = leaf3->getKeys();
-    for (int i=0; i<leaf2->getCount(); i++) {
+    for (int i=0; i<leaf3->getCount(); i++) {
         cout << " " << RightChildKeys[i];
     }
+    
+    cout << "\n\nCheck remove function:" << endl << endl;
+    cout << "CASE 1 - Try to remove non existing key (3): ";
+    b3.remove(3);
+    
+    cout << "\n\nCASE 2 - Remove from leaf, no underflow (1):";
+    b3.remove(1);
+    cout << "\nRoot's keys:";
+    for (int i=0; i<b3.root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    cout << "\nLeft child's keys:";
+    leaf1 = b3.search(2);
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nMiddle child's keys:";
+    leaf2 = b3.search(8);
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << MiddleChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    for (int i=0; i<leaf3->getCount(); i++) {
+        cout << " " << RightChildKeys[i];
+    }
+    cout << endl;
+    b3.traverse();
+    
+    cout << "\n\nCASE 3a - Underflow, borrow from previous sibling (17):\n";
+    b3.remove(17);
+    cout << "Left child's keys:";
+    leaf1 = b3.search(2);
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nMiddle child's keys:";
+    leaf2 = b3.search(8);
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << MiddleChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    for (int i=0; i<leaf3->getCount(); i++) {
+        cout << " " << RightChildKeys[i];
+    }
+    cout << endl;
+    b3.traverse();
+    
+    cout << "\n\nInsert key 11 into b3: ";
+    b3.insert(11);
+    b3.traverse();
+    
+    cout << "\n\nCASE 3b - Underflow, borrow from next sibling (8):\n";
+    b3.remove(8);
+    cout << "Left child's keys:";
+    leaf1 = b3.search(2);
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nMiddle child's keys:";
+    leaf2 = b3.search(10);
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << MiddleChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    leaf3 = b3.search(25);
+    for (int i=0; i<leaf3->getCount(); i++) {
+        cout << " " << RightChildKeys[i];
+    }
+    cout << endl;
+    b3.traverse();
+    
+    cout << "\n\nCASE 4a - Underflow, merge with previous sibling (10):\n";
+    b3.remove(10);
+    cout << "\nLeft child's keys:";
+    leaf1 = b3.search(2);
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    leaf2 = b3.search(25);
+    int *rightChildKeys = leaf2->getKeys();
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << rightChildKeys[i];
+    }
+    cout << endl;
+    b3.traverse();
+    cout << "\n\nInsert key 12 into b3: ";
+    b3.insert(12);
+    b3.traverse();
+    cout << "\n\nCASE 4b - Underflow, merge with next sibling (4, 7):\n";
+    b3.remove(4);
+    b3.remove(7);
+    cout << "Left child's keys:";
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << rightChildKeys[i];
+    }
+    cout << endl;
+    b3.traverse();
+    
+    cout << "\n\nCASE 5 - Underflow in parent, parent is root (12):\n";
+    b3.remove(12);
+    cout << endl;
+    b3.traverse();
+    
+    cout << "\n\nCASE 6a - Underflow in parent, borrow from previous index node ():\n ";
     cout << endl;
     return 0;
 }
