@@ -228,10 +228,10 @@ KW 18 (25.5 h)
 * So, 08.05. (5 h)
 
 
-KW 19 (noch 20.75 h)
+KW 19 (noch 18.25 h)
 * Mo, 09.05. (5 h)
 * Di, 10.05. (6 h)
-* Mi, 11.05. (6.75 h, 21:25 - )
+* Mi, 11.05. (9.25)
 
 
 ## TODO
@@ -253,9 +253,8 @@ KW 19 (noch 20.75 h)
 		* Evtl.: "secession request": wird an den repräsentativen Knoten des niedrigsten internen Knoten gesendet, an dem der ausscheidende Knoten hängt (S. 319)
 
 		* remove function BPlusIndexNode fertig
-		* Evtl. Klasse BPlusLeaf anpassen, sodass bei Overflow neues BPlusTree-Objekt erzeugt wird
 		* Physische Daten in die Blätter
-		* contains function BPlusIndexNode fertig
+		* Children-array von BPlusLeaf-Instanzen mit NULL initialisieren 
 
 		
 ## TODO Ausarbeitung 

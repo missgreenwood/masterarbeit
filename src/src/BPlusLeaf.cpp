@@ -154,7 +154,7 @@ void BPlusLeaf::remove(int k) {
                     cout << "merge with previous" << endl;
                     BPlusNode *prev = getPrev();
                     int *prevKeys = prev->getKeys();
-                    cout << "\nPrevious's old keys:";
+                    cout << "Previous's old keys:";
                     int prevCount = prev->getCount();
                     for (int i=0; i<prevCount; i++) {
                         cout << " " << prevKeys[i];

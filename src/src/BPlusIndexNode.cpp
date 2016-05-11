@@ -122,20 +122,20 @@ void BPlusIndexNode::remove(int k) {
     int order = getOrder();
     int count;
     int min;
-    if (parent) {
-        min = order;
+    if (!parent) {
+        min = 1;
     }
     else {
-        min = 1;
+        min = order;
     }
     
     // NON ROOT
     if (min>1) {
         decrement();
         count = getCount();
-        
+        order = 1;
         // NO UNDERFLOW
-        if (count >= min) {
+        if (count >= order) {
             cout << "\nParent's new keys:";
             for (int i=0; i<getCount(); i++) {
                 cout << " " << keys[i];
@@ -149,12 +149,43 @@ void BPlusIndexNode::remove(int k) {
             // TODO
             // 6. Check neighbors -> MINIMAL?
             // 7. NO -> Borrow from neighbor -> DONE
-            
             if ((prev) && (prev->getCount() > order)) {
-                cout << "Underflow in parent - borrowing key from previous index node";
-                int *prevKeys = prev->getKeys();
+                cout << "\nUnderflow in parent - borrowing child from previous index node";
+                increment();
                 
-                // Shift own keys and retrieve biggest key from previous
+                // Shift own children and get previous's rightmost child
+                for (int i=getCount(); i>0; i--) {
+                    C[i] = C[i-1];
+                }
+                
+                C[0] = prev->C[prev->getCount()];
+                
+                // Insert my rightmost child's biggest key
+                int newKey = C[getCount()]->getKeys()[0];
+                keys[0] = newKey;
+                
+                // Decrement previous's keys
+                prev->decrement();
+                
+                cout << "\nParent's new keys:";
+                for (int i=0; i<parent->getCount(); i++) {
+                    cout << " " << keys[i];
+                }
+                cout << endl;
+                
+                
+                // AUSKOMMENTIEREN!
+                return;
+            }
+            
+            else if ((next) && next->getCount() > order) {
+                cout << "Underflow in parent - borrowing key from next index node";
+                int *nextKeys = next->getKeys();
+                increment();
+                
+                // Retrieve smallest key from next
+                int newKey = nextKeys[0];
+                
             }
             // 8. YES -> Merge with neighbor
             // 9. Unwind to parent node
@@ -170,7 +201,7 @@ void BPlusIndexNode::remove(int k) {
     else if (min==1) {
         count = getCount()-1;
         
-        // NO UNDERFLOW
+        // NO UNDERFLOW -> DONE
         if (count >= min) {
             decrement();
             cout << "\nParent's new keys:";

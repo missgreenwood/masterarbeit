@@ -10,9 +10,11 @@
 
 class BPlusIndexNode : public BPlusNode {
 private:
-    BPlusNode **C;
+    // BPlusNode **C;
 
 public:
+    // BPlusIndexNode *prev;
+    // BPlusIndexNode *next;
     BPlusIndexNode(int t);
     ~BPlusIndexNode();
     BPlusNode *search(int k);

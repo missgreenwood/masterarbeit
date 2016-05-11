@@ -233,7 +233,7 @@ int main(int argc, const char *argv[]) {
     l1.traverse(); 
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
-    cout << "\n\nInsert keys into b2: 1, 4, 7, 10, 17, 25, 2, 8\n";
+    cout << "\n\nInsert keys into b3: 1, 4, 7, 10, 17, 25, 2, 8\n";
     b3.insert(1);
     b3.insert(4);
     b3.insert(7);
@@ -422,7 +422,62 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b3.traverse();
     
-    cout << "\n\nCASE 6a - Underflow in parent, borrow from previous index node ():\n ";
+    cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b2)";
+    BPlusTree b2(2);
+    cout << "\nInsert keys into b2: 1, 3, 4, 5, 6, 7, 8, 26, 2, 11, 25\n";
+    b2.insert(1);
+    b2.insert(3);
+    b2.insert(4);
+    b2.insert(5);
+    b2.insert(6);
+    b2.insert(7);
+    b2.insert(8);
+    b2.insert(26);
+    b2.insert(2);
+    b2.insert(11);
+    b2.insert(25);
+    b2.traverse();
+    rootKeys = b3.root->getKeys();
+    cout << "\nRoot's keys:";
+    for (int i=0; i<b2.root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    leaf1 = b2.search(3);
+    leaf2 = b2.search(5);
+    leaf3 = b2.search(7);
+    BPlusNode *leaf4 = b2.search(11);
+    BPlusNode *leaf5 = b2.search(26);
+    BPlusNode *leftIndex = leaf1->getParent();
+    int *leftIndexKeys = leftIndex->getKeys();
+    BPlusNode *rightIndex = leaf5->getParent();
+    int *rightIndexKeys = rightIndex->getKeys();
+    cout << "\nLeft index node's keys:";
+    for (int i=0; i<leftIndex->getCount(); i++) {
+        cout << " " << leftIndexKeys[i];
+    }
+    cout << "\nRight index node's keys:";
+    for (int i=0; i<rightIndex->getCount(); i++) {
+        cout << " " << rightIndexKeys[i];
+    }
+    cout << "\n\nCASE 6a - Underflow in parent, borrow from previous index node (25):\n";
+    b2.remove(25);
+    rightIndex = leaf4->getParent();
+    cout << "Root's keys:";
+    for (int i=0; i<b2.root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    cout << "\nLeft index node's keys:";
+    for (int i=0; i<leftIndex->getCount(); i++) {
+        cout << " " << leftIndexKeys[i];
+    }
+    leaf4 = b3.search(26);
+    rightIndex = leaf4->getParent(); 
+    cout << "\nRight index node's keys:";
+    for (int i=0; i<rightIndex->getCount(); i++) {
+        cout << " " << rightIndexKeys[i];
+    }
+    cout << endl;
+    b2.traverse();
     cout << endl;
     return 0;
 }

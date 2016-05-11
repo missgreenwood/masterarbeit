@@ -17,6 +17,7 @@ private:
 public:
     BPlusNode *next;
     BPlusNode *prev;
+    BPlusNode **C;          // Array of children
     int *keys;              // Array of keys
     BPlusNode(int _t);
     virtual ~BPlusNode();
