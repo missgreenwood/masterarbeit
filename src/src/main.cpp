@@ -200,50 +200,6 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BPlusTree
     cout << "\nCLASS BPlusTree";
     cout << "\n----------------\n\n";
-    cout << "Create instance of BPlusTree with degree 3 (b2)";
-    BPlusTree b2(3);
-    cout << "\n\nInsert keys into b2: 1, 3, 7, 10, 11, 13, 14, 15, 18, 16, 19, 24, 25, 26, 21, 4, 5, 20, 22, 2, 17, 12, 6";
-    b2.insert(1);
-    b2.insert(3);
-    b2.insert(7);
-    b2.insert(10);
-    b2.insert(11);
-    b2.insert(13);
-    b2.insert(14);
-    b2.insert(15);
-    b2.insert(18);
-    b2.insert(16);
-    b2.insert(19);
-    b2.insert(24);
-    b2.insert(25);
-    b2.insert(26);
-    b2.insert(21);
-    b2.insert(4);
-    b2.insert(5);
-    b2.insert(20);
-    b2.insert(22);
-    b2.insert(2);
-    b2.insert(17);
-    b2.insert(12);
-    b2.insert(6);
-    cout << "\nTraverse b2: ";
-    b2.traverse();
-    cout << "\nSearch for existing key 10 in b2: ";
-    if (b2.contains(10)) {
-        cout << "Key 10 is present in b2";
-    }
-    else {
-        cout << "Error! Key 10 should be present in b2";
-    }
-    cout << "\nSearch for non existing key 23 in b2: ";
-    if (b2.contains(23)) {
-        cout << "Error! Key 23 should not be present in b2";
-    }
-    else {
-        cout << "Key 23 is not present in b2";
-    }
-    cout << "\n\nTry to remove non existing key 23 from b2: ";
-    b2.remove(23);
     cout << "\n\nCreate leaf with minimum degree 3/max. elements 5 (l1)";
     BPlusLeaf l1(3);
     cout << "\n\nInsert keys into l1: 1, 3, 7, 8, 9";
@@ -254,84 +210,69 @@ int main(int argc, const char *argv[]) {
     l1.insert(9);
     cout << "\nTraverse l1:";
     l1.traverse();
-    cout << "\nCheck index function:" << endl;
+    cout << "\n\nCheck index function:" << endl;
     int *keys = l1.getKeys();
     for (int i=0; i<l1.getCount(); i++) {
         cout << "Key: " << keys[i] << ", index: " << l1.indexOfKey(keys[i]) << endl; 
     }
-    cout << "\nTry to remove non existing key 23 from l1:";
+    cout << "\nCheck remove function for leaf:";
+    cout << "\n\nTry to remove non existing key 23 from l1:\n";
     l1.remove(23);
-    cout << "\n\nTraverse l1: ";
-    l1.traverse();
-    cout << "\n\nRemove key 1 from l1";
+    cout << "\n\nRemove key 1 from l1:\n";
     l1.remove(1);
-    cout << "\nTraverse l1: ";
     l1.traverse();
-    cout << "\n\nRemove keys 3 and 7 from l1";
+    cout << "\n\nRemove keys 3 and 7 from l1:\n";
     l1.remove(3);
     l1.remove(7);
-    cout << "\nTraverse l1:";
     l1.traverse();
-    cout << "\n\nRemove key 8 from l1, should not create underflow: ";
+    cout << "\n\nRemove key 8 from l1, should not create underflow:\n";
     l1.remove(8);
-    cout << "\nTraverse l1:";
     l1.traverse();
-    cout << "\n\nRemove last remaining key 9 from l1, should not create underflow: ";
+    cout << "\n\nRemove last remaining key 9 from l1, should not create underflow:\n";
     l1.remove(9);
-    cout << "\nTraverse l1:";
     l1.traverse(); 
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
-    cout << "\n\nInsert keys into b2: 1, 2, 5, 6, 9, 3, 4, 10, 11, 12\n";
+    cout << "\n\nInsert keys into b2: 1, 4, 7, 10, 17, 25\n";
     b3.insert(1);
-    b3.insert(2);
-    b3.insert(5);
-    b3.insert(6);
-    b3.insert(9);
-    b3.insert(3);
     b3.insert(4);
+    b3.insert(7);
     b3.insert(10);
-    b3.insert(11);
-    b3.insert(12); 
+    b3.insert(17);
+    b3.insert(25);
     cout << "Traverse b3: ";
     b3.traverse();
-    cout << "\nSearch for existing keys 1, 2, 5, 6, 9 in b3: ";
+    cout << "\nSearch for existing keys 1, 4, 7, 10 in b3: ";
     if (b3.contains(1)) {
         cout << "\nb3 contains key 1 ";
     }
     else {
         cout << "\nKey 1 not present in b3 ";
     }
-    if (b3.contains(2)) {
-        cout << "\nb3 contains key 2 ";
+    if (b3.contains(4)) {
+        cout << "\nb3 contains key 4 ";
     }
     else {
-        cout << "\nKey 2 not present in b3 ";
+        cout << "\nKey 4 not present in b3 ";
     }
+    if (b3.contains(7)) {
+        cout << "\nb3 contains key 7 ";
+    }
+    else {
+        cout << "\nKey 7 not present in b3 ";
+    }
+    if (b3.contains(10)) {
+        cout << "\nb3 contains key 10 ";
+    }
+    else {
+        cout << "\nKey 10 not present in b3 ";
+    }
+    cout << "\nSearch for non existing key 5 in b3: ";
     if (b3.contains(5)) {
-        cout << "\nb3 contains key 5 ";
+        cout << "\nError - b3 does not contain key 5, but it is said to be there ";
     }
     else {
         cout << "\nKey 5 not present in b3 ";
-    }
-    if (b3.contains(6)) {
-        cout << "\nb3 contains key 6 ";
-    }
-    else {
-        cout << "\nKey 6 not present in b3 ";
-    }
-    if (b3.contains(9)) {
-        cout << "\nb3 contains key 9 ";
-    }
-    else {
-        cout << "\nKey 9 not present in b3 ";
-    }
-    cout << "\nSearch for non existing key 8 in b3: ";
-    if (b3.contains(8)) {
-        cout << "\nError - b3 does not contain key 8, but it is said to be there ";
-    }
-    else {
-        cout << "\nKey 8 not present in b3 ";
     }
     cout << "\nSearch for non existing key 0 in b3: ";
     if (b3.contains(0)) {
@@ -346,18 +287,31 @@ int main(int argc, const char *argv[]) {
     else {
         cout << "\nKey 23 not present in b3 ";
     }
-    /* cout << "\n\nRemove key 5 from b3: ";
-    b3.remove(5);
-    b3.traverse();
-    cout << "\n\nRemove key 6 from b3: ";
-    b3.remove(6);
-    b3.traverse();
-    cout << "\n\nRemove key 1 from b3: ";
-    b3.remove(1);
-    b3.traverse();
-    cout << "\n\nRemove key 2 from b3: ";
-    b3.remove(2);
-    b3.traverse(); */
+    
+    cout << "\n\nCheck correct tree construction:" << endl;
+    cout << "Root's keys:";
+    int *rootKeys = b3.root->getKeys();
+    for (int i=0; i<b3.root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    cout << "\nLeft child's keys:";
+    BPlusNode *leaf1 = b3.search(1);
+    int *leftChildKeys = leaf1->getKeys();
+    for (int i=0; i<leaf1->getCount(); i++) {
+        cout << " " << leftChildKeys[i];
+    }
+    cout << "\nMiddle child's keys:";
+    BPlusNode *leaf2 = b3.search(10);
+    int *MiddleChildKeys = leaf2->getKeys();
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << MiddleChildKeys[i];
+    }
+    cout << "\nRight child's keys:";
+    BPlusNode *leaf3 = b3.search(25);
+    int *RightChildKeys = leaf3->getKeys();
+    for (int i=0; i<leaf2->getCount(); i++) {
+        cout << " " << RightChildKeys[i];
+    }
     cout << endl;
     return 0;
 }

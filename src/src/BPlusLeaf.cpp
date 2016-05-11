@@ -168,8 +168,12 @@ void BPlusLeaf::remove(int k) {
                         cout << " " << prevKeys[i];
                     }
                     
-                    // Update sibling pointer
-                    prev->setNext(getNext());
+                    // Update sibling pointers
+                    if (next) {
+                        next->setPrev(prev);
+                        prev->setNext(next);
+                    }
+                    else prev->setNext(NULL);
                     
                     // 9. Unwind to parent node
                     BPlusNode *parent = getParent();
@@ -203,8 +207,9 @@ void BPlusLeaf::remove(int k) {
                     }
                     cout << endl;
                     
-                    // Update sibling pointer
-                    setNext(next->getNext());
+                    // Update sibling pointers
+                    setNext(next->next);
+                    next->setPrev(this);
                     
                     // 9. Unwind to parent node
                     getParent()->remove(k);
@@ -214,8 +219,6 @@ void BPlusLeaf::remove(int k) {
     }
     return; 
 }
-
-// Continue steps 1. - 9. as long as neccessary
 
 BPlusNode * BPlusLeaf::search(int k) {
     return this;
@@ -249,9 +252,6 @@ BPlusLeaf * BPlusLeaf::split(int k) {
         newNodeKeys[i-half] = merged[i];
         l->increment();
     }
-    
-    // BPlusNode *next = getNext();
-    // BPlusNode *prev = getPrev();
     
     // Update sibling pointers
     if (keys[0] < newNodeKeys[0]) {

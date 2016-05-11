@@ -3,6 +3,8 @@
 
 #include "BPlusNode.hpp"
 
+using namespace std;
+
 
 BPlusNode::BPlusNode(int _t): t(_t), n(0) {
     parent = NULL;
@@ -57,7 +59,7 @@ int BPlusNode::indexOfKey(int k) {
     if (n == 0) {
         return 0;
     }
-    int i = 0;
+    int i=0;
     while (i<n && keys[i]<k) {
         i++;
     }
