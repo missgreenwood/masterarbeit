@@ -461,8 +461,7 @@ int main(int argc, const char *argv[]) {
     }
     cout << "\n\nCASE 6a - Underflow in parent, borrow from previous index node (25):\n";
     b2.remove(25);
-    rightIndex = leaf4->getParent();
-    cout << "Root's keys:";
+    cout << "\nRoot's keys:";
     for (int i=0; i<b2.root->getCount(); i++) {
         cout << " " << rootKeys[i];
     }
@@ -470,8 +469,7 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<leftIndex->getCount(); i++) {
         cout << " " << leftIndexKeys[i];
     }
-    leaf4 = b3.search(26);
-    rightIndex = leaf4->getParent(); 
+    rightIndex = leaf5->getParent();
     cout << "\nRight index node's keys:";
     for (int i=0; i<rightIndex->getCount(); i++) {
         cout << " " << rightIndexKeys[i];
@@ -479,5 +477,43 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b2.traverse();
     cout << endl;
+    
+    cout << "\nInsert keys into into b2: 9, 27\n";
+    b2.insert(9);
+    b2.insert(27);
+    b2.traverse();
+    
+    cout << "\n\nCASE 6b - Underflow in parent, borrow from next index node (4, 5):\n";
+    b2.remove(4);
+    b2.remove(5);
+    cout << "\nRoot's keys:";
+    for (int i=0; i<b2.root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    cout << "\nLeft index node's keys:";
+    for (int i=0; i<leftIndex->getCount(); i++) {
+        cout << " " << leftIndexKeys[i];
+    }
+    leaf5 = b2.search(27); 
+    rightIndex = leaf5->getParent();
+    cout << "\nRight index node's keys:";
+    for (int i=0; i<rightIndex->getCount(); i++) {
+        cout << " " << rightIndexKeys[i];
+    }
+    cout << endl;
+    b2.traverse();
+    
+    /* cout << "\n\nCASE 7a - Underflow in parent, merge parent with previous index node (11, 26):\n";
+    b2.remove(11);
+    b2.remove(26);
+    cout << endl;
+    b2.traverse(); */
+    
+    cout << "\n\nCASE 7b - Underflow in parent, merge parent with next index node (3, 6):\n";
+    b2.remove(3);
+    b2.remove(6); 
+    cout << endl;
+    b2.traverse();
+    cout << endl; 
     return 0;
 }
