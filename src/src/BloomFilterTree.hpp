@@ -1,28 +1,39 @@
 //  bloom_filter_tree.hpp, Judith Greif
-//  Description: Header for classes BloomFilterNode, BloomFilterTree
+//  Description: Header for class BloomFilterTree
+
+//  Properties (same as B+Tree):
+//  * All leaves at same level
+//  * Defined by minimum degree t
+//  * Every node has at least 2t keys
+//  * Every node has keys+1 children
+//  * Keys are sorted in increasing order
+//  * Grows from root
+//  * Child between keys k1 and k2 contains all keys >= k1 and < k2
+//  * All keys are also stored in leaves
+
+//  Properties (different from B+Tree):
+//  * Bloom filters are data sets
+//  * Each has pointers to n data sets
+//  * No remove function
+
 
 #ifndef BloomFilterTree_hpp
 #define BloomFilterTree_hpp
 
-#include <iostream>
 #include "BloomFilterNode.hpp"
+#include "BloomFilterIndexNode.hpp"
+#include "BloomFilterLeaf.hpp"
+#include "BloomFilterVec.hpp"
+
 
 using namespace std;
 
 
-// BloomFilterNode - Bloom filter in a B-Tree
-// Differences from normal B-Tree:
-//  * Only logical nodes
-//  * The leaves hold the IDs of all physical nodes -> each internal key is also stored in leaf
-//  * Leaves have pointers to physical nodes
-
-
-// BloomFilterTree
 class BloomFilterTree {
     
 private:
     BloomFilterNode *root;      // Pointer to root node
-    int t;                      // Minimum degree
+    int t;                      // Order = minimum degree
     BloomFilterVec *filtersvec; // Associated Bloom filter vector
     
 public:
@@ -30,23 +41,31 @@ public:
     // Initializes tree as empty
     BloomFilterTree(int _t);
     
-    // TODO: Constructor with parameters t and *filtersvec
+    // TODO
+    // Constructor with parameters t and *filtersvec
     // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
+    BloomFilterTree(int _t, BloomFilterVec *_f);
     
-    // Traverse tree
+    ~BloomFilterTree();
+    
+    // TODO 
     void traverse();
     
-    // Search key in tree
-    // Return NULL if key is not present
+    // TODO
+    // Return leaf node to place k in
     BloomFilterNode *search(int k);
     
+    // TODO
     // Insert new Bloom filter
-    void insert(BloomFilter *filter); // TODO: Create physical node for inserted key and link to logical node
+    void insert(BloomFilter *filter);
     
-    // Remove key
-    void remove(int k);
- 
+    // TODO
+    // Search key in tree
+    // Return false if key is not present
+    
     friend class BloomFilterNode;
+    friend class BloomFilterIndexNode;
+    friend class BloomFilterLeaf;
 };
 
 #endif

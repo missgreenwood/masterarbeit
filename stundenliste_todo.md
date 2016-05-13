@@ -222,12 +222,12 @@ KW 18 (25.5 h)
 * So, 08.05. (5 h)
 
 
-KW 19 (noch 14.75 h)
+KW 19 (noch 3.5 h)
 * Mo, 09.05. (5 h)
 * Di, 10.05. (6 h)
 * Mi, 11.05. (9.25)
 * Do, 12.05. (3.5 h)
-* Fr, 13.05. 
+* Fr, 13.05. (7.25 h)
 
 
 ## TODO
@@ -248,11 +248,6 @@ KW 19 (noch 14.75 h)
 		* Evtl.: "notification of change information": wird vom repräsentativen Knoten des höchsten Knoten in der Baumstruktur ausgeführt, der von der Änderung betroffen ist 
 		* Evtl.: "secession request": wird an den repräsentativen Knoten des niedrigsten internen Knoten gesendet, an dem der ausscheidende Knoten hängt (S. 319)
 
-		* remove function BPlusIndexNode fertig
-		* Physische Daten in die Blätter
-		* Children-array von BPlusLeaf-Instanzen mit NULL initialisieren 
-
-		
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)

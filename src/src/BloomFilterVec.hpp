@@ -30,6 +30,7 @@ public:
     friend class BloomFilter; 
     friend class BloomFilterNode; 
     friend class BloomFilterTree;
+    friend class BPlusTree;
 };
 
 #endif

@@ -4,37 +4,75 @@
 #include "BloomFilterNode.hpp"
 
 
-// Constructor with parameters t and leaf
-BloomFilterNode::BloomFilterNode(int _t, bool _leaf): t(_t), leaf(_leaf) {
-    
-    // Allocate memory for maximum # of possible keys, child pointers and data of physical nodes
-    // Set maximum # of keys to # of Bloom filters, i.e. m (default)
-    keys = new int[m];
-    C = new BloomFilterNode *[2*t];
-    filtersArr = new int[m];
-    
-    // Initialize # of keys as 0
-    n=0;
-}
-
-// Constructor with parameters t, leaf, # of Bloom filters
-BloomFilterNode::BloomFilterNode(int _t, bool _leaf, int _count) {
-    
-    // Allocate memory for maximum # of possible keys, child pointers and data of physical nodes
-    // Set maximum # of keys to # of Bloom filters
-    keys = new int[_count];
-    C = new BloomFilterNode *[2*t];
-    filtersArr = new int[m];
-    
-    // Initialize # of keys as 0
-    n=0;
+// Constructor with parameter t
+BloomFilterNode::BloomFilterNode(int _t): t(_t), n(0) {
+    parent = NULL;
+    keys = new int[2*_t];
 }
 
 BloomFilterNode::~BloomFilterNode() {
+    delete parent;
     delete[] keys;
-    for (int i=0; i<2*t; i++) {
-        delete C[i];
+}
+
+void BloomFilterNode::shiftAndInsert(int k) {
+    assert(n < getMax());
+    int index = indexOfKey(k);
+    for (int i=n-1; i>=index; i--) {
+        keys[i+1] = keys[i];
     }
-    delete[] C;
-    delete[] filtersArr; 
+    keys[index] = k;
+    increment();
+    return; 
+}
+
+int BloomFilterNode::getOrder() {
+    return t;
+}
+
+int BloomFilterNode::getCount() {
+    return n;
+}
+
+void BloomFilterNode::setCount(int count) {
+    n = count;
+}
+
+BloomFilterNode * BloomFilterNode::getParent() {
+    return parent;
+}
+
+void BloomFilterNode::setParent(BloomFilterNode *node) {
+    parent = node;
+}
+
+void BloomFilterNode::insert(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+    assert(false);
+}
+
+int BloomFilterNode::indexOfKey(int k) {
+    if (n == 0) {
+        return 0;
+    }
+    int i=0;
+    while (i<n && keys[i]<k) {
+        i++;
+    }
+    return i;
+}
+
+int * BloomFilterNode::getKeys() {
+    return keys;
+}
+
+int BloomFilterNode::getMax() {
+    return 2*t;
+}
+
+void BloomFilterNode::increment() {
+    n++;
+}
+
+void BloomFilterNode::decrement() {
+    n--; 
 }

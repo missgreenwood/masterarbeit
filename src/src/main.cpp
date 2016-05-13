@@ -189,18 +189,11 @@ int main(int argc, const char *argv[]) {
     t2.traverse();
     cout << endl << endl << endl;
     
-    // Test driver for class BloomFilterTree
-    cout << "CLASS BloomFilterTree";
-    cout << "\n---------------------\n\n";
-    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n";
-    BloomFilterTree b1(3);
-    
-    // TODO
     
     // Test driver for class BPlusTree
-    cout << "\nCLASS BPlusTree";
+    cout << "CLASS BPlusTree";
     cout << "\n----------------\n\n";
-    cout << "\n\nCreate leaf with minimum degree 3/max. elements 5 (l1)";
+    cout << "Create leaf with minimum degree 3/max. elements 5 (l1)";
     BPlusLeaf l1(3);
     cout << "\n\nInsert keys into l1: 1, 3, 7, 8, 9";
     l1.insert(1);
@@ -445,7 +438,6 @@ int main(int argc, const char *argv[]) {
     leaf1 = b2.search(3);
     leaf2 = b2.search(5);
     leaf3 = b2.search(7);
-    BPlusNode *leaf4 = b2.search(11);
     BPlusNode *leaf5 = b2.search(26);
     BPlusNode *leftIndex = leaf1->getParent();
     int *leftIndexKeys = leftIndex->getKeys();
@@ -514,6 +506,17 @@ int main(int argc, const char *argv[]) {
     b2.remove(6); 
     cout << endl;
     b2.traverse(); */
-    cout << endl; 
+    
+    
+    // Test driver for class BloomFilterTree
+    cout << "\n\n\nCLASS BloomFilterTree";
+    cout << "\n---------------------\n\n";
+    cout << "Create leaf with minimum degree 3/max. elements 5 (l2)\n\n";
+    BloomFilterLeaf l2(3); 
+    cout << "Insert keys into l2: 1, 3, 7, 8, 9\n";
+    cout << "Traverse l2:";
+    l2.traverse();
+    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n";
+    cout << endl;
     return 0;
 }

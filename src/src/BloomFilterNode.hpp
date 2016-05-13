@@ -5,33 +5,35 @@
 #define BloomFilterNode_hpp
 
 #include <iostream>
-#include "BloomFilterVec.hpp"
+#include <assert.h>
 
 class BloomFilterNode {
     
 private:
     int *keys;              // Array of keys
-    int t;                  // Minimum degree
-    BloomFilterNode **C;    // Array of child pointers
+    int t;                  // Order/minimum degree
     int n;                  // Current # of keys
-    bool leaf;
-    int *filtersArr;        // The associated data of this logical node (physical nodes)
-    
+    BloomFilterNode *parent; 
+        
 public:
-    BloomFilterNode(int _t, bool _leaf);
-    BloomFilterNode(int _t, bool _leaf, int _count);
-    ~BloomFilterNode(); 
-    
-    // Function to traverse all nodes in a subtree rooted with this node
-    // Print only keys present in leaf nodes
-    void traverse();
-    
-    // Search key in a subtree rooted with this node
-    // Return NULL if key is not present
-    // Return first occurence if key is present
-    BloomFilterNode *search(int k);
-    
-    friend class BloomFilterTree;
+    BloomFilterNode(int _t);
+    virtual ~BloomFilterNode();
+    virtual void shiftAndInsert(int k);
+    int getOrder();
+    int getCount();
+    void setCount(int count);
+    BloomFilterNode *getParent();
+    void setParent(BloomFilterNode *node);
+    virtual void insert(int k) = 0;
+    virtual BloomFilterNode *search(int k) = 0;
+    virtual void insert(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    int indexOfKey(int k);
+    int *getKeys();
+    virtual void traverse() = 0;
+    virtual bool contains(int k) = 0;
+    int getMax();
+    void increment();
+    void decrement();
 };
 
 #endif 

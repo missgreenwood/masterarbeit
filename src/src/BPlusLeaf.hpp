@@ -15,8 +15,8 @@ public:
     BPlusLeaf(int _t);
     BPlusLeaf(int _t, BPlusLeaf *prev, BPlusLeaf *next);
     ~BPlusLeaf();
-    virtual void insert(int k);
-    virtual void remove(int k);
+    void insert(int k);
+    void remove(int k);
     BPlusNode *search(int k);
     BPlusLeaf *split(int k);
     void traverse();
