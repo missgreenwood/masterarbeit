@@ -53,7 +53,7 @@ BloomFilterLeaf *BloomFilterLeaf::split(int k) {
         merged[i] = keys[i];
     }
     merged[index] = k;
-    for (int i=0; i<max+1; i++) {
+    for (int i=index+1; i<max+1; i++) {
         merged[i] = keys[i-1];
     }
     BloomFilterLeaf *l = new BloomFilterLeaf(getOrder());

@@ -62,6 +62,8 @@ public:
     // Return false if key is not present
     bool contains(int k);
     
+    BloomFilterNode *getRoot(); 
+    
     friend class BloomFilterNode;
     friend class BloomFilterIndexNode;
     friend class BloomFilterLeaf;

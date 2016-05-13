@@ -529,13 +529,17 @@ int main(int argc, const char *argv[]) {
     }
     cout << "\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6 (b1)\n\n";
     BloomFilterTree b1(3);
-    cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25\n"; // 2, 8
+    cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25, 2, 8, 9, 26\n";
     b1.insert(1);
     b1.insert(4);
     b1.insert(7);
     b1.insert(10);
     b1.insert(17);
     b1.insert(25);
+    b1.insert(2);
+    b1.insert(8);
+    b1.insert(9);
+    b1.insert(26);
     cout << "Traverse b1: ";
     b1.traverse();
     cout << endl;

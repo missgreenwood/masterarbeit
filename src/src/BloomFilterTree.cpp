@@ -69,3 +69,7 @@ bool BloomFilterTree::contains(int k) {
         return root->contains(k);
     }
 }
+
+BloomFilterNode * BloomFilterTree::getRoot() {
+    return root; 
+}
