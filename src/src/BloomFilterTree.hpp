@@ -45,23 +45,22 @@ public:
     // Constructor with parameters t and *filtersvec
     // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
     BloomFilterTree(int _t, BloomFilterVec *_f);
-    
     ~BloomFilterTree();
     
-    // TODO 
     void traverse();
     
-    // TODO
-    // Return leaf node to place k in
     BloomFilterNode *search(int k);
     
     // TODO
     // Insert new Bloom filter
     void insert(BloomFilter *filter);
     
+    void insert(int k);
+    
     // TODO
     // Search key in tree
     // Return false if key is not present
+    bool contains(int k);
     
     friend class BloomFilterNode;
     friend class BloomFilterIndexNode;

@@ -513,15 +513,31 @@ int main(int argc, const char *argv[]) {
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
     BloomFilterLeaf l2(3);
-    /* cout << "Insert keys into l2: 1, 3, 7, 8, 9\n";
+    cout << "Insert keys into l2: 1, 3, 7, 8, 9, 11\n";
     l2.insert(1);
     l2.insert(3);
     l2.insert(7);
     l2.insert(8);
     l2.insert(9);
+    l2.insert(11);
     cout << "Traverse l2:";
     l2.traverse();
-    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n"; */
+    cout << "\n\nCheck index function:\n";
+    keys = l2.getKeys();
+    for (int i=0; i<l2.getCount(); i++) {
+        cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
+    }
+    cout << "\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6 (b1)\n\n";
+    BloomFilterTree b1(3);
+    cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25\n"; // 2, 8
+    b1.insert(1);
+    b1.insert(4);
+    b1.insert(7);
+    b1.insert(10);
+    b1.insert(17);
+    b1.insert(25);
+    cout << "Traverse b1: ";
+    b1.traverse();
     cout << endl;
     return 0;
 }

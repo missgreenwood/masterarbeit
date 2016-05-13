@@ -242,11 +242,12 @@ KW 19 (noch 3.5 h)
 
 	a. Sakuma2011: 
 		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries
-		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Löschen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
+		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
 		* Jeder physische Knoten managt die Information für seinen Zweig sowie Informationen über die Geschwisterknoten 
 		* Der Knoten mit der kleinsten ID in der internen Knoten-Information heißt repräsentativer Knoten; er managt die Informationen des korrespondierenden internen Knoten (vgl. Fig. 4 S. 319)
 		* Evtl.: "notification of change information": wird vom repräsentativen Knoten des höchsten Knoten in der Baumstruktur ausgeführt, der von der Änderung betroffen ist 
-		* Evtl.: "secession request": wird an den repräsentativen Knoten des niedrigsten internen Knoten gesendet, an dem der ausscheidende Knoten hängt (S. 319)
+
+		* insert function für BloomFilterLeaf
 
 ## TODO Ausarbeitung 
 
