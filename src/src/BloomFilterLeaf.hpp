@@ -11,7 +11,7 @@
 
 class BloomFilterLeaf : public BloomFilterNode {
 private:
-    int **filters;
+    // int **filters;
     BloomFilterLeaf *prev;
     BloomFilterLeaf *next; 
 

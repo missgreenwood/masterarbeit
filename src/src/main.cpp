@@ -511,12 +511,17 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BloomFilterTree
     cout << "\n\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    cout << "Create leaf with minimum degree 3/max. elements 5 (l2)\n\n";
-    BloomFilterLeaf l2(3); 
-    cout << "Insert keys into l2: 1, 3, 7, 8, 9\n";
+    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
+    BloomFilterLeaf l2(3);
+    /* cout << "Insert keys into l2: 1, 3, 7, 8, 9\n";
+    l2.insert(1);
+    l2.insert(3);
+    l2.insert(7);
+    l2.insert(8);
+    l2.insert(9);
     cout << "Traverse l2:";
     l2.traverse();
-    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n";
+    cout << "Create instance of BloomFilterTree with minimum degree 3 (b1)\n\n"; */
     cout << endl;
     return 0;
 }

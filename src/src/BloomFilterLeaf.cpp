@@ -6,7 +6,10 @@
 using namespace std;
 
 
-BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t) {};
+BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t) {
+    next = NULL;
+    prev = NULL;
+};
 
 BloomFilterLeaf::BloomFilterLeaf(int _t, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t) {
     next = _next;
