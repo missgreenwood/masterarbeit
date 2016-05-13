@@ -507,13 +507,13 @@ int main(int argc, const char *argv[]) {
     b2.remove(11);
     b2.remove(26);
     cout << endl;
-    b2.traverse(); */
+    b2.traverse();
     
     cout << "\n\nCASE 7b - Underflow in parent, merge parent with next index node (3, 6):\n";
     b2.remove(3);
     b2.remove(6); 
     cout << endl;
-    b2.traverse();
+    b2.traverse(); */
     cout << endl; 
     return 0;
 }

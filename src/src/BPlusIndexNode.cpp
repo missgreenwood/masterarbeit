@@ -94,7 +94,7 @@ bool BPlusIndexNode::contains(int k) {
 }
 
 void BPlusIndexNode::remove(int k) {
- 
+    
     // 1. Remove key from target
     // Shift keys in parent and delete k
     int index=0;
@@ -146,8 +146,7 @@ void BPlusIndexNode::remove(int k) {
         
         // UNDERFLOW
         else {
-      
-            // TODO
+            
             // 6. Check neighbors -> MINIMAL?
             // 7. NO -> Borrow from neighbor -> DONE
             if ((prev) && (prev->getCount() > order)) {
@@ -202,6 +201,7 @@ void BPlusIndexNode::remove(int k) {
             }
             else {
                 
+                // TODO (traverse() not working)
                 // 8. YES -> Merge with neighbor
                 cout << "\nBoth siblings are minimal - ";
                 if (prev) {
@@ -212,7 +212,7 @@ void BPlusIndexNode::remove(int k) {
                     int prevCount = prev->getCount();
                     cout << "Parent's previous's old keys:";
                     for (int i=0; i<prevCount; i++) {
-                        cout << " " << prevKeys[i]; 
+                        cout << " " << prevKeys[i];
                     }
                     
                     // Increment self to retain children (THIS IS A HACK)
@@ -225,6 +225,7 @@ void BPlusIndexNode::remove(int k) {
                     
                     // Hand child over to previous
                     prev->C[prev->getCount()] = C[0];
+                    prev->C[prev->getCount()]->setParent(this);
                     
                     cout << "\nParent's previous's new keys:";
                     for (int i=0; i<prev->getCount(); i++) {
@@ -245,41 +246,52 @@ void BPlusIndexNode::remove(int k) {
                 }
                 else if (next) {
                     
+                    // TODO (traverse() not working)
                     // Merge next's keys into into own and update own counter
                     cout << "merge with next" << endl;
-                    int *nextKeys = next->getKeys();
-                    int nextCount = next->getCount();
                     cout << "Parent's old keys: ";
                     for (int i=0; i<getCount(); i++) {
                         cout << " " << keys[i];
                     }
                     
-                    // Increment self to retain children
-                    increment();
+                    // Retrieve next's children's smallest keys and insert into self
+                    int newKey = next->C[0]->getKeys()[0];
+                    int nextKey = next->C[next->getCount()]->getKeys()[0];
+                    // cout << "\nNew key: " << newKey;
+                    // cout << "\nNext key: " << nextKey;
+                    keys[0] = newKey;
+                    keys[1] = nextKey;
                     
-                    // TODO
-                    // Retrieve new key and next's children's smallest keys
+                    // Increment self and next to retain children (THIS IS A HACK)
+                    increment();
+                    next->increment();
                     
                     // Retrieve next's children
-                    for (int i=1; i<nextCount; i++) {
-                        C[i] = next->C[i-1];
+                    for (int i=0; i<next->getCount(); i++) {
                         increment();
+                        C[i+1] = next->C[i];
+                        C[i+1]->setParent(this);
                     }
                     
-                    cout << "Parent's new keys: ";
-                    for (int i=0; i<getCount(); i++) {
+                    // Update sibling pointers
+                    if (next->next) {
+                        next->next->setPrev(this);
+                        setNext(next->next);
+                    }
+                    else {
+                        setNext(NULL);
+                    }
+                    
+                    cout << "\nParent's new keys: ";
+                    for (int i=0; i<getCount()-1; i++) {
                         cout << " " << keys[i];
                     }
                     
+                    // 9. Unwind to parent node
+                    parent->remove(k);
                 }
             }
-            
-            // 9. Unwind to parent node
-            // Continue steps 1. - 9. as long as neccessary
-        
-      
-            return;
-            
+            // return;
         }
     }
     
@@ -300,7 +312,7 @@ void BPlusIndexNode::remove(int k) {
         // UNDERFLOW
         else {
             
-            // TODO
+            // TODO (tree traversal not working)
             // COLLAPSE ROOT -> DONE
             decrement();
             cout << "\nParent's new keys:";
