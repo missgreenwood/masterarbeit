@@ -22,27 +22,6 @@ using namespace std;
 
 int main(int argc, const char *argv[]) {
     
-    // Test driver for class BloomFilter
-    // Instantiate one Bloom filter and call its methods
-    
-    cout << "CLASS BloomFilter" << endl;
-    cout << "-----------------" << endl << endl;
-    cout << "Create instance of BloomFilter (f1)" << endl << endl;
-    BloomFilter f1(10, 0);
-    cout << "Id: " << f1.getId() << endl;
-    cout << "Size: " << f1.getSize() << endl;
-    cout << "Data: ";
-    f1.printData();
-    cout << "Associated int array: ";
-    f1.printArr();
-    cout << endl << "Fill filter with random values 0 or 1" << endl << endl;
-    f1.initRandom();
-    f1.printData();
-    cout << "Associated int array: ";
-    f1.printArr();
-    cout << endl << endl << endl;
-    
-    
     // Test driver for class BloomFilterVec
     // Instantiate Bloom filter vectors and and call their methods
     
@@ -507,19 +486,36 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b2.traverse(); */
     
+    // Test driver for class BloomFilter
+    // Instantiate one Bloom filter and call its methods
+    
+    cout << "\n\n\nCLASS BloomFilter" << endl;
+    cout << "-----------------" << endl << endl;
+    cout << "Create instance of BloomFilter (f1)";
+    BloomFilter f1(10, 0);
+    cout << "Id: " << f1.getId() << endl;
+    cout << "Size: " << f1.getSize() << endl;
+    cout << "Data: ";
+    f1.printData();
+    cout << "Associated int array: ";
+    f1.printArr();
+    cout << endl << "Fill filter with random values 0 or 1" << endl << endl;
+    f1.initRandom();
+    f1.printData();
+    cout << "Associated int array: ";
+    f1.printArr();
     
     // Test driver for class BloomFilterTree
-    cout << "\n\n\nCLASS BloomFilterTree";
+    cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    BloomFilterLeaf l2(3);
-    cout << "Insert keys into l2: 1, 3, 7, 8, 9, 11\n";
+    BloomFilterLeaf l2(3, f1.getSize());
+    cout << "\nInsert keys into l2: 1, 3, 7, 8, 9\n";
     l2.insert(1);
     l2.insert(3);
     l2.insert(7);
     l2.insert(8);
     l2.insert(9);
-    l2.insert(11);
     cout << "Traverse l2:";
     l2.traverse();
     cout << "\n\nCheck index function:\n";
@@ -527,6 +523,13 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<l2.getCount(); i++) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
+    cout << "\nInsert f1 into l2:\n";
+    l2.insertFilter(&f1);
+    cout << "Traverse l2: ";
+    l2.traverse();
+    cout << "\nTraverse l2 filters: ";
+    l2.traverseFilters();
+    
     cout << "\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6 (b1)\n\n";
     BloomFilterTree b1(3);
     cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25, 2, 8, 9, 26\n";
@@ -542,6 +545,9 @@ int main(int argc, const char *argv[]) {
     b1.insert(26);
     cout << "Traverse b1: ";
     b1.traverse();
+    
+    cout << "Create "; 
+    
     cout << endl;
     return 0;
 }

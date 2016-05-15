@@ -199,16 +199,11 @@ Bloom-Filter Basisimplementierung
 KW 17 (29 h) 
 * Di, 26.04. (5.75 h)
 Bloom-Filter Basisimplementierung, Bloom-Filter-Baum
-
 * Mi, 27.04. (5.5 h)
 Bloom-Filter-Baum, Recherche
-
 * Do, 28.04. (3 h)
-
 * Fr, 29.04. (6 h)
-
 * Sa, 30.04. (2 h)
-
 * So, 01.05. (6.25 h)
 
 
@@ -222,12 +217,16 @@ KW 18 (25.5 h)
 * So, 08.05. (5 h)
 
 
-KW 19 (noch 3.5 h)
+KW 19 (noch 1.75 h)
 * Mo, 09.05. (5 h)
 * Di, 10.05. (6 h)
 * Mi, 11.05. (9.25)
 * Do, 12.05. (3.5 h)
-* Fr, 13.05. (7.25 h)
+* Fr, 13.05. (7.5 h)
+* So, 15.05. (4.5 h)
+
+
+KW 20 (noch 32 h)
 
 
 ## TODO

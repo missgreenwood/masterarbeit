@@ -10,7 +10,7 @@
 
 using namespace std;
 
-const int n = 32;   // # of bits in Bloom filter
+const int filtersize = 32;   // # of bits in Bloom filter
 
 
 class BloomFilter {

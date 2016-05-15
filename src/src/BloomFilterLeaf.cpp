@@ -9,16 +9,64 @@ using namespace std;
 BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t) {
     next = NULL;
     prev = NULL;
-};
+    
+    // Allocate memory
+    filters = new int *[_t*2];
+    for (int i=0; i<(_t*2); i++) {
+        filters[i] = new int[filtersize];
+    }
+    
+    // Initialize 2D filters array with zeros
+    for (int i=0; i<2*_t; i++) {
+        for (int j=0; j<filtersize; j++) {
+            filters[i][j] = 0;
+        }
+    }
+}
+
+BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t) {
+    next = NULL;
+    prev = NULL;
+    size = _s;
+    
+    filters = new int *[_t*2];
+    for (int i=0; i<(_t*2); i++) {
+        filters[i] = new int[size];
+    }
+    cout << "Initialize filters array:\n";
+    for (int i=0; i<_t*2; i++) {
+        for (int j=0; j<size; j++) {
+            filters[i][j] = 0;
+            cout << filters[i][j];
+        }
+        cout << endl;
+    }
+}
 
 BloomFilterLeaf::BloomFilterLeaf(int _t, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t) {
     next = _next;
     prev = _prev;
+    // Allocate memory
+    filters = new int *[_t];
+    for (int i=0; i<_t; i++) {
+        filters[i] = new int[filtersize];
+    }
+    
+    // Initialize 2D filters array with zeros
+    for (int i=0; i<_t; i++) {
+        for (int j=0; j<filtersize; j++) {
+            filters[i][j] = 0;
+        }
+    }
 }
 
 BloomFilterLeaf::~BloomFilterLeaf() {
     delete prev;
     delete next;
+    for (int i=0; i<t; i++) {
+        delete[] filters[i];
+    }
+    delete[] filters;
 }
 
 void BloomFilterLeaf::insert(int k) {
@@ -36,6 +84,56 @@ void BloomFilterLeaf::insert(int k) {
         }
         l->setParent(p);
         p->insert(l->getKeys()[0], this, l);
+    }
+}
+
+void BloomFilterLeaf::insertFilter(BloomFilter *f) {
+    
+    // Get Bloom filter values
+    int *data = f->getArr();
+    cout << "Data: ";
+    for (int i=0; i<f->getSize(); i++) {
+        cout << data[i];
+    }
+    int id = f->getId();
+    cout << "\nId: " << id << endl;
+    
+    int index;
+    int *filter;
+    if (getCount() < getMax()) {
+        index = indexOfKey(id);
+        cout << "Index in leaf: " << index << endl;
+        shiftAndInsert(id);
+        filter = getFilters()[index];
+        for (int i=0; i<getFilterSize(); i++) {
+            filter[i] = data[i];
+        }
+    }
+    else { /*
+        BloomFilterLeaf *l = split(index);
+        l->setPrev(this);
+        setNext(l);
+        BloomFilterNode *p = getParent();
+        if (p == NULL) {
+            p = new BloomFilterIndexNode(getOrder());
+            setParent(p);
+        }
+        l->setParent(p);
+        p->insert(l->getKeys()[0], this, l);
+        if (l->contains(id)) {
+            index = l->indexOfKey(id);
+            filter = l->getFilters()[index];
+            for (int i=0; i<filtersize; i++) {
+                filter[i] = data[i];
+            }
+        }
+        else {
+            index = indexOfKey(id);
+            filter = getFilters()[index];
+            for (int i=0; i<filtersize; i++) {
+                filter[i] = data[i];
+            }
+        } */
     }
 }
 
@@ -125,4 +223,24 @@ void BloomFilterLeaf::setNext(BloomFilterLeaf *leaf) {
 
 BloomFilterLeaf * BloomFilterLeaf::getNext() {
     return next;
+}
+
+int ** BloomFilterLeaf::getFilters() {
+    return filters;
+}
+
+int BloomFilterLeaf::getFilterSize() {
+    return size;
+}
+
+void BloomFilterLeaf::traverseFilters() {
+    int **filters = getFilters();
+    cout << "|";
+    for (int i=0; i<getCount(); i++) {
+        cout << "|";
+        for (int j=0; j<getFilterSize(); j++) {
+            cout << filters[i][j];
+        }
+    }
+    cout << "||";
 }

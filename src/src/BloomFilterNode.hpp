@@ -11,10 +11,12 @@ class BloomFilterNode {
     
 private:
     int *keys;              // Array of keys
-    int t;                  // Order/minimum degree
     int n;                  // Current # of keys
     BloomFilterNode *parent; 
-        
+    
+protected:
+    int t;                  // Order/minimum degree
+    
 public:
     BloomFilterNode(int _t);
     virtual ~BloomFilterNode();
