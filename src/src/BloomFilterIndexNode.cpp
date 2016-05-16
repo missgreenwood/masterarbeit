@@ -22,44 +22,48 @@ BloomFilterNode * BloomFilterIndexNode::search(int k) {
     return C[index]->search(k);
 }
 
-void BloomFilterIndexNode::shiftAndInsert(int k) {
-    int index = indexOfKey(k);
-    BloomFilterNode::shiftAndInsert(k);
+void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
+    int id = filter->getId();
+    int index = indexOfKey(id);
+    BloomFilterNode::shiftAndInsert(filter);
     for (int i=getCount()-1; i>index; i--) {
         C[i+1] = C[i];
     }
 }
 
-void BloomFilterIndexNode::insert(int k) {
-    BloomFilterNode *leaf = search(k);
-    leaf->insert(k);
-}
-
-void BloomFilterIndexNode::insertFilter(BloomFilter *filter) {
+void BloomFilterIndexNode::insert(BloomFilter *filter) {
     int id = filter->getId();
     BloomFilterNode *l = search(id);
-    l->insertFilter(filter);
+    l->insert(filter);
 }
 
-void BloomFilterIndexNode::insert(int k, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
+// TODO
+void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
+    int id = filter->getId();
     if (getCount()<getMax()) {
-        int index = indexOfKey(k);
-        shiftAndInsert(k);
+        int index = indexOfKey(id);
+        shiftAndInsert(filter);
         C[index] = leftNode;
         C[index+1] = rightNode;
     }
     else {
         int mid;
-        BloomFilterIndexNode *s = split(k, leftNode, rightNode, mid);
+        BloomFilterIndexNode *s = split(filter, leftNode, rightNode, mid);
         BloomFilterNode *p = getParent();
         if (p == NULL) {
             p = new BloomFilterIndexNode(getOrder());
             setParent(p);
         }
         s->setParent(p);
-        p->insert(mid, this, s);
-        
+        int correctId = filter->getId();
+        filter->setId(mid);
+        p->insert(filter, this, s);
+        filter->setId(correctId); 
     }
+}
+
+void BloomFilterIndexNode::insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
+
 }
 
 // Returns false if k is not in leaf of subtree
@@ -78,11 +82,13 @@ bool BloomFilterIndexNode::contains(int k) {
     else return false;
 }
 
-BloomFilterIndexNode * BloomFilterIndexNode::split(int k, BloomFilterNode *left, BloomFilterNode *right, int &middle) {
+// TODO 
+BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle) {
     assert(getCount() == getMax());
     int max = getMax();
+    int id = filter->getId();
     int *merged = new int[max+1];
-    int index = indexOfKey(k);
+    int index = indexOfKey(id);
     int *keys = getKeys();
     BloomFilterNode **mergedNodes = new BloomFilterNode *[max+2];
     for (int i=0; i<index; i++) {

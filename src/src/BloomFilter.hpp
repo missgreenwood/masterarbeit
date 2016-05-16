@@ -29,6 +29,7 @@ public:
     
     void printData();
     void printValue();
+    void setId(int value);
     int getId();
     int getSize();
     void setValue(int index, int value);

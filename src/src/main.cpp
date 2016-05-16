@@ -491,61 +491,6 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create instance of BloomFilter with array length 10 (f0)";
-    BloomFilter f0(10, 0);
-    cout << "Id: " << f0.getId() << endl;
-    cout << "Size: " << f0.getSize() << endl;
-    cout << "Data: ";
-    f0.printData();
-    cout << "Associated int array: ";
-    f0.printArr();
-    cout << endl << "Fill filter with random values 0 or 1" << endl << endl;
-    f0.initRandom();
-    f0.printData();
-    cout << "Associated int array: ";
-    f0.printArr();
-    
-    // Test driver for class BloomFilterTree
-    cout << "\n\nCLASS BloomFilterTree";
-    cout << "\n---------------------\n\n";
-    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    BloomFilterLeaf l2(3, f0.getSize());
-    cout << "\nInsert keys into l2: 1, 3, 7, 8, 9\n";
-    l2.insert(1);
-    l2.insert(3);
-    l2.insert(7);
-    l2.insert(8);
-    l2.insert(9);
-    cout << "Traverse l2:";
-    l2.traverse();
-    cout << "\n\nCheck index function:\n";
-    keys = l2.getKeys();
-    for (int i=0; i<l2.getCount(); i++) {
-        cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
-    }
-    cout << "\nInsert f1 into l2:\n";
-    l2.insertFilter(&f0);
-    cout << "Traverse l2: ";
-    l2.traverse();
-    cout << "\nTraverse l2 filters: ";
-    l2.traverseFilters();
-    
-    cout << "\n\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6, filter size 10 (b1)\n\n";
-    BloomFilterTree b1(3, 10);
-    /* cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25, 2, 8, 9, 26\n";
-    b1.insert(1);
-    b1.insert(4);
-    b1.insert(7);
-    b1.insert(10);
-    b1.insert(17);
-    b1.insert(25);
-    b1.insert(2);
-    b1.insert(8);
-    b1.insert(9);
-    b1.insert(26);
-    cout << "Traverse b1: ";
-    b1.traverse(); */
-    
     cout << "Create 10 instances of BloomFilter with ids 1, 4, 7, 10, 17, 25, 2, 8, 9, 26, array length 10 and random values\n\n";
     BloomFilter f1(10, 1);
     BloomFilter f4(10, 4);
@@ -578,13 +523,58 @@ int main(int argc, const char *argv[]) {
     f26.initRandom();
     f26.printData();
     
-    cout << "\nInsert filters f0, f1, f4, f7, f10, f17 into b1\n";
-    b1.insert(&f0);
+    // Test driver for class BloomFilterLeaf
+    cout << "\n\nCLASS BloomFilterLeaf";
+    cout << "\n---------------------\n\n";
+    BloomFilterLeaf l2(3, f1.getSize());
+    cout << "Insert filters into l2: f1, f4, f7, f10, f17, f25\n";
+    l2.insert(&f1);
+    l2.insert(&f4);
+    l2.insert(&f7);
+    l2.insert(&f10);
+    l2.insert(&f17);
+    l2.insert(&f25);
+    cout << "\nTraverse l2: ";
+    l2.traverse();
+    cout << "\nTraverse l2 filters: ";
+    l2.traverseFilters();
+    cout << "\n\nCheck index function:\n";
+    keys = l2.getKeys();
+    for (int i=0; i<l2.getCount(); i++) {
+        cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
+    }
+    
+    // Test driver for class BloomFilterTree
+    cout << "\n\nCLASS BloomFilterTree";
+    cout << "\n---------------------\n\n";
+    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
+    cout << "Create instance of BloomFilterTree with minimum degree 3/max. elements 6, filter size 10 (b1)\n\n";
+    BloomFilterTree b1(3, 10);
+    cout << "Insert filters into b1: f1, f4, f7, f10, f17, f25, f2\n";
     b1.insert(&f1);
     b1.insert(&f4);
     b1.insert(&f7);
     b1.insert(&f10);
     b1.insert(&f17);
+    b1.insert(&f25);
+    b1.insert(&f2);
+    BloomFilterNode *L1 = b1.search(1);
+    BloomFilterNode *L2 = b1.search(25);
+    BloomFilterNode *root = L1->getParent();
+    cout << endl;
+    L1->traverse();
+    cout << endl;
+    L1->traverseFilters();
+    cout << endl;
+    L2->traverse();
+    cout << endl;
+    L2->traverseFilters();
+    rootKeys = root->getKeys();
+    cout << "\nRoot's keys:";
+    for (int i=0; i<root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    cout << endl;
     b1.traverse();
     cout << endl;
     b1.traverseFilters(); 

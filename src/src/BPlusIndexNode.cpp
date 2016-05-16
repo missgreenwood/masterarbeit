@@ -324,6 +324,7 @@ void BPlusIndexNode::remove(int k) {
     }
 }
 
+// TODO
 BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right, int &middle) {
     assert(getCount() == getMax());
     int max = getMax();
@@ -377,7 +378,6 @@ BPlusIndexNode * BPlusIndexNode::split(int k, BPlusNode *left, BPlusNode *right,
     delete[] mergedNodes;
     return s;
 }
-
 
 void BPlusIndexNode::traverse() {
     for (int i=0; i<getCount()+1; i++) {

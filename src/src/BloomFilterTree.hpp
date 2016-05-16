@@ -57,8 +57,6 @@ public:
     // Insert Bloom filter
     void insert(BloomFilter *filter);
     
-    void insert(int k);
-    
     // TODO
     // Search key in tree
     // Return false if key is not present

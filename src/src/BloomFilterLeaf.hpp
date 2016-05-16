@@ -22,10 +22,10 @@ public:
     BloomFilterLeaf(int _t, int _s); 
     BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next);
     ~BloomFilterLeaf();
-    void insert(int k);
-    void insertFilter(BloomFilter *f);
+    void insert(BloomFilter *filter);
+    void insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode); 
     BloomFilterNode *search(int k);
-    BloomFilterLeaf *split(int k);
+    BloomFilterLeaf *split(BloomFilter *filter);
     void traverse();
     bool contains(int k);
     int **getFilters();

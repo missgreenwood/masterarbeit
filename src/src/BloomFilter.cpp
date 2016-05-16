@@ -47,6 +47,10 @@ void BloomFilter::printData() {
     cout << endl;
 }
 
+void BloomFilter::setId(int value) {
+    id = value;
+}
+
 int BloomFilter::getId() {
     return id;
 }

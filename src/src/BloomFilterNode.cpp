@@ -15,13 +15,14 @@ BloomFilterNode::~BloomFilterNode() {
     delete[] keys;
 }
 
-void BloomFilterNode::shiftAndInsert(int k) {
+void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
     assert(n < getMax());
-    int index = indexOfKey(k);
+    int id = filter->getId();
+    int index = indexOfKey(id);
     for (int i=n-1; i>=index; i--) {
         keys[i+1] = keys[i];
     }
-    keys[index] = k;
+    keys[index] = id;
     increment();
     return; 
 }
@@ -46,13 +47,18 @@ void BloomFilterNode::setParent(BloomFilterNode *node) {
     parent = node;
 }
 
-void BloomFilterNode::insert(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+void BloomFilterNode::insert(BloomFilter *filter) {
     assert(false);
 }
 
-void BloomFilterNode::insertFilter(BloomFilter *filter) {
+void BloomFilterNode::insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
     assert(false);
 }
+
+void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+    assert(false);
+}
+
 
 int BloomFilterNode::indexOfKey(int k) {
     if (n == 0) {

@@ -48,27 +48,12 @@ BloomFilterNode * BloomFilterTree::search(int k) {
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
         root = new BloomFilterLeaf(t, size, NULL, NULL);
-        root->insertFilter(filter);
+        root->insert(filter);
     }
     else {
-        root->insertFilter(filter);
+        root->insert(filter);
         if (root->getParent() != NULL) {
             root = root->getParent(); 
-        }
-    }
-}
-
-void BloomFilterTree::insert(int k) {
-    if (root == NULL) {
-        
-        // Allocate memory for root
-        root = new BloomFilterLeaf(t, size, NULL, NULL);
-        root->insert(k);
-    }
-    else {
-        root->insert(k);
-        if (root->getParent() != NULL) {
-            root = root->getParent();
         }
     }
 }

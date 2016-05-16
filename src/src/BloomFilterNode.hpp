@@ -23,16 +23,16 @@ protected:
 public:
     BloomFilterNode(int _t);
     virtual ~BloomFilterNode();
-    virtual void shiftAndInsert(int k);
+    virtual void shiftAndInsert(BloomFilter *filter);
     int getOrder();
     int getCount();
     void setCount(int count);
     BloomFilterNode *getParent();
     void setParent(BloomFilterNode *node);
-    virtual void insert(int k) = 0;
-    virtual void insertFilter(BloomFilter *filter) = 0;
+    virtual void insert(BloomFilter *filter) = 0;
+    virtual void insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) = 0;
     virtual BloomFilterNode *search(int k) = 0;
-    virtual void insert(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     int indexOfKey(int k);
     int *getKeys();
     virtual void traverse() = 0;
