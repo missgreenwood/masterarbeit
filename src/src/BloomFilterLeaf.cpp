@@ -31,11 +31,11 @@ BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t) {
     
     filters = new int *[_t*2];
     for (int i=0; i<(_t*2); i++) {
-        filters[i] = new int[size];
+        filters[i] = new int[_s];
     }
     cout << "Initialize filters array:\n";
     for (int i=0; i<_t*2; i++) {
-        for (int j=0; j<size; j++) {
+        for (int j=0; j<_s; j++) {
             filters[i][j] = 0;
             cout << filters[i][j];
         }
@@ -43,18 +43,19 @@ BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t) {
     }
 }
 
-BloomFilterLeaf::BloomFilterLeaf(int _t, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t) {
+BloomFilterLeaf::BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t) {
     next = _next;
     prev = _prev;
+    size = _s; 
     // Allocate memory
-    filters = new int *[_t];
-    for (int i=0; i<_t; i++) {
-        filters[i] = new int[filtersize];
+    filters = new int *[_t*2];
+    for (int i=0; i<_t*2; i++) {
+        filters[i] = new int[_s];
     }
     
     // Initialize 2D filters array with zeros
-    for (int i=0; i<_t; i++) {
-        for (int j=0; j<filtersize; j++) {
+    for (int i=0; i<_t*2; i++) {
+        for (int j=0; j<_s; j++) {
             filters[i][j] = 0;
         }
     }
@@ -109,11 +110,12 @@ void BloomFilterLeaf::insertFilter(BloomFilter *f) {
             filter[i] = data[i];
         }
     }
-    else { /*
+    else {
         BloomFilterLeaf *l = split(index);
+        cout << "Index: " << index;
         l->setPrev(this);
         setNext(l);
-        BloomFilterNode *p = getParent();
+        /* BloomFilterNode *p = getParent();
         if (p == NULL) {
             p = new BloomFilterIndexNode(getOrder());
             setParent(p);
@@ -234,6 +236,7 @@ int BloomFilterLeaf::getFilterSize() {
 }
 
 void BloomFilterLeaf::traverseFilters() {
+    assert (getCount() <= getMax()); 
     int **filters = getFilters();
     cout << "|";
     for (int i=0; i<getCount(); i++) {

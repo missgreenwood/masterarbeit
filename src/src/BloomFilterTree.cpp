@@ -4,18 +4,15 @@
 #include "BloomFilterTree.hpp"
 
 
-// Constructor with parameter t
+// Constructor with parameters t and size
 // Initializes tree as empty
-BloomFilterTree::BloomFilterTree(int _t): t(_t), root(NULL) {};
+BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), size(_s), root(NULL) {};
 
 // TODO
-BloomFilterTree::BloomFilterTree(int _t, BloomFilterVec *_f) {
-
+BloomFilterTree::BloomFilterTree(int _t, int _s, BloomFilterVec *_f): t(_t), root(NULL) {
+    filtersvec = _f;
 }
 
-// TODO
-// Constructor with parameters t and *filtersvec
-// Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
 BloomFilterTree::~BloomFilterTree() {
     delete root;
 }
@@ -30,6 +27,16 @@ void BloomFilterTree::traverse() {
     }
 }
 
+void BloomFilterTree::traverseFilters() {
+    if (root == NULL) {
+        cout << "The tree is empty!";
+        return;
+    }
+    else {
+        root->traverseFilters(); 
+    }
+}
+
 BloomFilterNode * BloomFilterTree::search(int k) {
     if (root == NULL) {
         cout << "Tree is empty!";
@@ -38,16 +45,24 @@ BloomFilterNode * BloomFilterTree::search(int k) {
     else return root->search(k);
 }
 
-// TODO
 void BloomFilterTree::insert(BloomFilter *filter) {
-
+    if (root == NULL) {
+        root = new BloomFilterLeaf(t, size, NULL, NULL);
+        root->insertFilter(filter);
+    }
+    else {
+        root->insertFilter(filter);
+        if (root->getParent() != NULL) {
+            root = root->getParent(); 
+        }
+    }
 }
 
 void BloomFilterTree::insert(int k) {
     if (root == NULL) {
         
         // Allocate memory for root
-        root = new BloomFilterLeaf(t, NULL, NULL);
+        root = new BloomFilterLeaf(t, size, NULL, NULL);
         root->insert(k);
     }
     else {
@@ -72,4 +87,8 @@ bool BloomFilterTree::contains(int k) {
 
 BloomFilterNode * BloomFilterTree::getRoot() {
     return root; 
+}
+
+BloomFilterVec * BloomFilterTree::getFiltersVec() {
+    return filtersvec; 
 }

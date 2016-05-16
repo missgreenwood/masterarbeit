@@ -97,7 +97,6 @@
 		BC5861DC1CCABB13007CDEC0 = {
 			isa = PBXGroup;
 			children = (
-				BCECF51D1CE8C22A00E25698 /* bloomfiltertree */,
 				BCCE1F2A1CD625B6004382A8 /* src */,
 				BC5861F71CCABB5C007CDEC0 /* Tests */,
 				BC5861E61CCABB13007CDEC0 /* Products */,
@@ -141,13 +140,6 @@
 				BC5862081CCAD8CE007CDEC0 /* main.cpp */,
 			);
 			name = src;
-			sourceTree = "<group>";
-		};
-		BCECF51D1CE8C22A00E25698 /* bloomfiltertree */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = bloomfiltertree;
 			sourceTree = "<group>";
 		};
 		BCECF51E1CE8C26900E25698 /* bloomfiltertree */ = {

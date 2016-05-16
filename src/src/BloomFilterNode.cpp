@@ -50,6 +50,10 @@ void BloomFilterNode::insert(int k, BloomFilterNode *oldNode, BloomFilterNode *n
     assert(false);
 }
 
+void BloomFilterNode::insertFilter(BloomFilter *filter) {
+    assert(false);
+}
+
 int BloomFilterNode::indexOfKey(int k) {
     if (n == 0) {
         return 0;

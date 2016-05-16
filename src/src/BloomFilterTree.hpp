@@ -23,7 +23,6 @@
 #include "BloomFilterNode.hpp"
 #include "BloomFilterIndexNode.hpp"
 #include "BloomFilterLeaf.hpp"
-#include "BloomFilterVec.hpp"
 
 
 using namespace std;
@@ -32,27 +31,30 @@ using namespace std;
 class BloomFilterTree {
     
 private:
-    BloomFilterNode *root;      // Pointer to root node
     int t;                      // Order = minimum degree
+    int size;                   // Size of associated Bloom filters (# of bits)
     BloomFilterVec *filtersvec; // Associated Bloom filter vector
     
 public:
-    // Constructor with parameter t
+    BloomFilterNode *root;      // Pointer to root node
+    
+    // Constructor with parameters t and size
     // Initializes tree as empty
-    BloomFilterTree(int _t);
+    BloomFilterTree(int _t, int _s);
     
     // TODO
-    // Constructor with parameters t and *filtersvec
+    // Constructor with parameters t, size, *filtersvec
     // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
-    BloomFilterTree(int _t, BloomFilterVec *_f);
+    BloomFilterTree(int _t, int _s, BloomFilterVec *_f);
     ~BloomFilterTree();
     
     void traverse();
     
+    void traverseFilters(); 
+    
     BloomFilterNode *search(int k);
     
-    // TODO
-    // Insert new Bloom filter
+    // Insert Bloom filter
     void insert(BloomFilter *filter);
     
     void insert(int k);
@@ -62,7 +64,9 @@ public:
     // Return false if key is not present
     bool contains(int k);
     
-    BloomFilterNode *getRoot(); 
+    BloomFilterNode *getRoot();
+    
+    BloomFilterVec *getFiltersVec();
     
     friend class BloomFilterNode;
     friend class BloomFilterIndexNode;

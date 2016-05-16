@@ -35,6 +35,12 @@ void BloomFilterIndexNode::insert(int k) {
     leaf->insert(k);
 }
 
+void BloomFilterIndexNode::insertFilter(BloomFilter *filter) {
+    int id = filter->getId();
+    BloomFilterNode *l = search(id);
+    l->insertFilter(filter);
+}
+
 void BloomFilterIndexNode::insert(int k, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
     if (getCount()<getMax()) {
         int index = indexOfKey(k);
@@ -124,5 +130,11 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(int k, BloomFilterNode *left,
 void BloomFilterIndexNode::traverse() {
     for (int i=0; i<getCount()+1; i++) {
         C[i]->traverse();
+    }
+}
+
+void BloomFilterIndexNode::traverseFilters() {
+    for (int i=0; i<getCount()+1; i++) {
+        C[i]->traverseFilters();
     }
 }

@@ -6,6 +6,9 @@
 
 #include <iostream>
 #include <assert.h>
+#include "BloomFilter.hpp"
+#include "BloomFilterVec.hpp"
+
 
 class BloomFilterNode {
     
@@ -27,11 +30,13 @@ public:
     BloomFilterNode *getParent();
     void setParent(BloomFilterNode *node);
     virtual void insert(int k) = 0;
+    virtual void insertFilter(BloomFilter *filter) = 0;
     virtual BloomFilterNode *search(int k) = 0;
     virtual void insert(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     int indexOfKey(int k);
     int *getKeys();
     virtual void traverse() = 0;
+    virtual void traverseFilters() = 0; 
     virtual bool contains(int k) = 0;
     int getMax();
     void increment();

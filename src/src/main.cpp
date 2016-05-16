@@ -60,21 +60,21 @@ int main(int argc, const char *argv[]) {
     }
     
     // Instantiate one Bloom filter
-    cout << "Create instance of bloom_filter with seleceted parameters (f2)" << endl << endl;
-    bloom_filter f2(parameters);
+    cout << "Create instance of bloom_filter with seleceted parameters (f27)" << endl << endl;
+    bloom_filter f27(parameters);
     
     string str_list[] = {"AbC", "iJk", "XYZ"};
     
     // Insert strings into Bloom filter f2
     cout << "Insert strings into filter: \"AbC\", \"iJk\", \"XYZ\"" << endl << endl;
     for (int i=0; i<(sizeof(str_list)/sizeof(string)); i++) {
-        f2.insert(str_list[i]);
+        f27.insert(str_list[i]);
     }
     
     // Query Bloom filter for existence of strings
     cout << "Query filter for existence of strings" << endl << endl;
     for (size_t i=0; i<(sizeof(str_list)/sizeof(string)); i++) {
-        if (f2.contains(str_list[i])) {
+        if (f27.contains(str_list[i])) {
             cout << "f2 contains: " << str_list[i] << endl;
         }
     }
@@ -491,25 +491,25 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create instance of BloomFilter (f1)";
-    BloomFilter f1(10, 0);
-    cout << "Id: " << f1.getId() << endl;
-    cout << "Size: " << f1.getSize() << endl;
+    cout << "Create instance of BloomFilter with array length 10 (f0)";
+    BloomFilter f0(10, 0);
+    cout << "Id: " << f0.getId() << endl;
+    cout << "Size: " << f0.getSize() << endl;
     cout << "Data: ";
-    f1.printData();
+    f0.printData();
     cout << "Associated int array: ";
-    f1.printArr();
+    f0.printArr();
     cout << endl << "Fill filter with random values 0 or 1" << endl << endl;
-    f1.initRandom();
-    f1.printData();
+    f0.initRandom();
+    f0.printData();
     cout << "Associated int array: ";
-    f1.printArr();
+    f0.printArr();
     
     // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    BloomFilterLeaf l2(3, f1.getSize());
+    BloomFilterLeaf l2(3, f0.getSize());
     cout << "\nInsert keys into l2: 1, 3, 7, 8, 9\n";
     l2.insert(1);
     l2.insert(3);
@@ -524,15 +524,15 @@ int main(int argc, const char *argv[]) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
     cout << "\nInsert f1 into l2:\n";
-    l2.insertFilter(&f1);
+    l2.insertFilter(&f0);
     cout << "Traverse l2: ";
     l2.traverse();
     cout << "\nTraverse l2 filters: ";
     l2.traverseFilters();
     
-    cout << "\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6 (b1)\n\n";
-    BloomFilterTree b1(3);
-    cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25, 2, 8, 9, 26\n";
+    cout << "\n\nCreate instance of BloomFilterTree with minimum degree 3/max. elements 6, filter size 10 (b1)\n\n";
+    BloomFilterTree b1(3, 10);
+    /* cout << "Insert keys into b1: 1, 4, 7, 10, 17, 25, 2, 8, 9, 26\n";
     b1.insert(1);
     b1.insert(4);
     b1.insert(7);
@@ -544,10 +544,50 @@ int main(int argc, const char *argv[]) {
     b1.insert(9);
     b1.insert(26);
     cout << "Traverse b1: ";
+    b1.traverse(); */
+    
+    cout << "Create 10 instances of BloomFilter with ids 1, 4, 7, 10, 17, 25, 2, 8, 9, 26, array length 10 and random values\n\n";
+    BloomFilter f1(10, 1);
+    BloomFilter f4(10, 4);
+    BloomFilter f7(10, 7);
+    BloomFilter f10(10, 10);
+    BloomFilter f17(10, 17);
+    BloomFilter f25(10, 25);
+    BloomFilter f2(10, 2);
+    BloomFilter f8(10, 8);
+    BloomFilter f9(10, 9);
+    BloomFilter f26(10, 26);
+    f1.initRandom();
+    f1.printData();
+    f4.initRandom();
+    f4.printData();
+    f7.initRandom();
+    f7.printData();
+    f10.initRandom();
+    f10.printData();
+    f17.initRandom();
+    f17.printData();
+    f25.initRandom();
+    f25.printData();
+    f2.initRandom();
+    f2.printData();
+    f8.initRandom();
+    f8.printData();
+    f9.initRandom();
+    f9.printData();
+    f26.initRandom();
+    f26.printData();
+    
+    cout << "\nInsert filters f0, f1, f4, f7, f10, f17 into b1\n";
+    b1.insert(&f0);
+    b1.insert(&f1);
+    b1.insert(&f4);
+    b1.insert(&f7);
+    b1.insert(&f10);
+    b1.insert(&f17);
     b1.traverse();
-    
-    cout << "Create "; 
-    
+    cout << endl;
+    b1.traverseFilters(); 
     cout << endl;
     return 0;
 }

@@ -7,7 +7,6 @@
 #include <iostream>
 #include "BloomFilterNode.hpp"
 #include "BloomFilterIndexNode.hpp"
-#include "BloomFilter.hpp"
 
 
 class BloomFilterLeaf : public BloomFilterNode {
@@ -21,7 +20,7 @@ private:
 public:
     BloomFilterLeaf(int _t);
     BloomFilterLeaf(int _t, int _s); 
-    BloomFilterLeaf(int _t, BloomFilterLeaf *_prev, BloomFilterLeaf *_next);
+    BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next);
     ~BloomFilterLeaf();
     void insert(int k);
     void insertFilter(BloomFilter *f);
