@@ -561,23 +561,23 @@ int main(int argc, const char *argv[]) {
     BloomFilterNode *L1 = b1.search(1);
     BloomFilterNode *L2 = b1.search(25);
     BloomFilterNode *root = L1->getParent();
-    cout << endl;
+    cout << "\nLeft leaf: ";
     L1->traverse();
-    cout << endl;
+    cout << "\nLeft leaf's filters: ";
     L1->traverseFilters();
-    cout << endl;
+    cout << "\n\nRight leaf: ";
     L2->traverse();
-    cout << endl;
+    cout << "\nRight leaf's filters: ";
     L2->traverseFilters();
     rootKeys = root->getKeys();
-    cout << "\nRoot's keys:";
+    cout << "\n\nRoot's keys:";
     for (int i=0; i<root->getCount(); i++) {
         cout << " " << rootKeys[i];
     }
-    cout << endl;
+    cout << "\n\nTraverse b2: ";
     b1.traverse();
-    cout << endl;
-    b1.traverseFilters(); 
+    cout << "\nTraverse b2 filters: ";
+    b1.traverseFilters();
     cout << endl;
     return 0;
 }
