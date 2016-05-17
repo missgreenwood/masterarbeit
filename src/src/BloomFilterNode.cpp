@@ -4,8 +4,8 @@
 #include "BloomFilterNode.hpp"
 
 
-// Constructor with parameter t
-BloomFilterNode::BloomFilterNode(int _t): t(_t), n(0) {
+// Constructor with parameters t and size
+BloomFilterNode::BloomFilterNode(int _t, int _s): t(_t), n(0), size(_s) {
     parent = NULL;
     keys = new int[2*_t];
 }
@@ -51,14 +51,13 @@ void BloomFilterNode::insert(BloomFilter *filter) {
     assert(false);
 }
 
-void BloomFilterNode::insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
-    assert(false);
-}
-
 void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
     assert(false);
 }
 
+void BloomFilterNode::insertSimilarFilter(BloomFilter *filter) {
+    assert(false);
+}
 
 int BloomFilterNode::indexOfKey(int k) {
     if (n == 0) {
@@ -85,4 +84,50 @@ void BloomFilterNode::increment() {
 
 void BloomFilterNode::decrement() {
     n--; 
+}
+
+int BloomFilterNode::getFilterSize() {
+    return size; 
+}
+
+// TODO
+float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {
+    float count1 = 0;
+    float count2 = 0;
+    float same = 0;
+    for (int i=0; i<getFilterSize(); i++) {
+        if (arr1[i] == 1) {
+            count1++;
+        }
+        if (arr2[i] == 1) {
+            count2++;
+        }
+        if ((arr1[i] == 1) && (arr2[i] == 1)) {
+            same++;
+        }
+    }
+    float count = count1+count2;
+    return same/count;
+}
+
+bool BloomFilterNode::isSubset(int *arr1, int *arr2) {
+    bool result = true;
+    int length = sizeof(arr1)/sizeof(int);
+    int length2 = sizeof(arr1)/sizeof(arr2);
+    assert(length == length2);
+    for (int i=0; i<length; i++) {
+        if (arr1[i] !=arr2[i]) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+void BloomFilterNode::logicalAnd(int *arr1, int *arr2) {
+
+}
+
+void BloomFilterNode::logicalOr(int *arr1, int *arr2) {
+
 }

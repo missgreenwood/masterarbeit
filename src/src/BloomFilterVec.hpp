@@ -9,7 +9,6 @@
 const int m = 100;          // default # of Bloom filters in array
 
 
-// Vector of Bloom filters with constructors
 class BloomFilterVec {
     
 private:
@@ -27,10 +26,8 @@ public:
     void print();
     int *getFiltersArr();
     
-    friend class BloomFilter; 
-    friend class BloomFilterNode; 
+    friend class BloomFilterNode;
     friend class BloomFilterTree;
-    friend class BPlusTree;
 };
 
 #endif

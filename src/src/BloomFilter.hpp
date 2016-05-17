@@ -36,11 +36,10 @@ public:
     int *getArr();
     void printArr();
     void initRandom();
-    
+      
     friend class BloomFilterVec;
     friend class BloomFilterNode;
     friend class BloomFilterTree;
-    
 };
 
 

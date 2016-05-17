@@ -6,7 +6,7 @@
 using namespace std;
 
 
-BloomFilterIndexNode::BloomFilterIndexNode(int _t): BloomFilterNode(_t) {
+BloomFilterIndexNode::BloomFilterIndexNode(int _t, int _s): BloomFilterNode(_t, _s) {
     C = new BloomFilterNode *[2*_t+1];
     for (int i=0; i<2*_t+1; i++) {
         C[i] = NULL; 
@@ -38,6 +38,11 @@ void BloomFilterIndexNode::insert(BloomFilter *filter) {
 }
 
 // TODO
+void BloomFilterIndexNode::insertSimilarFilter(BloomFilter *filter) {
+    
+}
+
+// Evtl. TODO
 void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
     int id = filter->getId();
     if (getCount()<getMax()) {
@@ -51,7 +56,7 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
         BloomFilterIndexNode *s = split(filter, leftNode, rightNode, mid);
         BloomFilterNode *p = getParent();
         if (p == NULL) {
-            p = new BloomFilterIndexNode(getOrder());
+            p = new BloomFilterIndexNode(getOrder(), getFilterSize());
             setParent(p);
         }
         s->setParent(p);
@@ -60,10 +65,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
         p->insert(filter, this, s);
         filter->setId(correctId); 
     }
-}
-
-void BloomFilterIndexNode::insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
-
 }
 
 // Returns false if k is not in leaf of subtree
@@ -83,6 +84,11 @@ bool BloomFilterIndexNode::contains(int k) {
 }
 
 // TODO 
+int ** BloomFilterIndexNode::getFilters() {
+    assert(false);
+}
+
+// Evtl. TODO
 BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle) {
     assert(getCount() == getMax());
     int max = getMax();
@@ -96,7 +102,7 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
         mergedNodes[i] = C[i];
     }
     
-    // Evtl. TO FIX
+    // Evtl. TODO
     int half = (max+1)/2; // max+1 immer ungerade
     middle = merged[half];
     for (int i=0; i<half; i++) {
@@ -108,7 +114,7 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
         C[i] = NULL;
     }
     setCount(half);
-    BloomFilterIndexNode *s = new BloomFilterIndexNode(getOrder());
+    BloomFilterIndexNode *s = new BloomFilterIndexNode(getOrder(), getFilterSize());
     int *sKeys = s->getKeys();
     BloomFilterNode **sChildren = s->C;
     for (int i=half+1; i<max+1; i++) {

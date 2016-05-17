@@ -15,32 +15,44 @@ class BloomFilterNode {
 private:
     int *keys;              // Array of keys
     int n;                  // Current # of keys
-    BloomFilterNode *parent; 
+    BloomFilterNode *parent;
+    int size; 
     
 protected:
     int t;                  // Order/minimum degree
     
 public:
-    BloomFilterNode(int _t);
+    BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
-    virtual void shiftAndInsert(BloomFilter *filter);
     int getOrder();
     int getCount();
     void setCount(int count);
     BloomFilterNode *getParent();
     void setParent(BloomFilterNode *node);
-    virtual void insert(BloomFilter *filter) = 0;
-    virtual void insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) = 0;
     virtual BloomFilterNode *search(int k) = 0;
+    
+    // Insertion methods
+    virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void insert(BloomFilter *filter) = 0;
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    virtual void insertSimilarFilter(BloomFilter *filter);
+
     int indexOfKey(int k);
     int *getKeys();
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0; 
     virtual bool contains(int k) = 0;
+    virtual int **getFilters() = 0; 
     int getMax();
     void increment();
     void decrement();
+    int getFilterSize();
+    
+    // Helper methods for tree management
+    float computeJaccard(int *arr1, int *arr2);
+    bool isSubset(int *arr1, int *arr2);
+    void logicalAnd(int *arr1, int *arr2);
+    void logicalOr(int *arr1, int *arr2);
 };
 
 #endif 

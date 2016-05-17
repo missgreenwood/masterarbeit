@@ -15,15 +15,17 @@ private:
     BloomFilterLeaf *prev;
     BloomFilterLeaf *next;
     int **filters;
-    int size;
     
 public:
     BloomFilterLeaf(int _t);
     BloomFilterLeaf(int _t, int _s); 
     BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next);
     ~BloomFilterLeaf();
+    
+    // Insertion methods
     void insert(BloomFilter *filter);
-    void insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode); 
+    void insertSimilarFilter(BloomFilter *filter);
+    
     BloomFilterNode *search(int k);
     BloomFilterLeaf *split(BloomFilter *filter);
     void traverse();
@@ -33,8 +35,7 @@ public:
     BloomFilterLeaf *getPrev();
     void setNext(BloomFilterLeaf *leaf);
     BloomFilterLeaf *getNext();
-    int getFilterSize();
-    void traverseFilters(); 
+    void traverseFilters();
 };
 
 #endif

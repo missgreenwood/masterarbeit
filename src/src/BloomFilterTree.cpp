@@ -17,6 +17,35 @@ BloomFilterTree::~BloomFilterTree() {
     delete root;
 }
 
+// TODO
+bool BloomFilterTree::contains(int k) {
+    
+    // If tree is empty return false
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return false;
+    }
+    else {
+        return root->contains(k);
+    }
+}
+
+BloomFilterNode * BloomFilterTree::search(int k) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return NULL;
+    }
+    else return root->search(k);
+}
+
+BloomFilterNode * BloomFilterTree::getRoot() {
+    return root;
+}
+
+BloomFilterVec * BloomFilterTree::getFiltersVec() {
+    return filtersvec;
+}
+
 void BloomFilterTree::traverse() {
     if (root == NULL) {
         cout << "Tree is empty!";
@@ -37,13 +66,6 @@ void BloomFilterTree::traverseFilters() {
     }
 }
 
-BloomFilterNode * BloomFilterTree::search(int k) {
-    if (root == NULL) {
-        cout << "Tree is empty!";
-        return NULL;
-    }
-    else return root->search(k);
-}
 
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
@@ -58,22 +80,16 @@ void BloomFilterTree::insert(BloomFilter *filter) {
     }
 }
 
-bool BloomFilterTree::contains(int k) {
-
-    // If tree is empty return false
+void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty!";
-        return false;
+        root = new BloomFilterLeaf(t, size, NULL, NULL);
+        root->insertSimilarFilter(filter);
     }
     else {
-        return root->contains(k);
+        root->insertSimilarFilter(filter);
+        if (root->getParent() != NULL) {
+            root = root->getParent();
+        }
     }
 }
 
-BloomFilterNode * BloomFilterTree::getRoot() {
-    return root; 
-}
-
-BloomFilterVec * BloomFilterTree::getFiltersVec() {
-    return filtersvec; 
-}

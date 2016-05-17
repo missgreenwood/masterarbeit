@@ -227,7 +227,8 @@ KW 19 (35.75 h)
 
 
 KW 20 (noch 32.5 h)
-MO, 16.05. (7.25 h)
+Mo, 16.05. (7.25 h)
+Di, 17.05. (10:10 - )
 
 ## TODO
 
@@ -240,14 +241,8 @@ MO, 16.05. (7.25 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries
-		* Verwaltung d. Bloom-Filter im Baum (Einfügen, Nachbarinformationen, Lookup von Informationen, Update-Propagierung) -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
-		* Jeder physische Knoten managt die Information für seinen Zweig sowie Informationen über die Geschwisterknoten 
-		* Der Knoten mit der kleinsten ID in der internen Knoten-Information heißt repräsentativer Knoten; er managt die Informationen der korrespondierenden internen Knoten (vgl. Fig. 4 S. 319)
-		* Evtl.: "notification of change information": wird vom repräsentativen Knoten des höchsten Knoten in der Baumstruktur ausgeführt, der von der Änderung betroffen ist 
-
-		* insert function für BloomFilterLeaf
-
+		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
+		
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)

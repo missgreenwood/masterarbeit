@@ -6,7 +6,7 @@
 using namespace std;
 
 
-BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t) {
+BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t, filtersize) {
     next = NULL;
     prev = NULL;
     
@@ -24,10 +24,9 @@ BloomFilterLeaf::BloomFilterLeaf(int _t) : BloomFilterNode(_t) {
     }
 }
 
-BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t) {
+BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t, _s) {
     next = NULL;
     prev = NULL;
-    size = _s;
     
     filters = new int *[_t*2];
     for (int i=0; i<(_t*2); i++) {
@@ -40,10 +39,9 @@ BloomFilterLeaf::BloomFilterLeaf(int _t, int _s): BloomFilterNode(_t) {
     }
 }
 
-BloomFilterLeaf::BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t) {
+BloomFilterLeaf::BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next) : BloomFilterNode(_t, _s) {
     next = _next;
     prev = _prev;
-    size = _s; 
     // Allocate memory
     filters = new int *[_t*2];
     for (int i=0; i<_t*2; i++) {
@@ -85,7 +83,7 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
         setNext(l);
         BloomFilterNode *p = getParent();
         if (p == NULL) {
-            p = new BloomFilterIndexNode(getOrder());
+            p = new BloomFilterIndexNode(getOrder(), getFilterSize());
             setParent(p);
         }
         l->setParent(p);
@@ -96,8 +94,9 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
     }
 }
 
-void BloomFilterLeaf::insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
-    assert(false); 
+// TODO
+void BloomFilterLeaf::insertSimilarFilter(BloomFilter *filter) {
+    
 }
 
 BloomFilterNode *BloomFilterLeaf::search(int k) {
@@ -190,10 +189,6 @@ BloomFilterLeaf * BloomFilterLeaf::getNext() {
 
 int ** BloomFilterLeaf::getFilters() {
     return filters;
-}
-
-int BloomFilterLeaf::getFilterSize() {
-    return size;
 }
 
 void BloomFilterLeaf::traverseFilters() {

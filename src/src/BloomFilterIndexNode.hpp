@@ -12,14 +12,18 @@ private:
     BloomFilterNode **C;
     
 public:
-    BloomFilterIndexNode(int _t);
+    BloomFilterIndexNode(int _t, int _s);
     ~BloomFilterIndexNode();
     BloomFilterNode *search(int k);
+    
+    // Insertion methods
     void shiftAndInsert(BloomFilter *filter);
-    void insertKey(int key, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
     void insert(BloomFilter *filter);
     void insert(BloomFilter *filter, BloomFilterNode *leftnode, BloomFilterNode *rightNode);
+    void insertSimilarFilter(BloomFilter *filter); 
+    
     bool contains(int k);
+    int **getFilters();
     BloomFilterIndexNode *split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle);
     void traverse();
     void traverseFilters(); 

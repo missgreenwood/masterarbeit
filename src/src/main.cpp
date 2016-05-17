@@ -487,7 +487,6 @@ int main(int argc, const char *argv[]) {
     b2.traverse(); */
     
     // Test driver for class BloomFilter
-    // Instantiate one Bloom filter and call its methods
     
     cout << "\n\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
@@ -578,6 +577,17 @@ int main(int argc, const char *argv[]) {
     b1.traverse();
     cout << "\nTraverse b2 filters: ";
     b1.traverseFilters();
+    
+    cout << "\n\nCheck tree management helper methods:\n\n";
+    cout << "Compute Jaccard distance of f1 and f4: ";
+    int *arr1 = L1->getFilters()[0];
+    int *arr2 = L1->getFilters()[1];
+    L1->computeJaccard(arr1, arr2);
+    
+    cout << "\nCompute subset property of f1 and f2:";
+    cout << "\nCompute subset property of f1 and identical filter:";
+    cout << "\nCompute f1 AND f2:";
+    cout << "\nCompute f1 OR f2:";
     cout << endl;
     return 0;
 }
