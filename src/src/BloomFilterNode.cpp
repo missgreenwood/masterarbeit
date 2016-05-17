@@ -90,7 +90,6 @@ int BloomFilterNode::getFilterSize() {
     return size; 
 }
 
-// TODO
 float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {
     float count1 = 0;
     float count2 = 0;
@@ -107,16 +106,15 @@ float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {
         }
     }
     float count = count1+count2;
-    return same/count;
+    float res = (float)same/count;
+    return res;
 }
 
+// Return true if arr2 is subset of arr1
 bool BloomFilterNode::isSubset(int *arr1, int *arr2) {
     bool result = true;
-    int length = sizeof(arr1)/sizeof(int);
-    int length2 = sizeof(arr1)/sizeof(arr2);
-    assert(length == length2);
-    for (int i=0; i<length; i++) {
-        if (arr1[i] !=arr2[i]) {
+    for (int i=0; i<getFilterSize(); i++) {
+        if ((arr2[i] == 1) && (arr1[i] != arr2[i])) {
             result = false;
             break;
         }
@@ -124,10 +122,30 @@ bool BloomFilterNode::isSubset(int *arr1, int *arr2) {
     return result;
 }
 
-void BloomFilterNode::logicalAnd(int *arr1, int *arr2) {
-
+int * BloomFilterNode::logicalAnd(int *arr1, int *arr2) {
+    int *arr3 = new int[getFilterSize()];
+    for (int i=0; i<getFilterSize(); i++) {
+        if ((arr1[i] == 1) && (arr2[i] == 1)) {
+            arr3[i] = 1;
+        }
+        else {
+            arr3[i] = 0;
+        }
+        cout << arr3[i];
+    }
+    return arr3;
 }
 
-void BloomFilterNode::logicalOr(int *arr1, int *arr2) {
-
+int * BloomFilterNode::logicalOr(int *arr1, int *arr2) {
+    int *arr3 = new int[getFilterSize()];
+    for (int i=0; i<getFilterSize(); i++) {
+        if ((arr1[i] == 1) || (arr2[i] == 1)) {
+            arr3[i] = 1;
+        }
+        else {
+            arr3[i] = 0;
+        }
+        cout << arr3[i];
+    }
+    return arr3;
 }

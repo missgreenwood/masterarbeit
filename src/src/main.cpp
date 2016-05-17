@@ -579,15 +579,25 @@ int main(int argc, const char *argv[]) {
     b1.traverseFilters();
     
     cout << "\n\nCheck tree management helper methods:\n\n";
-    cout << "Compute Jaccard distance of f1 and f4: ";
+    cout << "Compute Jaccard distance of f1 and f2: ";
     int *arr1 = L1->getFilters()[0];
     int *arr2 = L1->getFilters()[1];
-    L1->computeJaccard(arr1, arr2);
+    cout << L1->computeJaccard(arr1, arr2);
     
-    cout << "\nCompute subset property of f1 and f2:";
-    cout << "\nCompute subset property of f1 and identical filter:";
-    cout << "\nCompute f1 AND f2:";
-    cout << "\nCompute f1 OR f2:";
+    cout << "\nCompute subset property of f1 and f2: ";
+    cout << L1->isSubset(arr1, arr2);
+    cout << "\nCompute subset property of f1 and identical filter: ";
+    int arr3[] = { 0, 1, 1, 0, 0, 1, 0, 1, 1, 1 };
+    cout << L1->isSubset(arr1, arr3);
+    cout << "\nCompute subset property of f1 and actual subset filter: ";
+    int arr4[] = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
+    cout << L1->isSubset(arr1, arr4); 
+    cout << "\nCompute f1 AND f2: ";
+    int *arr5 = L1->logicalAnd(arr1, arr2);
+    // cout << arr5;
+    cout << "\nCompute f1 OR f2: ";
+    arr5 = L1->logicalOr(arr1, arr2);
+    // cout << arr5;
     cout << endl;
     return 0;
 }

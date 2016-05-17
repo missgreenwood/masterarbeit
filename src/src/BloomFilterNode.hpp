@@ -51,8 +51,8 @@ public:
     // Helper methods for tree management
     float computeJaccard(int *arr1, int *arr2);
     bool isSubset(int *arr1, int *arr2);
-    void logicalAnd(int *arr1, int *arr2);
-    void logicalOr(int *arr1, int *arr2);
+    int *logicalAnd(int *arr1, int *arr2);
+    int *logicalOr(int *arr1, int *arr2);
 };
 
 #endif 
