@@ -73,10 +73,6 @@ int BloomFilterNode::getFilterSize() {
     return filtersize;
 }
 
-BloomFilter ** BloomFilterNode::getFilters() {
-    return filters;
-}
-
 void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
     assert(getCount() < getMax());
     int id = filter->getId();

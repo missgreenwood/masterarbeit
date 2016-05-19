@@ -17,10 +17,6 @@ BloomFilterIndexNode::~BloomFilterIndexNode() {
     delete[] C;
 }
 
-BloomFilterNode ** BloomFilterIndexNode::getChildren() {
-    return C; 
-}
-
 // TODO
 BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle) {
     assert(getCount() == getMax());
@@ -120,12 +116,26 @@ void BloomFilterIndexNode::insert(BloomFilter *filter) {
     l->insert(filter);
 }
 
-// TODO
 void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
+    
     int id = filter->getId();
+    
     if (getCount()<getMax()) {
         int index = indexOfKey(id);
         shiftAndInsert(filter);
+        int *parentKeys = getKeys();
+        cout << "Count: " << getCount(); 
+        cout << "\nParent's new keys:";
+        for (int i=0; i<getCount(); i++) {
+            cout << " " << parentKeys[i];
+        }
+        cout << "\nParent's new filters: ";
+        for (int i=0; i<getCount(); i++) {
+            cout << "|";
+            filters[i]->printArr();
+        }
+        cout << "|" << endl; 
+        
         C[index] = leftNode;
         C[index+1] = rightNode;
     }
@@ -138,9 +148,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             setParent(p);
         }
         s->setParent(p);
-        int correctId = filter->getId();
-        filter->setId(mid);
         p->insert(filter, this, s);
-        filter->setId(correctId); 
     }
 }

@@ -34,7 +34,6 @@ public:
     void increment();
     void decrement();
     int getFilterSize();
-    BloomFilter **getFilters();
     
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;

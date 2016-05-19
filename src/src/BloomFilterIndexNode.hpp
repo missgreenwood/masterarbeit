@@ -15,7 +15,6 @@ public:
     BloomFilterIndexNode(int _t, int _s);
     ~BloomFilterIndexNode();
     
-    BloomFilterNode **getChildren(); 
     BloomFilterIndexNode *split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle);
     bool contains(int k);
     void traverse();

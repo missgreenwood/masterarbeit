@@ -558,11 +558,28 @@ int main(int argc, const char *argv[]) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
     
+    cout << "Split l2 and traverse new sibling l3: ";
     BloomFilterLeaf *l3 = l2.split(&f101);
+    l3->traverse();
+    cout << endl;
+    l3->traverseFilters(); 
     
-    // l2.insert(&f101);
+    cout << "\nInsert filters into l2: f2, f8, f9, f101: ";
+    l2.insert(&f2);
+    l2.insert(&f8);
+    l2.insert(&f9);
+    l2.traverse();
+    cout << endl;
+    l2.traverseFilters();
+    l2.insert(&f101);
+    l2.traverse();
+    cout << "\nTraverse new parent: ";
+    BloomFilterNode *parent = l2.getParent();
+    parent->traverse();
+    cout << endl;
+    parent->traverseFilters();
     
-    /* // Test driver for class BloomFilterTree
+    // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
@@ -640,6 +657,6 @@ int main(int argc, const char *argv[]) {
     I1->traverse();
     // b1.traverse(); */
     
-    cout << endl; 
+    cout << endl;
     return 0;
 }
