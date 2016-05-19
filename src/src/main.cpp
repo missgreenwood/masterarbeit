@@ -579,7 +579,7 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     parent->traverseFilters();
     
-    // Test driver for class BloomFilterTree
+    /* // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
