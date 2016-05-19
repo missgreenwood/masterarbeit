@@ -16,10 +16,10 @@ private:
     int filtersize;
     int t;                  // Order/minimum degree
     int *keys;              // Array of keys
-    BloomFilter **filters;
     BloomFilterNode *parent;
     
 public:
+    BloomFilter **filters;
     BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
     

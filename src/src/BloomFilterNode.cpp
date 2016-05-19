@@ -9,9 +9,9 @@ BloomFilterNode::BloomFilterNode(int _t, int _s): n(0), filtersize(_s), t(_t), p
     
     // Allocate memory
     keys = new int[2*_t];
-    filters = new BloomFilter *[2*_t];
+    filters = new BloomFilter *[(2*_t)];
     
-    for (int i=0; i<2*_t; i++) {
+    for (int i=0; i<(2*_t); i++) {
         filters[i] = NULL;
     }
 }
@@ -83,11 +83,9 @@ void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
     int index = indexOfKey(id);
     for (int i=getCount()-1; i>=index; i--) {
         keys[i+1] = keys[i];
-    }
-    keys[index] = id;
-    for (int i=getCount()-1; i>=index; i--) {
         filters[i+1] = filters[i];
     }
+    keys[index] = id;
     filters[index] = filter; 
     increment();
     return;

@@ -21,52 +21,76 @@ BloomFilterLeaf::~BloomFilterLeaf() {
     delete next;
 }
 
-// TODO
 BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     assert(getCount() == getMax());
+    
     int *keys = getKeys();
     int max = getMax();
     int *merged = new int[max+1];
+    BloomFilter **mergedFilters = new BloomFilter*[max+1];
     int id = f->getId();
     int index = indexOfKey(id);
-    int *data = f->getArr();
+    
+    // Merge keys and filters together
+    cout << "\nMerged filters:";
     for (int i=0; i<index; i++) {
         merged[i] = keys[i];
+        cout << "|";
+        mergedFilters[i] = filters[i];
+        mergedFilters[i]->printArr();
     }
+    cout << "|";
+    
+    cout << "\nNew filter: ";
     merged[index] = id;
+    mergedFilters[index] = f;
+    mergedFilters[index]->printArr();
     for (int i=index+1; i<max+1; i++) {
         merged[i] = keys[i-1];
-    }
-    BloomFilterLeaf *l = new BloomFilterLeaf(getOrder(), getFilterSize());
-    int half = (max+1)/2;
-    setCount(half);
-    for (int i=0; i<half; i++) {
-        keys[i] = merged[i];
+        mergedFilters[i] = filters[i-1];
     }
     
+    BloomFilterLeaf *l = new BloomFilterLeaf(getOrder(), getFilterSize());
+    
+    // Divide keys and filters
+    int half = (max+1)/2;
+    setCount(half);
+    
+    // Keep half of keys and filters
+    cout << "\nMy new filters: ";
+    for (int i=0; i<half; i++) {
+        keys[i] = merged[i];
+        filters[i] = mergedFilters[i];
+        cout << "|";
+        filters[i]->printArr();
+    }
+    cout << "|";
+    cout << "\nMy new keys:";
+    for (int i=0; i<getCount(); i++) {
+        cout << " " << keys[i];
+    }
+    
+    int *newNodeKeys = l->getKeys();
+    
     // Hand over keys and filters to new sibling
+    cout << "\nSibling's new filters: ";
     for (int i=half; i<max+1; i++) {
-        l->getKeys()[i-half] = merged[i];
+        newNodeKeys[i-half] = merged[i];
+        l->filters[i-half] = mergedFilters[i];
         l->increment();
+        cout << "|";
+        l->filters[i-half]->printArr();
     }
-    for (int i=half; i<max; i++) {
-        for (int j=0; j<l->getFilterSize(); j++) {
-            l->getFilters()[i-half][j] = getFilters()[i][j];
-        }
-    }
-    for (int j=0; j<l->getFilterSize(); j++) {
-        l->getFilters()[l->getCount()-1][j] = data[j];
+    cout << "|";
+    cout << "\nSibling's new keys:";
+    for (int i=0; i<l->getCount(); i++) {
+        cout << " " << newNodeKeys[i];
     }
     
     // Delete filters that have been handed over
     for (int i=half; i<max; i++) {
-        for (int j=0; j<getFilterSize(); j++) {
-            getFilters()[i][j] = 0;
-        }
+        getFilters()[i] = NULL;
     }
-    
-    // Decrement self
-    setCount(half); 
     
     // Update sibling pointers
     if (next) {
@@ -75,6 +99,7 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     }
     
     delete[] merged;
+    delete[] mergedFilters;
     return l;
 }
 
@@ -88,7 +113,6 @@ void BloomFilterLeaf::traverse() {
     cout << "|";
 }
 
-// TODO 
 void BloomFilterLeaf::traverseFilters() {
     assert (getCount() <= getMax());
     BloomFilter **filters = getFilters();

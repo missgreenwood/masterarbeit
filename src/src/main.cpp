@@ -557,6 +557,9 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<l2.getCount(); i++) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
+    
+    BloomFilterLeaf *l3 = l2.split(&f101);
+    
     // l2.insert(&f101);
     
     /* // Test driver for class BloomFilterTree
@@ -635,8 +638,8 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     BloomFilterNode *I1 = b1.search(1);
     I1->traverse();
-    // b1.traverse();
+    // b1.traverse(); */
     
-    cout << endl; */
+    cout << endl; 
     return 0;
 }
