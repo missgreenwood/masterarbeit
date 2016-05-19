@@ -32,7 +32,7 @@ class BloomFilterTree {
     
 private:
     int t;                      // Order = minimum degree
-    int size;                   // Size of associated Bloom filters (# of bits)
+    int filtersize;             // Size of associated Bloom filters (# of bits)
     BloomFilterVec *filtersvec; // Associated Bloom filter vector
     
 public:
@@ -62,9 +62,6 @@ public:
     
     // Insertion methods
     void insert(BloomFilter *filter);
-    void insertSimilarFilter(BloomFilter *filter);
-    
-    
 };
 
 #endif

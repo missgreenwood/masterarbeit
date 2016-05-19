@@ -6,10 +6,10 @@
 
 // Constructor with parameters t and size
 // Initializes tree as empty
-BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), size(_s), root(NULL) {};
+BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), filtersize(_s), root(NULL) {};
 
 // TODO
-BloomFilterTree::BloomFilterTree(int _t, int _s, BloomFilterVec *_f): t(_t), root(NULL) {
+BloomFilterTree::BloomFilterTree(int _t, int _s, BloomFilterVec *_f): t(_t), filtersize(_s), root(NULL) {
     filtersvec = _f;
 }
 
@@ -66,10 +66,10 @@ void BloomFilterTree::traverseFilters() {
     }
 }
 
-
+// TODO 
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
-        root = new BloomFilterLeaf(t, size, NULL, NULL);
+        root = new BloomFilterLeaf(t, filtersize, NULL, NULL);
         root->insert(filter);
     }
     else {
@@ -79,17 +79,3 @@ void BloomFilterTree::insert(BloomFilter *filter) {
         }
     }
 }
-
-void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
-    if (root == NULL) {
-        root = new BloomFilterLeaf(t, size, NULL, NULL);
-        root->insertSimilarFilter(filter);
-    }
-    else {
-        root->insertSimilarFilter(filter);
-        if (root->getParent() != NULL) {
-            root = root->getParent();
-        }
-    }
-}
-

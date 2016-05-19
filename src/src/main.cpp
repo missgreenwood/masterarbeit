@@ -548,7 +548,6 @@ int main(int argc, const char *argv[]) {
     l2.insert(&f10);
     l2.insert(&f17);
     l2.insert(&f25);
-    // l2.insert(&f101);
     cout << "\nTraverse l2: ";
     l2.traverse();
     cout << "\nTraverse l2 filters: ";
@@ -558,9 +557,9 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<l2.getCount(); i++) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
-    l2.traverse();
+    // l2.insert(&f101);
     
-    // Test driver for class BloomFilterTree
+    /* // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
@@ -633,11 +632,11 @@ int main(int argc, const char *argv[]) {
         cout << " " << rootKeys[i];
     }
     // b1.insert(&f101);
-    cout << endl; 
+    cout << endl;
     BloomFilterNode *I1 = b1.search(1);
     I1->traverse();
     // b1.traverse();
     
-    cout << endl;
+    cout << endl; */
     return 0;
 }

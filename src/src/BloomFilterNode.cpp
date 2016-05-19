@@ -4,38 +4,22 @@
 #include "BloomFilterNode.hpp"
 
 
-// Constructor with parameters t and size
-BloomFilterNode::BloomFilterNode(int _t, int _s): t(_t), n(0), size(_s) {
-    parent = NULL;
+// Constructor with parameters t and filtersize
+BloomFilterNode::BloomFilterNode(int _t, int _s): n(0), filtersize(_s), t(_t), parent(NULL) {
+    
+    // Allocate memory
     keys = new int[2*_t];
+    filters = new BloomFilter *[2*_t];
+    
+    for (int i=0; i<2*_t; i++) {
+        filters[i] = NULL;
+    }
 }
 
 BloomFilterNode::~BloomFilterNode() {
     delete parent;
     delete[] keys;
-}
-
-void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
-    assert(n < getMax());
-    int id = filter->getId();
-    int index = indexOfKey(id);
-    for (int i=n-1; i>=index; i--) {
-        keys[i+1] = keys[i];
-    }
-    keys[index] = id;
-    increment();
-    return; 
-}
-
-void BloomFilterNode::shiftAndInsertKey(int k) {
-    assert(getCount() < getMax());
-    int index = indexOfKey(k);
-    for (int i=n-1; i>=index; i--) {
-        keys[i+1] = keys[i];
-    }
-    keys[index] = k;
-    increment();
-    return;
+    delete[] filters;
 }
 
 int BloomFilterNode::getOrder() {
@@ -56,18 +40,6 @@ BloomFilterNode * BloomFilterNode::getParent() {
 
 void BloomFilterNode::setParent(BloomFilterNode *node) {
     parent = node;
-}
-
-void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
-    assert(false);
-}
-
-void BloomFilterNode::insertKey(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
-    assert(false); 
-}
-
-void BloomFilterNode::insertSimilarFilter(BloomFilter *filter) {
-    assert(false);
 }
 
 int BloomFilterNode::indexOfKey(int k) {
@@ -94,11 +66,35 @@ void BloomFilterNode::increment() {
 }
 
 void BloomFilterNode::decrement() {
-    n--; 
+    n--;
 }
 
 int BloomFilterNode::getFilterSize() {
-    return size; 
+    return filtersize;
+}
+
+BloomFilter ** BloomFilterNode::getFilters() {
+    return filters;
+}
+
+void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
+    assert(getCount() < getMax());
+    int id = filter->getId();
+    int index = indexOfKey(id);
+    for (int i=getCount()-1; i>=index; i--) {
+        keys[i+1] = keys[i];
+    }
+    keys[index] = id;
+    for (int i=getCount()-1; i>=index; i--) {
+        filters[i+1] = filters[i];
+    }
+    filters[index] = filter; 
+    increment();
+    return;
+}
+
+void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+    assert(false);
 }
 
 float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {

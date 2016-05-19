@@ -11,47 +11,41 @@
 
 
 class BloomFilterNode {
-    
 private:
-    int *keys;              // Array of keys
     int n;                  // Current # of keys
-    BloomFilterNode *parent;
-    int size; 
-    
-protected:
+    int filtersize;
     int t;                  // Order/minimum degree
+    int *keys;              // Array of keys
+    BloomFilter **filters;
+    BloomFilterNode *parent;
     
 public:
     BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
+    
     int getOrder();
     int getCount();
     void setCount(int count);
     BloomFilterNode *getParent();
     void setParent(BloomFilterNode *node);
-    virtual BloomFilterNode *search(int k) = 0;
-    
-    // Insertion methods
-    virtual void shiftAndInsert(BloomFilter *filter);
-    virtual void shiftAndInsertKey(int k);
-    
-    virtual void insert(BloomFilter *filter) = 0;
-    virtual void insertKey(int k) = 0;
-    virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
-    virtual void insertKey(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode); 
-    virtual void insertSimilarFilter(BloomFilter *filter);
-
     int indexOfKey(int k);
     int *getKeys();
-    virtual void traverse() = 0;
-    virtual void traverseFilters() = 0; 
-    virtual bool contains(int k) = 0;
-    virtual int **getFilters() = 0; 
     int getMax();
     void increment();
     void decrement();
     int getFilterSize();
+    BloomFilter **getFilters();
     
+    virtual void traverse() = 0;
+    virtual void traverseFilters() = 0;
+    virtual bool contains(int k) = 0;
+    virtual BloomFilterNode *search(int k) = 0;
+    
+    // Insertion methods
+    virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    virtual void insert(BloomFilter *filter) = 0;
+
     // Helper methods for tree management
     float computeJaccard(int *arr1, int *arr2);
     bool isSubset(int *arr1, int *arr2);

@@ -79,7 +79,6 @@ void BloomFilter::printArr() {
     for (int i=0; i<getSize(); i++) {
         cout << dataArr[i];
     }
-    cout << endl;
 }
 
 void BloomFilter::initRandom() {
