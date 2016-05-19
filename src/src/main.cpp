@@ -559,13 +559,13 @@ int main(int argc, const char *argv[]) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
     
-    cout << "Split l2 and traverse new sibling l3: ";
+    cout << "\nSplit l2 and traverse new sibling l3:\n";
     BloomFilterLeaf *l3 = l2.split(&f101);
     l3->traverse();
     cout << endl;
     l3->traverseFilters(); 
     
-    cout << "\nInsert filters into l2: f2, f8, f9, f101: ";
+    cout << "\n\nInsert filters into l2: f2, f8, f9:\n";
     l2.insert(&f2);
     l2.insert(&f8);
     l2.insert(&f9);
@@ -573,8 +573,10 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     l2.traverseFilters();
     l2.insert(&f101);
+    cout << "Insert into l2: f101\n";
+    cout << "\nTraverse old leaf: ";
     l2.traverse();
-    cout << "\nTraverse new parent: ";
+    cout << "\nTraverse new parent:\n";
     BloomFilterNode *parent = l2.getParent();
     parent->traverse();
     cout << endl;
@@ -622,7 +624,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nf1 OR f2: ";
     fO->printArr();
     
-    cout << "Check correct tree construction:\n";
+    cout << "\n\nCheck correct tree construction:\n";
     BloomFilterNode *L1 = b1.search(1);
     BloomFilterNode *L2 = b1.search(17);
     // BloomFilterNode *root = L1->getParent();
@@ -631,7 +633,7 @@ int main(int argc, const char *argv[]) {
     L1->traverse();
     cout << "\nLeft leaf filters: ";
     L1->traverseFilters();
-    cout << "\n\nRight leaf: ";
+    cout << "\nRight leaf: ";
     L2->traverse();
     cout << "\nRight leaf filters: ";
     L2->traverseFilters();
@@ -651,8 +653,19 @@ int main(int argc, const char *argv[]) {
     cout << "\nTraverse b1 filters: ";
     b1.traverseFilters();
     
-    cout << "\n\nCheck correct tree construction (level 3 tree):\n";
-    /* cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
+    cout << "\n\nCheck search functions: ";
+    cout << "\n\nSearch in leaf (key 1):\n";
+    BloomFilterNode *L3 = l2.search(1);
+    L3->traverse();
+    L3->traverseFilters();
+    cout << "\nSearch in leaf (key 10):\n";
+    
+    L3 = l3->search(10);
+    L3->traverse();
+    L3->traverseFilters();
+    
+    /* cout << "\n\nCheck correct tree construction (level 3 tree):\n";
+    cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
     b1.insert(&f25);
     b1.insert(&f2);
     b1.insert(&f8);

@@ -226,11 +226,11 @@ KW 19 (35.75 h)
 * So, 15.05. (4.5 h)
 
 
-KW 20 (noch 12.25 h)
+KW 20 (noch 12 h)
 * Mo, 16.05. (7.25 h)
 * Di, 17.05. (3.5 h)
 * Mi, 18.05. (8 h)
-* Do, 19.05. (8.75 h)
+* Do, 19.05. (9 h)
 
 ## TODO
 
@@ -243,6 +243,8 @@ KW 20 (noch 12.25 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
+		* Check search and contains functions
+		* Check 3 level tree construction 
 		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
 		
 ## TODO Ausarbeitung 
