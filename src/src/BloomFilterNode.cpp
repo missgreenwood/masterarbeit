@@ -91,10 +91,12 @@ void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, Bloo
     assert(false);
 }
 
-float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {
+float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
     float count1 = 0;
     float count2 = 0;
-    float same = 0;
+    float intersection = 0;
+    int *arr1 = f1->getArr();
+    int *arr2 = f2->getArr();
     for (int i=0; i<getFilterSize(); i++) {
         if (arr1[i] == 1) {
             count1++;
@@ -103,50 +105,49 @@ float BloomFilterNode::computeJaccard(int *arr1, int *arr2) {
             count2++;
         }
         if ((arr1[i] == 1) && (arr2[i] == 1)) {
-            same++;
+            intersection++;
         }
     }
-    float count = count1+count2;
-    float res = (float)same/count;
-    return res;
+    float unite = count1+count2;
+    float result = (float) intersection/unite;
+    return result;
 }
 
-// Return true if arr2 is subset of arr1
-bool BloomFilterNode::isSubset(int *arr1, int *arr2) {
+// Return true if f2 is subset of f1
+bool BloomFilterNode::isSubset(BloomFilter *f1, BloomFilter *f2) {
     bool result = true;
+    int *arr1 = f1->getArr();
+    int *arr2 = f2->getArr();
     for (int i=0; i<getFilterSize(); i++) {
         if ((arr2[i] == 1) && (arr1[i] != arr2[i])) {
             result = false;
             break;
         }
     }
+    return result; 
+}
+
+BloomFilter * BloomFilterNode::logicalAnd(BloomFilter *f1, BloomFilter *f2) {
+     int *arr1 = f1->getArr();
+     int *arr2 = f2->getArr();
+     BloomFilter *result = new BloomFilter(getFilterSize(), rand());
+     for (int i=0; i<getFilterSize(); i++) {
+         if ((arr1[i] == 1) && (arr2[i] == 1)) {
+             result->setValue(i, 1);
+         }
+     }
+     return result;
+ }
+
+
+BloomFilter * BloomFilterNode::logicalOr(BloomFilter *f1, BloomFilter *f2) {
+    int *arr1 = f1->getArr();
+    int *arr2 = f2->getArr();
+    BloomFilter *result = new BloomFilter(getFilterSize(), rand());
+    for (int i=0; i<getFilterSize(); i++) {
+        if ((arr1[i] == 1) || (arr2[i] == 1 )) {
+            result->setValue(i, 1);
+        }
+    }
     return result;
-}
-
-int * BloomFilterNode::logicalAnd(int *arr1, int *arr2) {
-    int *arr3 = new int[getFilterSize()];
-    for (int i=0; i<getFilterSize(); i++) {
-        if ((arr1[i] == 1) && (arr2[i] == 1)) {
-            arr3[i] = 1;
-        }
-        else {
-            arr3[i] = 0;
-        }
-        cout << arr3[i];
-    }
-    return arr3;
-}
-
-int * BloomFilterNode::logicalOr(int *arr1, int *arr2) {
-    int *arr3 = new int[getFilterSize()];
-    for (int i=0; i<getFilterSize(); i++) {
-        if ((arr1[i] == 1) || (arr2[i] == 1)) {
-            arr3[i] = 1;
-        }
-        else {
-            arr3[i] = 0;
-        }
-        cout << arr3[i];
-    }
-    return arr3;
 }

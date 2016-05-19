@@ -46,10 +46,10 @@ public:
     virtual void insert(BloomFilter *filter) = 0;
 
     // Helper methods for tree management
-    float computeJaccard(int *arr1, int *arr2);
-    bool isSubset(int *arr1, int *arr2);
-    int *logicalAnd(int *arr1, int *arr2);
-    int *logicalOr(int *arr1, int *arr2);
+    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
+    bool isSubset(BloomFilter *f1, BloomFilter *f2);
+    BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
+    BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
 };
 
 #endif 

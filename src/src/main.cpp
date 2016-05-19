@@ -540,6 +540,7 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BloomFilterLeaf
     cout << "\n\nCLASS BloomFilterLeaf";
     cout << "\n---------------------\n\n";
+    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
     BloomFilterLeaf l2(3, f1.getSize());
     cout << "Insert filters into l2: f1, f4, f7, f10, f17, f25\n";
     l2.insert(&f1);
@@ -579,10 +580,9 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     parent->traverseFilters();
     
-    /* // Test driver for class BloomFilterTree
+    // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
     cout << "Create instance of BloomFilterTree with minimum degree 2/max. elements 4, filter size 10 (b1)\n\n";
     BloomFilterTree b1(2, 10);
     cout << "Insert filters into b1: f1, f4, f7, f10, f17\n";
@@ -593,28 +593,36 @@ int main(int argc, const char *argv[]) {
     b1.insert(&f17);
     
     cout << "\nCheck tree management helper methods:\n\n";
-    cout << "Compute Jaccard distance of f1 and f2: ";
-    int *arr1 = l2.getFilters()[0];
-    int *arr2 = l2.getFilters()[1];
-    cout << l2.computeJaccard(arr1, arr2);
+    BloomFilter f20(10, 20);
+    f20.setValue(1, 1);
+    f20.setValue(9, 1);
+    BloomFilter *fA = l2.logicalAnd(&f1, &f2);
+    BloomFilter *fO = l2.logicalOr(&f1, &f2);
+    cout << "f1: ";
+    f1.printArr();
+    cout << "\nf2: ";
+    f2.printArr();
+    cout << endl;
+    cout << "f20: ";
+    f20.printArr();
+    cout << "\n\nJaccard distance of f1 and f2: ";
+    float jaccard = l2.computeJaccard(&f1, &f2);
+    cout << jaccard;
+    cout << "\nf2 subset of f1: ";
+    bool subset = l2.isSubset(&f1, &f2);
+    cout << subset;
+    cout << "\nf1 subset of f1: ";
+    subset = l2.isSubset(&f1, &f1);
+    cout << subset << endl;
+    cout << "f20 subset of f1: ";
+    subset = l2.isSubset(&f1, &f20);
+    cout << subset;
+    cout << "\nf1 AND f2: ";
+    fA->printArr();
+    cout << "\nf1 OR f2: ";
+    fO->printArr();
     
-    BloomFilterNode *L1 = b1.search(1);
-    BloomFilterNode *L2 = b1.search(17);
-    cout << "\nCompute subset property of f1 and f2: ";
-    cout << L1->isSubset(arr1, arr2);
-    cout << "\nCompute subset property of f1 and identical filter: ";
-    int arr3[] = { 0, 1, 1, 0, 0, 1, 0, 1, 1, 1 };
-    cout << L1->isSubset(arr1, arr3);
-    cout << "\nCompute subset property of f1 and actual subset filter: ";
-    int arr4[] = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
-    cout << L1->isSubset(arr1, arr4);
-    cout << "\nCompute f1 AND f2: ";
-    int *arr5 = L1->logicalAnd(arr1, arr2);
-    cout << "\nCompute f1 OR f2: ";
-    arr5 = L1->logicalOr(arr1, arr2);
-    
-    
-    BloomFilterNode *root = L1->getParent();
+    /* BloomFilterNode *root = L1->getParent();
     cout << "\nLeft leaf: ";
     L1->traverse();
     cout << "\nLeft leaf's filters: ";
