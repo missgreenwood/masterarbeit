@@ -583,7 +583,7 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    cout << "Create instance of BloomFilterTree with minimum degree 2/max. elements 4, filter size 10 (b1)\n\n";
+    cout << "Create instance of BloomFilterTree with minimum degree 2/max. elements 4, filter size 10, 2 levels (b1)\n\n";
     BloomFilterTree b1(2, 10);
     cout << "Insert filters into b1: f1, f4, f7, f10, f17\n";
     b1.insert(&f1);
@@ -622,26 +622,37 @@ int main(int argc, const char *argv[]) {
     cout << "\nf1 OR f2: ";
     fO->printArr();
     
-    /* BloomFilterNode *root = L1->getParent();
+    cout << "Check correct tree construction:\n";
+    BloomFilterNode *L1 = b1.search(1);
+    BloomFilterNode *L2 = b1.search(17);
+    // BloomFilterNode *root = L1->getParent();
+    BloomFilterNode *root = b1.getRoot();
     cout << "\nLeft leaf: ";
     L1->traverse();
-    cout << "\nLeft leaf's filters: ";
+    cout << "\nLeft leaf filters: ";
     L1->traverseFilters();
     cout << "\n\nRight leaf: ";
     L2->traverse();
-    cout << "\nRight leaf's filters: ";
+    cout << "\nRight leaf filters: ";
     L2->traverseFilters();
     rootKeys = root->getKeys();
-    cout << "\n\nRoot's keys:";
+    cout << "\nRoot keys:";
     for (int i=0; i<root->getCount(); i++) {
         cout << " " << rootKeys[i];
     }
-    cout << "\n\nTraverse b1: ";
+    cout << "\nRoot filters:";
+    for (int i=0; i<root->getCount(); i++) {
+        cout << "|";
+        root->filters[i]->printArr();
+    }
+    cout << "|";
+    cout << "\nTraverse b1: ";
     b1.traverse();
     cout << "\nTraverse b1 filters: ";
     b1.traverseFilters();
     
-    cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
+    cout << "\n\nCheck correct tree construction (level 3 tree):\n";
+    /* cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
     b1.insert(&f25);
     b1.insert(&f2);
     b1.insert(&f8);

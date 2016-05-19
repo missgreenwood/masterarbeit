@@ -30,6 +30,7 @@ bool BloomFilterTree::contains(int k) {
     }
 }
 
+// TODO (findet das falsche Blatt, falls k <= Wurzelschlüssel)
 BloomFilterNode * BloomFilterTree::search(int k) {
     if (root == NULL) {
         cout << "Tree is empty!";
