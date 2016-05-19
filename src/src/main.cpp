@@ -18,7 +18,7 @@
 #include "BPlusTree.hpp"
 #include "BloomFilterTree.hpp"
 
-using namespace std; 
+using namespace std;
 
 int main(int argc, const char *argv[]) {
     
@@ -51,7 +51,7 @@ int main(int argc, const char *argv[]) {
     
     // Maximum tolerable false positive probability? [0,1]
     parameters.false_positive_probability = 0.0001;  // 1 in 10000
-
+    
     cout << "Projected element count = " << parameters.projected_element_count << ", maximum false probability = " << parameters.false_positive_probability << endl << endl;
     
     if (!parameters) {
@@ -185,7 +185,7 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nCheck index function:" << endl;
     int *keys = l1.getKeys();
     for (int i=0; i<l1.getCount(); i++) {
-        cout << "Key: " << keys[i] << ", index: " << l1.indexOfKey(keys[i]) << endl; 
+        cout << "Key: " << keys[i] << ", index: " << l1.indexOfKey(keys[i]) << endl;
     }
     cout << "\nCheck remove function for leaf:";
     cout << "\n\nTry to remove non existing key 23 from l1:\n";
@@ -202,7 +202,7 @@ int main(int argc, const char *argv[]) {
     l1.traverse();
     cout << "\n\nRemove last remaining key 9 from l1, should not create underflow:\n";
     l1.remove(9);
-    l1.traverse(); 
+    l1.traverse();
     cout << "\n\nCreate instance of BPlusTree with minimum degree 2/max. elements 3 (b3)";
     BPlusTree b3(2);
     cout << "\n\nInsert keys into b3: 1, 4, 7, 10, 17, 25, 2, 8\n";
@@ -465,7 +465,7 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<leftIndex->getCount(); i++) {
         cout << " " << leftIndexKeys[i];
     }
-    leaf5 = b2.search(27); 
+    leaf5 = b2.search(27);
     rightIndex = leaf5->getParent();
     cout << "\nRight index node's keys:";
     for (int i=0; i<rightIndex->getCount(); i++) {
@@ -475,22 +475,22 @@ int main(int argc, const char *argv[]) {
     b2.traverse();
     
     /* cout << "\n\nCASE 7a - Underflow in parent, merge parent with previous index node (11, 26):\n";
-    b2.remove(11);
-    b2.remove(26);
-    cout << endl;
-    b2.traverse();
-    
-    cout << "\n\nCASE 7b - Underflow in parent, merge parent with next index node (3, 6):\n";
-    b2.remove(3);
-    b2.remove(6); 
-    cout << endl;
-    b2.traverse(); */
+     b2.remove(11);
+     b2.remove(26);
+     cout << endl;
+     b2.traverse();
+     
+     cout << "\n\nCASE 7b - Underflow in parent, merge parent with next index node (3, 6):\n";
+     b2.remove(3);
+     b2.remove(6);
+     cout << endl;
+     b2.traverse(); */
     
     // Test driver for class BloomFilter
     
     cout << "\n\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create 10 instances of BloomFilter with ids 1, 4, 7, 10, 17, 25, 2, 8, 9, 26, array length 10 and random values\n\n";
+    cout << "Create 15 instances of BloomFilter with ids 1, 4, 7, 10, 17, 25, 2, 8, 9, 26, 96, 97, 98, 99, array length 10 and random values\n\n";
     BloomFilter f1(10, 1);
     BloomFilter f4(10, 4);
     BloomFilter f7(10, 7);
@@ -501,6 +501,11 @@ int main(int argc, const char *argv[]) {
     BloomFilter f8(10, 8);
     BloomFilter f9(10, 9);
     BloomFilter f26(10, 26);
+    BloomFilter f96(10, 96);
+    BloomFilter f97(10, 97);
+    BloomFilter f98(10, 98);
+    BloomFilter f99(10, 99);
+    BloomFilter f101(10, 101);
     f1.initRandom();
     f1.printData();
     f4.initRandom();
@@ -521,6 +526,16 @@ int main(int argc, const char *argv[]) {
     f9.printData();
     f26.initRandom();
     f26.printData();
+    f96.initRandom();
+    f96.printData();
+    f97.initRandom();
+    f97.printData();
+    f98.initRandom();
+    f98.printData();
+    f99.initRandom();
+    f99.printData();
+    f101.initRandom();
+    f101.printData();
     
     // Test driver for class BloomFilterLeaf
     cout << "\n\nCLASS BloomFilterLeaf";
@@ -533,6 +548,7 @@ int main(int argc, const char *argv[]) {
     l2.insert(&f10);
     l2.insert(&f17);
     l2.insert(&f25);
+    // l2.insert(&f101);
     cout << "\nTraverse l2: ";
     l2.traverse();
     cout << "\nTraverse l2 filters: ";
@@ -542,23 +558,43 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<l2.getCount(); i++) {
         cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
     }
+    l2.traverse();
     
     // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    cout << "Create instance of BloomFilterTree with minimum degree 3/max. elements 6, filter size 10 (b1)\n\n";
-    BloomFilterTree b1(3, 10);
-    cout << "Insert filters into b1: f1, f4, f7, f10, f17, f25, f2\n";
+    cout << "Create instance of BloomFilterTree with minimum degree 2/max. elements 4, filter size 10 (b1)\n\n";
+    BloomFilterTree b1(2, 10);
+    cout << "Insert filters into b1: f1, f4, f7, f10, f17\n";
     b1.insert(&f1);
     b1.insert(&f4);
     b1.insert(&f7);
     b1.insert(&f10);
     b1.insert(&f17);
-    b1.insert(&f25);
-    b1.insert(&f2);
+    
+    cout << "\nCheck tree management helper methods:\n\n";
+    cout << "Compute Jaccard distance of f1 and f2: ";
+    int *arr1 = l2.getFilters()[0];
+    int *arr2 = l2.getFilters()[1];
+    cout << l2.computeJaccard(arr1, arr2);
+    
     BloomFilterNode *L1 = b1.search(1);
-    BloomFilterNode *L2 = b1.search(25);
+    BloomFilterNode *L2 = b1.search(17);
+    cout << "\nCompute subset property of f1 and f2: ";
+    cout << L1->isSubset(arr1, arr2);
+    cout << "\nCompute subset property of f1 and identical filter: ";
+    int arr3[] = { 0, 1, 1, 0, 0, 1, 0, 1, 1, 1 };
+    cout << L1->isSubset(arr1, arr3);
+    cout << "\nCompute subset property of f1 and actual subset filter: ";
+    int arr4[] = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
+    cout << L1->isSubset(arr1, arr4);
+    cout << "\nCompute f1 AND f2: ";
+    int *arr5 = L1->logicalAnd(arr1, arr2);
+    cout << "\nCompute f1 OR f2: ";
+    arr5 = L1->logicalOr(arr1, arr2);
+    
+    
     BloomFilterNode *root = L1->getParent();
     cout << "\nLeft leaf: ";
     L1->traverse();
@@ -573,31 +609,35 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<root->getCount(); i++) {
         cout << " " << rootKeys[i];
     }
-    cout << "\n\nTraverse b2: ";
+    cout << "\n\nTraverse b1: ";
     b1.traverse();
-    cout << "\nTraverse b2 filters: ";
+    cout << "\nTraverse b1 filters: ";
     b1.traverseFilters();
     
-    cout << "\n\nCheck tree management helper methods:\n\n";
-    cout << "Compute Jaccard distance of f1 and f2: ";
-    int *arr1 = L1->getFilters()[0];
-    int *arr2 = L1->getFilters()[1];
-    cout << L1->computeJaccard(arr1, arr2);
+    cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
+    b1.insert(&f25);
+    b1.insert(&f2);
+    b1.insert(&f8);
+    b1.insert(&f9);
+    b1.insert(&f26);
+    b1.insert(&f96);
+    b1.insert(&f97);
+    b1.insert(&f98);
+    b1.insert(&f99);
+    b1.traverse();
+    L1 = b1.search(1);
+    root = L1->getParent();
+    rootKeys = root->getKeys();
+    cout << "\nRoot's keys:";
+    for (int i=0; i<root->getCount(); i++) {
+        cout << " " << rootKeys[i];
+    }
+    // b1.insert(&f101);
+    cout << endl; 
+    BloomFilterNode *I1 = b1.search(1);
+    I1->traverse();
+    // b1.traverse();
     
-    cout << "\nCompute subset property of f1 and f2: ";
-    cout << L1->isSubset(arr1, arr2);
-    cout << "\nCompute subset property of f1 and identical filter: ";
-    int arr3[] = { 0, 1, 1, 0, 0, 1, 0, 1, 1, 1 };
-    cout << L1->isSubset(arr1, arr3);
-    cout << "\nCompute subset property of f1 and actual subset filter: ";
-    int arr4[] = { 0, 1, 1, 0, 0, 0, 0, 0, 0, 0 };
-    cout << L1->isSubset(arr1, arr4); 
-    cout << "\nCompute f1 AND f2: ";
-    int *arr5 = L1->logicalAnd(arr1, arr2);
-    // cout << arr5;
-    cout << "\nCompute f1 OR f2: ";
-    arr5 = L1->logicalOr(arr1, arr2);
-    // cout << arr5;
     cout << endl;
     return 0;
 }

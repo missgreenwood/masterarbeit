@@ -27,6 +27,17 @@ void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
     return; 
 }
 
+void BloomFilterNode::shiftAndInsertKey(int k) {
+    assert(getCount() < getMax());
+    int index = indexOfKey(k);
+    for (int i=n-1; i>=index; i--) {
+        keys[i+1] = keys[i];
+    }
+    keys[index] = k;
+    increment();
+    return;
+}
+
 int BloomFilterNode::getOrder() {
     return t;
 }
@@ -47,12 +58,12 @@ void BloomFilterNode::setParent(BloomFilterNode *node) {
     parent = node;
 }
 
-void BloomFilterNode::insert(BloomFilter *filter) {
+void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
     assert(false);
 }
 
-void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
-    assert(false);
+void BloomFilterNode::insertKey(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+    assert(false); 
 }
 
 void BloomFilterNode::insertSimilarFilter(BloomFilter *filter) {

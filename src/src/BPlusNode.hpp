@@ -21,16 +21,22 @@ public:
     int *keys;              // Array of keys
     BPlusNode(int _t);
     virtual ~BPlusNode();
+    
     virtual void shiftAndInsert(int k);
+    
     int getOrder();
     int getCount();
     void setCount(int count);
     BPlusNode *getParent();
     void setParent(BPlusNode *node);
+    
     virtual void insert(int k) = 0;
+    
     virtual BPlusNode *search(int k) = 0;
     virtual BPlusNode *searchRemoveIndex(int k) = 0; 
+    
     virtual void insert(int k, BPlusNode *oldNode, BPlusNode *newNode);
+    
     int indexOfKey(int k);
     int *getKeys();
     virtual void traverse() = 0;

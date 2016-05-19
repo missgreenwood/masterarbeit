@@ -18,13 +18,17 @@ public:
     
     // Insertion methods
     void shiftAndInsert(BloomFilter *filter);
+    void shiftAndInsertKey(int k);
     void insert(BloomFilter *filter);
-    void insert(BloomFilter *filter, BloomFilterNode *leftnode, BloomFilterNode *rightNode);
+    void insertKey(int k);
+    void insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
+    void insertKey(int k, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
     void insertSimilarFilter(BloomFilter *filter); 
     
     bool contains(int k);
     int **getFilters();
     BloomFilterIndexNode *split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle);
+    BloomFilterIndexNode *splitKey(int k, BloomFilterNode *left, BloomFilterNode *right, int &middle); 
     void traverse();
     void traverseFilters(); 
 };

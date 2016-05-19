@@ -23,11 +23,13 @@ public:
     ~BloomFilterLeaf();
     
     // Insertion methods
+    void insertKey(int k);
     void insert(BloomFilter *filter);
     void insertSimilarFilter(BloomFilter *filter);
     
     BloomFilterNode *search(int k);
     BloomFilterLeaf *split(BloomFilter *filter);
+    BloomFilterLeaf *splitKey(int k);
     void traverse();
     bool contains(int k);
     int **getFilters();

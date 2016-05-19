@@ -65,6 +65,64 @@ BloomFilterLeaf::~BloomFilterLeaf() {
     delete[] filters;
 }
 
+void BloomFilterLeaf::insertKey(int k) {
+    if (getCount() < getMax()) {
+        shiftAndInsertKey(k);
+    }
+    else {
+        BloomFilterLeaf *l = splitKey(k);
+        l->setPrev(this);
+        setNext(l);
+        BloomFilterNode *p = getParent();
+        if (p == NULL) {
+            p = new BloomFilterIndexNode(getOrder(), getFilterSize());
+            setParent(p);
+        }
+        l->setParent(p);
+        p->insertKey(l->getKeys()[0], this, l);
+    }
+}
+
+BloomFilterLeaf *BloomFilterLeaf::splitKey(int k) {
+    assert(getCount() == getMax());
+    int *keys = getKeys();
+    int max = getMax();
+    int *merged = new int[max+1];
+    int index = indexOfKey(k);
+    for (int i=0; i<index; i++) {
+        merged[i] = keys[i];
+    }
+    merged[index] = k;
+    for (int i=index+1; i<max+1; i++) {
+        merged[i] = keys[i-1];
+    }
+    BloomFilterLeaf *l = new BloomFilterLeaf(getOrder());
+    int half = (max+1)/2;
+    setCount(half);
+    for (int i=0; i<half; i++) {
+        keys[i] = merged[i];
+    }
+    int *newNodeKeys = l->getKeys();
+    
+    // Hand over keys to new sibling
+    for (int i=half; i<max+1; i++) {
+        newNodeKeys[i-half] = merged[i];
+        l->increment();
+    }
+    
+    // Decrement self
+    setCount(half);
+    
+    // Update sibling pointers
+    if (next) {
+        l->setNext(next);
+        next->setPrev(this);
+    }
+    
+    delete[] merged;
+    return l;
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values
@@ -79,6 +137,7 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
     }
     else {
         BloomFilterLeaf *l = split(filter);
+        // BloomFilterLeaf *l = splitKey(id);
         l->setPrev(this);
         setNext(l);
         BloomFilterNode *p = getParent();
@@ -87,10 +146,8 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
             setParent(p);
         }
         l->setParent(p);
-        int correctId = filter->getId();
-        filter->setId(l->getKeys()[0]);
-        p->insert(filter, this, l);
-        filter->setId(correctId); 
+        int newKey = l->getKeys()[0];
+        p->insertKey(newKey, this, l);
     }
 }
 
@@ -145,6 +202,16 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
             filters[i][j] = 0;
         }
     }
+    
+    // Decrement self
+    setCount(half); 
+    
+    // Update sibling pointers
+    if (next) {
+        l->setNext(next);
+        next->setPrev(l);
+    }
+    
     delete[] merged;
     return l;
 }

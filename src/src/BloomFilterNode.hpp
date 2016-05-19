@@ -33,8 +33,12 @@ public:
     
     // Insertion methods
     virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void shiftAndInsertKey(int k);
+    
     virtual void insert(BloomFilter *filter) = 0;
+    virtual void insertKey(int k) = 0;
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    virtual void insertKey(int k, BloomFilterNode *oldNode, BloomFilterNode *newNode); 
     virtual void insertSimilarFilter(BloomFilter *filter);
 
     int indexOfKey(int k);
