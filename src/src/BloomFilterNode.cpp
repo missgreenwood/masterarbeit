@@ -47,7 +47,8 @@ int BloomFilterNode::indexOfKey(int k) {
         return 0;
     }
     int i=0;
-    while (i<n && keys[i]<k) {
+    // while (i<n && keys[i]<k) {
+    while (i<n && keys[i]<=k) {
         i++;
     }
     return i;

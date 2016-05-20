@@ -573,7 +573,7 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     l2.traverseFilters();
     l2.insert(&f101);
-    cout << "Insert into l2: f101\n";
+    cout << endl << "Insert filter into l2: f101\n";
     cout << "\nTraverse old leaf: ";
     l2.traverse();
     cout << "\nTraverse new parent:\n";
@@ -654,18 +654,42 @@ int main(int argc, const char *argv[]) {
     b1.traverseFilters();
     
     cout << "\n\nCheck search functions: ";
-    cout << "\n\nSearch in leaf (key 1):\n";
+    cout << "\n\nSearch in leaf l2: key 1\n";
     BloomFilterNode *L3 = l2.search(1);
     L3->traverse();
     L3->traverseFilters();
-    cout << "\nSearch in leaf (key 10):\n";
-    
-    L3 = l3->search(10);
+    cout << "\nSearch in leaf l2: key 4\n";
+    L3 = l2.search(4);
     L3->traverse();
     L3->traverseFilters();
     
+    cout << "\n\nSearch in leaf l3: key 10\n";
+    L3 = l3->search(10);
+    L3->traverse();
+    L3->traverseFilters();
+    cout << "\nSearch in leaf l3: key 101\n";
+    L3 = l3->search(101);
+    L3->traverse();
+    L3->traverseFilters();
+    
+    cout << "\n\nSearch in 2-level tree b2: key 1\n";
+    L3 = b1.search(1);
+    L3->traverse();
+    L3->traverseFilters();
+    cout << "\nSearch in 2-level tree b2: key 4\n";
+    L3 = b1.search(4);
+    L3->traverse();
+    L3->traverseFilters();
+    cout << "\nSearch in 2-level tree b2: key 17\n";
+    L3 = b1.search(17);
+    L3->traverse();
+    L3->traverseFilters();
+    cout << "\nSearch in 2-level tree b2: key 7\n";
+    BloomFilterNode *L4 = b1.search(7);
+    L4->traverse();
+    L4->traverseFilters();
     /* cout << "\n\nCheck correct tree construction (level 3 tree):\n";
-    cout << "\n\nInsert into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
+    cout << "\n\nInsert filters into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
     b1.insert(&f25);
     b1.insert(&f2);
     b1.insert(&f8);

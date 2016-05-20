@@ -16,10 +16,15 @@ BloomFilterLeaf::BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFi
     prev = _prev;
 }
 
-// Evtl. TODO 
 BloomFilterLeaf::~BloomFilterLeaf() {
-    // delete prev;
-    // delete next;
+    if (next != NULL) {
+        next->setPrev(this->prev);
+    }
+    if (prev != NULL) {
+        prev->setNext(next);
+    }
+    setNext(NULL);
+    setPrev(NULL);
 }
 
 BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
