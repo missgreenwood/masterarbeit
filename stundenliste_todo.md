@@ -226,13 +226,14 @@ KW 19 (35.75 h)
 * So, 15.05. (4.5 h)
 
 
-KW 20 (noch 6.75 h)
+KW 20 (noch 4.5 h)
 * Mo, 16.05. (7.25 h)
 * Di, 17.05. (3.5 h)
 * Mi, 18.05. (8 h)
 * Do, 19.05. (9 h)
 * Fr, 20.05. (3.75 h)
 * Sa, 21.05. (1.5 h)
+* So, 22.05. (2.25 h, 15:30 -)
 
 ## TODO
 
@@ -245,7 +246,9 @@ KW 20 (noch 6.75 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* Check >3 level tree construction
+		* Evtl. check more tree constructions, e.g. level 4/degree 2
+		* Delete dangeling children and filter pointers after insert and split
+		* fix Jaccard
 		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
 		
 ## TODO Ausarbeitung 

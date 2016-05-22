@@ -9,7 +9,7 @@ using namespace std;
 BloomFilterIndexNode::BloomFilterIndexNode(int _t, int _s): BloomFilterNode(_t, _s) {
     C = new BloomFilterNode *[2*_t+1];
     for (int i=0; i<2*_t+1; i++) {
-        C[i] = NULL; 
+        C[i] = NULL;
     }
 }
 
@@ -82,7 +82,7 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
         C[i] = NULL;
     }
     for (int i=half; i<max; i++) {
-        filters[i] = NULL; 
+        filters[i] = NULL;
     }
     
     delete[] merged;
@@ -138,7 +138,7 @@ void BloomFilterIndexNode::insert(BloomFilter *filter) {
     l->insert(filter);
 }
 
- 
+
 void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode) {
     
     int id = filter->getId();
@@ -156,7 +156,7 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             cout << "|";
             filters[i]->printArr();
         }
-        cout << "|" << endl; 
+        cout << "|" << endl;
         
         C[index] = leftNode;
         C[index+1] = rightNode;
@@ -190,17 +190,20 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             // Adjust filters and children in right index node
             rightIndexFilters[s->getCount()-1] = NULL;
             s->decrement();
-            for (int i=s->getMax()+1; i>s->getCount(); i--) {
+            for (int i=s->getMax(); i>s->getCount(); i--) {
                 s->C[i] = NULL;
+            }
+            for (int i=s->getMax()-1; i>s->getCount()-1; i--) {
+                s->filters[i] = NULL;
             }
             
             // Delete dangeling pointers in root
-            for (int i=p->getMax()+1; i>p->getCount(); i--) {
+            /* for (int i=p->getMax(); i>p->getCount(); i--) {
                 p->C[i] = NULL;
-            }
+            } */
         }
         else {
-            BloomFilterNode *p = getParent(); 
+            BloomFilterNode *p = getParent();
             s->setParent(p);
             
             // Get middle filter
@@ -210,6 +213,46 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             middle->printArr();
             cout << endl;
             p->insert(middle, this, s);
+            
+            // Shift right index node's keys and filters
+            int *rightIndexKeys = s->getKeys();
+            BloomFilter **rightIndexFilters = s->filters;
+            for (int i=0; i<s->getCount(); i++) {
+                rightIndexKeys[i-1] = rightIndexKeys[i];
+                rightIndexFilters[i-1] = rightIndexFilters[i];
+            }
+            
+            // Adjust keys and filters in right index node
+            rightIndexFilters[s->getCount()-1] = NULL;
+            s->decrement();
+            for (int i=s->getMax(); i>s->getCount(); i--) {
+                s->C[i] = NULL;
+            }
+            for (int i=s->getMax()-1; i>s->getCount()-1; i--) {
+                s->filters[i] = NULL;
+            }
+            
+            cout << "\nRight index node's new keys: ";
+            for (int i=0; i<s->getCount(); i++) {
+                cout << " " << rightIndexKeys[i];
+            }
+            
+            cout << "\nRight index node's new filters: |";
+            for (int i=0; i<s->getCount(); i++) {
+                s->filters[i]->printArr();
+                cout << "|";
+            }
+            
+            cout << "\nRoot's new keys: ";
+            for (int i=0; i<p->getCount(); i++) {
+                cout << " " << p->getKeys()[i];
+            }
+            
+            cout << "\nRoot's new filters: |";
+            for (int i=0; i<p->getCount(); i++) {
+                p->filters[i]->printArr();
+                cout << "|";
+            }
         }
     }
 }

@@ -738,8 +738,30 @@ int main(int argc, const char *argv[]) {
     }
     cout << endl;
     b1.traverse();
-    cout << endl; 
+    cout << endl;
     b1.traverseFilters();
+    
+    cout << "\n\nCheck level 4 tree construction:\n";
+    cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b4)\n\n";
+    BloomFilterTree b4(1, 10);
+    cout << "Insert filters into b4: f1, f4, f7, f10, f17, f25, f2, f8, f9\n";
+    b4.insert(&f1);
+    b4.insert(&f4);
+    b4.insert(&f7);
+    b4.insert(&f10);
+    b4.insert(&f17);
+    b4.insert(&f25);
+    b4.insert(&f2);
+    b4.insert(&f8);
+    b4.insert(&f9);
+    cout << endl; 
+    b4.traverse();
+    cout << "\n\nInsert filters into b4: f26, f96";
+    b4.insert(&f26);
+    cout << endl;
+    b4.insert(&f96);
+    cout << endl; 
+    b4.traverse();
     cout << endl;
     return 0;
 }
