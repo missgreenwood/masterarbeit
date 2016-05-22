@@ -13,11 +13,11 @@ class BloomFilterVec {
     
 private:
     int size;
+    vector<BloomFilter> filters;
     int *filtersArr;
     int arrSize;
     
 public:
-    vector<BloomFilter> filters;
     BloomFilterVec();
     BloomFilterVec(int s);
     ~BloomFilterVec(); 

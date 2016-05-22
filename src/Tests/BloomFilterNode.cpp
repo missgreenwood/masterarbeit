@@ -93,6 +93,7 @@ void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, Bloo
 }
 
 float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
+    // float count1 = 0;
     float elementCount = 0;
     float intersection = 0;
     int *arr1 = f1->getArr();
@@ -151,4 +152,3 @@ BloomFilter * BloomFilterNode::logicalOr(BloomFilter *f1, BloomFilter *f2) {
     }
     return result;
 }
-

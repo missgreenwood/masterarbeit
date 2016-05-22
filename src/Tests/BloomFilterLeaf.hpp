@@ -33,11 +33,6 @@ public:
     
     // Insertion methods
     void insert(BloomFilter *filter);
-    
-    // Tree management helper methods
-    float computeMaxJaccard(BloomFilter *filter);
-    int computeMaxJaccardKey(BloomFilter *filter); 
-    // int computeSimilarityId(BloomFilter *filter);
 };
 
 #endif

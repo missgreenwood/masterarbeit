@@ -50,9 +50,6 @@ public:
     bool isSubset(BloomFilter *f1, BloomFilter *f2);
     BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
     BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
-    virtual float computeMaxJaccard(BloomFilter *filter) = 0;
-    virtual int computeMaxJaccardKey(BloomFilter *filter) = 0; 
-    // virtual int computeSimilarityId(BloomFilter *filter) = 0;
 };
 
 #endif 

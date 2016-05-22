@@ -49,6 +49,7 @@ public:
     // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
     BloomFilterTree(int _t, int _s, BloomFilterVec *_f);
     
+    // TODO
     // Search key in tree
     // Return false if key is not present
     bool contains(int k);
@@ -58,9 +59,6 @@ public:
     BloomFilterVec *getFiltersVec();
     void traverse();
     void traverseFilters();
-    float computeMaxJaccard(BloomFilter *filter);
-    int computeMaxJaccardKey(BloomFilter *filter); 
-    // int computeSimilarityId(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);

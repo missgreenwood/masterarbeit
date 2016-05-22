@@ -256,36 +256,3 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
         }
     }
 }
-
-float BloomFilterIndexNode::computeMaxJaccard(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i+1;
-        }
-    }
-    return C[index+1]->computeMaxJaccard(filter);
-}
-
-int BloomFilterIndexNode::computeMaxJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    return C[index+1]->computeMaxJaccardKey(filter);
-}
-
-// TODO 
-/* int BloomFilterIndexNode::computeSimilarityId(BloomFilter *filter) {
-
-} */

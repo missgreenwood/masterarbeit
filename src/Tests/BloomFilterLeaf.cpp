@@ -165,34 +165,3 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
         p->insert(middle, this, l);
     }
 }
-
-float BloomFilterLeaf::computeMaxJaccard(BloomFilter *filter) {
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-        }
-    }
-    return max;
-}
-
-int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    return getKeys()[index];
-}
-
-// TODO 
-/* int BloomFilterLeaf::computeSimilarityId(BloomFilter *filter) {
-
-} */

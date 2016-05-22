@@ -25,11 +25,6 @@ public:
     void shiftAndInsert(BloomFilter *filter);
     void insert(BloomFilter *filter);
     void insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
-    
-    // Tree management helper methods
-    float computeMaxJaccard(BloomFilter *filter); 
-    int computeMaxJaccardKey(BloomFilter *filter);
-    int computeSimilarityId(BloomFilter *filter);
 };
 
 #endif
