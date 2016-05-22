@@ -155,6 +155,7 @@ KW 20 (39.25 h)
 	a. Sakuma2011: 
 		* Evtl. check more tree constructions, e.g. level 4/degree 2
 		* Delete dangeling children pointers after insert and split
+		* computeSimilarityId() function 
 		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
 		
 ## TODO Ausarbeitung 

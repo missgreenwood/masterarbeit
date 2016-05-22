@@ -305,6 +305,10 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<v1.getSize(); i++) {
         cout << "jacc(root, filter " << i << "): " << b1.computeMaxJaccard(&v1.filters[i]) << endl;
     }
+    cout << "\n\nDetermine b1 key with highest Jaccard coefficient regarding filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96:\n\n";
+    for (int i=0; i<v1.getSize(); i++) {
+        cout << "max_jacc(b1, filter " << i << "): " << b1.computeMaxJaccardKey(&v1.filters[i]) << endl;
+    }
     cout << endl;
     return 0;
 }
