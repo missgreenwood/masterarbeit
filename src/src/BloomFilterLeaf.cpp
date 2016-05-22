@@ -33,7 +33,9 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     int *keys = getKeys();
     int max = getMax();
     int *merged = new int[max+1];
+    
     BloomFilter **mergedFilters = new BloomFilter *[max+1];
+    
     int id = f->getId();
     int index = indexOfKey(id);
     
@@ -45,6 +47,7 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     
     merged[index] = id;
     mergedFilters[index] = f;
+    
     for (int i=index+1; i<max+1; i++) {
         merged[i] = keys[i-1];
         mergedFilters[i] = filters[i-1];

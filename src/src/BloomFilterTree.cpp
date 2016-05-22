@@ -17,7 +17,6 @@ BloomFilterTree::~BloomFilterTree() {
     delete root;
 }
 
-// TODO
 bool BloomFilterTree::contains(int k) {
     
     // If tree is empty return false
@@ -66,7 +65,6 @@ void BloomFilterTree::traverseFilters() {
     }
 }
 
-// Evtl. TODO 
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
         root = new BloomFilterLeaf(t, filtersize, NULL, NULL);

@@ -585,7 +585,7 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BloomFilterTree
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    cout << "Create instance of BloomFilterTree with minimum degree 2/max. elements 4, filter size 10, 2 levels (b1)\n\n";
+    cout << "Create instance of 2-level BloomFilterTree with minimum degree 2/max. elements 4, filter size 10 (b1)\n\n";
     BloomFilterTree b1(2, 10);
     cout << "Insert filters into b1: f1, f4, f7, f10, f17\n";
     b1.insert(&f1);
@@ -624,10 +624,9 @@ int main(int argc, const char *argv[]) {
     cout << "\nf1 OR f2: ";
     fO->printArr();
     
-    cout << "\n\nCheck correct tree construction:\n";
+    cout << "\n\nCheck 2-level tree construction:\n";
     BloomFilterNode *L1 = b1.search(1);
     BloomFilterNode *L2 = b1.search(17);
-    // BloomFilterNode *root = L1->getParent();
     BloomFilterNode *root = b1.getRoot();
     cout << "\nLeft leaf: ";
     L1->traverse();
@@ -688,8 +687,18 @@ int main(int argc, const char *argv[]) {
     BloomFilterNode *L4 = b1.search(7);
     L4->traverse();
     L4->traverseFilters();
-    /* cout << "\n\nCheck correct tree construction (level 3 tree):\n";
-    cout << "\n\nInsert filters into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
+    
+    cout << "\n\nCheck contains functions: ";
+    cout << "\n\nLeaf l2 contains key 1: " << l2.contains(1);
+    cout << "\nLeaf l2 contains key 127: " << l2.contains(127);
+    cout << "\n\nBloomFilterIndexNode root contains key 1: " << root->contains(1);
+    cout << "\nBloomFilterIndexNode root contains key 127: " << root->contains(127);
+    cout << "\n\nBloomFilterTree b1 contains key 1: " << b1.contains(1);
+    cout << "\nBloomFilterTree b1 contains key 7: " << b1.contains(7);
+    cout << "\nBloomFilterTree b1 contains key 127: " << b1.contains(127);
+    
+    cout << "\n\nCheck 3-level tree construction:\n";
+    cout << "\nInsert filters into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
     b1.insert(&f25);
     b1.insert(&f2);
     b1.insert(&f8);
@@ -699,20 +708,38 @@ int main(int argc, const char *argv[]) {
     b1.insert(&f97);
     b1.insert(&f98);
     b1.insert(&f99);
+    cout << endl;
     b1.traverse();
-    L1 = b1.search(1);
-    root = L1->getParent();
+    cout << "\n\nInsert filter into b1: f101\n";
+    b1.insert(&f101);
+    
+    BloomFilterNode *I1 = b1.search(1)->getParent();
+    cout << "\nLeft index node count: " << I1->getCount();
+    cout << "\nLeft index node's keys:";
+    leftIndexKeys = I1->getKeys();
+    for (int i=0; i<I1->getCount(); i++) {
+        cout << " " << leftIndexKeys[i];
+    }
+    
+    BloomFilterNode *I2 = b1.search(96)->getParent();
+    cout << "\n\nRight index node count: " << I2->getCount();
+    cout << "\nRight index node keys: ";
+    rightIndexKeys = I2->getKeys();
+    for (int i=0; i<I2->getCount(); i++) {
+        cout << " " << rightIndexKeys[i];
+    }
+    
+    root = I1->getParent();
+    cout << "\n\nRoot count: " << root->getCount();
     rootKeys = root->getKeys();
-    cout << "\nRoot's keys:";
+    cout << "\nRoot's keys: ";
     for (int i=0; i<root->getCount(); i++) {
         cout << " " << rootKeys[i];
     }
-    // b1.insert(&f101);
     cout << endl;
-    BloomFilterNode *I1 = b1.search(1);
-    I1->traverse();
-    // b1.traverse(); */
-    
+    b1.traverse();
+    cout << endl; 
+    b1.traverseFilters();
     cout << endl;
     return 0;
 }
