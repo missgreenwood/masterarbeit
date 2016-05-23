@@ -192,7 +192,10 @@ int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
     return getKeys()[index];
 }
 
-// TODO 
-/* int BloomFilterLeaf::computeSimilarityId(BloomFilter *filter) {
+int BloomFilterLeaf::getMinKey() {
+    return getKeys()[0];
+}
 
-} */
+int BloomFilterLeaf::getMaxKey() {
+    return getKeys()[getCount()-1];
+}

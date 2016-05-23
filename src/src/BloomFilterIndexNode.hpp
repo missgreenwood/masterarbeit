@@ -29,7 +29,7 @@ public:
     // Tree management helper methods
     float computeMaxJaccard(BloomFilter *filter); 
     int computeMaxJaccardKey(BloomFilter *filter);
-    int computeSimilarityId(BloomFilter *filter);
-};
+    int getMinKey();
+    int getMaxKey(); };
 
 #endif

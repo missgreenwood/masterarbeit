@@ -51,8 +51,9 @@ public:
     BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
     BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
     virtual float computeMaxJaccard(BloomFilter *filter) = 0;
-    virtual int computeMaxJaccardKey(BloomFilter *filter) = 0; 
-    // virtual int computeSimilarityId(BloomFilter *filter) = 0;
+    virtual int computeMaxJaccardKey(BloomFilter *filter) = 0;
+    virtual int getMinKey() = 0;
+    virtual int getMaxKey() = 0;
 };
 
 #endif 

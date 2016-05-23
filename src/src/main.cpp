@@ -150,7 +150,7 @@ int main(int argc, const char *argv[]) {
         cout << "jacc(root, filter " << i << "): " << b1.computeMaxJaccard(&v1.filters[i]) << endl;
     }
     
-    cout << "\n\nInsert filters into b1: f4, f7, f10, f17, f25, f2, f8\n";
+    cout << "\nInsert filters into b1: f4, f7, f10, f17, f25, f2, f8\n";
     for (int i=0; i<6; i++) {
         b1.insert(&v1.filters[i]);
     }
@@ -197,7 +197,7 @@ int main(int argc, const char *argv[]) {
     cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
     cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
     b2.insert(&f13);
-    cout << "\n\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
     cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
     cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
     cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
@@ -217,6 +217,13 @@ int main(int argc, const char *argv[]) {
     cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
     cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
     cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    
+    cout << "\nCompute optimal ids for filters f16, f18, f19 regarding b2";
+    cout << "\nSmallest key in b2: " << b2.getMinKey() << "\nBiggest key in b2: " << b2.getMaxKey();
+    cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
+    cout << "\nOptimal id for f18 should be: 16" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
+    cout << "\nOptimal id for f19 should be: 7" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19);
+    
     cout << endl;
     return 0;
 }

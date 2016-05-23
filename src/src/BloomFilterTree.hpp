@@ -59,8 +59,10 @@ public:
     void traverse();
     void traverseFilters();
     float computeMaxJaccard(BloomFilter *filter);
-    int computeMaxJaccardKey(BloomFilter *filter); 
-    // int computeSimilarityId(BloomFilter *filter);
+    int computeMaxJaccardKey(BloomFilter *filter);
+    int getMinKey();
+    int getMaxKey(); 
+    int computeSimilarityId(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);

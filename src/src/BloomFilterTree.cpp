@@ -100,4 +100,68 @@ int BloomFilterTree::computeMaxJaccardKey(BloomFilter *filter) {
     }
 }
 
-// int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {}
+int BloomFilterTree::getMinKey() {
+    if (root == NULL) {
+        cout << "Tree is emtpy!";
+        return 0;
+    }
+    else {
+        return root->getMinKey();
+    }
+}
+
+int BloomFilterTree::getMaxKey() {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return 0;
+    }
+    else {
+        return root->getMaxKey(); 
+    }
+}
+
+// Compute best similarity id for filter regarding this tree
+int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return filter->getId();
+    }
+    else {
+        int minId = getMinKey();
+        int maxId = getMaxKey();
+        int optimalId = computeMaxJaccardKey(filter);
+        int smallId = minId;
+        int bigId = maxId;
+        
+        // Get next available lesser key
+        for (int i=optimalId-1; i>minId; i--) {
+            if (!contains(i)) {
+                smallId = i;
+                break;
+            }
+        }
+        if (smallId == minId) {
+            smallId = minId-1;
+        }
+        
+        // Get next available greater key
+        for (int i=optimalId+1; i<maxId; i++) {
+            if (!contains(i)) {
+                bigId = i;
+                break;
+            }
+        }
+        if (bigId == maxId) {
+            bigId = maxId+1;
+        }
+        
+        // Decide which key is better
+        // Returns smaller key if both are equally good
+        if ((bigId-optimalId) > (optimalId-smallId)) {
+            return smallId;
+        }
+        else {
+            return bigId; 
+        }
+    }
+}
