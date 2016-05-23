@@ -88,52 +88,6 @@ int main(int argc, const char *argv[]) {
     f19.initRandom();
     f19.printData();
     
-    // Class BloomFilterLeaf
-    
-    /* cout << "\n\nCLASS BloomFilterLeaf";
-    cout << "\n---------------------\n\n";
-    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    BloomFilterLeaf l2(3, f1.getSize());
-    cout << "Insert filters into l2: f1, f4, f7, f10, f17, f25\n";
-    l2.insert(&f1);
-    l2.insert(&f4);
-    l2.insert(&f7);
-    l2.insert(&f10);
-    l2.insert(&f17);
-    l2.insert(&f25);
-    cout << "\nTraverse l2: ";
-    l2.traverse();
-    cout << "\nTraverse l2 filters: ";
-    l2.traverseFilters();
-    cout << "\n\nCheck index function:\n";
-    keys = l2.getKeys();
-    for (int i=0; i<l2.getCount(); i++) {
-        cout << "Key: " << keys[i] << ", index: " << l2.indexOfKey(keys[i]) << endl;
-    }
-    
-    cout << "\nSplit l2 and traverse new sibling l3:\n";
-    BloomFilterLeaf *l3 = l2.split(&f101);
-    l3->traverse();
-    cout << endl;
-    l3->traverseFilters(); 
-    
-    cout << "\n\nInsert filters into l2: f2, f8, f9:\n";
-    l2.insert(&f2);
-    l2.insert(&f8);
-    l2.insert(&f9);
-    l2.traverse();
-    cout << endl;
-    l2.traverseFilters();
-    l2.insert(&f101);
-    cout << endl << "Insert filter into l2: f101\n";
-    cout << "\nTraverse old leaf: ";
-    l2.traverse();
-    cout << "\nTraverse new parent:\n";
-    BloomFilterNode *parent = l2.getParent();
-    parent->traverse();
-    cout << endl;
-    parent->traverseFilters(); */
-    
     // Class BloomFilterTree
     
     cout << "\n\nCLASS BloomFilterTree";
@@ -243,7 +197,17 @@ int main(int argc, const char *argv[]) {
     f19.printArr();
     cout << "): ";
     L1 = b2.search(7);
-    L1->filters[1]->printArr(); 
+    L1->filters[1]->printArr();
+    cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 32 (b3)\n\n";
+    BloomFilterTree b3(1, 32);
+    cout << "Change ids of all filters in v1 to their optimal values and insert them into b3:\n";
+    for (int i=0; i<v1.getSize(); i++) {
+        b3.insertSimilarFilter(&v1.filters[i]);
+    }
+    cout << endl << endl;
+    b3.traverse();
+    cout << endl << endl; 
+    v1.print();
     cout << endl;
     return 0;
 }
