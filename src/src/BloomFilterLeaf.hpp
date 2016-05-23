@@ -39,6 +39,17 @@ public:
     int computeMaxJaccardKey(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
+    
+    // Lookup methods
+    // Similarity queries
+    BloomFilter *simpleSimQuery(BloomFilter *filter);
+    /* BloomFilter *simQuery(BloomFilter *filter);
+    BloomFilterVec *simQueryVec(BloomFilter *filter);
+    
+    // Subset queries
+    BloomFilter *simpleSubsetQuery(BloomFilter *filter);
+    BloomFilter *subsetQuery(BloomFilter *filter);
+    BloomFilterVec *subsetQueryVec(BloomFilter *filter); */
 };
 
 #endif

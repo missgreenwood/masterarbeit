@@ -290,3 +290,17 @@ int BloomFilterIndexNode::getMinKey() {
 int BloomFilterIndexNode::getMaxKey() {
     return C[getCount()]->getMaxKey(); 
 }
+
+BloomFilter * BloomFilterIndexNode::simpleSimQuery(BloomFilter *filter) {
+    int index = 0;
+    float max = 0;
+    float jacc;
+    for (int i=0; i<getCount(); i++) {
+        jacc = C[i]->computeMaxJaccard(filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    return C[index]->simpleSimQuery(filter); 
+}

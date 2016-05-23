@@ -4,11 +4,13 @@
 #include "BloomFilterTree.hpp"
 
 
-// Constructor with parameters t and size
+// Constructor with parameters order and size
 // Initializes tree as empty
 BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), filtersize(_s), root(NULL) {};
 
 // TODO
+// Constructor with parameters order, size, *filtersvec
+// Insert all filters from Bloom filter vector into BloomFilterTree, based on similarity
 BloomFilterTree::BloomFilterTree(int _t, int _s, BloomFilterVec *_f): t(_t), filtersize(_s), root(NULL) {
     filtersvec = _f;
 }
@@ -17,6 +19,8 @@ BloomFilterTree::~BloomFilterTree() {
     delete root;
 }
 
+// Function to determine if key is present in tree
+// Return false otherwise
 bool BloomFilterTree::contains(int k) {
     
     // If tree is empty return false
@@ -175,5 +179,16 @@ void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
         int newId = computeSimilarityId(filter);
         filter->setId(newId);
         insert(filter);
+    }
+}
+
+// Return Bloom filter with highest similarity in tree - naive approach
+BloomFilter *BloomFilterTree::simpleSimQuery(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return filter;
+    }
+    else {
+        return root->simpleSimQuery(filter);
     }
 }

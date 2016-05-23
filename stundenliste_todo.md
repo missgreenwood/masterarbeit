@@ -144,7 +144,7 @@ KW 20 (39.25 h)
 
 
 KW 21 (noch 24 h)
-* Mo, 23.05. (8 h)
+* Mo, 23.05. (8 h, bis 20:55)
 
 
 ## TODO
@@ -158,12 +158,14 @@ KW 21 (noch 24 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* Evtl. check more tree constructions, e.g. level 4/degree 2
+		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 		* Dangeling children and filter pointers after insert and split
-		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
-		* Adapt other features of paper
-		* Compare to unsorted list
+		* Bloomfilter ausgeben (subset/similarity queries) 
+		* Vergleich von Lookup mit unsortierter Liste
 
+		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
+		* Evtl.: Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
+		* Evtl.: Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
 		
 ## TODO Ausarbeitung 
 

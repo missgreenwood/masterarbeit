@@ -38,19 +38,15 @@ private:
 public:
     BloomFilterNode *root;      // Pointer to root node
     
-    // Constructor with parameters t and size
-    // Initializes tree as empty
+    // Constructor with parameters order and filter size
     BloomFilterTree(int _t, int _s);
-
-    ~BloomFilterTree();
     
-    // TODO
-    // Constructor with parameters t, size, *filtersvec
-    // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
+    // Constructor with paramenters order, filter size and associated Bloom filter vector
     BloomFilterTree(int _t, int _s, BloomFilterVec *_f);
     
-    // Search key in tree
-    // Return false if key is not present
+    ~BloomFilterTree();
+    
+    // Function to determine if key is present in tree
     bool contains(int k);
     
     BloomFilterNode *search(int k);
@@ -66,7 +62,18 @@ public:
     
     // Insertion methods
     void insert(BloomFilter *filter);
-    void insertSimilarFilter(BloomFilter *filter); 
+    void insertSimilarFilter(BloomFilter *filter);
+    
+    // Lookup methods
+    // Similarity queries
+    BloomFilter *simpleSimQuery(BloomFilter *filter);
+    BloomFilter *simQuery(BloomFilter *filter);
+    BloomFilterVec *simQueryVec(BloomFilter *filter);
+    
+    // Subset queries
+    BloomFilter *simpleSubsetQuery(BloomFilter *filter); 
+    BloomFilter *subsetQuery(BloomFilter *filter);
+    BloomFilterVec *subsetQueryVec(BloomFilter *filter);
 };
 
 #endif
