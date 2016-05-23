@@ -81,18 +81,18 @@ void BloomFilterTree::insert(BloomFilter *filter) {
 float BloomFilterTree::computeMaxJaccard(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!";
-        insert(filter);
         return 1.0;
     }
     else {
         return root->computeMaxJaccard(filter);
     }
-} 
+}
 
+// Returns key with highest Jaccard coefficient
+// Returns first key if there are several keys with equal Jaccard coefficient
 int BloomFilterTree::computeMaxJaccardKey(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty - this is the first filter!";
-        insert(filter);
         return filter->getId();
     }
     else {
@@ -100,13 +100,4 @@ int BloomFilterTree::computeMaxJaccardKey(BloomFilter *filter) {
     }
 }
 
-/* int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
-    if (root == NULL) {
-        cout << "Tree is empty - this is the first filter!";
-        insert(filter);
-        return filter->getId();
-    }
-    else {
-        return root->computeSimilarityId(filter);
-    }
-} */
+// int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {}

@@ -50,43 +50,43 @@ int main(int argc, const char *argv[]) {
     
     // Class BloomFilter
     
-    /* cout << "\n\nCLASS BloomFilter" << endl;
+    cout << "\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create 11 instances of BloomFilter with ids 1, 4, 7, 10, 17, 25, 2, 8, 9, 26, 96, array length 10 and random values\n\n";
-    BloomFilter f1(10, 1);
-    BloomFilter f4(10, 4);
-    BloomFilter f7(10, 7);
-    BloomFilter f10(10, 10);
-    BloomFilter f17(10, 17);
-    BloomFilter f25(10, 25);
-    BloomFilter f2(10, 2);
-    BloomFilter f8(10, 8);
-    BloomFilter f9(10, 9);
-    BloomFilter f26(10, 26);
-    BloomFilter f96(10, 96);
+    cout << "Create 11 instances of BloomFilter with ids 3, 5, 6, 11, 12, 13, 14, 15, 16, 18, 19, array length 10 and random values\n\n";
+    BloomFilter f3(10, 3);
+    BloomFilter f5(10, 5);
+    BloomFilter f6(10, 6);
+    BloomFilter f11(10, 11);
+    BloomFilter f12(10, 12);
+    BloomFilter f13(10, 13);
+    BloomFilter f14(10, 14);
+    BloomFilter f15(10, 15);
+    BloomFilter f16(10, 16);
+    BloomFilter f18(10, 18);
+    BloomFilter f19(10, 19);
     cout << endl;
-    f1.initRandom();
-    f1.printData();
-    f4.initRandom();
-    f4.printData();
-    f7.initRandom();
-    f7.printData();
-    f10.initRandom();
-    f10.printData();
-    f17.initRandom();
-    f17.printData();
-    f25.initRandom();
-    f25.printData();
-    f2.initRandom();
-    f2.printData();
-    f8.initRandom();
-    f8.printData();
-    f9.initRandom();
-    f9.printData();
-    f26.initRandom();
-    f26.printData();
-    f96.initRandom();
-    f96.printData(); */
+    f3.initRandom();
+    f3.printData();
+    f5.initRandom();
+    f5.printData();
+    f6.initRandom();
+    f6.printData();
+    f11.initRandom();
+    f11.printData();
+    f12.initRandom();
+    f12.printData();
+    f13.initRandom();
+    f13.printData();
+    f14.initRandom();
+    f14.printData();
+    f15.initRandom();
+    f15.printData();
+    f16.initRandom();
+    f16.printData();
+    f18.initRandom();
+    f18.printData();
+    f19.initRandom();
+    f19.printData();
     
     // Class BloomFilterLeaf
     
@@ -138,177 +138,62 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    /* cout << "Create instance of 2-level BloomFilterTree with minimum degree 2/max. elements 4, filter size 10 (b1)\n\n";
-    BloomFilterTree b1(2, 10);
-    cout << "Insert filters into b1: f1, f4, f7, f10, f17\n";
-    b1.insert(&f1);
-    b1.insert(&f4);
-    b1.insert(&f7);
-    b1.insert(&f10);
-    b1.insert(&f17);
     
-    cout << "\nCheck tree management helper methods:\n\n";
-    BloomFilter f20(10, 20);
-    f20.setValue(1, 1);
-    f20.setValue(9, 1);
-    BloomFilter *fA = l2.logicalAnd(&f1, &f2);
-    BloomFilter *fO = l2.logicalOr(&f1, &f2);
-    cout << "f1: ";
-    f1.printArr();
-    cout << "\nf2: ";
-    f2.printArr();
-    cout << endl;
-    cout << "f20: ";
-    f20.printArr();
-    cout << "\n\nJaccard distance of f1 and f2: ";
-    float jaccard = l2.computeJaccard(&f1, &f2);
-    cout << jaccard;
-    cout << "\nf2 subset of f1: ";
-    bool subset = l2.isSubset(&f1, &f2);
-    cout << subset;
-    cout << "\nf1 subset of f1: ";
-    subset = l2.isSubset(&f1, &f1);
-    cout << subset << endl;
-    cout << "f20 subset of f1: ";
-    subset = l2.isSubset(&f1, &f20);
-    cout << subset;
-    cout << "\nf1 AND f2: ";
-    fA->printArr();
-    cout << "\nf1 OR f2: ";
-    fO->printArr();
-    
-    cout << "\n\nCheck 2-level tree construction:\n";
-    BloomFilterNode *L1 = b1.search(1);
-    BloomFilterNode *L2 = b1.search(17);
-    BloomFilterNode *root = b1.getRoot();
-    cout << "\nLeft leaf: ";
-    L1->traverse();
-    cout << "\nLeft leaf filters: ";
-    L1->traverseFilters();
-    cout << "\nRight leaf: ";
-    L2->traverse();
-    cout << "\nRight leaf filters: ";
-    L2->traverseFilters();
-    rootKeys = root->getKeys();
-    cout << "\nRoot keys:";
-    for (int i=0; i<root->getCount(); i++) {
-        cout << " " << rootKeys[i];
-    }
-    cout << "\nRoot filters:";
-    for (int i=0; i<root->getCount(); i++) {
-        cout << "|";
-        root->filters[i]->printArr();
-    }
-    cout << "|";
-    cout << "\nTraverse b1: ";
-    b1.traverse();
-    cout << "\nTraverse b1 filters: ";
-    b1.traverseFilters();
-    
-    cout << "\n\nCheck search functions: ";
-    cout << "\n\nSearch in leaf l2: key 1\n";
-    BloomFilterNode *L3 = l2.search(1);
-    L3->traverse();
-    L3->traverseFilters();
-    cout << "\nSearch in leaf l2: key 4\n";
-    L3 = l2.search(4);
-    L3->traverse();
-    L3->traverseFilters();
-    
-    cout << "\n\nSearch in leaf l3: key 10\n";
-    L3 = l3->search(10);
-    L3->traverse();
-    L3->traverseFilters();
-    cout << "\nSearch in leaf l3: key 101\n";
-    L3 = l3->search(101);
-    L3->traverse();
-    L3->traverseFilters();
-    
-    cout << "\n\nSearch in 2-level tree b2: key 1\n";
-    L3 = b1.search(1);
-    L3->traverse();
-    L3->traverseFilters();
-    cout << "\nSearch in 2-level tree b2: key 4\n";
-    L3 = b1.search(4);
-    L3->traverse();
-    L3->traverseFilters();
-    cout << "\nSearch in 2-level tree b2: key 17\n";
-    L3 = b1.search(17);
-    L3->traverse();
-    L3->traverseFilters();
-    cout << "\nSearch in 2-level tree b2: key 7\n";
-    BloomFilterNode *L4 = b1.search(7);
-    L4->traverse();
-    L4->traverseFilters();
-    
-    cout << "\n\nCheck contains functions: ";
-    cout << "\n\nLeaf l2 contains key 1: " << l2.contains(1);
-    cout << "\nLeaf l2 contains key 127: " << l2.contains(127);
-    cout << "\n\nBloomFilterIndexNode root contains key 1: " << root->contains(1);
-    cout << "\nBloomFilterIndexNode root contains key 127: " << root->contains(127);
-    cout << "\n\nBloomFilterTree b1 contains key 1: " << b1.contains(1);
-    cout << "\nBloomFilterTree b1 contains key 7: " << b1.contains(7);
-    cout << "\nBloomFilterTree b1 contains key 127: " << b1.contains(127);
-    
-    cout << "\n\nCheck 3-level tree construction:\n";
-    cout << "\nInsert filters into b1: f25, f2, f8, f9, f26, f96, f97, f98, f99\n";
-    b1.insert(&f25);
-    b1.insert(&f2);
-    b1.insert(&f8);
-    b1.insert(&f9);
-    b1.insert(&f26);
-    b1.insert(&f96);
-    b1.insert(&f97);
-    b1.insert(&f98);
-    b1.insert(&f99);
-    cout << endl;
-    b1.traverse();
-    cout << "\n\nInsert filter into b1: f101\n";
-    b1.insert(&f101);
-    
-    BloomFilterNode *I1 = b1.search(1)->getParent();
-    cout << "\nLeft index node count: " << I1->getCount();
-    cout << "\nLeft index node's keys:";
-    leftIndexKeys = I1->getKeys();
-    for (int i=0; i<I1->getCount(); i++) {
-        cout << " " << leftIndexKeys[i];
-    }
-    
-    BloomFilterNode *I2 = b1.search(96)->getParent();
-    cout << "\n\nRight index node count: " << I2->getCount();
-    cout << "\nRight index node keys: ";
-    rightIndexKeys = I2->getKeys();
-    for (int i=0; i<I2->getCount(); i++) {
-        cout << " " << rightIndexKeys[i];
-    }
-    
-    root = I1->getParent();
-    cout << "\n\nRoot count: " << root->getCount();
-    rootKeys = root->getKeys();
-    cout << "\nRoot's keys: ";
-    for (int i=0; i<root->getCount(); i++) {
-        cout << " " << rootKeys[i];
-    }
-    cout << endl;
-    b1.traverse();
-    cout << endl;
-    b1.traverseFilters();
-    
-    cout << "\n\nCheck level 4 tree construction:\n"; */
-    cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b1)\n\n";
-    BloomFilterTree b1(1, 10);
-    cout << "Insert filter into into b1: 1\n";
+    cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 32 (b1)\n\n";
+    BloomFilterTree b1(1, 32);
+    cout << "Insert filter into into b1: f1\n";
     b1.insert(&v1.filters[0]);
     b1.traverse();
     cout << endl;
-    cout << "\nCompute similarity of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96 with tree root:\n\n";
+    cout << "\nCompute Jaccard coefficient of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96 and  tree root:\n\n";
     for (int i=0; i<v1.getSize(); i++) {
         cout << "jacc(root, filter " << i << "): " << b1.computeMaxJaccard(&v1.filters[i]) << endl;
     }
-    cout << "\n\nDetermine b1 key with highest Jaccard coefficient regarding filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96:\n\n";
-    for (int i=0; i<v1.getSize(); i++) {
-        cout << "max_jacc(b1, filter " << i << "): " << b1.computeMaxJaccardKey(&v1.filters[i]) << endl;
+    
+    cout << "\n\nInsert filters into b1: f4, f7, f10, f17, f25, f2, f8\n";
+    for (int i=0; i<6; i++) {
+        b1.insert(&v1.filters[i]);
     }
+    cout << endl << "Traverse b1: ";
+    b1.traverse();
+    
+    cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
+    BloomFilterTree b2(1, 10);
+    cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15";
+    cout << "\nCompute highest Jaccard coefficient of f16, f18, f19 and each intermediate tree state\n\n";
+    b2.insert(&f3);
+    cout << "Max jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    b2.insert(&f5);
+    cout << "Max jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    b2.insert(&f6);
+    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    b2.insert(&f11);
+    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    /* b2.insert(&f12);
+    b2.insert(&f13);
+    b2.insert(&f14);
+    b2.insert(&f15); */
+    
     cout << endl;
     return 0;
 }

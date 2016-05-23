@@ -142,6 +142,11 @@ KW 20 (39.25 h)
 * Sa, 21.05. (1.5 h)
 * So, 22.05. (6.75 h)
 
+
+KW 21 (noch 28.75 h)
+* Mo, 23.05. (3.25 h)
+
+
 ## TODO
 
 1. Wie arbeitet Cassandra stress tool? 
@@ -157,7 +162,11 @@ KW 20 (39.25 h)
 		* Delete dangeling children pointers after insert and split
 		* computeSimilarityId() function 
 		* Bloomfilter in Baumstruktur einfügen + ausgeben mit subset and similarity queries -> beruhen auf Ähnlichkeitsverhältnis der Knoten/Bloom-Filter: "similar Bloom filters are grouped and managed as the child node of one internal node" (S. 321)
+		* Adapt other features of paper
+		* Compare to unsorted list
+
 		
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
+- Sprache ändern zu Deutsch
