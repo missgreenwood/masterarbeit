@@ -181,19 +181,42 @@ int main(int argc, const char *argv[]) {
     cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
     cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
     cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
     b2.insert(&f11);
     cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
     cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
     cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
     cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
     cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
-    /* b2.insert(&f12);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    b2.insert(&f12);
+    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
     b2.insert(&f13);
+    cout << "\n\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
     b2.insert(&f14);
-    b2.insert(&f15); */
-    
+    cout << "\n\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    b2.insert(&f15);
+    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
+    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
     cout << endl;
     return 0;
 }
