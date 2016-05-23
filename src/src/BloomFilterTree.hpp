@@ -66,6 +66,7 @@ public:
     
     // Insertion methods
     void insert(BloomFilter *filter);
+    void insertSimilarFilter(BloomFilter *filter); 
 };
 
 #endif

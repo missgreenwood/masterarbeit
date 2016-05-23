@@ -223,7 +223,27 @@ int main(int argc, const char *argv[]) {
     cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
     cout << "\nOptimal id for f18 should be: 16" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
     cout << "\nOptimal id for f19 should be: 7" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19);
-    
+    cout << "\n\nChange ids of f16, f18, f19 to their optimal values and insert them into b2:\n";
+    b2.insertSimilarFilter(&f16);
+    b2.insertSimilarFilter(&f18);
+    b2.insertSimilarFilter(&f19);
+    cout << endl << endl;
+    b2.traverse();
+    cout << "\n\nCheck correct insertion of f16 (";
+    f16.printArr();
+    cout << "): ";
+    BloomFilterNode *L1 = b2.search(4);
+    L1->filters[1]->printArr();
+    cout << "\nCheck correct insertion of f18 (";
+    f18.printArr();
+    cout << "): ";
+    L1 = b2.search(16);
+    L1->filters[1]->printArr();
+    cout << "\nCheck correct insertion of f19 (";
+    f19.printArr();
+    cout << "): ";
+    L1 = b2.search(7);
+    L1->filters[1]->printArr(); 
     cout << endl;
     return 0;
 }

@@ -165,3 +165,15 @@ int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
         }
     }
 }
+
+void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty - this is the first filter!";
+        insert(filter);
+    }
+    else {
+        int newId = computeSimilarityId(filter);
+        filter->setId(newId);
+        insert(filter);
+    }
+}
