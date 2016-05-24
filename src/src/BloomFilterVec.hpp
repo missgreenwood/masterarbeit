@@ -13,6 +13,7 @@ class BloomFilterVec {
     
 private:
     int size;
+    int filtersize;
     int *filtersArr;
     int arrSize;
     
@@ -20,6 +21,7 @@ public:
     vector<BloomFilter> filters;
     BloomFilterVec();
     BloomFilterVec(int s);
+    BloomFilterVec(int s, int f); 
     ~BloomFilterVec(); 
     int getSize();
     void initRandom();

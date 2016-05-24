@@ -250,7 +250,7 @@ BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) 
     
     // Determine k-1 nearest neighbors
     // Collect candidates with greater keys
-    int *ids = new int[(k-1)*2];
+    /* int *ids = new int[(k-1)*2];
     float *coefficients = new float[(k-1)*2];
     BloomFilter **candidates = new BloomFilter *[(k-1)*2];
     int count = 1;
@@ -307,7 +307,7 @@ BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) 
             }
         }
         results->filters.push_back(*candidates[index]);
-    }
+    } */
     return results;
 }
 
