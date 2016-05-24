@@ -143,8 +143,9 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 24 h)
-* Mo, 23.05. (8 h, bis 20:55)
+KW 21 (noch 23.75 h)
+* Mo, 23.05. (8.25 h)
+* Di, 24.05. (14:25 - )
 
 
 ## TODO
@@ -163,7 +164,10 @@ KW 21 (noch 24 h)
 		* Bloomfilter ausgeben (subset/similarity queries) 
 		* Vergleich von Lookup mit unsortierter Liste
 
+		* Einfügen so ändern, dass bei besserem Fit Ids getauscht werden
+
 		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
+		* Evtl.: subset queries
 		* Evtl.: Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
 		* Evtl.: Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
 		

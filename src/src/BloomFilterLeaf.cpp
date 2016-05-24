@@ -1,8 +1,8 @@
 //  BloomFilterLeaf.cpp, Judith Greif
 //  Description: Implementation of class BloomFilterLeaf
 
-#include "BloomFilterLeaf.hpp"
 
+#include "BloomFilterLeaf.hpp"
 using namespace std;
 
 
@@ -212,4 +212,106 @@ BloomFilter * BloomFilterLeaf::simpleSimQuery(BloomFilter *filter) {
         }
     }
     return filters[index]; 
+}
+
+// Identical to simpleSimQuery() because pruning only takes place in index nodes
+BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
+    int index = 0;
+    float max = 0;
+    float jacc;
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    return filters[index];
+}
+
+// TODO
+BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
+    BloomFilterVec *results = new BloomFilterVec(getFilterSize());
+    int index = 0;
+    float max = 0;
+    float jacc;
+    
+    // Determine nearest neighbor
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    results->filters.push_back(*filters[index]);
+    cout << "Best result: ";
+    results->filters[0].printData();
+    
+    // Determine k-1 nearest neighbors
+    // Collect candidates with greater keys
+    int *ids = new int[(k-1)*2];
+    float *coefficients = new float[(k-1)*2];
+    BloomFilter **candidates = new BloomFilter *[(k-1)*2];
+    int count = 1;
+    int first=0;
+    for (int i=0; i<(k-1)/2; i++) {
+        if (getKeys()[index+1+i]) {
+            candidates[i] = filters[index+1+i];
+            count++;
+        }
+        else if (next) {
+            candidates[i] = next->filters[first];
+            first++;
+            count++;
+        }
+    }
+    
+    // Collect candidates with smaller keys
+    first = 0;
+    for (int i=0; i<(k-1)/2; i++) {
+        if (getKeys()[index-1+i]) {
+            candidates[((k-1)/2)-1+i] = filters[index-1-i];
+            count++;
+        }
+        else if (prev) {
+            candidates[((k-1)/2)-1+i] = filters[first];
+            first++;
+            count++;
+        }
+    }
+    
+    // Check if enough candidates have been found
+    if (count != k*2) {
+        cout << "Error - too little candidates for query!";
+        for (int i=0; i<count; i++) {
+            results->filters.push_back(*candidates[i]);
+        }
+        return results;
+    }
+    
+    // Determine k-1 best candidates
+    max = 0;
+    for (int i=0; i<k-1; i++) {
+        coefficients[i] = computeJaccard(candidates[i], filter);
+        ids[i] = candidates[i]->getId();
+    }
+    
+    index = 0;
+    for (int i=0; i<k-1; i++) {
+        for (int j=0; j<(k-1)*2; j++) {
+            float max = 0;
+            if (coefficients[j] > max) {
+                max = coefficients[j];
+                index = ids[j];
+            }
+        }
+        results->filters.push_back(*candidates[index]);
+    }
+    return results;
+}
+
+// TODO
+BloomFilterVec * BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
+    return NULL; 
 }

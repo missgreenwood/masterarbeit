@@ -31,9 +31,9 @@ using namespace std;
 class BloomFilterTree {
     
 private:
-    int t;                      // Order = minimum degree
-    int filtersize;             // Size of associated Bloom filters (# of bits)
-    BloomFilterVec *filtersvec; // Associated Bloom filter vector
+    int t;                          // Order = minimum degree
+    int filtersize;                 // Size of associated Bloom filters (# of bits)
+    BloomFilterVec *filtersvec;     // Associated Bloom filter vector
     
 public:
     BloomFilterNode *root;      // Pointer to root node
@@ -68,12 +68,9 @@ public:
     // Similarity queries
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);
-    BloomFilterVec *simQueryVec(BloomFilter *filter);
+    BloomFilterVec *simpleSimQueryVec(BloomFilter *filter, int k);
+    BloomFilterVec *simQueryVec(BloomFilter *filter, int k);
     
-    // Subset queries
-    BloomFilter *simpleSubsetQuery(BloomFilter *filter); 
-    BloomFilter *subsetQuery(BloomFilter *filter);
-    BloomFilterVec *subsetQueryVec(BloomFilter *filter);
 };
 
 #endif

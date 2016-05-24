@@ -58,13 +58,9 @@ public:
     // Lookup methods
     // Similarity queries
     virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;
-    /* virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
-    virtual BloomFilterVec *simQueryVec(BloomFilter *filter) = 0;
-    
-    // Subset queries
-    virtual BloomFilter *simpleSubsetQuery(BloomFilter *filter) = 0;
-    virtual BloomFilter *subsetQuery(BloomFilter *filter) = 0;
-    virtual BloomFilterVec *subsetQueryVec(BloomFilter *filter) = 0; */
+    virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
+    virtual BloomFilterVec *simpleSimQueryVec(BloomFilter *filter, int k) = 0;
+    virtual BloomFilterVec *simQueryVec(BloomFilter *filter, int k) = 0;
 };
 
 #endif 

@@ -182,7 +182,8 @@ void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
     }
 }
 
-// Return Bloom filter with highest similarity in tree - naive approach
+// Function to find Bloom filter with highest Jaccard coefficient in tree
+// Naive approach, no pruning
 BloomFilter *BloomFilterTree::simpleSimQuery(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!";
@@ -190,5 +191,41 @@ BloomFilter *BloomFilterTree::simpleSimQuery(BloomFilter *filter) {
     }
     else {
         return root->simpleSimQuery(filter);
+    }
+}
+
+// Function to find Bloom filter with highest Jaccard coefficient in tree
+// Follow only best path in tree
+BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return filter;
+    }
+    else {
+        return root->simQuery(filter); 
+    }
+}
+
+// Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
+// Naive approach, no pruning
+BloomFilterVec * BloomFilterTree::simpleSimQueryVec(BloomFilter *filter, int k) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return NULL;
+    }
+    else {
+        return root->simpleSimQueryVec(filter, k);
+    }
+}
+
+// Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
+// Follow only best path in tree
+BloomFilterVec * BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return NULL;
+    }
+    else {
+        return root->simpleSimQueryVec(filter, k);
     }
 }

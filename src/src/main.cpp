@@ -237,11 +237,33 @@ int main(int argc, const char *argv[]) {
     cout << "\nMost similar filter should be: ";
     L1 = b4.search(b4.computeMaxJaccardKey(&f100));
     L1->filters[0]->printArr();
-    cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient, no pruning\nResult: ";
+    cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient - no pruning\nResult: ";
     b4.simpleSimQuery(&f100)->printArr();
     
     cout << "\n\nb) simQuery: Return BloomFilter object with highest Jaccard coeffient, follow only best path in tree\nResult: ";
-    // b4.simQuery(&f101);
+    b4.simQuery(&f100)->printArr();
+    
+    cout << "\n\nc) simpleSimQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - no pruning\nResult: ";
+    
+    cout << "\n\nd) simQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - follow only best path in tree\nResult: "; 
+    
+    // Test driver for class BloomFilterLeaf
+    cout << "\n\n\nCLASS BloomFilterLeaf";
+    cout << "\n---------------------\n\n";
+    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
+    BloomFilterLeaf l2(3, f3.getSize());
+    cout << "Insert filters into l2: f3, f5, f6, f11, f12, f13\n";
+    l2.insert(&f3);
+    l2.insert(&f5);
+    l2.insert(&f6);
+    l2.insert(&f11);
+    l2.insert(&f12);
+    l2.insert(&f13);
+    cout << "\nTraverse l2: ";
+    l2.traverse();
+    cout << "\nTraverse l2 filters: ";
+    l2.traverseFilters();
+    cout << "\n\nCheck function to return Bloom filter vector with most similar filters in leaf:\n";
     cout << endl;
     return 0;
 }
