@@ -33,16 +33,12 @@ class BloomFilterTree {
 private:
     int t;                          // Order = minimum degree
     int filtersize;                 // Size of associated Bloom filters (# of bits)
-    BloomFilterVec *filtersvec;     // Associated Bloom filter vector
     
 public:
     BloomFilterNode *root;      // Pointer to root node
     
     // Constructor with parameters order and filter size
     BloomFilterTree(int _t, int _s);
-    
-    // Constructor with paramenters order, filter size and associated Bloom filter vector
-    BloomFilterTree(int _t, int _s, BloomFilterVec *_f);
     
     ~BloomFilterTree();
     
@@ -51,7 +47,6 @@ public:
     
     BloomFilterNode *search(int k);
     BloomFilterNode *getRoot();
-    BloomFilterVec *getFiltersVec();
     void traverse();
     void traverseFilters();
     float computeMaxJaccard(BloomFilter *filter);
@@ -68,8 +63,8 @@ public:
     // Similarity queries
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);
-    BloomFilterVec *simpleSimQueryVec(BloomFilter *filter, int k);
-    BloomFilterVec *simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
     
 };
 

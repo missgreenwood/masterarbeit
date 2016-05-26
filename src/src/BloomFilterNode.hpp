@@ -7,7 +7,6 @@
 #include <iostream>
 #include <assert.h>
 #include "BloomFilter.hpp"
-#include "BloomFilterVec.hpp"
 
 
 class BloomFilterNode {
@@ -59,8 +58,8 @@ public:
     // Similarity queries
     virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;
     virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
-    virtual BloomFilterVec *simpleSimQueryVec(BloomFilter *filter, int k) = 0;
-    virtual BloomFilterVec *simQueryVec(BloomFilter *filter, int k) = 0;
+    // virtual vector<BloomFilter> *simpleSimQueryVec(BloomFilter *filter, int k);
+    // virtual vector<BloomFilter> *simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif 

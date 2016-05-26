@@ -230,8 +230,8 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
 }
 
 // TODO
-BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
-    BloomFilterVec *results = new BloomFilterVec(getFilterSize());
+vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter> results(k);
     int index = 0;
     float max = 0;
     float jacc;
@@ -244,9 +244,9 @@ BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) 
             index = i;
         }
     }
-    results->filters.push_back(*filters[index]);
-    cout << "Best result: ";
-    results->filters[0].printData();
+    results.push_back(*filters[index]);
+    cout << "\nNN: ";
+    results[0].printArr();
     
     // Determine k-1 nearest neighbors
     // Collect candidates with greater keys
@@ -312,6 +312,7 @@ BloomFilterVec * BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) 
 }
 
 // TODO
-BloomFilterVec * BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
-    return NULL; 
+vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter> results;
+    return results; 
 }

@@ -11,7 +11,22 @@ BloomFilter::BloomFilter(): size(filtersize), id(rand()), data(vector<int>(size)
     }
     dataArr = new int[size];
     copy(data.begin(), data.end(), dataArr);
-};
+}; 
+
+// Copy constructor
+// Usage: If a new object has to be created before the copying can occur
+BloomFilter::BloomFilter(const BloomFilter& fSource) {
+    size = fSource.size;
+    id = fSource.id;
+    
+    // Allocate memory (deep copy)
+    data = vector<int>(fSource.size);
+    for (int i=0; i<fSource.size; i++) {
+        data[i] = fSource.data[i];
+    }
+    dataArr = new int[fSource.size];
+    copy(fSource.data.begin(), fSource.data.end(), dataArr);
+}; 
 
 // Constructor with parameter id
 BloomFilter::BloomFilter(int i): size(filtersize), id(i), data(vector<int>(size)) {
@@ -32,6 +47,27 @@ BloomFilter::BloomFilter(int s, int i): size(s), id(i), data(vector<int>(s)) {
 };
 
 BloomFilter::~BloomFilter() {}
+
+// Evtl. TODO 
+// Overloaded assignment operator
+// Usage: If a new object does not have to be created before the copying can occur
+BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
+    
+    // Check for self assignment
+    if (this != &fSource) {
+        size = fSource.size;
+        id = fSource.id;
+        
+        // Allocate memory (deep copy)
+        data = vector<int>(fSource.size);
+        for (int i=0; i<fSource.size; i++) {
+            data[i] = fSource.data[i];
+        }
+        dataArr = new int[fSource.size];
+        copy(fSource.data.begin(), fSource.data.end(), dataArr);
+    }
+    return *this; 
+}
 
 void BloomFilter::printData() {
     cout << "Bloom filter " << getId() << ": ";

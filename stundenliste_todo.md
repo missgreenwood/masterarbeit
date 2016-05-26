@@ -143,9 +143,10 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 19.25 h)
+KW 21 (noch 17.75 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
+* Mi, 25.05. (1.5 h) 
 
 
 ## TODO
@@ -161,10 +162,12 @@ KW 21 (noch 19.25 h)
 	a. Sakuma2011: 
 		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 		* Dangeling children and filter pointers after insert and split
-		* Bloomfilter ausgeben (subset/similarity queries) 
+		* similarity queries fertig 
 		* Vergleich von Lookup mit unsortierter Liste
 
 		* Einfügen so ändern, dass bei besserem Fit Ids getauscht werden
+		* overloaded assignment operator + copy constructor for class BloomFilter
+		* remove custom vector class
 
 		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
 		* Evtl.: subset queries

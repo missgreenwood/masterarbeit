@@ -6,14 +6,7 @@
 
 // Constructor with parameters order and size
 // Initializes tree as empty
-BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), filtersize(_s), root(NULL) {};
-
-// TODO
-// Constructor with parameters order, size, *filtersvec
-// Insert all filters from Bloom filter vector into BloomFilterTree, based on similarity
-BloomFilterTree::BloomFilterTree(int _t, int _s, BloomFilterVec *_f): t(_t), filtersize(_s), root(NULL) {
-    filtersvec = _f;
-}
+BloomFilterTree::BloomFilterTree(int _t, int _s): t(_t), filtersize(_s), root(NULL) {}
 
 BloomFilterTree::~BloomFilterTree() {
     delete root;
@@ -43,10 +36,6 @@ BloomFilterNode * BloomFilterTree::search(int k) {
 
 BloomFilterNode * BloomFilterTree::getRoot() {
     return root;
-}
-
-BloomFilterVec * BloomFilterTree::getFiltersVec() {
-    return filtersvec;
 }
 
 void BloomFilterTree::traverse() {
@@ -206,26 +195,31 @@ BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
     }
 }
 
+// TODO
 // Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
 // Naive approach, no pruning
-BloomFilterVec * BloomFilterTree::simpleSimQueryVec(BloomFilter *filter, int k) {
+/* vector<BloomFilter> BloomFilterTree::simpleSimQueryVec(BloomFilter *filter, int k) {
     if (root == NULL) {
+        vector<BloomFilter> results(1);
         cout << "Tree is empty!";
-        return NULL;
+        results.push_back(*filter);
+        return results;
     }
     else {
-        return root->simpleSimQueryVec(filter, k);
+        return *root->simpleSimQueryVec(filter, k);
     }
-}
+} */
 
+// TODO 
 // Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
 // Follow only best path in tree
-BloomFilterVec * BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
-    if (root == NULL) {
+/* vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
+    if (root == NULL) {vector<BloomFilter> results(1);
         cout << "Tree is empty!";
-        return NULL;
+        results.push_back(*filter);
+        return results;
     }
     else {
-        return root->simpleSimQueryVec(filter, k);
+        return *root->simpleSimQueryVec(filter, k);
     }
-}
+} */

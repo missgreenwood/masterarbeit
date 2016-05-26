@@ -10,7 +10,8 @@
 
 using namespace std;
 
-const int filtersize = 32;   // # of bits in Bloom filter
+// Evtl. TODO 
+const int filtersize = 10;   // # of bits in Bloom filter
 
 
 class BloomFilter {
@@ -23,9 +24,13 @@ private:
 public:
     int *dataArr;
     BloomFilter();
+    BloomFilter(const BloomFilter& fSource); 
     BloomFilter(int i);
     BloomFilter(int s, int i);
-    ~BloomFilter(); 
+    ~BloomFilter();
+    
+    // Overloaded assignment operator
+    BloomFilter & operator = (const BloomFilter &fSource); 
     
     void printData();
     void printValue();
@@ -37,7 +42,6 @@ public:
     void printArr();
     void initRandom();
         
-    friend class BloomFilterVec;
     friend class BloomFilterNode;
     friend class BloomFilterTree;
 };

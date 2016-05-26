@@ -344,11 +344,11 @@ BloomFilter *BloomFilterIndexNode::simQuery(BloomFilter *filter) {
 }
 
 // TODO
-BloomFilterVec * BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter, int k) {
-    return NULL;
-}
+/* vector<BloomFilter> BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter, int k) {
+    
+} */
 
 // TODO
-BloomFilterVec * BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
-    return NULL; 
-}
+/* vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
+
+} */
