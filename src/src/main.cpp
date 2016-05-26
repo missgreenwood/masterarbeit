@@ -341,6 +341,26 @@ int main(int argc, const char *argv[]) {
     l3.filters[0]->printArr();
     cout << endl;
     vector<BloomFilter> v3 = l2.simpleSimQueryVec(&f13, 3);
+    
+    cout << "Query l3 and l2 for similar filters of f14 (";
+    f14.printArr();
+    cout << ")";
+    cout << "Most similar key should be: " << l3.computeMaxJaccardKey(&f14) << " (";
+    l3.filters[0]->printArr();
+    cout << ")";
+    cout << "\n\nf) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
+    cout << "\n3 most similar keys should be (because leaves are not sorted): 14, 13, 15\n";
+    cout << "3 most similar filters should be (because leaves are not sorted): ";
+    l3.filters[0]->printArr();
+    cout << ", ";
+    l2.filters[5]->printArr();
+    cout << ", ";
+    l3.filters[1]->printArr();
+    cout << endl;
+    
+    // TODO
+    // return all candidates (f17 missing)
+    vector<BloomFilter> v4 = l3.simpleSimQueryVec(&f14, 3); 
     cout << endl;
     return 0;
 }

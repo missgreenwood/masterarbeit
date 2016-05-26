@@ -310,7 +310,7 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
         }
     }
     
-    cout << "Jaccard coefficients of candidates:\n";
+    cout << "Jaccard coefficients of other candidates:\n";
     for (int i=0; i<(k-1)*2; i++) {
         if (coefficients[i]) {
             cout << coefficients[i] << " (" << ids[i] << ")\n";
