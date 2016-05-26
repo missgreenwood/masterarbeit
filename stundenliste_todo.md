@@ -164,13 +164,14 @@ KW 21 (noch 9.25 h)
 		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 		* Dangeling children and filter pointers after insert and split
 		* similarity queries fertig 
-			-> gleich gute Keys
-			-> simQuery durch checken und anpassen 
+			-> simpleSimQuery: linker Nachbar, BloomFilterIndexNode::
+			-> simQuery fertig (mit pruning)
+
 		* Vergleich von Lookup mit unsortierter Liste + Zeitmessungen 
 
 		* Einfügen so ändern, dass bei besserem Fit Ids getauscht werden
 
-		* Komische Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
+		* Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
 
 		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
 		* Evtl.: subset queries

@@ -291,9 +291,10 @@ int main(int argc, const char *argv[]) {
     cout << ")";
     
     cout << "\n\nMost similar key should be: " << b3.computeMaxJaccardKey(&f100);
-    cout << "\nMost similar filter should be: ";
+    cout << " (";
     L1 = b3.search(b3.computeMaxJaccardKey(&f100));
     L1->filters[0]->printArr();
+    cout << ")";
     cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient -- no pruning\nResult: " << b3.simpleSimQuery(&f100)->getId() << " (";
     b3.simpleSimQuery(&f100)->printArr();
     cout << ")";
@@ -305,23 +306,41 @@ int main(int argc, const char *argv[]) {
      
      cout << "\n\nd) simQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - follow only best path in tree\nResult: "; */
     
-    cout << "Query l2 for similar filters of f100 (";
+    cout << "\n\n\nQuery l2 for similar filters of f100 (";
     f100.printArr();
-    
     cout << ")";
     cout << "\n\nMost similar key should be: " << l2.computeMaxJaccardKey(&f100);
-    cout << "\nMost similar filter should be: ";
+    cout << " (";
     l2.filters[1]->printArr();
+    cout << ")";
     cout << "\n\ne) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
-    cout << "\n3 most similar keys should be: " << l2.computeMaxJaccardKey(&f100) << ", 11, 12\n";
-    cout << "3 most similar filters should be: ";
+    cout << "\n3 most similar keys should be (because leaf is not sorted): " << l2.computeMaxJaccardKey(&f100) << ", 11, 3\n";
+    cout << "3 most similar filters should be (because leaf is not sorted): ";
     l2.filters[1]->printArr();
     cout << ", ";
     l2.filters[3]->printArr();
     cout << ", ";
-    l2.filters[4]->printArr();
+    l2.filters[0]->printArr();
     cout << endl;
     vector<BloomFilter> v2 = l2.simpleSimQueryVec(&f100, 3);
+    
+    cout << "\n\nQuery l2 and l3 for similar filters of f13 (";
+    f13.printArr();
+    cout << ")";
+    cout << "\n\nMost similar key should be: " << l2.computeMaxJaccardKey(&f13);
+    cout << " (";
+    l2.filters[5]->printArr();
+    cout << ")";
+    cout << "\n\nf) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
+    cout << "\n3 most similar keys should be (because leaves are not sorted): 13, 14, 11\n";
+    cout << "3 most similar filters should be (because leaves are not sorted): ";
+    l2.filters[5]->printArr();
+    cout << ", ";
+    l2.filters[4]->printArr();
+    cout << ", ";
+    l3.filters[0]->printArr();
+    cout << endl;
+    vector<BloomFilter> v3 = l2.simpleSimQueryVec(&f13, 3);
     cout << endl;
     return 0;
 }
