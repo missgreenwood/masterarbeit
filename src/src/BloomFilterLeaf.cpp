@@ -1,4 +1,4 @@
-//  BloomFilterLeaf.cpp, Judith Greif
+////  BloomFilterLeaf.cpp, Judith Greif
 //  Description: Implementation of class BloomFilterLeaf
 
 
@@ -158,10 +158,10 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
         
         // Get middle filter
         BloomFilter *middle = l->filters[0];
-        cout << "\nKey to be inserted into parent: " << middle->getId();
+        /* cout << "\nKey to be inserted into parent: " << middle->getId();
         cout << "\nFilter to be inserted into parent: ";
         middle->printArr();
-        cout << endl; 
+        cout << endl; */ 
         p->insert(middle, this, l);
     }
 }
@@ -229,7 +229,8 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
     return filters[index];
 }
 
-// TODO
+// Function to return Bloom filter vector with k highest Jaccard coefficients in tree  
+// If tree holds less than k filters, return them all sorted by Jaccard coefficient in descending order
 vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
     vector<BloomFilter> results(k);
     int index = 0;
@@ -244,70 +245,118 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
             index = i;
         }
     }
-    results.push_back(*filters[index]);
-    cout << "\nNN: ";
+    results[0] = *filters[index];
+    cout << "\nNearest neighbor: " << results[0].getId() << " (";
     results[0].printArr();
+    cout << ")\n";
     
     // Determine k-1 nearest neighbors
-    // Collect candidates with greater keys
-    /* int *ids = new int[(k-1)*2];
+    // Collect k-1 candidates with greater keys
+    int *ids = new int[(k-1)*2];
     float *coefficients = new float[(k-1)*2];
     BloomFilter **candidates = new BloomFilter *[(k-1)*2];
     int count = 1;
-    int first=0;
-    for (int i=0; i<(k-1)/2; i++) {
+    int first = 0;
+    for (int i=0; i<k-1; i++) {
         if (getKeys()[index+1+i]) {
             candidates[i] = filters[index+1+i];
             count++;
         }
+        
+        // Evtl. TODO
         else if (next) {
-            candidates[i] = next->filters[first];
-            first++;
-            count++;
+            BloomFilterLeaf *tmp = next;
+            while (tmp && count<k-1) {
+                for (int j=0; j<tmp->getCount(); j++) {
+                    candidates[i] = tmp->filters[first];
+                    first++;
+                    count++;
+                }
+                if (tmp->next) {
+                    tmp = tmp->next;
+                    first = 0;
+                }
+            }
         }
     }
     
-    // Collect candidates with smaller keys
-    first = 0;
-    for (int i=0; i<(k-1)/2; i++) {
+    // Collect k-1 candidates with smaller keys
+    for (int i=0; i<k-1; i++) {
+        first = 0;
         if (getKeys()[index-1+i]) {
-            candidates[((k-1)/2)-1+i] = filters[index-1-i];
+            candidates[count-1+i] = filters[index-1-i];
             count++;
         }
+        
+        // Evtl. TODO
         else if (prev) {
-            candidates[((k-1)/2)-1+i] = filters[first];
-            first++;
-            count++;
+            BloomFilterLeaf *tmp = prev;
+            while (tmp && count<(k-1)*2) {
+                for (int j=0; j<tmp->getCount(); j++) {
+                    candidates[count+i] = tmp->filters[first];
+                    first++;
+                    count++;
+                }
+                if (tmp->prev) {
+                    tmp = tmp->prev;
+                    first = 0;
+                }
+            }
+        }
+    }
+
+    first = 0;
+    // cout << "Candidates with greater keys: ";
+    for (int i=first; i<k-1; i++) {
+        if (candidates[i]) {
+            // cout << candidates[i]->getId() << " ";
+            first++; 
         }
     }
     
-    // Check if enough candidates have been found
-    if (count != k*2) {
-        cout << "Error - too little candidates for query!";
-        for (int i=0; i<count; i++) {
-            results->filters.push_back(*candidates[i]);
+    // cout << "\nCandidates with smaller keys: ";
+    for (int i=first; i<(k-1)*2; i++) {
+        if (candidates[i]) {
+            // cout << candidates[i]->getId() << " ";
         }
-        return results;
     }
     
     // Determine k-1 best candidates
-    max = 0;
-    for (int i=0; i<k-1; i++) {
-        coefficients[i] = computeJaccard(candidates[i], filter);
-        ids[i] = candidates[i]->getId();
+    for (int i=0; i<(k-1)*2; i++) {
+        if (candidates[i]) {
+            coefficients[i] = computeJaccard(candidates[i], filter);
+            ids[i] = candidates[i]->getId();
+        }
+    }
+    
+    cout << "Jaccard coefficients of candidates:\n";
+    for (int i=0; i<(k-1)*2; i++) {
+        if (coefficients[i]) {
+            cout << coefficients[i] << " (" << ids[i] << ")\n";
+        }
     }
     
     index = 0;
+    int key = 0;
     for (int i=0; i<k-1; i++) {
-        for (int j=0; j<(k-1)*2; j++) {
-            float max = 0;
+        max = 0;
+        for (int j=0; j<count-1; j++) {
             if (coefficients[j] > max) {
                 max = coefficients[j];
-                index = ids[j];
+                key = ids[j];
+                index = j;
             }
         }
-        results->filters.push_back(*candidates[index]);
-    } */
+        // cout << "New maximum: " << max << " (" << key << ")" << endl;
+        results[i+1] = *candidates[index];
+        coefficients[index] = 0;
+    }
+    
+    cout << "Result vector: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << ", ";
+    }
+    cout << results[results.size()-1].getId();
     return results;
 }
 

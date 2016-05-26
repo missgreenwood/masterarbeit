@@ -149,7 +149,7 @@ int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
         }
         
         // Decide which key is better
-        // Returns smaller key if both are equally good
+        // Returns greater key if both are equally good
         if ((bigId-optimalId) > (optimalId-smallId)) {
             return smallId;
         }

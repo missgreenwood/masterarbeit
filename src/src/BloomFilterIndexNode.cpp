@@ -173,10 +173,10 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            cout << "\nKey to be inserted into parent: " << middle->getId();
+            /* cout << "\nKey to be inserted into parent: " << middle->getId();
             cout << "\nFilter to be inserted into parent: ";
             middle->printArr();
-            cout << endl;
+            cout << endl; */
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
@@ -208,10 +208,10 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            cout << "\nKey to be inserted into parent: " << middle->getId();
+            /* cout << "\nKey to be inserted into parent: " << middle->getId();
             cout << "\nFilter to be inserted into parent: ";
             middle->printArr();
-            cout << endl;
+            cout << endl; */
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
@@ -243,7 +243,7 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
                 cout << "|";
             }
             
-            cout << "\nRoot's new keys: ";
+            cout << "\n\nRoot's new keys: ";
             for (int i=0; i<p->getCount(); i++) {
                 cout << " " << p->getKeys()[i];
             }

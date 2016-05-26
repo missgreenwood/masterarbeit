@@ -26,7 +26,7 @@ int main(int argc, const char *argv[]) {
     
     cout << "CLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create 23 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, 100, array length 10 and random values\n";
+    cout << "Create 23 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, 100, array length 10 and random values 0/1\n";
     BloomFilter f1(10, 1);
     BloomFilter f2(10, 2);
     BloomFilter f3(10, 3);
@@ -98,24 +98,6 @@ int main(int argc, const char *argv[]) {
     f96.printData();
     f100.initRandom();
     f100.printData();
-
-    // Class BloomFilterLeaf
-    
-    cout << "\n\nCLASS BloomFilterLeaf";
-    cout << "\n---------------------\n\n";
-    cout << "Create leaf with minimum degree 3/max. elements 6 (l2)\n\n";
-    BloomFilterLeaf l2(3, f3.getSize());
-    cout << "Insert filters into l2: f3, f5, f6, f11, f12, f13\n";
-    l2.insert(&f3);
-    l2.insert(&f5);
-    l2.insert(&f6);
-    l2.insert(&f11);
-    l2.insert(&f12);
-    l2.insert(&f13);
-    cout << "\nTraverse l2: ";
-    l2.traverse();
-    cout << "\nTraverse l2 filters: ";
-    l2.traverseFilters();
     
     // Class BloomFilterTree
     
@@ -127,11 +109,8 @@ int main(int argc, const char *argv[]) {
     cout << "Insert filter into into b1: f1\n";
     b1.insert(&f1);
     b1.traverse();
+    b1.traverseFilters();
     cout << endl;
-    
-    // TODO
-    // insert all filters into v1
-    // overloaded assignment operator for class BloomFilter
     
     cout << "\nCreate BloomFilter vector (v1) and insert filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96\n\n";
     vector<BloomFilter> v1;
@@ -149,14 +128,13 @@ int main(int argc, const char *argv[]) {
         v1[i].printData();
     }
     
-    /*
-    // TODO
     cout << "\nCompute Jaccard coefficient of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96 and  tree root:\n\n";
+    BloomFilterNode *root = b1.root;
+    for (int i=0; i<10; i++) {
+        cout << "Jaccard coefficient of f1 and f" << v1[i].getId() << ": " << root->computeJaccard(root->filters[0], &v1[i]) << endl;
+    }
     
-    cout << endl << "Traverse b1: ";
-    b1.traverse();
-    
-    cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
+    cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
     BloomFilterTree b2(1, 10);
     cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15";
     cout << "\nCompute highest Jaccard coefficient of f16, f18, f19 and each intermediate tree state\n\n";
@@ -215,19 +193,40 @@ int main(int argc, const char *argv[]) {
     cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
     cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
     cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
     
-    cout << "\nCompute optimal ids for filters f16, f18, f19 regarding b2";
+    b2.traverse();
+    cout << endl;
+    b2.traverseFilters();
+    
+    cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
     cout << "\nSmallest key in b2: " << b2.getMinKey() << "\nBiggest key in b2: " << b2.getMaxKey();
     cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
-    cout << "\nOptimal id for f18 should be: 16" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
-    cout << "\nOptimal id for f19 should be: 7" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19);
-    cout << "\n\nChange ids of f16, f18, f19 to their optimal values and insert them into b2:\n";
+    cout << "\nOptimal id for f18 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
+    cout << "\nOptimal id for f19 should be: 10" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19);
+    cout << "\n\nInsert f16 into b2, changing its id to optimal value:\n\n";
     b2.insertSimilarFilter(&f16);
-    b2.insertSimilarFilter(&f18);
-    b2.insertSimilarFilter(&f19);
-    cout << endl << endl;
     b2.traverse();
+    cout << endl;
+    b2.traverseFilters();
+    cout << "\n\nInsert f18 into b2, changing its id to optimal value:\n\n";
+    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
+    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
+    cout << "Optimal id for f18 should be: 7" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18) << endl << endl;
+    b2.insertSimilarFilter(&f18);
+    b2.traverse();
+    cout << endl;
+    b2.traverseFilters();
+    cout << "\n\nInsert f19 into b2, changing its id to optimal value:\n\n";
+    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
+    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << "Optimal id for f19 should be: 10" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19) << endl;
+    b2.insertSimilarFilter(&f19);
+    cout << endl;
+    b2.traverse();
+    cout << endl;
+    b2.traverseFilters();
+    
     cout << "\n\nCheck correct insertion of f16 (";
     f16.printArr();
     cout << "): ";
@@ -236,60 +235,93 @@ int main(int argc, const char *argv[]) {
     cout << "\nCheck correct insertion of f18 (";
     f18.printArr();
     cout << "): ";
-    L1 = b2.search(16);
-    L1->filters[1]->printArr();
+    L1 = b2.search(7);
+    L1->filters[0]->printArr();
     cout << "\nCheck correct insertion of f19 (";
     f19.printArr();
     cout << "): ";
-    L1 = b2.search(7);
+    L1 = b2.search(10);
     L1->filters[1]->printArr();
-    cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 32 (b3)\n\n";
-    BloomFilterTree b3(1, 32);
-    cout << "Change ids of all filters in to their optimal values and insert them into b3:\n";
-    // TODO
-    
-    cout << "\n\nCheck query functions";
-    cout << "\n---------------------\n";
-    cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b4)\n\n";
-    BloomFilterTree b4(1, 10);
-    cout << "Change ids of filters f3, f5, f6, f11, f12, f13, f14, f15, f16, f18, f19 to their optimal values and insert them into b4:\n";
-    b4.insertSimilarFilter(&f3);
-    b4.insertSimilarFilter(&f5);
-    b4.insertSimilarFilter(&f6);
-    b4.insertSimilarFilter(&f11);
-    b4.insertSimilarFilter(&f12);
-    b4.insertSimilarFilter(&f13);
-    b4.insertSimilarFilter(&f14);
-    b4.insertSimilarFilter(&f15);
-    b4.insertSimilarFilter(&f16);
-    b4.insertSimilarFilter(&f18);
-    b4.insertSimilarFilter(&f19);
+    cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b3)\n\n";
+    BloomFilterTree b3(1, 10);
+    cout << "Insert all filters in v1 into b3, changing their ids to optimal values:\n\n";
+    for (int i=0; i<10; i++) {
+        b3.insertSimilarFilter(&v1[i]);
+    }
+    cout << endl << endl;
+    b3.traverse();
     cout << endl;
-    b4.traverse();
-    cout << endl;
-    b4.traverseFilters();
+    b3.traverseFilters();
     
-    cout << "\n\nMost similar key should be: " << b4.computeMaxJaccardKey(&f100);
+    // Class BloomFilterLeaf
+    
+    cout << "\n\n\nCLASS BloomFilterLeaf";
+    cout << "\n---------------------\n\n";
+    cout << "Create leaves with minimum degree 3/max. elements 6 (l2, l3)\n\n";
+    BloomFilterLeaf l2(3, f3.getSize());
+    BloomFilterLeaf l3(3, f3.getSize());
+    cout << "Insert filters into l2: f3, f5, f6, f11, f12, f13\n";
+    cout << "Insert filters into l3: f14, f15, f17, f25, f26, f96\n";
+    l2.insert(&f3);
+    l2.insert(&f5);
+    l2.insert(&f6);
+    l2.insert(&f11);
+    l2.insert(&f12);
+    l2.insert(&f13);
+    l3.insert(&f14);
+    l3.insert(&f15);
+    l3.insert(&f17);
+    l3.insert(&f25);
+    l3.insert(&f26);
+    l3.insert(&f96);
+    cout << "\nTraverse l2: ";
+    l2.traverse();
+    cout << "\nTraverse l2 filters: ";
+    l2.traverseFilters();
+    cout << "\n\nMake l2 and l3 siblings and traverse both: ";
+    l2.setNext(&l3);
+    l3.setPrev(&l2);
+    l2.traverse();
+    l2.getNext()->traverse();
+    
+    cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
+    cout << "\n-------------------------------------------------------";
+    cout << "\nQuery b3 for similar filters of f100 (";
+    f100.printArr();
+    cout << ")";
+    
+    cout << "\n\nMost similar key should be: " << b3.computeMaxJaccardKey(&f100);
     cout << "\nMost similar filter should be: ";
-    L1 = b4.search(b4.computeMaxJaccardKey(&f100));
+    L1 = b3.search(b3.computeMaxJaccardKey(&f100));
     L1->filters[0]->printArr();
-    cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient - no pruning\nResult: ";
-    b4.simpleSimQuery(&f100)->printArr();
+    cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient -- no pruning\nResult: " << b3.simpleSimQuery(&f100)->getId() << " (";
+    b3.simpleSimQuery(&f100)->printArr();
+    cout << ")";
     
-    cout << "\n\nb) simQuery: Return BloomFilter object with highest Jaccard coeffient, follow only best path in tree\nResult: ";
-    b4.simQuery(&f100)->printArr();
+    // TODO
+    /* cout << "\n\nb) simQuery: Return BloomFilter object with highest Jaccard coeffient, follow only best path in tree\nResult: ";
+    b3.simQuery(&f100)->printArr();
+     cout << "\n\nc) simpleSimQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - no pruning\nResult: ";
+     
+     cout << "\n\nd) simQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - follow only best path in tree\nResult: "; */
     
-    cout << "\n\ne) simpleSimQueryVec: Return k Bloom filters with highest Jaccard coefficients in leaf and return them as Bloom filter vector - no pruning";
-    cout << "\n3 most similar keys should be: 4, 6, 3\nResult: |";
+    cout << "Query l2 for similar filters of f100 (";
+    f100.printArr();
+    
+    cout << ")";
+    cout << "\n\nMost similar key should be: " << l2.computeMaxJaccardKey(&f100);
+    cout << "\nMost similar filter should be: ";
+    l2.filters[1]->printArr();
+    cout << "\n\ne) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
+    cout << "\n3 most similar keys should be: " << l2.computeMaxJaccardKey(&f100) << ", 11, 12\n";
+    cout << "3 most similar filters should be: ";
+    l2.filters[1]->printArr();
+    cout << ", ";
+    l2.filters[3]->printArr();
+    cout << ", ";
+    l2.filters[4]->printArr();
+    cout << endl;
     vector<BloomFilter> v2 = l2.simpleSimQueryVec(&f100, 3);
-    /* for (int i=0; i<3; i++) {
-        v2->filters[i].printArr();
-        cout << "|";
-    } */
-    /* cout << "\n\nc) simpleSimQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - no pruning\nResult: ";
-    
-    cout << "\n\nd) simQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - follow only best path in tree\nResult: "; */
-    
     cout << endl;
     return 0;
 }

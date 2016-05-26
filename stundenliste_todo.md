@@ -143,10 +143,11 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 17.75 h)
+KW 21 (noch 9.25 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
+* Do, 26.05. (8 h)
 
 
 ## TODO
@@ -163,17 +164,21 @@ KW 21 (noch 17.75 h)
 		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 		* Dangeling children and filter pointers after insert and split
 		* similarity queries fertig 
-		* Vergleich von Lookup mit unsortierter Liste
+			-> gleich gute Keys
+			-> simQuery durch checken und anpassen 
+		* Vergleich von Lookup mit unsortierter Liste + Zeitmessungen 
 
 		* Einfügen so ändern, dass bei besserem Fit Ids getauscht werden
-		* overloaded assignment operator + copy constructor for class BloomFilter
-		* remove custom vector class
+
+		* Komische Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
 
 		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
 		* Evtl.: subset queries
 		* Evtl.: Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
 		* Evtl.: Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
 		
+	b. Yang2002
+
 ## TODO Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
