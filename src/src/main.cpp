@@ -286,16 +286,16 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
     cout << "\n-------------------------------------------------------";
-    cout << "\nQuery b3 for similar filters of f100 (";
+    cout << "\nTREE QUERY for f100 (";
     f100.printArr();
     cout << ")";
     
-    cout << "\n\nMost similar key should be: " << b3.computeMaxJaccardKey(&f100);
+    cout << "\n\nNN should be: " << b3.computeMaxJaccardKey(&f100);
     cout << " (";
     L1 = b3.search(b3.computeMaxJaccardKey(&f100));
     L1->filters[0]->printArr();
     cout << ")";
-    cout << "\n\na) simpleSimQuery: Return BloomFilter object with highest Jaccard coefficient -- no pruning\nResult: " << b3.simpleSimQuery(&f100)->getId() << " (";
+    cout << "\n\na) simpleSimQuery: Return nearest neighbor, no pruning\nResult: " << b3.simpleSimQuery(&f100)->getId() << " (";
     b3.simpleSimQuery(&f100)->printArr();
     cout << ")";
     
@@ -306,60 +306,54 @@ int main(int argc, const char *argv[]) {
      
      cout << "\n\nd) simQueryVec: Return k Bloom filters with highest Jaccard coefficients in tree and return them as Bloom filter vector - follow only best path in tree\nResult: "; */
     
-    cout << "\n\n\nQuery l2 for similar filters of f100 (";
+    cout << "\n\n\nLEAF QUERY for f100 (";
     f100.printArr();
     cout << ")";
-    cout << "\n\nMost similar key should be: " << l2.computeMaxJaccardKey(&f100);
+    cout << "\n\nNN should be: " << l2.computeMaxJaccardKey(&f100);
     cout << " (";
     l2.filters[1]->printArr();
     cout << ")";
-    cout << "\n\ne) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
-    cout << "\n3 most similar keys should be (because leaf is not sorted): " << l2.computeMaxJaccardKey(&f100) << ", 11, 3\n";
-    cout << "3 most similar filters should be (because leaf is not sorted): ";
+    cout << "\n\ne) simpleSimQueryVec: Return k nearest neighbors, no pruning";
+    cout << "\nResult should be (because leaf is not sorted): " << l2.computeMaxJaccardKey(&f100) << " (";
     l2.filters[1]->printArr();
-    cout << ", ";
+    cout << "), 11 (";
     l2.filters[3]->printArr();
-    cout << ", ";
+    cout << "), 3 (";
     l2.filters[0]->printArr();
-    cout << endl;
+    cout << ")\n";
     vector<BloomFilter> v2 = l2.simpleSimQueryVec(&f100, 3);
     
-    cout << "\n\nQuery l2 and l3 for similar filters of f13 (";
+    cout << "\n\n\nLEAF QUERY for f13 (";
     f13.printArr();
     cout << ")";
-    cout << "\n\nMost similar key should be: " << l2.computeMaxJaccardKey(&f13);
+    cout << "\n\nNN should be: " << l2.computeMaxJaccardKey(&f13);
     cout << " (";
     l2.filters[5]->printArr();
     cout << ")";
-    cout << "\n\nf) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
-    cout << "\n3 most similar keys should be (because leaves are not sorted): 13, 14, 11\n";
-    cout << "3 most similar filters should be (because leaves are not sorted): ";
+    cout << "\n\nf) simpleSimQueryVec: Return k nearest neighbors, no pruning";
+    cout << "\nResult should be (because leaves are not sorted): 13 (";
     l2.filters[5]->printArr();
-    cout << ", ";
+    cout << "), 14 (";
     l2.filters[4]->printArr();
-    cout << ", ";
+    cout << "), 11 (";
     l3.filters[0]->printArr();
-    cout << endl;
+    cout << ")\n";
     vector<BloomFilter> v3 = l2.simpleSimQueryVec(&f13, 3);
     
-    cout << "\n\nQuery l3 and l2 for similar filters of f14 (";
+    cout << "\n\n\nLEAF QUERY for f14 (";
     f14.printArr();
     cout << ")";
-    cout << "\n\nMost similar key should be: " << l3.computeMaxJaccardKey(&f14) << " (";
+    cout << "\n\nNearest neighbor should be: " << l3.computeMaxJaccardKey(&f14) << " (";
     l3.filters[0]->printArr();
     cout << ")";
-    cout << "\n\nf) simpleSimQueryVec: Return BloomFilter vector with k highest Jaccard coefficients -- no pruning";
-    cout << "\n3 most similar keys should be (because leaves are not sorted): 14, 13, 15\n";
-    cout << "3 most similar filters should be (because leaves are not sorted): ";
+    cout << "\n\ng) simpleSimQueryVec: Return k nearest neighbors, no pruning";
+    cout << "\nResult should be (because leaves are not sorted): 14 (";
     l3.filters[0]->printArr();
-    cout << ", ";
+    cout << "), 13 (";
     l2.filters[5]->printArr();
-    cout << ", ";
+    cout << "), 15 (";
     l3.filters[1]->printArr();
-    cout << endl;
-    
-    // TODO
-    // return all candidates (f17 missing)
+    cout << ")\n";
     vector<BloomFilter> v4 = l3.simpleSimQueryVec(&f14, 3);
     cout << endl;
     return 0;

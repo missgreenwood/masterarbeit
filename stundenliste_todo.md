@@ -143,11 +143,12 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 9.25 h)
+KW 21 (noch 7.5 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
-* Do, 26.05. (8 h)
+* Do, 26.05. (8.25 h)
+* Fr, 27.05. (1.5 h)
 
 
 ## TODO
@@ -163,9 +164,10 @@ KW 21 (noch 9.25 h)
 	a. Sakuma2011: 
 		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 		* Dangeling children and filter pointers after insert and split
-		* similarity queries fertig 
-			-> simpleSimQuery: linker Nachbar, BloomFilterIndexNode::
+		* similarity queries fertig: 
+			-> simpleSimQueryVec: BloomFilterIndexNode::
 			-> simQuery fertig (mit pruning)
+			-> simQueryVec
 
 		* Vergleich von Lookup mit unsortierter Liste + Zeitmessungen 
 

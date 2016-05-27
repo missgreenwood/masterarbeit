@@ -258,11 +258,11 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
     int count = 0;
     int first = 0;
     for (int i=0; i<k-1; i++) {
-        if (index+1+i < getCount()) {
+        if (index+1+i<getCount() && count<k-1) {
             candidates[i] = filters[index+1+i];
             count++;
         }
-        else if (next) {
+        else if (next && count<k-1) {
             BloomFilterLeaf *tmp = next;
             while (tmp && count<k-1) {
                 for (int j=0; j<k-1; j++) {
@@ -281,17 +281,17 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
     // Collect k-1 candidates with smaller keys
     first = count;
     for (int i=0; i<k-1; i++) {
-        if (index-1-i > -1) {
-            candidates[first+i] = filters[index-1-i];
+        if (index-1-i>-1 && count<(k-1)*2) {
+            candidates[count] = filters[index-1-i];
             count++;
         }
-        else if (prev) {
+        else if (prev && count<(k-1)*2) {
             BloomFilterLeaf *tmp = prev;
             first = prev->getCount()-1;
             while (tmp && count<(k-1)*2) {
                 for (int j=0; j<k-1; j++) {
                     if (tmp->filters[first] != NULL) {
-                        candidates[count-1+i+j] = tmp->filters[first];
+                        candidates[count] = tmp->filters[first];
                         first--;
                         count++;
                     }
@@ -309,10 +309,14 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
             ids[i] = candidates[i]->getId();
         }
     }
-    
-    cout << "Jaccard coefficients of other candidates:\n";
-    for (int i=0; i<(k-1)*2; i++) {
-        if (coefficients[i]) {
+   
+    // Check if enough candidates have been found
+    if (count<(k-1)*2) {
+        cout << "Too little candidates for query!";
+    }
+    else {
+        cout << "Jaccard coefficients of other candidates:\n";
+        for (int i=0; i<(k-1)*2; i++) {
             cout << coefficients[i] << " (" << ids[i] << ")\n";
         }
     }
