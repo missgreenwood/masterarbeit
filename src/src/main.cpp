@@ -2,20 +2,6 @@
 //  Description: Main executable for Bloom-Filter-Tree
 
 
-// Includes for bloom_filter.hpp
-#include <string>
-#include <cstddef>
-#include <cstdio>
-#include <fstream>
-#include <iterator>
-#include <algorithm>
-#include <deque>
-#include <set>
-
-#include <iostream>
-#include "bloom_filter.hpp"
-#include "BTree.hpp"
-#include "BPlusTree.hpp"
 #include "BloomFilterTree.hpp"
 
 using namespace std;
@@ -317,7 +303,7 @@ int main(int argc, const char *argv[]) {
     b3.simQuery(&f100)->printArr();
     cout << ")";
     
-    cout << "\n\nd) simQueryVec -- return 3 Bloom nearest neighbors, follow only best path: ";
+    cout << "\n\nd) simQueryVec -- return 3 nearest neighbors, follow only best path: ";
     b3.simQueryVec(&f100, 3); 
     
     cout << "\n\n\nLEAF QUERY for f100 (";

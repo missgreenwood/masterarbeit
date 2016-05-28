@@ -209,16 +209,17 @@ vector<BloomFilter> BloomFilterTree::simpleSimQueryVec(BloomFilter *filter, int 
     }
 }
 
-// TODO 
+
 // Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
 // Follow only best path in tree
-/* vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
-    if (root == NULL) {vector<BloomFilter> results(1);
+vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
+    if (root == NULL) {
+        vector<BloomFilter> results(1);
         cout << "Tree is empty!";
         results.push_back(*filter);
         return results;
     }
     else {
-        return *root->simpleSimQueryVec(filter, k);
+        return root->simQueryVec(filter, k);
     }
-} */
+} 

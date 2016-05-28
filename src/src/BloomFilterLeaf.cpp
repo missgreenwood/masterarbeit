@@ -210,7 +210,7 @@ BloomFilter * BloomFilterLeaf::simpleSimQuery(BloomFilter *filter) {
     return filters[index]; 
 }
 
-// Identical to simpleSimQuery() because pruning only takes place in index nodes
+// Identical to simpleSimQuery() because pruning happens in index nodes
 BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
     int index = 0;
     float max = 0;
@@ -225,10 +225,9 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
     return filters[index];
 }
 
-// Function to return Bloom filter vector for k highest Jaccard coefficients in tree/leaf
-// Checks only candidates in k-1-environment of nearest neighbor
-// Therefore best applicable to already sorted tree/leaf
-// If tree holds less than k filters, return all of them sorted by Jaccard coefficient
+// Function to return k nearest neighbors in tree
+// Checks only candidates in k-1-environment of nearest neighbor - use only on already sorted tree/leaf
+// If tree has less than k filters, return them all sorted by Jaccard coefficient
 vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
     vector<BloomFilter> results(k);
     int index = 0;
@@ -348,8 +347,122 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
     return results;
 }
 
-// Identical to simpQueryVec() because pruning only takes place in index nodes
+// Identical to simpleSimQueryVec() because pruning happens in index nodes
 vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
-    vector<BloomFilter> results;
-    return results; 
+    vector<BloomFilter> results(k);
+    int index = 0;
+    float max = 0;
+    float jacc;
+    
+    // Determine nearest neighbor
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    results[0] = *filters[index];
+    cout << "\nNearest neighbor: " << results[0].getId() << " (";
+    results[0].printArr();
+    cout << ")\n";
+    
+    // Determine k-1 nearest neighbors
+    // Collect k-1 candidates with greater keys
+    int *ids = new int[(k-1)*2];
+    float *coefficients = new float[(k-1)*2];
+    BloomFilter **candidates = new BloomFilter *[(k-1)*2];
+    
+    // count = # of found candidates
+    int count = 0;
+    int first = 0;
+    for (int i=0; i<k-1; i++) {
+        if (index+1+i<getCount() && count<k-1) {
+            candidates[i] = filters[index+1+i];
+            count++;
+        }
+        else if (next && count<k-1) {
+            BloomFilterLeaf *tmp = next;
+            while (tmp && count<k-1) {
+                for (int j=0; j<k-1; j++) {
+                    if (tmp->filters[first] != NULL) {
+                        candidates[i+j] = tmp->filters[first];
+                        first++;
+                        count++;
+                    }
+                }
+                tmp = tmp->next;
+                first = 0;
+            }
+        }
+    }
+    
+    // Collect k-1 candidates with smaller keys
+    first = count;
+    for (int i=0; i<k-1; i++) {
+        if (index-1-i>-1 && count<(k-1)*2) {
+            candidates[count] = filters[index-1-i];
+            count++;
+        }
+        else if (prev && count<(k-1)*2) {
+            BloomFilterLeaf *tmp = prev;
+            first = prev->getCount()-1;
+            while (tmp && count<(k-1)*2) {
+                for (int j=0; j<k-1; j++) {
+                    if (tmp->filters[first] != NULL) {
+                        candidates[count] = tmp->filters[first];
+                        first--;
+                        count++;
+                    }
+                }
+                tmp = tmp->prev;
+                first = 0;
+            }
+        }
+    }
+    
+    // Determine k-1 best candidates
+    for (int i=0; i<(k-1)*2; i++) {
+        if (candidates[i] != NULL) {
+            coefficients[i] = computeJaccard(candidates[i], filter);
+            ids[i] = candidates[i]->getId();
+        }
+    }
+    
+    // Check if enough candidates have been found
+    if (count<(k-1)*2) {
+        cout << "Too little candidates for query! ";
+    }
+    else {
+        cout << "Jaccard coefficients of other candidates:\n";
+        for (int i=0; i<(k-1)*2; i++) {
+            cout << coefficients[i] << " (" << ids[i] << ")\n";
+        }
+    }
+    
+    index = 0;
+    int key = 0;
+    for (int i=0; i<k-1; i++) {
+        max = 0;
+        for (int j=0; j<count; j++) {
+            if (coefficients[j] > max) {
+                max = coefficients[j];
+                key = ids[j];
+                index = j;
+            }
+        }
+        results[i+1] = *candidates[index];
+        coefficients[index] = 0;
+    }
+    
+    cout << "Result vector: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << " (";
+        results[i].printArr();
+        cout << "), ";
+    }
+    cout << results[results.size()-1].getId() << " (";
+    results[results.size()-1].printArr();
+    cout << ")";
+    return results;
 }

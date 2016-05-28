@@ -346,7 +346,37 @@ vector<BloomFilter> BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter,
     return C[index]->simpleSimQueryVec(filter, k); 
 }
 
-// TODO
-/* vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
-
-} */
+vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
+    int index = 0;
+    float max = 0;
+    float jacc;
+    float bestMax1 = 0;
+    float bestMax2 = 0;
+    float bestJacc1;
+    float bestJacc2;
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    for (int i=0; i<C[index]->getCount(); i++) {
+        bestJacc1 = C[index]->computeJaccard(C[index]->filters[i], filter);
+        if (bestJacc1 > bestMax1) {
+            bestMax1 = bestJacc1;
+        }
+    }
+    for (int i=0; i<C[index+1]->getCount(); i++) {
+        bestJacc2 = C[index+1]->computeJaccard(C[index+1]->filters[i], filter);
+        if (bestJacc2 > bestMax2) {
+            bestMax2 = bestJacc2;
+        }
+    }
+    if (bestMax1 > bestMax2) {
+        return C[index]->simQueryVec(filter, k);
+    }
+    else {
+        return C[index+1]->simQueryVec(filter, k);
+    }
+}

@@ -143,13 +143,13 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 5.45 h)
+KW 21 (noch 3.25 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
 * Do, 26.05. (8.25 h)
 * Fr, 27.05. (3.25 h)
-* Sa, 28.05. (14:05 - )
+* Sa, 28.05. (2.5 h)
 
 
 ## TODO
@@ -182,6 +182,7 @@ KW 21 (noch 5.45 h)
 			-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 			-> Dangeling children and filter pointers after insert and split
 			-> Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
+			-> doppelte Methoden ändern in BloomFilterLeaf
 		
 	b. Yang2002
 
