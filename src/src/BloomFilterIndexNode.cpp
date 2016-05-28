@@ -173,10 +173,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            /* cout << "\nKey to be inserted into parent: " << middle->getId();
-            cout << "\nFilter to be inserted into parent: ";
-            middle->printArr();
-            cout << endl; */
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
@@ -196,11 +192,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             for (int i=s->getMax()-1; i>s->getCount()-1; i--) {
                 s->filters[i] = NULL;
             }
-            
-            // Delete dangeling pointers in root
-            /* for (int i=p->getMax(); i>p->getCount(); i--) {
-                p->C[i] = NULL;
-            } */
         }
         else {
             BloomFilterNode *p = getParent();
@@ -208,10 +199,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            /* cout << "\nKey to be inserted into parent: " << middle->getId();
-            cout << "\nFilter to be inserted into parent: ";
-            middle->printArr();
-            cout << endl; */
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
@@ -343,10 +330,21 @@ BloomFilter *BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     }
 }
 
-// TODO
-/* vector<BloomFilter> BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter, int k) {
-    
-} */
+vector<BloomFilter> BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter, int k) {
+ 
+    // Select correct child
+    int index = 0;
+    float max = 0;
+    float jacc;
+    for (int i=0; i<getCount()+1; i++) {
+        jacc = C[i]->computeMaxJaccard(filter);
+        if (jacc > max) {
+            max = jacc;
+            index = i;
+        }
+    }
+    return C[index]->simpleSimQueryVec(filter, k); 
+}
 
 // TODO
 /* vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {

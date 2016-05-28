@@ -312,7 +312,7 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
    
     // Check if enough candidates have been found
     if (count<(k-1)*2) {
-        cout << "Too little candidates for query!";
+        cout << "Too little candidates for query! ";
     }
     else {
         cout << "Jaccard coefficients of other candidates:\n";
@@ -325,7 +325,7 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
     int key = 0;
     for (int i=0; i<k-1; i++) {
         max = 0;
-        for (int j=0; j<count-1; j++) {
+        for (int j=0; j<count; j++) {
             if (coefficients[j] > max) {
                 max = coefficients[j];
                 key = ids[j];
@@ -348,7 +348,7 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
     return results;
 }
 
-// TODO
+// Identical to simpQueryVec() because pruning only takes place in index nodes
 vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     vector<BloomFilter> results;
     return results; 

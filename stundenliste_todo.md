@@ -143,12 +143,13 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 7.5 h)
+KW 21 (noch 5.45 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
 * Do, 26.05. (8.25 h)
-* Fr, 27.05. (1.5 h)
+* Fr, 27.05. (3.25 h)
+* Sa, 28.05. (14:05 - )
 
 
 ## TODO
@@ -162,23 +163,25 @@ KW 21 (noch 7.5 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* Evtl. weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
-		* Dangeling children and filter pointers after insert and split
 		* similarity queries fertig: 
-			-> simpleSimQueryVec: BloomFilterIndexNode::
 			-> simQuery fertig (mit pruning)
 			-> simQueryVec
 
 		* Vergleich von Lookup mit unsortierter Liste + Zeitmessungen 
+		* Datentyp/Schnittstelle ändern für vector<int> (BloomFilter)
 
-		* Einfügen so ändern, dass bei besserem Fit Ids getauscht werden
+		* Jaccard-Berechnung
+		* Einfüge-Operation + Beweis 
+		* Alle Suchalgorithmen nachher checken 
 
-		* Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
-
-		* Evtl.: Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
-		* Evtl.: subset queries
-		* Evtl.: Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
-		* Evtl.: Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
+		* Evtl.: 
+			-> Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
+			-> subset queries
+			-> Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
+			-> Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
+			-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
+			-> Dangeling children and filter pointers after insert and split
+			-> Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
 		
 	b. Yang2002
 
