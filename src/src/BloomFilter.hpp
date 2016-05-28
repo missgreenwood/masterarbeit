@@ -10,7 +10,7 @@
 
 using namespace std;
 
-// Evtl. TODO 
+// TODO
 const int filtersize = 10;   // # of bits in Bloom filter
 
 
@@ -19,10 +19,9 @@ class BloomFilter {
 private:
     int size;
     int id;
-    vector<int> data;
+    int *data;
     
 public:
-    int *dataArr;
     BloomFilter();
     BloomFilter(const BloomFilter& fSource); 
     BloomFilter(int i);
@@ -33,13 +32,12 @@ public:
     BloomFilter & operator = (const BloomFilter &fSource); 
     
     void printData();
-    void printValue();
     void setId(int value);
     int getId();
     int getSize();
     void setValue(int index, int value);
-    int *getArr();
     void printArr();
+    int *getData();
     void initRandom();
         
     friend class BloomFilterNode;

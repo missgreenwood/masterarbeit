@@ -143,13 +143,13 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 3.25 h)
+KW 21 (noch 3 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
 * Do, 26.05. (8.25 h)
 * Fr, 27.05. (3.25 h)
-* Sa, 28.05. (2.5 h)
+* Sa, 28.05. (2.75 h)
 
 
 ## TODO
@@ -163,16 +163,13 @@ KW 21 (noch 3.25 h)
 4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
 
 	a. Sakuma2011: 
-		* similarity queries fertig: 
-			-> simQuery fertig (mit pruning)
-			-> simQueryVec
 
-		* Vergleich von Lookup mit unsortierter Liste + Zeitmessungen 
 		* Datentyp/Schnittstelle ändern für vector<int> (BloomFilter)
 
 		* Jaccard-Berechnung
 		* Einfüge-Operation + Beweis 
 		* Alle Suchalgorithmen nachher checken 
+		* Vergleich mit unsortierter Liste (Zeitmessungen) 
 
 		* Evtl.: 
 			-> Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)

@@ -5,13 +5,12 @@
 
 
 // Default constructor with no parameters
-BloomFilter::BloomFilter(): size(filtersize), id(rand()), data(vector<int>(size)) {
+BloomFilter::BloomFilter(): size(filtersize), id(rand()) {
+    data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
     }
-    dataArr = new int[size];
-    copy(data.begin(), data.end(), dataArr);
-}; 
+};
 
 // Copy constructor
 // Usage: If a new object has to be created before the copying can occur
@@ -20,35 +19,30 @@ BloomFilter::BloomFilter(const BloomFilter& fSource) {
     id = fSource.id;
     
     // Allocate memory (deep copy)
-    data = vector<int>(fSource.size);
+    data = new int[fSource.size];
     for (int i=0; i<fSource.size; i++) {
         data[i] = fSource.data[i];
     }
-    dataArr = new int[fSource.size];
-    copy(fSource.data.begin(), fSource.data.end(), dataArr);
-}; 
+};
 
 // Constructor with parameter id
-BloomFilter::BloomFilter(int i): size(filtersize), id(i), data(vector<int>(size)) {
+BloomFilter::BloomFilter(int i): size(filtersize), id(i) {
+    data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
     }
-    dataArr = new int[size];
-    copy(data.begin(), data.end(), dataArr);
 }
 
 // Constructor with parameters size and id
-BloomFilter::BloomFilter(int s, int i): size(s), id(i), data(vector<int>(s)) {
+BloomFilter::BloomFilter(int s, int i): size(s), id(i) {
+    data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
     }
-    dataArr = new int[size];
-    copy(data.begin(), data.end(), dataArr);
 };
 
 BloomFilter::~BloomFilter() {}
 
-// Evtl. TODO 
 // Overloaded assignment operator
 // Usage: If a new object does not have to be created before the copying can occur
 BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
@@ -59,12 +53,10 @@ BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
         id = fSource.id;
         
         // Allocate memory (deep copy)
-        data = vector<int>(fSource.size);
+        data = new int[fSource.size];
         for (int i=0; i<fSource.size; i++) {
             data[i] = fSource.data[i];
         }
-        dataArr = new int[fSource.size];
-        copy(fSource.data.begin(), fSource.data.end(), dataArr);
     }
     return *this; 
 }
@@ -91,23 +83,15 @@ int BloomFilter::getSize() {
 
 void BloomFilter::setValue(int index, int value) {
     data[index] = value;
-    dataArr[index] = value;
 }
 
-void BloomFilter::printValue() {
-    for (int i=0; i<size; i++) {
-        cout << data[i];
-    }
-    cout << endl;
+int * BloomFilter::getData() {
+    return data;
 }
-
-int * BloomFilter::getArr() {
-    return dataArr;
-}
-
+ 
 void BloomFilter::printArr() {
     for (int i=0; i<getSize(); i++) {
-        cout << dataArr[i];
+        cout << data[i]; 
     }
 }
 

@@ -95,8 +95,10 @@ void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, Bloo
 float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
     float elementCount = 0;
     float intersection = 0;
-    int *arr1 = f1->getArr();
-    int *arr2 = f2->getArr();
+    int *arr1 = f1->getData();
+    // vector<int> arr1 = f1->getData();
+    int *arr2 = f2->getData();
+    // vector<int> arr2 = f2->getData();
     for (int i=0; i<getFilterSize(); i++) {
         if ((arr1[i] == 1) && (arr2[i] == 1)) {
             intersection++;
@@ -116,8 +118,10 @@ float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
 // Return true if f2 is subset of f1
 bool BloomFilterNode::isSubset(BloomFilter *f1, BloomFilter *f2) {
     bool result = true;
-    int *arr1 = f1->getArr();
-    int *arr2 = f2->getArr();
+    int *arr1 = f1->getData();
+    int *arr2 = f2->getData();
+    // vector<int> arr1 = f1->getData();
+    // vector<int> arr2 = f2->getData();
     for (int i=0; i<getFilterSize(); i++) {
         if ((arr2[i] == 1) && (arr1[i] != arr2[i])) {
             result = false;
@@ -128,8 +132,10 @@ bool BloomFilterNode::isSubset(BloomFilter *f1, BloomFilter *f2) {
 }
 
 BloomFilter * BloomFilterNode::logicalAnd(BloomFilter *f1, BloomFilter *f2) {
-     int *arr1 = f1->getArr();
-     int *arr2 = f2->getArr();
+    int *arr1 = f1->getData();
+    int *arr2 = f2->getData();
+    // vector<int> arr1 = f1->getData();
+    // vector<int> arr2 = f2->getData();
      BloomFilter *result = new BloomFilter(getFilterSize(), rand());
      for (int i=0; i<getFilterSize(); i++) {
          if ((arr1[i] == 1) && (arr2[i] == 1)) {
@@ -141,8 +147,10 @@ BloomFilter * BloomFilterNode::logicalAnd(BloomFilter *f1, BloomFilter *f2) {
 
 
 BloomFilter * BloomFilterNode::logicalOr(BloomFilter *f1, BloomFilter *f2) {
-    int *arr1 = f1->getArr();
-    int *arr2 = f2->getArr();
+    int *arr1 = f1->getData();
+    int *arr2 = f2->getData();
+    // vector<int> arr1 = f1->getData();
+    // vector<int> arr2 = f2->getData();
     BloomFilter *result = new BloomFilter(getFilterSize(), rand());
     for (int i=0; i<getFilterSize(); i++) {
         if ((arr1[i] == 1) || (arr2[i] == 1 )) {
