@@ -143,38 +143,35 @@ KW 20 (39.25 h)
 * So, 22.05. (6.75 h)
 
 
-KW 21 (noch 3 h)
+KW 21 (35.25 h)
 * Mo, 23.05. (8.25 h)
 * Di, 24.05. (4.5 h)
 * Mi, 25.05. (1.5 h) 
 * Do, 26.05. (8.25 h)
 * Fr, 27.05. (3.25 h)
-* Sa, 28.05. (2.75 h)
+* Sa, 28.05. (4.25 h)
+* So, 29.05. (5.25 h)
 
+KW 22 (noch 28.5 h)
+* Mo, 30.05. (3.5 h)
 
 ## TODO
 
-1. Wie arbeitet Cassandra stress tool? 
+1. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
 
-2. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
-
-3. Stand in Ausarbeitung 
-
-4. Wie kann ich bestehende Algorithmen u. Indexstrukturen umbauen?
+2. Implementierung
 
 	a. Sakuma2011: 
-
-		* Datentyp/Schnittstelle ändern für vector<int> (BloomFilter)
 
 		* Jaccard-Berechnung
 		* Einfüge-Operation + Beweis 
 		* Alle Suchalgorithmen nachher checken 
 		* Vergleich mit unsortierter Liste (Zeitmessungen) 
+		-> Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
+		-> subset queries
+		-> Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
 
 		* Evtl.: 
-			-> Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
-			-> subset queries
-			-> Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
 			-> Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
 			-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
 			-> Dangeling children and filter pointers after insert and split
@@ -183,7 +180,7 @@ KW 21 (noch 3 h)
 		
 	b. Yang2002
 
-## TODO Ausarbeitung 
+3. Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 - Sprache ändern zu Deutsch

@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <assert.h>
+#include <math.h>
 #include "BloomFilter.hpp"
 
 
@@ -53,6 +54,10 @@ public:
     virtual int computeMaxJaccardKey(BloomFilter *filter) = 0;
     virtual int getMinKey() = 0;
     virtual int getMaxKey() = 0;
+    
+    float eUnion(BloomFilter *f1, BloomFilter *f2);
+    float eIntersect(BloomFilter *f1, BloomFilter *f2);
+    float jacc(BloomFilter *f1, BloomFilter *f2); 
     
     // Query methods
     virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;

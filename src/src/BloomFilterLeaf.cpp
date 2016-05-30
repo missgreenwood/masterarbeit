@@ -303,7 +303,7 @@ vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int 
 
     // Determine k-1 best candidates
     for (int i=0; i<(k-1)*2; i++) {
-        if (candidates[i] != NULL) {
+        if (candidates[i]) {
             coefficients[i] = computeJaccard(candidates[i], filter);
             ids[i] = candidates[i]->getId();
         }

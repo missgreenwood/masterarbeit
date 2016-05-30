@@ -304,7 +304,7 @@ int main(int argc, const char *argv[]) {
     cout << ")";
     
     cout << "\n\nd) simQueryVec -- return 3 nearest neighbors, follow only best path: ";
-    b3.simQueryVec(&f100, 3); 
+    b3.simQueryVec(&f100, 3);
     
     cout << "\n\n\nLEAF QUERY for f100 (";
     f100.printArr();
@@ -356,6 +356,44 @@ int main(int argc, const char *argv[]) {
     cout << ")\n";
     cout << "\ng) simpleSimQueryVec -- return k nearest neighbors, no pruning";
     l3.simpleSimQueryVec(&f14, 3);
+    
+    
+    cout << "/n\n\nCheck Jaccard distance computation";
+    cout << "\n----------------------------------";
+    cout << "\nf1: ";
+    f1.printArr();
+    cout << "\nf2: ";
+    f2.printArr();
+    cout << "\nf3: ";
+    f3.printArr();
+    BloomFilterLeaf l4(2, 3);
+    l4.insert(&f1);
+    l4.insert(&f2);
+    l4.insert(&f3);
+    /* cout << endl;
+    l4.traverse();
+    cout << endl;
+    l4.traverseFilters(); */
+    
+    cout << "\n\nFraction of zeros(f1): " << f1.fractionOfZeros();
+    cout << "\nEstimated size(f1): " << f1.eSize();
+    cout << "\n\nFraction of zeros(f2): " << f2.fractionOfZeros();
+    cout << "\nEstimated size(f2): " << f2.eSize();
+    cout << "\n\nFraction of zeros(f3): " << f3.fractionOfZeros();
+    cout << "\nEstimated size(f3): " << f3.eSize();
+    
+    cout << "\n\neUnion(f1, f2): " << l4.eUnion(l4.filters[0], l4.filters[1]);
+    cout << "\neUnion(f2, f3): " << l4.eUnion(l4.filters[1], l4.filters[2]);
+    cout << "\neUnion(f1, f3): " << l4.eUnion(l4.filters[0], l4.filters[2]);
+    
+    cout << "\n\neIntersect(f1, f2): " << l4.eIntersect(l4.filters[0], l4.filters[1]);
+    cout << "\neIntersect(f2, f3): " << l4.eIntersect(l4.filters[1], l4.filters[2]);
+    cout << "\neIntersect(f1, f3): " << l4.eIntersect(l4.filters[0], l4.filters[2]);
+    
+    cout << "\n\njacc(f1, f2): " << l4.jacc(l4.filters[0], l4.filters[1]);
+    cout << "\njacc(f2, f3): " << l4.jacc(l4.filters[1], l4.filters[2]);
+    cout << "\njacc(f1, f3): " << l4.jacc(l4.filters[0], l4.filters[2]);
+    
     cout << endl;
     return 0;
 }

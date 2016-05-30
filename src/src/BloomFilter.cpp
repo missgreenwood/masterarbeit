@@ -100,3 +100,17 @@ void BloomFilter::initRandom() {
         setValue(i, (rand()%2));
     }
 }
+
+float BloomFilter::fractionOfZeros() {
+    int o = 0;
+    for (int i=0; i<size; i++) {
+        if (data[i] == 0) {
+            o++;
+        }
+    }
+    return (float)o/(float)size;
+}
+
+float BloomFilter::eSize() {
+    return -log(fractionOfZeros()) * (float) size/(float) d;
+}

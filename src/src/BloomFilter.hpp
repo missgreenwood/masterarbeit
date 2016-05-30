@@ -7,11 +7,13 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <math.h>
 
 using namespace std;
 
 // TODO
 const int filtersize = 10;   // # of bits in Bloom filter
+const int d = 3;             // # of hash functions
 
 
 class BloomFilter {
@@ -39,6 +41,8 @@ public:
     void printArr();
     int *getData();
     void initRandom();
+    float fractionOfZeros();
+    float eSize();
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;
