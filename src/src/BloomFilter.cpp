@@ -95,9 +95,14 @@ void BloomFilter::printArr() {
     }
 }
 
+// Function to initialize Bloom Filter with values 0 or 1
+// Max. 50% of the array elements may be 1
 void BloomFilter::initRandom() {
-    for (int i=0; i<getSize(); i++) {
-        setValue(i, (rand()%2));
+    random_device seed;
+    mt19937 gen(seed());
+    uniform_int_distribution<int> dist(0, getSize());
+    for (int i=0; i<getSize()/2; i++) {
+        setValue(dist(gen), 1);
     }
 }
 

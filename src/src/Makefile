@@ -1,5 +1,5 @@
 CC=g++-4.8
-CFLAGS=-w
+CFLAGS=-w -std=c++11
 
 # list all .cpp files 
 SOURCES=main.cpp BloomFilter.cpp BTreeNode.cpp BTree.cpp BPlusNode.cpp BPlusIndexNode.cpp BPlusLeaf.cpp BPlusTree.cpp BloomFilterNode.cpp BloomFilterIndexNode.cpp BloomFilterLeaf.cpp BloomFilterTree.cpp 
