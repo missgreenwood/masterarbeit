@@ -163,14 +163,6 @@ float BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
 }
 
 float BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
-    float dot = 0;
-    int *arr1 = f1->getData();
-    int *arr2 = f2->getData();
-    for (int i=0; i<f1->getSize(); i++) {
-        if (arr1[i] == 1 || arr2[i] == 1) {
-            dot++;
-        }
-    }
     float union_size = eUnion(f1, f2);
     float e = f1->eSize() + f2->eSize() - union_size;
     return e;

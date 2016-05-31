@@ -152,8 +152,10 @@ KW 21 (35.25 h)
 * Sa, 28.05. (4.25 h)
 * So, 29.05. (5.25 h)
 
-KW 22 (noch 28.5 h)
-* Mo, 30.05. (3.5 h)
+
+KW 22 (noch 29 h)
+* Mo, 30.05. (3 h)
+* Di, 31.05.
 
 ## TODO
 
@@ -161,26 +163,33 @@ KW 22 (noch 28.5 h)
 
 2. Implementierung
 
-	a. Sakuma2011: 
+	* Jaccard-Berechnung 
+		-> 06.06. Mail an Mirco
+	
+	* 1. Einfüge-Operation: Über Teilmengen 
+		-> z.B. vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
 
-		* Jaccard-Berechnung
-		* Einfüge-Operation + Beweis 
-		* Alle Suchalgorithmen nachher checken 
-		* Vergleich mit unsortierter Liste (Zeitmessungen) 
-		-> Vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
-		-> subset queries
-		-> Auch Verschmelzen/Split von Knoten werden basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
+	* 2. Einfüge-Operation: Über Teilsegmente
+		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
 
-		* Evtl.: 
-			-> Nachbarinformationen + Update-Propagierung (vgl. Abschnitte 3.3.1/3.3.2)
-			-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
-			-> Dangeling children and filter pointers after insert and split
-			-> Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
-			-> doppelte Methoden ändern in BloomFilterLeaf
-		
-	b. Yang2002
+	* Filter dürfen mehrmals eingefügt werden 
+	* Alle Suchalgorithmen daran anpassen und checken 
+	* Filter max. zu 50% füllen 
+	
+	* Evtl.:
+		-> Auch Split von Knoten basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
+		-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
+		-> Dangeling children and filter pointers after insert and split
+		-> Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
+		-> doppelte Methoden ändern in BloomFilterLeaf
 
-3. Ausarbeitung 
+3. Evaluation 
+
+	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
+	* Bloom-Filter-Größe wie in Cassandra (z.B. 256/512 Bit), # Bloom-Filter z.B. 100
+	* z.B. in R
+
+4. Ausarbeitung 
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 - Sprache ändern zu Deutsch
