@@ -92,23 +92,9 @@ void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, Bloo
 }
 
 float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
-    float elementCount = 0;
-    float intersection = 0;
-    int *arr1 = f1->getData();    int *arr2 = f2->getData();
-    for (int i=0; i<getFilterSize(); i++) {
-        if ((arr1[i] == 1) && (arr2[i] == 1)) {
-            intersection++;
-            elementCount++;
-        }
-        else if ((arr1[i] == 1) && arr2[i] == 0) {
-            elementCount++;
-        }
-        else if ((arr1[i] == 0) && (arr2[i] == 1)) {
-            elementCount++;
-        }
-    }
-    float result = (float) intersection/elementCount;
-    return result;
+    float intersect_size = eIntersect(f1, f2);
+    float union_size = eUnion(f1, f2);
+    return 1 - (intersect_size/union_size); 
 }
 
 // Return true if f2 is subset of f1

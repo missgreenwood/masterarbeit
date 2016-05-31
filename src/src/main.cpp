@@ -116,6 +116,8 @@ int main(int argc, const char *argv[]) {
     
     cout << "\nCompute Jaccard coefficient of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96 and  tree root:\n\n";
     BloomFilterNode *root = b1.root;
+    
+    // TO CHECK
     for (int i=0; i<10; i++) {
         cout << "Jaccard coefficient of f1 and f" << v1[i].getId() << ": " << root->computeJaccard(root->filters[0], &v1[i]) << endl;
     }
@@ -123,6 +125,8 @@ int main(int argc, const char *argv[]) {
     cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
     BloomFilterTree b2(1, 10);
     cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15";
+    
+    // TO CHECK
     cout << "\nCompute highest Jaccard coefficient of f16, f18, f19 and each intermediate tree state\n\n";
     b2.insert(&f3);
     cout << "Max jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
@@ -185,7 +189,8 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b2.traverseFilters();
     
-    cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
+    // TODO
+    /* cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
     cout << "\nSmallest key in b2: " << b2.getMinKey() << "\nBiggest key in b2: " << b2.getMaxKey();
     cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
     cout << "\nOptimal id for f18 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
@@ -227,17 +232,19 @@ int main(int argc, const char *argv[]) {
     f19.printArr();
     cout << "): ";
     L1 = b2.search(10);
-    L1->filters[1]->printArr();
+    L1->filters[1]->printArr(); */
     cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b3)\n\n";
     BloomFilterTree b3(1, 10);
     cout << "Insert all filters in v1 into b3, changing their ids to optimal values:\n\n";
-    for (int i=0; i<10; i++) {
+    
+    // TO CHECK
+    /* for (int i=0; i<10; i++) {
         b3.insertSimilarFilter(&v1[i]);
     }
     cout << endl << endl;
     b3.traverse();
     cout << endl;
-    b3.traverseFilters();
+    b3.traverseFilters(); */
     
     // Class BloomFilterLeaf
     
@@ -270,7 +277,8 @@ int main(int argc, const char *argv[]) {
     l2.traverse();
     l2.getNext()->traverse();
     
-    cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
+    // TODO
+    /* cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
     cout << "\n-------------------------------------------------------";
     cout << "\nTREE QUERY for f100 (";
     f100.printArr();
@@ -289,7 +297,7 @@ int main(int argc, const char *argv[]) {
     cout << "), ";
     BloomFilterNode *L3 = b3.search(4);
     cout << "4 (";
-    L3->filters[1]->printArr();
+    // L3->filters[1]->printArr();
     cout << ")\n";
     
     cout << "\na) simpleSimQuery -- return nearest neighbor, no pruning: " << b3.simpleSimQuery(&f100)->getId() << " (";
@@ -355,9 +363,9 @@ int main(int argc, const char *argv[]) {
     l3.filters[1]->printArr();
     cout << ")\n";
     cout << "\ng) simpleSimQueryVec -- return k nearest neighbors, no pruning";
-    l3.simpleSimQueryVec(&f14, 3);
+    l3.simpleSimQueryVec(&f14, 3); */
     
-    
+    // TO CHECK 
     cout << "/n\n\nCheck Jaccard distance computation";
     cout << "\n----------------------------------";
     cout << "\nf1: ";
@@ -370,10 +378,6 @@ int main(int argc, const char *argv[]) {
     l4.insert(&f1);
     l4.insert(&f2);
     l4.insert(&f3);
-    /* cout << endl;
-    l4.traverse();
-    cout << endl;
-    l4.traverseFilters(); */
     
     cout << "\n\nFraction of zeros(f1): " << f1.fractionOfZeros();
     cout << "\nEstimated size(f1): " << f1.eSize();
