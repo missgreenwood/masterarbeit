@@ -244,30 +244,30 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
     }
 }
 
-float BloomFilterIndexNode::computeMaxJaccard(BloomFilter *filter) {
-    float max = 0;
+float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+    float min = 1;
     float jacc;
     for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMaxJaccard(filter);
-        if (jacc > max) {
-            max = jacc;
+        jacc = C[i]->computeMinJaccard(filter);
+        if (jacc < min) {
+            min = jacc;
         }
     }
-    return max;
+    return min;
 }
 
-int BloomFilterIndexNode::computeMaxJaccardKey(BloomFilter *filter) {
+int BloomFilterIndexNode::computeMinJaccardKey(BloomFilter *filter) {
     int index = 0;
-    float max = 0;
+    float min = 1;
     float jacc;
     for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMaxJaccard(filter);
-        if (jacc > max) {
-            max = jacc;
+        jacc = C[i]->computeMinJaccard(filter);
+        if (jacc < min) {
+            min = jacc;
             index = i;
         }
     }
-    return C[index]->computeMaxJaccardKey(filter);
+    return C[index]->computeMinJaccardKey(filter);
 }
 
 int BloomFilterIndexNode::getMinKey() {
@@ -283,7 +283,7 @@ BloomFilter * BloomFilterIndexNode::simpleSimQuery(BloomFilter *filter) {
     float max = 0;
     float jacc;
     for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMaxJaccard(filter);
+        jacc = C[i]->computeMinJaccard(filter);
         if (jacc > max) {
             max = jacc;
             index = i;
@@ -337,7 +337,7 @@ vector<BloomFilter> BloomFilterIndexNode::simpleSimQueryVec(BloomFilter *filter,
     float max = 0;
     float jacc;
     for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMaxJaccard(filter);
+        jacc = C[i]->computeMinJaccard(filter);
         if (jacc > max) {
             max = jacc;
             index = i;

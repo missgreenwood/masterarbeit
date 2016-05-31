@@ -106,16 +106,16 @@ void BloomFilter::initRandom() {
     }
 }
 
-float BloomFilter::fractionOfZeros() {
+double BloomFilter::fractionOfZeros() {
     int o = 0;
     for (int i=0; i<size; i++) {
         if (data[i] == 0) {
             o++;
         }
     }
-    return (float)o/(float)size;
+    return (double)o/(double)size;
 }
 
-float BloomFilter::eSize() {
-    return -log(fractionOfZeros()) * (float) size/(float) d;
+double BloomFilter::eSize() {
+    return -log(fractionOfZeros()) * (double) size/(double) d;
 }

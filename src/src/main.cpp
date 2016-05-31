@@ -114,35 +114,97 @@ int main(int argc, const char *argv[]) {
         v1[i].printData();
     }
     
-    cout << "\nCompute Jaccard coefficient of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96 and  tree root:\n\n";
+    // TO CHECK -> Mirco
+    cout << "\n\n\nCheck Jaccard distance computation";
+    cout << "\n----------------------------------";
+    cout << "\nf3: ";
+    f3.printArr();
+    cout << "\nf5: ";
+    f5.printArr();
+    cout << "\nf16: ";
+    f16.printArr();
+    cout << "\nf18: ";
+    f18.printArr();
+    cout << "\nf19: ";
+    f19.printArr();
+    BloomFilterLeaf l4(3, 10);
+    l4.insert(&f3);
+    l4.insert(&f5);
+    l4.insert(&f16);
+    l4.insert(&f18);
+    l4.insert(&f19);
+    cout << "\n\nFraction of zeros(f3): " << f3.fractionOfZeros();
+    cout << "\nEstimated size(f3): " << f3.eSize();
+    
+    cout << "\n\nFraction of zeros(f5): " << f5.fractionOfZeros();
+    cout << "\nEstimated size(f5): " << f5.eSize();
+    
+    cout << "\n\nFraction of zeros(f16): " << f16.fractionOfZeros();
+    cout << "\nEstimated size(f16): " << f16.eSize();
+    
+    cout << "\n\nFraction of zeros(f18): " << f18.fractionOfZeros();
+    cout << "\nEstimated size(f18): " << f18.eSize();
+    
+    cout << "\n\nFraction of zeros(f19): " << f19.fractionOfZeros();
+    cout << "\nEstimated size(f19): " << f19.eSize();
+    
+    cout << "\n\neUnion(f3, f16): " << l4.eUnion(l4.filters[0], l4.filters[2]);
+    cout << "\neUnion(f3, f18): " << l4.eUnion(l4.filters[0], l4.filters[3]);
+    cout << "\neUnion(f3, f19): " << l4.eUnion(l4.filters[0], l4.filters[4]);
+    
+    cout << "\n\neUnion(f5, f16): " << l4.eUnion(l4.filters[1], l4.filters[2]);
+    cout << "\neUnion(f5, f18): " << l4.eUnion(l4.filters[1], l4.filters[3]);
+    cout << "\neUnion(f5, f19): " << l4.eUnion(l4.filters[1], l4.filters[4]);
+    
+    cout << "\n\neIntersect(f3, f16): " << l4.eIntersect(l4.filters[0], l4.filters[2]);
+    cout << "\neIntersect(f3, f18): " << l4.eIntersect(l4.filters[0], l4.filters[3]);
+    cout << "\neIntersect(f3, f19): " << l4.eIntersect(l4.filters[0], l4.filters[4]);
+    
+    cout << "\n\neIntersect(f5, f16): " << l4.eIntersect(l4.filters[1], l4.filters[2]);
+    cout << "\neIntersect(f5, f18): " << l4.eIntersect(l4.filters[1], l4.filters[3]);
+    cout << "\neIntersect(f5, f19): " << l4.eIntersect(l4.filters[1], l4.filters[4]);
+    
+    cout << "\n\njacc(f3, f16): " << l4.jacc(l4.filters[0], l4.filters[2]);
+    cout << "\njacc(f3, f18): " << l4.jacc(l4.filters[0], l4.filters[3]);
+    cout << "\njacc(f3, f19): " << l4.jacc(l4.filters[0], l4.filters[4]);
+    
+    cout << "\n\njacc(f5, f16): " << l4.jacc(l4.filters[1], l4.filters[2]);
+    cout << "\njacc(f5, f18): " << l4.jacc(l4.filters[1], l4.filters[3]);
+    cout << "\njacc(f5, f19): " << l4.jacc(l4.filters[1], l4.filters[4]);
+    
+    cout << "\n\nCompute Jaccard distance of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96, f16 and  tree root:\n\n";
     BloomFilterNode *root = b1.root;
-    
-    // TO CHECK
     for (int i=0; i<10; i++) {
-        cout << "Jaccard coefficient of f1 and f" << v1[i].getId() << ": " << root->computeJaccard(root->filters[0], &v1[i]) << endl;
+        cout << "jacc(f1, f" << v1[i].getId() << "): " << root->computeJaccard(root->filters[0], &v1[i]) << endl;
     }
-    
-    cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
-    BloomFilterTree b2(1, 10);
-    cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15";
+   
+    /* cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
+     BloomFilterTree b2(1, 10);
+     b2.insert(&f3);
+     cout << endl;
+     b2.traverse();
+     cout << endl;
+     b2.traverseFilters();
+     cout << endl;
+     
+    cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15\n";
     
     // TO CHECK
-    cout << "\nCompute highest Jaccard coefficient of f16, f18, f19 and each intermediate tree state\n\n";
-    b2.insert(&f3);
-    cout << "Max jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    cout << "\nCompute minimum Jaccard distance of f16, f18, f19 and each intermediate tree state\n\n";
+    cout << "Min jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n\n";
     b2.insert(&f5);
-    cout << "Max jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
-    b2.insert(&f6);
+    cout << "Min jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
+     b2.insert(&f6);
     cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
     cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
     cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
@@ -187,7 +249,7 @@ int main(int argc, const char *argv[]) {
     
     b2.traverse();
     cout << endl;
-    b2.traverseFilters();
+    b2.traverseFilters(); */
     
     // TODO
     /* cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
@@ -232,10 +294,10 @@ int main(int argc, const char *argv[]) {
     f19.printArr();
     cout << "): ";
     L1 = b2.search(10);
-    L1->filters[1]->printArr(); */
+    L1->filters[1]->printArr();
     cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b3)\n\n";
     BloomFilterTree b3(1, 10);
-    cout << "Insert all filters in v1 into b3, changing their ids to optimal values:\n\n";
+    cout << "Insert all filters in v1 into b3, changing their ids to optimal values:\n\n"; */
     
     // TO CHECK
     /* for (int i=0; i<10; i++) {
@@ -364,39 +426,6 @@ int main(int argc, const char *argv[]) {
     cout << ")\n";
     cout << "\ng) simpleSimQueryVec -- return k nearest neighbors, no pruning";
     l3.simpleSimQueryVec(&f14, 3); */
-    
-    // TO CHECK 
-    cout << "/n\n\nCheck Jaccard distance computation";
-    cout << "\n----------------------------------";
-    cout << "\nf1: ";
-    f1.printArr();
-    cout << "\nf2: ";
-    f2.printArr();
-    cout << "\nf3: ";
-    f3.printArr();
-    BloomFilterLeaf l4(2, 3);
-    l4.insert(&f1);
-    l4.insert(&f2);
-    l4.insert(&f3);
-    
-    cout << "\n\nFraction of zeros(f1): " << f1.fractionOfZeros();
-    cout << "\nEstimated size(f1): " << f1.eSize();
-    cout << "\n\nFraction of zeros(f2): " << f2.fractionOfZeros();
-    cout << "\nEstimated size(f2): " << f2.eSize();
-    cout << "\n\nFraction of zeros(f3): " << f3.fractionOfZeros();
-    cout << "\nEstimated size(f3): " << f3.eSize();
-    
-    cout << "\n\neUnion(f1, f2): " << l4.eUnion(l4.filters[0], l4.filters[1]);
-    cout << "\neUnion(f2, f3): " << l4.eUnion(l4.filters[1], l4.filters[2]);
-    cout << "\neUnion(f1, f3): " << l4.eUnion(l4.filters[0], l4.filters[2]);
-    
-    cout << "\n\neIntersect(f1, f2): " << l4.eIntersect(l4.filters[0], l4.filters[1]);
-    cout << "\neIntersect(f2, f3): " << l4.eIntersect(l4.filters[1], l4.filters[2]);
-    cout << "\neIntersect(f1, f3): " << l4.eIntersect(l4.filters[0], l4.filters[2]);
-    
-    cout << "\n\njacc(f1, f2): " << l4.jacc(l4.filters[0], l4.filters[1]);
-    cout << "\njacc(f2, f3): " << l4.jacc(l4.filters[1], l4.filters[2]);
-    cout << "\njacc(f1, f3): " << l4.jacc(l4.filters[0], l4.filters[2]);
     
     cout << endl;
     return 0;

@@ -27,8 +27,8 @@ public:
     void insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
     
     // Tree management helper methods
-    float computeMaxJaccard(BloomFilter *filter); 
-    int computeMaxJaccardKey(BloomFilter *filter);
+    float computeMinJaccard(BloomFilter *filter);
+    int computeMinJaccardKey(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
     

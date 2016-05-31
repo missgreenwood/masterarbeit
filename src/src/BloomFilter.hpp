@@ -42,8 +42,8 @@ public:
     void printArr();
     int *getData();
     void initRandom();
-    float fractionOfZeros();
-    float eSize();
+    double fractionOfZeros();
+    double eSize();
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

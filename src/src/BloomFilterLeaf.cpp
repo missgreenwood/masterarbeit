@@ -162,19 +162,33 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
     }
 }
 
-float BloomFilterLeaf::computeMaxJaccard(BloomFilter *filter) {
-    float max = 0;
+float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
+    float min = 1;
     float jacc;
     for (int i=0; i<getCount(); i++) {
         jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
+        if (jacc < min) {
+            min = jacc;
         }
     }
-    return max;
+    return min;
 }
 
-int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
+int BloomFilterLeaf::computeMinJaccardKey(BloomFilter *filter) {
+    int index = 0;
+    float min = 1;
+    float jacc;
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        if (jacc < min) {
+            min = jacc;
+            index = i;
+        }
+    }
+    return getKeys()[index];
+}
+
+/* int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
     int index = 0;
     float max = 0;
     float jacc;
@@ -186,7 +200,7 @@ int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
         }
     }
     return getKeys()[index];
-}
+} */
 
 int BloomFilterLeaf::getMinKey() {
     return getKeys()[0];

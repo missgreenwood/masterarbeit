@@ -50,14 +50,14 @@ public:
     bool isSubset(BloomFilter *f1, BloomFilter *f2);
     BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
     BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
-    virtual float computeMaxJaccard(BloomFilter *filter) = 0;
-    virtual int computeMaxJaccardKey(BloomFilter *filter) = 0;
+    virtual float computeMinJaccard(BloomFilter *filter) = 0;
+    virtual int computeMinJaccardKey(BloomFilter *filter) = 0;
     virtual int getMinKey() = 0;
     virtual int getMaxKey() = 0;
     
-    float eUnion(BloomFilter *f1, BloomFilter *f2);
-    float eIntersect(BloomFilter *f1, BloomFilter *f2);
-    float jacc(BloomFilter *f1, BloomFilter *f2); 
+    double eUnion(BloomFilter *f1, BloomFilter *f2);
+    double eIntersect(BloomFilter *f1, BloomFilter *f2);
+    double jacc(BloomFilter *f1, BloomFilter *f2);
     
     // Query methods
     virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;

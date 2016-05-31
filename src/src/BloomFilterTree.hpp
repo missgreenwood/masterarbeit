@@ -49,8 +49,8 @@ public:
     BloomFilterNode *getRoot();
     void traverse();
     void traverseFilters();
-    float computeMaxJaccard(BloomFilter *filter);
-    int computeMaxJaccardKey(BloomFilter *filter);
+    float computeMinJaccard(BloomFilter *filter); 
+    int computeMinJaccardKey(BloomFilter *filter);
     int getMinKey();
     int getMaxKey(); 
     int computeSimilarityId(BloomFilter *filter);
