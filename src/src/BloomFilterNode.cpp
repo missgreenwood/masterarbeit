@@ -10,10 +10,10 @@ BloomFilterNode::BloomFilterNode(int _t, int _s): t(_t), filtersize(_s), n(0), p
     // Allocate memory
     keys = new int[2*_t];
     filters = new BloomFilter *[2*_t];
-    
     for (int i=0; i<(2*_t); i++) {
         filters[i] = NULL;
     }
+    unionfilter = new BloomFilter(filtersize, rand());
 }
 
 BloomFilterNode::~BloomFilterNode() {
@@ -71,6 +71,10 @@ void BloomFilterNode::decrement() {
 
 int BloomFilterNode::getFilterSize() {
     return filtersize;
+}
+
+BloomFilter * BloomFilterNode::getUnionFilter() {
+    return unionfilter;
 }
 
 void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {

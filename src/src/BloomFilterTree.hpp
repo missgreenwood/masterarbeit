@@ -52,14 +52,16 @@ public:
     float computeMinJaccard(BloomFilter *filter); 
     int computeMinJaccardKey(BloomFilter *filter);
     int getMinKey();
-    int getMaxKey(); 
-    int computeSimilarityId(BloomFilter *filter);
+    int getMaxKey();
+    BloomFilterNode **superSetNodes(BloomFilter *filter);
+    int computeSubsetId(BloomFilter *filter);
+    int computeSegementId(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);
-    void insertSimilarFilter(BloomFilter *filter);
+    void insertAsSubset(BloomFilter *filter);
+    void insertAsSegments(BloomFilter *filter);
     
-    // Lookup methods
     // Similarity queries
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);

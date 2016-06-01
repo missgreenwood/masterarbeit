@@ -115,7 +115,7 @@ int main(int argc, const char *argv[]) {
     }
 
     cout << "\n\n\nCheck Jaccard distance computation";
-    cout << "\n----------------------------------";
+    cout << "\n----------------------------------\n";
     cout << "\nf3: ";
     f3.printArr();
     cout << "\nf5: ";
@@ -260,6 +260,8 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b2.traverseFilters();
     
+    // Class BloomFilterLeaf
+    
     cout << "\n\n\nCLASS BloomFilterLeaf";
     cout << "\n---------------------\n\n";
     cout << "Create leaves with minimum degree 3/max. elements 6 (l2, l3)\n\n";
@@ -291,6 +293,11 @@ int main(int argc, const char *argv[]) {
 
     
     // TODO
+    cout << "\n\n\nCheck subset relations";
+    cout << "\n----------------------\n\n";
+    cout << "isSubset(f3, f5): " << l2.isSubset(&f3, &f5) << endl;
+    cout << "isSubset(f3, f6): " << l2.isSubset(&f3, &f6) << endl;
+    cout << "isSubset(f3, f11): " << l2.isSubset(&f3, &f11) << endl;
     /* cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
     cout << "\nSmallest key in b2: " << b2.getMinKey() << "\nBiggest key in b2: " << b2.getMaxKey();
     cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
@@ -347,7 +354,6 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b3.traverseFilters(); */
     
-    // Class BloomFilterLeaf
     
     
     // TODO

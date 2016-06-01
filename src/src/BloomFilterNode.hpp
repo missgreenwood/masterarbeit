@@ -12,14 +12,15 @@
 
 class BloomFilterNode {
 private:
-    int n;                  // Current # of keys
+    int n;                      // Current # of keys
     int filtersize;
-    int t;                  // Order/minimum degree
-    int *keys;              // Array of keys
+    int t;                      // Order/minimum degree
+    int *keys;                  // Array of keys
     BloomFilterNode *parent;
     
 public:
     BloomFilter **filters;
+    BloomFilter *unionfilter;    // Union of all filters in subtree of this node
     BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
     
@@ -34,6 +35,7 @@ public:
     void increment();
     void decrement();
     int getFilterSize();
+    BloomFilter *getUnionFilter();
     
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;

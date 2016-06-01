@@ -114,7 +114,7 @@ int BloomFilterTree::getMaxKey() {
 }
 
 // Compute best similarity id for filter regarding this tree
-int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
+/* int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!";
         return filter->getId();
@@ -157,18 +157,31 @@ int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
             return bigId; 
         }
     }
-}
+} */
 
-void BloomFilterTree::insertSimilarFilter(BloomFilter *filter) {
+// Function to return list of all tree nodes with filter as subset
+/* BloomFilterNode ** BloomFilterTree::superSetNodes(BloomFilter *filter) {
+    
+} */
+
+// Function to compute best id for filter
+// Treating filters as subsets of each other
+int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty - this is the first filter!";
-        insert(filter);
+        cout << "Tree is empty!";
+        return filter->getId();
     }
+    /* else if {
+        // Check if filter is subset of any tree nodes
+        
+        
+    } */
     else {
-        int newId = computeSimilarityId(filter);
-        filter->setId(newId);
-        insert(filter);
+        // Check if any tree nodes are subset of filter
     }
+    
+        // Best id for filter: in best similarity circle (take any free id from there)
+    return 0;
 }
 
 // Function to find Bloom filter with highest Jaccard coefficient in tree
