@@ -146,18 +146,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
     if (getCount()<getMax()) {
         int index = indexOfKey(id);
         shiftAndInsert(filter);
-        int *parentKeys = getKeys();
-        cout << "\nParent's new keys:";
-        for (int i=0; i<getCount(); i++) {
-            cout << " " << parentKeys[i];
-        }
-        cout << "\nParent's new filters: ";
-        for (int i=0; i<getCount(); i++) {
-            cout << "|";
-            filters[i]->printArr();
-        }
-        cout << "|" << endl;
-        
         C[index] = leftNode;
         C[index+1] = rightNode;
     }
@@ -217,28 +205,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             }
             for (int i=s->getMax()-1; i>s->getCount()-1; i--) {
                 s->filters[i] = NULL;
-            }
-            
-            cout << "\nRight index node's new keys: ";
-            for (int i=0; i<s->getCount(); i++) {
-                cout << " " << rightIndexKeys[i];
-            }
-            
-            cout << "\nRight index node's new filters: |";
-            for (int i=0; i<s->getCount(); i++) {
-                s->filters[i]->printArr();
-                cout << "|";
-            }
-            
-            cout << "\n\nRoot's new keys: ";
-            for (int i=0; i<p->getCount(); i++) {
-                cout << " " << p->getKeys()[i];
-            }
-            
-            cout << "\nRoot's new filters: |";
-            for (int i=0; i<p->getCount(); i++) {
-                p->filters[i]->printArr();
-                cout << "|";
             }
         }
     }

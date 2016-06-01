@@ -113,14 +113,15 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<10; i++) {
         v1[i].printData();
     }
-    
-    // TO CHECK -> Mirco
+
     cout << "\n\n\nCheck Jaccard distance computation";
     cout << "\n----------------------------------";
     cout << "\nf3: ";
     f3.printArr();
     cout << "\nf5: ";
     f5.printArr();
+    cout << "\nf6: ";
+    f6.printArr();
     cout << "\nf16: ";
     f16.printArr();
     cout << "\nf18: ";
@@ -130,6 +131,7 @@ int main(int argc, const char *argv[]) {
     BloomFilterLeaf l4(3, 10);
     l4.insert(&f3);
     l4.insert(&f5);
+    l4.insert(&f6);
     l4.insert(&f16);
     l4.insert(&f18);
     l4.insert(&f19);
@@ -138,6 +140,9 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\nFraction of zeros(f5): " << f5.fractionOfZeros();
     cout << "\nEstimated size(f5): " << f5.eSize();
+    
+    cout << "\n\nFraction of zeros(f6): " << f6.fractionOfZeros();
+    cout << "\nEstimated size(f6): " << f6.eSize();
     
     cout << "\n\nFraction of zeros(f16): " << f16.fractionOfZeros();
     cout << "\nEstimated size(f16): " << f16.eSize();
@@ -148,29 +153,41 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nFraction of zeros(f19): " << f19.fractionOfZeros();
     cout << "\nEstimated size(f19): " << f19.eSize();
     
-    cout << "\n\neUnion(f3, f16): " << l4.eUnion(l4.filters[0], l4.filters[2]);
-    cout << "\neUnion(f3, f18): " << l4.eUnion(l4.filters[0], l4.filters[3]);
-    cout << "\neUnion(f3, f19): " << l4.eUnion(l4.filters[0], l4.filters[4]);
+    cout << "\n\neUnion(f3, f16): " << l4.eUnion(l4.filters[0], l4.filters[3]);
+    cout << "\neUnion(f3, f18): " << l4.eUnion(l4.filters[0], l4.filters[4]);
+    cout << "\neUnion(f3, f19): " << l4.eUnion(l4.filters[0], l4.filters[5]);
     
-    cout << "\n\neUnion(f5, f16): " << l4.eUnion(l4.filters[1], l4.filters[2]);
-    cout << "\neUnion(f5, f18): " << l4.eUnion(l4.filters[1], l4.filters[3]);
-    cout << "\neUnion(f5, f19): " << l4.eUnion(l4.filters[1], l4.filters[4]);
+    cout << "\n\neUnion(f5, f16): " << l4.eUnion(l4.filters[1], l4.filters[3]);
+    cout << "\neUnion(f5, f18): " << l4.eUnion(l4.filters[1], l4.filters[4]);
+    cout << "\neUnion(f5, f19): " << l4.eUnion(l4.filters[1], l4.filters[5]);
     
-    cout << "\n\neIntersect(f3, f16): " << l4.eIntersect(l4.filters[0], l4.filters[2]);
-    cout << "\neIntersect(f3, f18): " << l4.eIntersect(l4.filters[0], l4.filters[3]);
-    cout << "\neIntersect(f3, f19): " << l4.eIntersect(l4.filters[0], l4.filters[4]);
+    cout << "\n\neUnion(f6, f16): " << l4.eUnion(l4.filters[2], l4.filters[3]);
+    cout << "\neUnion(f6, f18): " << l4.eUnion(l4.filters[2], l4.filters[4]);
+    cout << "\neUnion(f6, f19): " << l4.eUnion(l4.filters[2], l4.filters[5]);
     
-    cout << "\n\neIntersect(f5, f16): " << l4.eIntersect(l4.filters[1], l4.filters[2]);
-    cout << "\neIntersect(f5, f18): " << l4.eIntersect(l4.filters[1], l4.filters[3]);
-    cout << "\neIntersect(f5, f19): " << l4.eIntersect(l4.filters[1], l4.filters[4]);
+    cout << "\n\neIntersect(f3, f16): " << l4.eIntersect(l4.filters[0], l4.filters[3]);
+    cout << "\neIntersect(f3, f18): " << l4.eIntersect(l4.filters[0], l4.filters[4]);
+    cout << "\neIntersect(f3, f19): " << l4.eIntersect(l4.filters[0], l4.filters[5]);
     
-    cout << "\n\njacc(f3, f16): " << l4.jacc(l4.filters[0], l4.filters[2]);
-    cout << "\njacc(f3, f18): " << l4.jacc(l4.filters[0], l4.filters[3]);
-    cout << "\njacc(f3, f19): " << l4.jacc(l4.filters[0], l4.filters[4]);
+    cout << "\n\neIntersect(f5, f16): " << l4.eIntersect(l4.filters[1], l4.filters[3]);
+    cout << "\neIntersect(f5, f18): " << l4.eIntersect(l4.filters[1], l4.filters[4]);
+    cout << "\neIntersect(f5, f19): " << l4.eIntersect(l4.filters[1], l4.filters[5]);
     
-    cout << "\n\njacc(f5, f16): " << l4.jacc(l4.filters[1], l4.filters[2]);
-    cout << "\njacc(f5, f18): " << l4.jacc(l4.filters[1], l4.filters[3]);
-    cout << "\njacc(f5, f19): " << l4.jacc(l4.filters[1], l4.filters[4]);
+    cout << "\n\neIntersect(f6, f16): " << l4.eIntersect(l4.filters[2], l4.filters[3]);
+    cout << "\neIntersect(f6, f18): " << l4.eIntersect(l4.filters[2], l4.filters[4]);
+    cout << "\neIntersect(f6, f19): " << l4.eIntersect(l4.filters[2], l4.filters[5]);
+    
+    cout << "\n\njacc(f3, f16): " << l4.jacc(l4.filters[0], l4.filters[3]);
+    cout << "\njacc(f3, f18): " << l4.jacc(l4.filters[0], l4.filters[4]);
+    cout << "\njacc(f3, f19): " << l4.jacc(l4.filters[0], l4.filters[5]);
+    
+    cout << "\n\njacc(f5, f16): " << l4.jacc(l4.filters[1], l4.filters[3]);
+    cout << "\njacc(f5, f18): " << l4.jacc(l4.filters[1], l4.filters[4]);
+    cout << "\njacc(f5, f19): " << l4.jacc(l4.filters[1], l4.filters[5]);
+    
+    cout << "\n\njacc(f6, f16): " << l4.jacc(l4.filters[2], l4.filters[3]);
+    cout << "\njacc(f6, f18): " << l4.jacc(l4.filters[2], l4.filters[4]);
+    cout << "\njacc(f6, f19): " << l4.jacc(l4.filters[2], l4.filters[5]);
     
     cout << "\n\nCompute Jaccard distance of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96, f16 and  tree root:\n\n";
     BloomFilterNode *root = b1.root;
@@ -178,19 +195,11 @@ int main(int argc, const char *argv[]) {
         cout << "jacc(f1, f" << v1[i].getId() << "): " << root->computeJaccard(root->filters[0], &v1[i]) << endl;
     }
    
-    /* cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
-     BloomFilterTree b2(1, 10);
-     b2.insert(&f3);
-     cout << endl;
-     b2.traverse();
-     cout << endl;
-     b2.traverseFilters();
-     cout << endl;
-     
+    cout << "\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b2)\n\n";
+    BloomFilterTree b2(1, 10);
     cout << "Insert filters into b2: f3, f5, f6, f11, f12, f13, f14, f15\n";
-    
-    // TO CHECK
     cout << "\nCompute minimum Jaccard distance of f16, f18, f19 and each intermediate tree state\n\n";
+    b2.insert(&f3);
     cout << "Min jacc(b2, f16): " << b2.computeMinJaccard(&f16);
     cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
     cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
@@ -204,52 +213,82 @@ int main(int argc, const char *argv[]) {
     cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
     cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
     cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
-     b2.insert(&f6);
-    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    b2.insert(&f6);
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
     b2.insert(&f11);
-    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
     b2.insert(&f12);
-    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
     b2.insert(&f13);
-    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
     b2.insert(&f14);
-    cout << "\n\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n";
     b2.insert(&f15);
-    cout << "\nMax jacc(b2, f16): " << b2.computeMaxJaccard(&f16);
-    cout << " (key " << b2.computeMaxJaccardKey(&f16) << ")\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n\n";
+    cout << "\nMin jacc(b2, f16): " << b2.computeMinJaccard(&f16);
+    cout << " (key " << b2.computeMinJaccardKey(&f16) << ")\n";
+    cout << "Min jacc(b2, f18): " << b2.computeMinJaccard(&f18);
+    cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
+    cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
+    cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n\n";
     
     b2.traverse();
     cout << endl;
-    b2.traverseFilters(); */
+    b2.traverseFilters();
+    
+    cout << "\n\n\nCLASS BloomFilterLeaf";
+    cout << "\n---------------------\n\n";
+    cout << "Create leaves with minimum degree 3/max. elements 6 (l2, l3)\n\n";
+    BloomFilterLeaf l2(3, f3.getSize());
+    BloomFilterLeaf l3(3, f3.getSize());
+    cout << "Insert filters into l2: f3, f5, f6, f11, f12, f13\n";
+    cout << "Insert filters into l3: f14, f15, f17, f25, f26, f96\n";
+    l2.insert(&f3);
+    l2.insert(&f5);
+    l2.insert(&f6);
+    l2.insert(&f11);
+    l2.insert(&f12);
+    l2.insert(&f13);
+    l3.insert(&f14);
+    l3.insert(&f15);
+    l3.insert(&f17);
+    l3.insert(&f25);
+    l3.insert(&f26);
+    l3.insert(&f96);
+    cout << "\nTraverse l2: ";
+    l2.traverse();
+    cout << "\nTraverse l2 filters: ";
+    l2.traverseFilters();
+    cout << "\n\nMake l2 and l3 siblings and traverse both: ";
+    l2.setNext(&l3);
+    l3.setPrev(&l2);
+    l2.traverse();
+    l2.getNext()->traverse();
+
     
     // TODO
     /* cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
@@ -310,34 +349,6 @@ int main(int argc, const char *argv[]) {
     
     // Class BloomFilterLeaf
     
-    cout << "\n\n\nCLASS BloomFilterLeaf";
-    cout << "\n---------------------\n\n";
-    cout << "Create leaves with minimum degree 3/max. elements 6 (l2, l3)\n\n";
-    BloomFilterLeaf l2(3, f3.getSize());
-    BloomFilterLeaf l3(3, f3.getSize());
-    cout << "Insert filters into l2: f3, f5, f6, f11, f12, f13\n";
-    cout << "Insert filters into l3: f14, f15, f17, f25, f26, f96\n";
-    l2.insert(&f3);
-    l2.insert(&f5);
-    l2.insert(&f6);
-    l2.insert(&f11);
-    l2.insert(&f12);
-    l2.insert(&f13);
-    l3.insert(&f14);
-    l3.insert(&f15);
-    l3.insert(&f17);
-    l3.insert(&f25);
-    l3.insert(&f26);
-    l3.insert(&f96);
-    cout << "\nTraverse l2: ";
-    l2.traverse();
-    cout << "\nTraverse l2 filters: ";
-    l2.traverseFilters();
-    cout << "\n\nMake l2 and l3 siblings and traverse both: ";
-    l2.setNext(&l3);
-    l3.setPrev(&l2);
-    l2.traverse();
-    l2.getNext()->traverse();
     
     // TODO
     /* cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
