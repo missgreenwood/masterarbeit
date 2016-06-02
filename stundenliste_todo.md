@@ -153,9 +153,12 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (noch 26.25 h)
+KW 22 (noch 18.45 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
+* Mi, 01.06. (7.5 h)
+* Do, 02.06. ()
+
 
 ## TODO
 
@@ -165,8 +168,6 @@ KW 22 (noch 26.25 h)
 
 	* Jaccard-Berechnung 
 		-> 06.06. Mail an Mirco
-		-> min jaccard checken 
-		-> min jaccard key checken 
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
 		-> z.B. vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)

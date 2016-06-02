@@ -85,6 +85,9 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
         filters[i] = NULL;
     }
     
+    // Update union filter
+    updateUnionFilter(); 
+    
     delete[] merged;
     delete[] mergedNodes;
     return s;
@@ -123,6 +126,23 @@ BloomFilterNode * BloomFilterIndexNode::search(int k) {
     return C[index]->search(k);
 }
 
+void BloomFilterIndexNode::updateUnionFilter() {
+    
+    // Clear union filter
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, 0);
+    }
+    
+    // Calculate union of all children union filters
+    BloomFilter *newUnion = unionfilter;
+    for (int i=0; i<getCount()+1; i++) {
+        newUnion = newUnion->logicalOr(C[i]->unionfilter);
+    }
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, newUnion->getData()[i]);
+    }
+}
+
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
     int id = filter->getId();
     int index = indexOfKey(id);
@@ -145,21 +165,10 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
     
     if (getCount()<getMax()) {
         int index = indexOfKey(id);
-        shiftAndInsert(filter);
-        int *parentKeys = getKeys();
-        cout << "\nParent's new keys:";
-        for (int i=0; i<getCount(); i++) {
-            cout << " " << parentKeys[i];
-        }
-        cout << "\nParent's new filters: ";
-        for (int i=0; i<getCount(); i++) {
-            cout << "|";
-            filters[i]->printArr();
-        }
-        cout << "|" << endl;
-        
+        shiftAndInsert(filter);      
         C[index] = leftNode;
         C[index+1] = rightNode;
+        updateUnionFilter();
     }
     else {
         int mid;
@@ -219,28 +228,11 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
                 s->filters[i] = NULL;
             }
             
-            cout << "\nRight index node's new keys: ";
-            for (int i=0; i<s->getCount(); i++) {
-                cout << " " << rightIndexKeys[i];
-            }
-            
-            cout << "\nRight index node's new filters: |";
-            for (int i=0; i<s->getCount(); i++) {
-                s->filters[i]->printArr();
-                cout << "|";
-            }
-            
-            cout << "\n\nRoot's new keys: ";
-            for (int i=0; i<p->getCount(); i++) {
-                cout << " " << p->getKeys()[i];
-            }
-            
-            cout << "\nRoot's new filters: |";
-            for (int i=0; i<p->getCount(); i++) {
-                p->filters[i]->printArr();
-                cout << "|";
-            }
         }
+        
+        // Update union filters
+        s->updateUnionFilter();
+        getParent()->updateUnionFilter(); 
     }
 }
 

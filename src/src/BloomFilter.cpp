@@ -119,3 +119,33 @@ double BloomFilter::fractionOfZeros() {
 double BloomFilter::eSize() {
     return -log(fractionOfZeros()) * (double) size/(double) d;
 }
+
+BloomFilter * BloomFilter::logicalOr(BloomFilter *filter) {
+    if (getSize() != filter->getSize()) {
+        cout << "Error! Filters don't have the same length\n";
+        return this;
+    }
+    int *data2 = filter->getData();
+    BloomFilter *result = new BloomFilter(getSize(), rand());
+    for (int i=0; i<getSize(); i++) {
+        if ((data[i] == 1) || (data2[i] == 1 )) {
+            result->setValue(i, 1);
+        }
+    }
+    return result;
+}
+
+BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
+    if (getSize() != filter->getSize()) {
+        cout << "Error! Filters don't have the same length\n";
+        return this;
+    }
+    int *data2 = filter->getData();
+    BloomFilter *result = new BloomFilter(getSize(), rand());
+    for (int i=0; i<getSize(); i++) {
+        if (data[i] == 1 && data2[i] == 1) {
+            result->setValue(i, 1);
+        }
+     }
+    return result; 
+}

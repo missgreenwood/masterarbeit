@@ -35,7 +35,6 @@ public:
     void increment();
     void decrement();
     int getFilterSize();
-    BloomFilter *getUnionFilter();
     
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;
@@ -50,8 +49,7 @@ public:
     // Helper methods for tree management
     float computeJaccard(BloomFilter *f1, BloomFilter *f2);
     bool isSubset(BloomFilter *f1, BloomFilter *f2);
-    BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
-    BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
+    virtual void updateUnionFilter() = 0;
     virtual float computeMinJaccard(BloomFilter *filter) = 0;
     virtual int computeMinJaccardKey(BloomFilter *filter) = 0;
     virtual int getMinKey() = 0;

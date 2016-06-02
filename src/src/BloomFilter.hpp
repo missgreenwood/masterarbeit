@@ -44,6 +44,8 @@ public:
     void initRandom();
     double fractionOfZeros();
     double eSize();
+    BloomFilter *logicalOr(BloomFilter *filter);
+    BloomFilter *logicalAnd(BloomFilter *filter); 
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

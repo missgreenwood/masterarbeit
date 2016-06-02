@@ -77,6 +77,10 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
         filters[i] = NULL;
     }
     
+    // Update union filters
+    updateUnionFilter();
+    l->updateUnionFilter();
+    
     // Update sibling pointers
     if (next) {
         l->setNext(next);
@@ -139,11 +143,29 @@ void BloomFilterLeaf::setNext(BloomFilterLeaf *leaf) {
     next = leaf;
 }
 
+void BloomFilterLeaf::updateUnionFilter() {
+    
+    // Clear union filter
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, 0);
+    }
+    
+    // Calculate union of all key filters
+    BloomFilter *newUnion = unionfilter;
+    for (int i=0; i<getCount(); i++) {
+        newUnion = newUnion->logicalOr(filters[i]);
+    }
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, newUnion->getData()[i]);
+    }
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values
     if (getCount() < getMax()) {
         shiftAndInsert(filter);
+        updateUnionFilter();
     }
     else {
         BloomFilterLeaf *l = split(filter);
@@ -159,6 +181,14 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
         // Get middle filter
         BloomFilter *middle = l->filters[0];
         p->insert(middle, this, l);
+    }    
+    
+    // Propagate insertion into union filter up to root node
+    if (getParent() == NULL) {
+        return;
+    }
+    else {
+        getParent()->updateUnionFilter();
     }
 }
 
@@ -187,20 +217,6 @@ int BloomFilterLeaf::computeMinJaccardKey(BloomFilter *filter) {
     }
     return getKeys()[index];
 }
-
-/* int BloomFilterLeaf::computeMaxJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    return getKeys()[index];
-} */
 
 int BloomFilterLeaf::getMinKey() {
     return getKeys()[0];

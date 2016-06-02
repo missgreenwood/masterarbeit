@@ -26,11 +26,11 @@ public:
     void traverseFilters();
     bool contains(int k);
     BloomFilterNode *search(int k);
-    
     BloomFilterLeaf *getPrev();
     void setPrev(BloomFilterLeaf *leaf);
     BloomFilterLeaf *getNext();
     void setNext(BloomFilterLeaf *leaf);
+    void updateUnionFilter(); 
     
     // Insertion methods
     void insert(BloomFilter *filter);
@@ -41,7 +41,6 @@ public:
     int getMinKey();
     int getMaxKey();
     
-    // Lookup methods
     // Similarity queries
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);

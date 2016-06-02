@@ -73,10 +73,6 @@ int BloomFilterNode::getFilterSize() {
     return filtersize;
 }
 
-BloomFilter * BloomFilterNode::getUnionFilter() {
-    return unionfilter;
-}
-
 void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
     assert(getCount() < getMax());
     int id = filter->getId();
@@ -115,31 +111,6 @@ bool BloomFilterNode::isSubset(BloomFilter *f1, BloomFilter *f2) {
     return result; 
 }
 
-BloomFilter * BloomFilterNode::logicalAnd(BloomFilter *f1, BloomFilter *f2) {
-    int *arr1 = f1->getData();
-    int *arr2 = f2->getData();
-     BloomFilter *result = new BloomFilter(getFilterSize(), rand());
-     for (int i=0; i<getFilterSize(); i++) {
-         if ((arr1[i] == 1) && (arr2[i] == 1)) {
-             result->setValue(i, 1);
-         }
-     }
-     return result;
- }
-
-
-BloomFilter * BloomFilterNode::logicalOr(BloomFilter *f1, BloomFilter *f2) {
-    int *arr1 = f1->getData();
-    int *arr2 = f2->getData();
-    BloomFilter *result = new BloomFilter(getFilterSize(), rand());
-    for (int i=0; i<getFilterSize(); i++) {
-        if ((arr1[i] == 1) || (arr2[i] == 1 )) {
-            result->setValue(i, 1);
-        }
-    }
-    return result;
-}
-
 double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
     double dot = 0;
     int *arr1 = f1->getData();
@@ -161,3 +132,4 @@ double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
 double BloomFilterNode::jacc(BloomFilter *f1, BloomFilter *f2) {
     return 1 - (eIntersect(f1, f2)/eUnion(f1, f2)); 
 }
+

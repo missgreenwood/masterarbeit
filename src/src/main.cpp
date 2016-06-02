@@ -255,10 +255,34 @@ int main(int argc, const char *argv[]) {
     cout << " (key " << b2.computeMinJaccardKey(&f18) << ")\n";
     cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
     cout << " (key " << b2.computeMinJaccardKey(&f19) << ")\n\n";
+    b2.insert(&f16);
     
+    cout << "\nCheck union filter construction";
+    cout << "\n-------------------------------\n\n";
     b2.traverse();
     cout << endl;
     b2.traverseFilters();
+    cout << endl;
+    
+    BloomFilterNode *L0 = b2.search(3);
+    BloomFilterNode *L4 = b2.search(12);
+    BloomFilterNode *L6 = b2.search(14);
+    BloomFilterNode *I0 = L0->getParent();
+    BloomFilterNode *I2 = L4->getParent();
+    BloomFilterNode *I3 = L6->getParent();
+    BloomFilterNode *I4 = I0->getParent();
+    BloomFilterNode *I5 = I2->getParent();
+    root = b2.getRoot();
+    cout << "\nI0 union filter: ";
+    I0->unionfilter->printArr();
+    cout << "\nI3 union filter: ";
+    I3->unionfilter->printArr();
+    cout << "\nI4 union filter: ";
+    I4->unionfilter->printArr();
+    cout << "\nI5 union filter: ";
+    I5->unionfilter->printArr();
+    cout << "\nRoot union filter: ";
+    root->unionfilter->printArr();
     
     // Class BloomFilterLeaf
     
@@ -291,72 +315,17 @@ int main(int argc, const char *argv[]) {
     l2.traverse();
     l2.getNext()->traverse();
 
-    
-    // TODO
     cout << "\n\n\nCheck subset relations";
     cout << "\n----------------------\n\n";
     cout << "isSubset(f3, f5): " << l2.isSubset(&f3, &f5) << endl;
     cout << "isSubset(f3, f6): " << l2.isSubset(&f3, &f6) << endl;
     cout << "isSubset(f3, f11): " << l2.isSubset(&f3, &f11) << endl;
-    /* cout << "\n\nCompute optimal ids for filters f16, f18, f19 regarding b2\n";
-    cout << "\nSmallest key in b2: " << b2.getMinKey() << "\nBiggest key in b2: " << b2.getMaxKey();
-    cout << "\nOptimal id for f16 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f16);
-    cout << "\nOptimal id for f18 should be: 4" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18);
-    cout << "\nOptimal id for f19 should be: 10" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19);
-    cout << "\n\nInsert f16 into b2, changing its id to optimal value:\n\n";
-    b2.insertSimilarFilter(&f16);
-    b2.traverse();
-    cout << endl;
-    b2.traverseFilters();
-    cout << "\n\nInsert f18 into b2, changing its id to optimal value:\n\n";
-    cout << "Max jacc(b2, f18): " << b2.computeMaxJaccard(&f18);
-    cout << " (key " << b2.computeMaxJaccardKey(&f18) << ")\n";
-    cout << "Optimal id for f18 should be: 7" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f18) << endl << endl;
-    b2.insertSimilarFilter(&f18);
-    b2.traverse();
-    cout << endl;
-    b2.traverseFilters();
-    cout << "\n\nInsert f19 into b2, changing its id to optimal value:\n\n";
-    cout << "Max jacc(b2, f19): " << b2.computeMaxJaccard(&f19);
-    cout << " (key " << b2.computeMaxJaccardKey(&f19) << ")\n";
-    cout << "Optimal id for f19 should be: 10" << "\nComputed optimal id is: " << b2.computeSimilarityId(&f19) << endl;
-    b2.insertSimilarFilter(&f19);
-    cout << endl;
-    b2.traverse();
-    cout << endl;
-    b2.traverseFilters();
-    
-    cout << "\n\nCheck correct insertion of f16 (";
-    f16.printArr();
-    cout << "): ";
-    BloomFilterNode *L1 = b2.search(4);
-    L1->filters[1]->printArr();
-    cout << "\nCheck correct insertion of f18 (";
-    f18.printArr();
-    cout << "): ";
-    L1 = b2.search(7);
-    L1->filters[0]->printArr();
-    cout << "\nCheck correct insertion of f19 (";
-    f19.printArr();
-    cout << "): ";
-    L1 = b2.search(10);
-    L1->filters[1]->printArr();
-    cout << "\n\nCreate instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b3)\n\n";
-    BloomFilterTree b3(1, 10);
-    cout << "Insert all filters in v1 into b3, changing their ids to optimal values:\n\n"; */
-    
-    // TO CHECK
-    /* for (int i=0; i<10; i++) {
-        b3.insertSimilarFilter(&v1[i]);
-    }
-    cout << endl << endl;
-    b3.traverse();
-    cout << endl;
-    b3.traverseFilters(); */
-    
-    
     
     // TODO
+    
+    // Insertion
+    // Queries
+    
     /* cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
     cout << "\n-------------------------------------------------------";
     cout << "\nTREE QUERY for f100 (";

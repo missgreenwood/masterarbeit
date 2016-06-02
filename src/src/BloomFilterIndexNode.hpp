@@ -20,6 +20,7 @@ public:
     void traverse();
     void traverseFilters();
     BloomFilterNode *search(int k);
+    void updateUnionFilter();
     
     // Insertion methods
     void shiftAndInsert(BloomFilter *filter);
