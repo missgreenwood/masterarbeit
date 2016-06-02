@@ -45,7 +45,9 @@ public:
     double fractionOfZeros();
     double eSize();
     BloomFilter *logicalOr(BloomFilter *filter);
-    BloomFilter *logicalAnd(BloomFilter *filter); 
+    BloomFilter *logicalAnd(BloomFilter *filter);
+    bool isSubset(BloomFilter *filter);
+    bool isSuperset(BloomFilter *filter);
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

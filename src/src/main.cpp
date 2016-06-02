@@ -2,6 +2,7 @@
 //  Description: Main executable for Bloom-Filter-Tree
 
 
+#include <algorithm>
 #include "BloomFilterTree.hpp"
 
 using namespace std;
@@ -12,7 +13,7 @@ int main(int argc, const char *argv[]) {
     
     cout << "CLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create 23 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, 100, array length 10 and random values 0/1\n";
+    cout << "Create 22 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, array length 10\n";
     BloomFilter f1(10, 1);
     BloomFilter f2(10, 2);
     BloomFilter f3(10, 3);
@@ -35,8 +36,6 @@ int main(int argc, const char *argv[]) {
     BloomFilter f25(10, 25);
     BloomFilter f26(10, 26);
     BloomFilter f96(10, 96);
-    BloomFilter f100(10, 100);
-    
     cout << endl;
     f1.initRandom();
     f1.printData();
@@ -82,12 +81,10 @@ int main(int argc, const char *argv[]) {
     f26.printData();
     f96.initRandom();
     f96.printData();
-    f100.initRandom();
-    f100.printData();
     
     // Class BloomFilterTree
     
-    cout << "\n\n\nCLASS BloomFilterTree";
+    cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
     
     cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b1)\n\n";
@@ -114,7 +111,7 @@ int main(int argc, const char *argv[]) {
         v1[i].printData();
     }
 
-    cout << "\n\n\nCheck Jaccard distance computation";
+    cout << "\n\nCheck Jaccard distance computation";
     cout << "\n----------------------------------\n";
     cout << "\nf3: ";
     f3.printArr();
@@ -317,101 +314,615 @@ int main(int argc, const char *argv[]) {
 
     cout << "\n\n\nCheck subset relations";
     cout << "\n----------------------\n\n";
-    cout << "isSubset(f3, f5): " << l2.isSubset(&f3, &f5) << endl;
-    cout << "isSubset(f3, f6): " << l2.isSubset(&f3, &f6) << endl;
-    cout << "isSubset(f3, f11): " << l2.isSubset(&f3, &f11) << endl;
+    cout << "Create 11 instances of BloomFilter with array size 4, all possible and valid permutations\n";
+    BloomFilter f100(4, 100);
+    BloomFilter f101(4, 101);
+    BloomFilter f102(4, 102);
+    BloomFilter f103(4, 103);
+    BloomFilter f104(4, 104);
+    BloomFilter f105(4, 105);
+    BloomFilter f106(4, 106);
+    BloomFilter f107(4, 107);
+    BloomFilter f108(4, 108);
+    BloomFilter f109(4, 109);
+    BloomFilter f110(4, 110);
+    
+    f100.setValue(0, 0);
+    f100.setValue(1, 0);
+    f100.setValue(2, 0);
+    f100.setValue(3, 0);
+    
+    f101.setValue(0, 0);
+    f101.setValue(1, 0);
+    f101.setValue(2, 0);
+    f101.setValue(3, 1);
+    
+    f102.setValue(0, 0);
+    f102.setValue(1, 0);
+    f102.setValue(2, 1);
+    f102.setValue(3, 0);
+    
+    f103.setValue(0, 0);
+    f103.setValue(1, 0);
+    f103.setValue(2, 1);
+    f103.setValue(3, 1);
+    
+    f104.setValue(0, 0);
+    f104.setValue(1, 1);
+    f104.setValue(2, 0);
+    f104.setValue(3, 0);
+    
+    f105.setValue(0, 0);
+    f105.setValue(1, 1);
+    f105.setValue(2, 0);
+    f105.setValue(3, 1);
+    
+    f106.setValue(0, 0);
+    f106.setValue(1, 1);
+    f106.setValue(2, 1);
+    f106.setValue(3, 0);
+    
+    f107.setValue(0, 1);
+    f107.setValue(1, 0);
+    f107.setValue(2, 0);
+    f107.setValue(3, 0);
+    
+    f108.setValue(0, 1);
+    f108.setValue(1, 0);
+    f108.setValue(2, 0);
+    f108.setValue(3, 1);
+    
+    f109.setValue(0, 1);
+    f109.setValue(1, 0);
+    f109.setValue(2, 1);
+    f109.setValue(3, 0);
+    
+    f110.setValue(0, 1);
+    f110.setValue(1, 1);
+    f110.setValue(2, 0);
+    f110.setValue(3, 0);
+    
+    cout << "\nCreate instance of BloomFilterTree with minimum degree 3/max elements 6, filter size 4 (b3) and insert all filters";
+    BloomFilterTree b3(3, 4);
+    b3.insert(&f100);
+    b3.insert(&f101);
+    b3.insert(&f102);
+    b3.insert(&f103);
+    b3.insert(&f104);
+    b3.insert(&f105);
+    b3.insert(&f106);
+    b3.insert(&f107);
+    b3.insert(&f108);
+    b3.insert(&f109);
+    b3.insert(&f110);
+    
+    
+    vector<BloomFilter> v2;
+    v2.push_back(f100);
+    v2.push_back(f101);
+    v2.push_back(f102);
+    v2.push_back(f103);
+    v2.push_back(f104);
+    v2.push_back(f105);
+    v2.push_back(f106);
+    v2.push_back(f107);
+    v2.push_back(f108);
+    v2.push_back(f109);
+    v2.push_back(f110);
+    cout << "\n\nCompute possible and valid subsets of query filter f105 (";
+    f105.printArr();
+    cout << ")\n";
+    cout << "Count should be: 4\n\n";
+    for (int i=0; i<v2.size(); i++) {
+        if (f105.isSubset(&v2[i]) == true) {
+            cout << v2[i].getId() << " (";
+            v2[i].printArr();
+            cout << ")" << endl;
+        }
+    }
+    
+    cout << "\nCompute possible and valid supersets of query filter f105 (";
+    f105.printArr();
+    cout << ")\n";
+    cout << "Count should be: 1\n\n";
+    for (int i=0; i<v2.size(); i++) {
+        if (f105.isSuperset(&v2[i]) == true) {
+            cout << v2[i].getId() << " (";
+            v2[i].printArr();
+            cout << ")" << endl;
+        }
+    }
+    
+    vector<pair<int, float>> v5;
+    BloomFilterNode *L7 = b3.search(105);
+    float jacc4;
+    cout << "\nCompute all jacc distances of query filter f105 (";
+    f105.printArr();
+    cout << ")\n\n";
+    for (int i=0; i<v2.size(); i++) {
+        jacc4 = L7->computeJaccard(L7->filters[2], &v2[i]);
+        v5.push_back(make_pair(v2[i].getId(), jacc4));
+        cout << "jacc(f105, f" << v2[i].getId() << "): " <<  jacc4 << endl;
+    }
+    
+    cout << "\n4 nearest neighbors of f105 in ascending order:\n\n";
+    sort(v5.begin(), v5.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+        return left.second < right.second;
+    });
+    for (int i=0; i<4; i++) {
+        cout << "f" << v5[i].first << " (" << v5[i].second << ")\n";
+    }
+    cout << "\nCreate 42 instances of BloomFilter with array size 6, all possible and valid permutations\n\n";
+    BloomFilter f600(6, 600);
+    BloomFilter f601(6, 601);
+    BloomFilter f602(6, 602);
+    BloomFilter f603(6, 603);
+    BloomFilter f604(6, 604);
+    BloomFilter f605(6, 605);
+    BloomFilter f606(6, 606);
+    BloomFilter f607(6, 607);
+    BloomFilter f608(6, 608);
+    BloomFilter f609(6, 609);
+    BloomFilter f610(6, 610);
+    BloomFilter f611(6, 611);
+    BloomFilter f612(6, 612);
+    BloomFilter f613(6, 613);
+    BloomFilter f614(6, 614);
+    BloomFilter f615(6, 615);
+    BloomFilter f616(6, 616);
+    BloomFilter f617(6, 617);
+    BloomFilter f618(6, 618);
+    BloomFilter f619(6, 619);
+    BloomFilter f620(6, 620);
+    BloomFilter f621(6, 621);
+    BloomFilter f622(6, 622);
+    BloomFilter f623(6, 623);
+    BloomFilter f624(6, 624);
+    BloomFilter f625(6, 625);
+    BloomFilter f626(6, 626);
+    BloomFilter f627(6, 627);
+    BloomFilter f628(6, 628);
+    BloomFilter f629(6, 629);
+    BloomFilter f630(6, 630);
+    BloomFilter f631(6, 631);
+    BloomFilter f632(6, 632);
+    BloomFilter f633(6, 633);
+    BloomFilter f634(6, 634);
+    BloomFilter f635(6, 635);
+    BloomFilter f636(6, 636);
+    BloomFilter f637(6, 637);
+    BloomFilter f638(6, 638);
+    BloomFilter f639(6, 639);
+    BloomFilter f640(6, 640);
+    BloomFilter f641(6, 641);
+    
+    f601.setValue(0, 0);
+    f601.setValue(1, 0);
+    f601.setValue(2, 0);
+    f601.setValue(3, 0);
+    f601.setValue(4, 0);
+    f601.setValue(5, 1);
+    
+    f602.setValue(0, 0);
+    f602.setValue(1, 0);
+    f602.setValue(2, 0);
+    f602.setValue(3, 0);
+    f602.setValue(4, 1);
+    f602.setValue(5, 0);
+    
+    f603.setValue(0, 0);
+    f603.setValue(1, 0);
+    f603.setValue(2, 0);
+    f603.setValue(3, 0);
+    f603.setValue(4, 1);
+    f603.setValue(5, 1);
+    
+    f604.setValue(0, 0);
+    f604.setValue(1, 0);
+    f604.setValue(2, 0);
+    f604.setValue(3, 1);
+    f604.setValue(4, 0);
+    f604.setValue(5, 0);
+    
+    f605.setValue(0, 0);
+    f605.setValue(1, 0);
+    f605.setValue(2, 0);
+    f605.setValue(3, 1);
+    f605.setValue(4, 0);
+    f605.setValue(5, 1);
+    
+    f606.setValue(0, 0);
+    f606.setValue(1, 0);
+    f606.setValue(2, 0);
+    f606.setValue(3, 1);
+    f606.setValue(4, 1);
+    f606.setValue(5, 0);
+    
+    f607.setValue(0, 0);
+    f607.setValue(1, 0);
+    f607.setValue(2, 0);
+    f607.setValue(3, 1);
+    f607.setValue(4, 1);
+    f607.setValue(5, 1);
+    
+    f608.setValue(0, 0);
+    f608.setValue(1, 0);
+    f608.setValue(2, 1);
+    f608.setValue(3, 0);
+    f608.setValue(4, 0);
+    f608.setValue(5, 0);
+    
+    f609.setValue(0, 0);
+    f609.setValue(1, 0);
+    f609.setValue(2, 1);
+    f609.setValue(3, 0);
+    f609.setValue(4, 0);
+    f609.setValue(5, 1);
+    
+    f610.setValue(0, 0);
+    f610.setValue(1, 0);
+    f610.setValue(2, 1);
+    f610.setValue(3, 0);
+    f610.setValue(4, 1);
+    f610.setValue(5, 0);
+    
+    f611.setValue(0, 0);
+    f611.setValue(1, 0);
+    f611.setValue(2, 1);
+    f611.setValue(3, 0);
+    f611.setValue(4, 1);
+    f611.setValue(5, 1);
+    
+    f612.setValue(0, 0);
+    f612.setValue(1, 0);
+    f612.setValue(2, 1);
+    f612.setValue(3, 1);
+    f612.setValue(4, 0);
+    f612.setValue(5, 0);
+    
+    f613.setValue(0, 0);
+    f613.setValue(1, 0);
+    f613.setValue(2, 1);
+    f613.setValue(3, 1);
+    f613.setValue(4, 0);
+    f613.setValue(5, 1);
+    
+    f614.setValue(0, 0);
+    f614.setValue(1, 0);
+    f614.setValue(2, 1);
+    f614.setValue(3, 1);
+    f614.setValue(4, 1);
+    f614.setValue(5, 0);
+    
+    f615.setValue(0, 0);
+    f615.setValue(1, 1);
+    f615.setValue(2, 0);
+    f615.setValue(3, 0);
+    f615.setValue(4, 0);
+    f615.setValue(5, 0);
+    
+    f616.setValue(0, 0);
+    f616.setValue(1, 1);
+    f616.setValue(2, 0);
+    f616.setValue(3, 0);
+    f616.setValue(4, 0);
+    f616.setValue(5, 1);
+    
+    f617.setValue(0, 0);
+    f617.setValue(1, 1);
+    f617.setValue(2, 0);
+    f617.setValue(3, 0);
+    f617.setValue(4, 1);
+    f617.setValue(5, 0);
+    
+    f618.setValue(0, 0);
+    f618.setValue(1, 1);
+    f618.setValue(2, 0);
+    f618.setValue(3, 0);
+    f618.setValue(4, 1);
+    f618.setValue(5, 1);
+    
+    f619.setValue(0, 0);
+    f619.setValue(1, 1);
+    f619.setValue(2, 0);
+    f619.setValue(3, 1);
+    f619.setValue(4, 0);
+    f619.setValue(5, 0);
+    
+    f620.setValue(0, 0);
+    f620.setValue(1, 1);
+    f620.setValue(2, 0);
+    f620.setValue(3, 1);
+    f620.setValue(4, 0);
+    f620.setValue(5, 1);
+    
+    f621.setValue(0, 0);
+    f621.setValue(1, 1);
+    f621.setValue(2, 0);
+    f621.setValue(3, 1);
+    f621.setValue(4, 1);
+    f621.setValue(5, 0);
+    
+    f622.setValue(0, 0);
+    f622.setValue(1, 1);
+    f622.setValue(2, 1);
+    f622.setValue(3, 0);
+    f622.setValue(4, 0);
+    f622.setValue(5, 0);
+    
+    f623.setValue(0, 0);
+    f623.setValue(1, 1);
+    f623.setValue(2, 1);
+    f623.setValue(3, 0);
+    f623.setValue(4, 0);
+    f623.setValue(5, 1);
+    
+    f624.setValue(0, 0);
+    f624.setValue(1, 1);
+    f624.setValue(2, 1);
+    f624.setValue(3, 0);
+    f624.setValue(4, 1);
+    f624.setValue(5, 0);
+
+    f625.setValue(0, 0);
+    f625.setValue(1, 1);
+    f625.setValue(2, 1);
+    f625.setValue(3, 1);
+    f625.setValue(4, 0);
+    f625.setValue(5, 0);
+
+    f626.setValue(0, 1);
+    f626.setValue(1, 0);
+    f626.setValue(2, 0);
+    f626.setValue(3, 0);
+    f626.setValue(4, 0);
+    f626.setValue(5, 0);
+
+    f627.setValue(0, 1);
+    f627.setValue(1, 0);
+    f627.setValue(2, 0);
+    f627.setValue(3, 0);
+    f627.setValue(4, 0);
+    f627.setValue(5, 1);
+
+    f628.setValue(0, 1);
+    f628.setValue(1, 0);
+    f628.setValue(2, 0);
+    f628.setValue(3, 0);
+    f628.setValue(4, 1);
+    f628.setValue(5, 0);
+
+    f629.setValue(0, 1);
+    f629.setValue(1, 0);
+    f629.setValue(2, 0);
+    f629.setValue(3, 0);
+    f629.setValue(4, 1);
+    f629.setValue(5, 1);
+
+    f630.setValue(0, 1);
+    f630.setValue(1, 0);
+    f630.setValue(2, 0);
+    f630.setValue(3, 1);
+    f630.setValue(4, 0);
+    f630.setValue(5, 0);
+
+    f631.setValue(0, 1);
+    f631.setValue(1, 0);
+    f631.setValue(2, 0);
+    f631.setValue(3, 1);
+    f631.setValue(4, 0);
+    f631.setValue(5, 1);
+
+    f632.setValue(0, 1);
+    f632.setValue(1, 0);
+    f632.setValue(2, 0);
+    f632.setValue(3, 1);
+    f632.setValue(4, 1);
+    f632.setValue(5, 0);
+
+    f633.setValue(0, 1);
+    f633.setValue(1, 0);
+    f633.setValue(2, 1);
+    f633.setValue(3, 0);
+    f633.setValue(4, 0);
+    f633.setValue(5, 0);
+
+    f634.setValue(0, 1);
+    f634.setValue(1, 0);
+    f634.setValue(2, 1);
+    f634.setValue(3, 0);
+    f634.setValue(4, 0);
+    f634.setValue(5, 1);
+
+    f635.setValue(0, 1);
+    f635.setValue(1, 0);
+    f635.setValue(2, 1);
+    f635.setValue(3, 0);
+    f635.setValue(4, 1);
+    f635.setValue(5, 0);
+
+    f636.setValue(0, 1);
+    f636.setValue(1, 0);
+    f636.setValue(2, 1);
+    f636.setValue(3, 1);
+    f636.setValue(4, 0);
+    f636.setValue(5, 0);
+
+    f637.setValue(0, 1);
+    f637.setValue(1, 1);
+    f637.setValue(2, 0);
+    f637.setValue(3, 0);
+    f637.setValue(4, 0);
+    f637.setValue(5, 0);
+
+    f638.setValue(0, 1);
+    f638.setValue(1, 1);
+    f638.setValue(2, 0);
+    f638.setValue(3, 0);
+    f638.setValue(4, 0);
+    f638.setValue(5, 1);
+
+    f639.setValue(0, 1);
+    f639.setValue(1, 1);
+    f639.setValue(2, 0);
+    f639.setValue(3, 0);
+    f639.setValue(4, 1);
+    f639.setValue(5, 0);
+    
+    f640.setValue(0, 1);
+    f640.setValue(1, 1);
+    f640.setValue(2, 0);
+    f640.setValue(3, 1);
+    f640.setValue(4, 0);
+    f640.setValue(5, 0);
+
+    f641.setValue(0, 1);
+    f641.setValue(1, 1);
+    f641.setValue(2, 1);
+    f641.setValue(3, 0);
+    f641.setValue(4, 0);
+    f641.setValue(5, 0);
+    
+    cout << "Create instance of BloomFilterTree with minimum degree 3/max elements 6, filter size 6 (b4) and insert all filters";
+    BloomFilterTree b4(3, 6);
+    b4.insert(&f600);
+    b4.insert(&f601);
+    b4.insert(&f602);
+    b4.insert(&f601);
+    b4.insert(&f603);
+    b4.insert(&f604);
+    b4.insert(&f605);
+    b4.insert(&f606);
+    b4.insert(&f607);
+    b4.insert(&f608);
+    b4.insert(&f609);
+    b4.insert(&f610);
+    b4.insert(&f611);
+    b4.insert(&f612);
+    b4.insert(&f613);
+    b4.insert(&f614);
+    b4.insert(&f615);
+    b4.insert(&f616);
+    b4.insert(&f617);
+    b4.insert(&f618);
+    b4.insert(&f619);
+    b4.insert(&f620);
+    b4.insert(&f621);
+    b4.insert(&f622);
+    b4.insert(&f623);
+    b4.insert(&f624);
+    b4.insert(&f625);
+    b4.insert(&f626);
+    b4.insert(&f627);
+    b4.insert(&f628);
+    b4.insert(&f629);
+    b4.insert(&f630);
+    b4.insert(&f631);
+    b4.insert(&f632);
+    b4.insert(&f633);
+    b4.insert(&f634);
+    b4.insert(&f635);
+    b4.insert(&f636);
+    b4.insert(&f637);
+    b4.insert(&f638);
+    b4.insert(&f639);
+    b4.insert(&f640);
+    b4.insert(&f641);
+    
+    vector<BloomFilter> v3;
+    v3.push_back(f600);
+    v3.push_back(f601);
+    v3.push_back(f602);
+    v3.push_back(f603);
+    v3.push_back(f604);
+    v3.push_back(f605);
+    v3.push_back(f606);
+    v3.push_back(f607);
+    v3.push_back(f608);
+    v3.push_back(f609);
+    v3.push_back(f610);
+    v3.push_back(f611);
+    v3.push_back(f612);
+    v3.push_back(f613);
+    v3.push_back(f614);
+    v3.push_back(f615);
+    v3.push_back(f616);
+    v3.push_back(f617);
+    v3.push_back(f618);
+    v3.push_back(f619);
+    v3.push_back(f620);
+    v3.push_back(f621);
+    v3.push_back(f622);
+    v3.push_back(f623);
+    v3.push_back(f624);
+    v3.push_back(f625);
+    v3.push_back(f626);
+    v3.push_back(f627);
+    v3.push_back(f628);
+    v3.push_back(f629);
+    v3.push_back(f630);
+    v3.push_back(f631);
+    v3.push_back(f632);
+    v3.push_back(f633);
+    v3.push_back(f634);
+    v3.push_back(f635);
+    v3.push_back(f636);
+    v3.push_back(f637);
+    v3.push_back(f638);
+    v3.push_back(f639);
+    v3.push_back(f640);
+    v3.push_back(f641);
+    
+    cout << "\n\nCompute possible and valid subsets of query filter f609 (";
+    f609.printArr();
+    cout << ")\n";
+    cout << "Count should be: 4\n\n";
+    for (int i=0; i<v3.size(); i++) {
+        if (f609.isSubset(&v3[i]) == true) {
+            cout << v3[i].getId() << " (";
+            v3[i].printArr();
+            cout << ")" << endl;
+        }
+    }
+
+    cout << "\nCompute possible and valid supersets of query filter f609 (";
+    f609.printArr();
+    cout << ")\n";
+    cout << "Count should be: 5\n\n";
+    for (int i=0; i<v3.size(); i++) {
+        if (f609.isSuperset(&v3[i]) == true) {
+            cout << v3[i].getId() << " (";
+            v3[i].printArr();
+            cout << ")" << endl;
+        }
+    }
+    
+    vector<pair<int, float>> v4;
+    BloomFilterNode *L8 = b4.search(609);
+    float jacc6;
+    cout << "\nCompute all jacc distances of query filter f609 (";
+    f609.printArr();
+    cout << ")\n";
+    for (int i=0; i<v3.size(); i++) {
+        jacc6 = L8->computeJaccard(L8->filters[1], &v3[i]);
+        v4.push_back(make_pair(v3[i].getId(), jacc6));
+        // cout << "jacc(f609, f" << v3[i].getId() << "): " << jacc6 << endl;
+    }
+    
+    cout << "8 nearest neighbors of f109 in ascending order:\n\n";
+    sort(v4.begin(), v4.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+        return left.second < right.second;
+    });
+    for (int i=0; i<8; i++) {
+        cout << "f" << v4[i].first << " (" << v4[i].second << ")\n";
+    }
+    
     
     // TODO
     
-    // Insertion
-    // Queries
-    
-    /* cout << "\n\n\nQuery functions for BloomFilterTree and BloomFilterLeaf";
-    cout << "\n-------------------------------------------------------";
-    cout << "\nTREE QUERY for f100 (";
-    f100.printArr();
-    cout << ")";
-    
-    cout << "\nNN should be: " << b3.computeMaxJaccardKey(&f100);
-    cout << " (";
-    b3.search(b3.computeMaxJaccardKey(&f100))->filters[0]->printArr();
-    cout << ")";
-    cout << "\n3 nearest neighbors should be: -1 (";
-    L1->filters[0]->printArr();
-    cout << "), ";
-    BloomFilterNode *L2 = b3.search(8);
-    cout << "8 (";
-    L2->filters[1]->printArr();
-    cout << "), ";
-    BloomFilterNode *L3 = b3.search(4);
-    cout << "4 (";
-    // L3->filters[1]->printArr();
-    cout << ")\n";
-    
-    cout << "\na) simpleSimQuery -- return nearest neighbor, no pruning: " << b3.simpleSimQuery(&f100)->getId() << " (";
-    b3.simpleSimQuery(&f100)->printArr();
-    cout << ")";
-    
-    cout << "\n\nb) simpleSimQueryVec -- return 3 nearest neighbors, no pruning: ";
-    b3.simpleSimQueryVec(&f100, 3);
-    
-    cout << "\n\nc) simQuery -- return nearest neighbor, follow only best path: " << b3.simQuery(&f100)->getId() << " (";
-    b3.simQuery(&f100)->printArr();
-    cout << ")";
-    
-    cout << "\n\nd) simQueryVec -- return 3 nearest neighbors, follow only best path: ";
-    b3.simQueryVec(&f100, 3);
-    
-    cout << "\n\n\nLEAF QUERY for f100 (";
-    f100.printArr();
-    cout << ")";
-    cout << "\nNearest neighbor should be: " << l2.computeMaxJaccardKey(&f100);
-    cout << " (";
-    l2.filters[1]->printArr();
-    cout << ")";
-    cout << "\n3 nearest neighbors should be (because leaf is not sorted): " << l2.computeMaxJaccardKey(&f100) << " (";
-    l2.filters[1]->printArr();
-    cout << "), 11 (";
-    l2.filters[3]->printArr();
-    cout << "), 3 (";
-    l2.filters[0]->printArr();
-    cout << ")\n";
-    
-    cout << "\ne) simpleSimQueryVec -- return k nearest neighbors, no pruning";
-    l2.simpleSimQueryVec(&f100, 3);
-    
-    cout << "\n\n\nLEAF QUERY for f13 (";
-    f13.printArr();
-    cout << ")";
-    cout << "\nNearest neighbor should be: " << l2.computeMaxJaccardKey(&f13);
-    cout << " (";
-    l2.filters[5]->printArr();
-    cout << ")";
-    cout << "\n3 nearest neighbors should be (because leaves are not sorted): 13 (";
-    l2.filters[5]->printArr();
-    cout << "), 14 (";
-    l2.filters[4]->printArr();
-    cout << "), 11 (";
-    l3.filters[0]->printArr();
-    cout << ")\n";
-    cout << "\nf) simpleSimQueryVec -- return k nearest neighbors, no pruning";
-    l2.simpleSimQueryVec(&f13, 3);
-    
-    cout << "\n\n\nLEAF QUERY for f14 (";
-    f14.printArr();
-    cout << ")";
-    cout << "\nNearest neighbor should be: " << l3.computeMaxJaccardKey(&f14) << " (";
-    l3.filters[0]->printArr();
-    cout << ")";
-    cout << "\n3 nearest neighbors should be (because leaves are not sorted): 14 (";
-    l3.filters[0]->printArr();
-    cout << "), 13 (";
-    l2.filters[5]->printArr();
-    cout << "), 15 (";
-    l3.filters[1]->printArr();
-    cout << ")\n";
-    cout << "\ng) simpleSimQueryVec -- return k nearest neighbors, no pruning";
-    l3.simpleSimQueryVec(&f14, 3); */
+    // Subset insertion
+    // Section insertion
+    // Search queries
     
     cout << endl;
     return 0;

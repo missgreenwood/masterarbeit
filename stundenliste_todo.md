@@ -153,11 +153,11 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (noch 18.45 h)
+KW 22 (noch 10 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
 * Mi, 01.06. (7.5 h)
-* Do, 02.06. ()
+* Do, 02.06. (8.75 h)
 
 
 ## TODO
@@ -170,8 +170,11 @@ KW 22 (noch 18.45 h)
 		-> 06.06. Mail an Mirco
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> z.B. vereinigter Bloom-Filter für jeden Knoten mit den Filtern aller darunter liegenden Knoten (vgl. Fig. 5 S. 320)
-
+		-> compute possible + valid permutations
+		-> k nearest neighbors (key/value pairs in vector, only for checks)
+		-> compute possible + valid subsets
+		-> compute possible + valid supersets
+		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
 
@@ -180,10 +183,8 @@ KW 22 (noch 18.45 h)
 	
 	* Evtl.:
 		-> Auch Split von Knoten basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
-		-> weitere Tree-Konstruktionen überprüfen (z.B. Level 4/Grad 2)
-		-> Dangeling children and filter pointers after insert and split
-		-> Laufzeitfehler (EXC_BAD_ACCESS) z.B. bei BloomFilter::getArr()
 		-> doppelte Methoden ändern in BloomFilterLeaf
+		
 
 3. Evaluation 
 

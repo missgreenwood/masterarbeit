@@ -122,7 +122,7 @@ double BloomFilter::eSize() {
 
 BloomFilter * BloomFilter::logicalOr(BloomFilter *filter) {
     if (getSize() != filter->getSize()) {
-        cout << "Error! Filters don't have the same length\n";
+        cout << "\nError! Filters don't have the same size\n";
         return this;
     }
     int *data2 = filter->getData();
@@ -137,7 +137,7 @@ BloomFilter * BloomFilter::logicalOr(BloomFilter *filter) {
 
 BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
     if (getSize() != filter->getSize()) {
-        cout << "Error! Filters don't have the same length\n";
+        cout << "\nError! Filters don't have the same size\n";
         return this;
     }
     int *data2 = filter->getData();
@@ -148,4 +148,38 @@ BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
         }
      }
     return result; 
+}
+
+// Function to determine if filter is my subset
+bool BloomFilter::isSubset(BloomFilter *filter) {
+    if (getSize() != filter->getSize()) {
+        cout << "\nError! Filters don't have the same size\n";
+        return false;
+    }
+    int *arr2 = filter->getData();
+    bool result = true;
+    for (int i=0; i<getSize(); i++) {
+        if ((arr2[i] == 1) && (data[i] != arr2[i])) {
+            result = false;
+            break;
+        }
+    }
+    return result;
+}
+
+// Function to determine if filter is my superset
+bool BloomFilter::isSuperset(BloomFilter *filter) {
+    if (getSize() != filter->getSize()) {
+        cout << "\nError! Filters don't have the same size\n";
+        return false;
+    }
+    int *arr2 = filter->getData();
+    bool result = true;
+    for (int i=0; i<getSize(); i++) {
+        if ((arr2[i] == 0) && (data[i] != arr2[i])) {
+            result = false;
+            break;
+        }
+    }
+    return result;
 }

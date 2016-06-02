@@ -97,19 +97,7 @@ float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
     return 1 - (intersect_size/union_size); 
 }
 
-// Return true if f2 is subset of f1
-bool BloomFilterNode::isSubset(BloomFilter *f1, BloomFilter *f2) {
-    bool result = true;
-    int *arr1 = f1->getData();
-    int *arr2 = f2->getData();
-    for (int i=0; i<getFilterSize(); i++) {
-        if ((arr2[i] == 1) && (arr1[i] != arr2[i])) {
-            result = false;
-            break;
-        }
-    }
-    return result; 
-}
+
 
 double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
     double dot = 0;
