@@ -55,7 +55,9 @@ public:
     int setZeros();
     int validOnes();
     int possibleFreeZeros();
-    int possibleAddedOnes(); 
+    int possibleAddedOnes();
+    float setUnion(BloomFilter *filter);
+    float setIntersection(BloomFilter *filter);
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

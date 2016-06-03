@@ -173,13 +173,13 @@ KW 22 (noch 3 h)
 		-> Übereinstimmung mit Teilmengen-Fkt checken 
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> check new tree management methods 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
 
 	* Filter dürfen mehrmals eingefügt werden 
 	* Alle Suchalgorithmen daran anpassen und checken 
+	 	-> immer k-1 gute Ergebnisse für Teilmengen und Supermengen (den trivialen Fall abziehen)
 	
 	* Evtl.:
 		-> doppelte Methoden ändern in BloomFilterLeaf

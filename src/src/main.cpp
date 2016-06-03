@@ -785,7 +785,6 @@ int main(int argc, const char *argv[]) {
     b4.insert(&f600);
     b4.insert(&f601);
     b4.insert(&f602);
-    b4.insert(&f601);
     b4.insert(&f603);
     b4.insert(&f604);
     b4.insert(&f605);

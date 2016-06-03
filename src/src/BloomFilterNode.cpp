@@ -91,13 +91,15 @@ void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, Bloo
     assert(false);
 }
 
-float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
-    float intersect_size = eIntersect(f1, f2);
-    float union_size = eUnion(f1, f2);
+double BloomFilterNode::computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2) {
+    double intersect_size = eIntersect(f1, f2);
+    double union_size = eUnion(f1, f2);
     return 1 - (intersect_size/union_size); 
 }
 
-
+float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
+    return (float) 1-(f1->setIntersection(f2)/f1->setUnion(f2));
+}
 
 double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
     double dot = 0;

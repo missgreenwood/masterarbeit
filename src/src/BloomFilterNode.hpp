@@ -47,7 +47,8 @@ public:
     virtual void insert(BloomFilter *filter) = 0;
 
     // Helper methods for tree management
-    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
+    double computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2);
+    float computeJaccard(BloomFilter *f1, BloomFilter *f2); 
     virtual void updateUnionFilter() = 0;
     virtual float computeMinJaccard(BloomFilter *filter) = 0;
     virtual int computeMinJaccardKey(BloomFilter *filter) = 0;

@@ -95,7 +95,7 @@ void BloomFilter::printArr() {
     }
 }
 
-// Function to initialize Bloom Filter with values 0 or 1
+// Initialize Bloom Filter with values 0 or 1
 // Max. 50% of the array elements may be 1
 void BloomFilter::initRandom() {
     random_device seed;
@@ -248,4 +248,26 @@ int BloomFilter::possibleFreeZeros() {
 
 int BloomFilter::possibleAddedOnes() {
     return validOnes() - setOnes();
+}
+
+float BloomFilter::setUnion(BloomFilter *filter) {
+    float result = 0;
+    int *data2 = filter->getData();
+    for (int i=0; i<size; i++) {
+        if ((data[i] == 1) || (data2[i] == 1)) {
+            result++;
+        }
+    }
+    return result;
+}
+
+float BloomFilter::setIntersection(BloomFilter *filter) {
+    float result = 0;
+    int *data2 = filter->getData();
+    for (int i=0; i<size; i++) {
+        if ((data[i] == 1) && (data2[i] == 1)) {
+            result++;
+        }
+    }
+    return result; 
 }
