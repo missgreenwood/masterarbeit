@@ -32,9 +32,10 @@ public:
     int computeMinJaccardKey(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
+    vector<BloomFilter> collectAllFilters(); 
     
-    // Lookup methods
     // Similarity queries
+    // TODO 
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);
     vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);

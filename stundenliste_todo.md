@@ -153,11 +153,12 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (noch 10 h)
+KW 22 (noch 7 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
 * Mi, 01.06. (7.5 h)
 * Do, 02.06. (8.75 h)
+* Fr, 03.06. (3 h)
 
 
 ## TODO
@@ -170,10 +171,7 @@ KW 22 (noch 10 h)
 		-> 06.06. Mail an Mirco
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> compute possible + valid permutations
 		-> k nearest neighbors (key/value pairs in vector, only for checks)
-		-> compute possible + valid subsets
-		-> compute possible + valid supersets
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
@@ -182,10 +180,11 @@ KW 22 (noch 10 h)
 	* Alle Suchalgorithmen daran anpassen und checken 
 	
 	* Evtl.:
-		-> Auch Split von Knoten basierend auf Ähnlichkeit durchgeführt (vgl. S. 321f.)
 		-> doppelte Methoden ändern in BloomFilterLeaf
+		-> compute possible + valid subsets
+		-> compute possible + valid supersets
+		-> compute possible + valid permutations
 		
-
 3. Evaluation 
 
 	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)

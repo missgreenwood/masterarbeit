@@ -226,6 +226,18 @@ int BloomFilterLeaf::getMaxKey() {
     return getKeys()[getCount()-1];
 }
 
+vector<BloomFilter> BloomFilterLeaf::collectAllFilters() {
+    vector<BloomFilter> result;
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        for (int i=0; i<getCount(); i++) {
+            result.push_back(*filters[i]);
+        }
+        tmp = getNext();
+    }
+    return result;
+}
+
 BloomFilter * BloomFilterLeaf::simpleSimQuery(BloomFilter *filter) {
     int index = 0;
     float max = 0;

@@ -120,4 +120,3 @@ double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
 double BloomFilterNode::jacc(BloomFilter *f1, BloomFilter *f2) {
     return 1 - (eIntersect(f1, f2)/eUnion(f1, f2)); 
 }
-

@@ -48,6 +48,14 @@ public:
     BloomFilter *logicalAnd(BloomFilter *filter);
     bool isSubset(BloomFilter *filter);
     bool isSuperset(BloomFilter *filter);
+    int mySupersetCount();
+    int mySubsetCount();
+    int binomialCoefficient(int n, int k);
+    int setOnes();
+    int setZeros();
+    int validOnes();
+    int possibleFreeZeros();
+    int possibleAddedOnes(); 
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

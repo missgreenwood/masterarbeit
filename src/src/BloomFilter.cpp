@@ -150,7 +150,7 @@ BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
     return result; 
 }
 
-// Function to determine if filter is my subset
+// Determine if argument filter is my subset
 bool BloomFilter::isSubset(BloomFilter *filter) {
     if (getSize() != filter->getSize()) {
         cout << "\nError! Filters don't have the same size\n";
@@ -167,7 +167,7 @@ bool BloomFilter::isSubset(BloomFilter *filter) {
     return result;
 }
 
-// Function to determine if filter is my superset
+// Determine if argument filter is my superset
 bool BloomFilter::isSuperset(BloomFilter *filter) {
     if (getSize() != filter->getSize()) {
         cout << "\nError! Filters don't have the same size\n";
@@ -182,4 +182,70 @@ bool BloomFilter::isSuperset(BloomFilter *filter) {
         }
     }
     return result;
+}
+
+// Return number of possible and valid supersets
+int BloomFilter::mySupersetCount() {
+    int result = 1;
+    if (setZeros() != 0) {
+        for (int i=1; i<=possibleAddedOnes(); i++) {
+            result += binomialCoefficient(possibleFreeZeros(), i);
+        }
+    }
+    return result;
+}
+
+// Return number of possible and valid subsets
+int BloomFilter::mySubsetCount() {
+    int result = 1;
+    if (setOnes() != 0) {
+        for (int i=1; i<=setOnes(); i++) {
+            result += binomialCoefficient(setOnes(), i);
+        }
+    }
+    return result;
+}
+
+int BloomFilter::binomialCoefficient(int n, int k) {
+    if (n == k || k == 0) {
+        return 1;
+    }
+    if (n < k) {
+        return 0;
+    }
+    else {
+        return binomialCoefficient(n-1, k-1) + binomialCoefficient(n-1, k);
+    }
+}
+
+int BloomFilter::setOnes() {
+    int ones = 0;
+    for (int i=0; i<getSize(); i++) {
+        if (data[i] == 1) {
+            ones++;
+        }
+    }
+    return ones;
+}
+
+int BloomFilter::setZeros() {
+    int zeros = 0;
+    for (int i=0; i<getSize(); i++) {
+        if (data[i] == 0) {
+            zeros++;
+        }
+    }
+    return zeros;
+}
+
+int BloomFilter::validOnes() {
+    return getSize()/2;
+}
+
+int BloomFilter::possibleFreeZeros() {
+    return getSize() - setOnes();
+}
+
+int BloomFilter::possibleAddedOnes() {
+    return validOnes() - setOnes();
 }

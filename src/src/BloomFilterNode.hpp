@@ -53,7 +53,7 @@ public:
     virtual int computeMinJaccardKey(BloomFilter *filter) = 0;
     virtual int getMinKey() = 0;
     virtual int getMaxKey() = 0;
-    
+    virtual vector<BloomFilter> collectAllFilters() = 0;
     double eUnion(BloomFilter *f1, BloomFilter *f2);
     double eIntersect(BloomFilter *f1, BloomFilter *f2);
     double jacc(BloomFilter *f1, BloomFilter *f2);

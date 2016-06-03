@@ -270,6 +270,10 @@ int BloomFilterIndexNode::getMaxKey() {
     return C[getCount()]->getMaxKey(); 
 }
 
+vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
+    return C[0]->collectAllFilters(); 
+}
+
 BloomFilter * BloomFilterIndexNode::simpleSimQuery(BloomFilter *filter) {
     int index = 0;
     float max = 0;

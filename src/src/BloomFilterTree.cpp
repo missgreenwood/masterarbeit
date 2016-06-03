@@ -12,7 +12,7 @@ BloomFilterTree::~BloomFilterTree() {
     delete root;
 }
 
-// Function to determine if key is present in tree
+// Determine if key is present in tree
 // Return false otherwise
 bool BloomFilterTree::contains(int k) {
     
@@ -58,19 +58,6 @@ void BloomFilterTree::traverseFilters() {
     }
 }
 
-void BloomFilterTree::insert(BloomFilter *filter) {
-    if (root == NULL) {
-        root = new BloomFilterLeaf(t, filtersize, NULL, NULL);
-        root->insert(filter);
-    }
-    else {
-        root->insert(filter);
-        if (root->getParent() != NULL) {
-            root = root->getParent(); 
-        }
-    }
-}
-
 float BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!";
@@ -81,8 +68,8 @@ float BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     }
 }
 
-// Returns key with minimal Jaccard distance
-// Returns first key if there are several keys with equal distance
+// Determine key with minimal Jaccard distance
+// Return first key if there are several with equal distance
 int BloomFilterTree::computeMinJaccardKey(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty - this is the first filter!";
@@ -113,58 +100,7 @@ int BloomFilterTree::getMaxKey() {
     }
 }
 
-// Compute best similarity id for filter regarding this tree
-/* int BloomFilterTree::computeSimilarityId(BloomFilter *filter) {
-    if (root == NULL) {
-        cout << "Tree is empty!";
-        return filter->getId();
-    }
-    else {
-        int minId = getMinKey();
-        int maxId = getMaxKey();
-        int optimalId = computeMinJaccardKey(filter);
-        int smallId = minId;
-        int bigId = maxId;
-        
-        // Get next available lesser key
-        for (int i=optimalId-1; i>minId; i--) {
-            if (!contains(i)) {
-                smallId = i;
-                break;
-            }
-        }
-        if (smallId == minId) {
-            smallId = minId-1;
-        }
-        
-        // Get next available greater key
-        for (int i=optimalId+1; i<maxId; i++) {
-            if (!contains(i)) {
-                bigId = i;
-                break;
-            }
-        }
-        if (bigId == maxId) {
-            bigId = maxId+1;
-        }
-        
-        // Decide which key is better
-        // Returns greater key if both are equally good
-        if ((bigId-optimalId) > (optimalId-smallId)) {
-            return smallId;
-        }
-        else {
-            return bigId; 
-        }
-    }
-} */
-
-// Function to return list of all tree nodes with filter as subset
-/* BloomFilterNode ** BloomFilterTree::superSetNodes(BloomFilter *filter) {
-    
-} */
-
-// Function to compute best id for filter
+// Compute best id for filter
 // Treating filters as subsets of each other
 int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
     if (root == NULL) {
@@ -184,55 +120,25 @@ int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
     return 0;
 }
 
-// Function to find Bloom filter with highest Jaccard coefficient in tree
-// Naive approach, no pruning
-BloomFilter *BloomFilterTree::simpleSimQuery(BloomFilter *filter) {
+vector<BloomFilter> BloomFilterTree::collectAllFilters() {
     if (root == NULL) {
-        cout << "Tree is empty!";
-        return filter;
+        cout << "Tree is empty!\n";
+        return {};
     }
     else {
-        return root->simpleSimQuery(filter);
+        return root->collectAllFilters();
     }
 }
 
-// Function to find Bloom filter with highest Jaccard coefficient in tree
-// Follow only best path in tree
-BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
+void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty!";
-        return filter;
+        root = new BloomFilterLeaf(t, filtersize, NULL, NULL);
+        root->insert(filter);
     }
     else {
-        return root->simQuery(filter); 
+        root->insert(filter);
+        if (root->getParent() != NULL) {
+            root = root->getParent();
+        }
     }
 }
-
-// Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
-// Naive approach, no pruning
-vector<BloomFilter> BloomFilterTree::simpleSimQueryVec(BloomFilter *filter, int k) {
-    if (root == NULL) {
-        vector<BloomFilter> results(1);
-        cout << "Tree is empty!";
-        results.push_back(*filter);
-        return results;
-    }
-    else {
-        return root->simpleSimQueryVec(filter, k);
-    }
-}
-
-
-// Function to find k Bloom filters with highest Jaccard coeffients in tree and return them as Bloom filter vector
-// Follow only best path in tree
-vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
-    if (root == NULL) {
-        vector<BloomFilter> results(1);
-        cout << "Tree is empty!";
-        results.push_back(*filter);
-        return results;
-    }
-    else {
-        return root->simQueryVec(filter, k);
-    }
-} 

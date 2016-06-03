@@ -39,12 +39,9 @@ public:
     
     // Constructor with parameters order and filter size
     BloomFilterTree(int _t, int _s);
-    
     ~BloomFilterTree();
     
-    // Function to determine if key is present in tree
     bool contains(int k);
-    
     BloomFilterNode *search(int k);
     BloomFilterNode *getRoot();
     void traverse();
@@ -53,9 +50,11 @@ public:
     int computeMinJaccardKey(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
-    BloomFilterNode **superSetNodes(BloomFilter *filter);
     int computeSubsetId(BloomFilter *filter);
-    int computeSegementId(BloomFilter *filter);
+    int computeSegmentId(BloomFilter *filter);
+    vector<BloomFilter> collectAllFilters();
+    vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
+    void printkDistances(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);
@@ -63,6 +62,7 @@ public:
     void insertAsSegments(BloomFilter *filter);
     
     // Similarity queries
+    // TODO 
     BloomFilter *simpleSimQuery(BloomFilter *filter);
     BloomFilter *simQuery(BloomFilter *filter);
     vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);

@@ -412,7 +412,7 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nCompute possible and valid subsets of query filter f105 (";
     f105.printArr();
     cout << ")\n";
-    cout << "Count should be: 4\n\n";
+    cout << "Count should be: " << f105.mySubsetCount() << endl << endl;
     for (int i=0; i<v2.size(); i++) {
         if (f105.isSubset(&v2[i]) == true) {
             cout << v2[i].getId() << " (";
@@ -424,7 +424,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nCompute possible and valid supersets of query filter f105 (";
     f105.printArr();
     cout << ")\n";
-    cout << "Count should be: 1\n\n";
+    cout << "Count should be: " << f105.mySupersetCount() << endl << endl;
     for (int i=0; i<v2.size(); i++) {
         if (f105.isSuperset(&v2[i]) == true) {
             cout << v2[i].getId() << " (";
@@ -433,9 +433,9 @@ int main(int argc, const char *argv[]) {
         }
     }
     
-    vector<pair<int, float>> v5;
+    vector<pair<int, double>> v5;
     BloomFilterNode *L7 = b3.search(105);
-    float jacc4;
+    double jacc4;
     cout << "\nCompute all jacc distances of query filter f105 (";
     f105.printArr();
     cout << ")\n\n";
@@ -876,7 +876,7 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nCompute possible and valid subsets of query filter f609 (";
     f609.printArr();
     cout << ")\n";
-    cout << "Count should be: 4\n\n";
+    cout << "Count should be: " << f609.mySubsetCount() << endl << endl;
     for (int i=0; i<v3.size(); i++) {
         if (f609.isSubset(&v3[i]) == true) {
             cout << v3[i].getId() << " (";
@@ -888,7 +888,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nCompute possible and valid supersets of query filter f609 (";
     f609.printArr();
     cout << ")\n";
-    cout << "Count should be: 5\n\n";
+    cout << "Count should be: " << f609.mySupersetCount() << endl << endl;
     for (int i=0; i<v3.size(); i++) {
         if (f609.isSuperset(&v3[i]) == true) {
             cout << v3[i].getId() << " (";
@@ -897,9 +897,9 @@ int main(int argc, const char *argv[]) {
         }
     }
     
-    vector<pair<int, float>> v4;
+    vector<pair<int, double>> v4;
     BloomFilterNode *L8 = b4.search(609);
-    float jacc6;
+    double jacc6;
     cout << "\nCompute all jacc distances of query filter f609 (";
     f609.printArr();
     cout << ")\n";
