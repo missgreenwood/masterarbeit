@@ -172,6 +172,7 @@ KW 22 (noch 7 h)
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
 		-> k nearest neighbors (key/value pairs in vector, only for checks)
+		-> check new tree management methods 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind

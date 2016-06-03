@@ -20,6 +20,7 @@
 #ifndef BloomFilterTree_hpp
 #define BloomFilterTree_hpp
 
+#include <algorithm>
 #include "BloomFilterNode.hpp"
 #include "BloomFilterIndexNode.hpp"
 #include "BloomFilterLeaf.hpp"
@@ -54,7 +55,7 @@ public:
     int computeSegmentId(BloomFilter *filter);
     vector<BloomFilter> collectAllFilters();
     vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
-    void printkDistances(BloomFilter *filter);
+    vector<pair<int, double>>computekDistances(BloomFilter *filter, int k);
     
     // Insertion methods
     void insert(BloomFilter *filter);

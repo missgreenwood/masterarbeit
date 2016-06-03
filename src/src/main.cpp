@@ -2,7 +2,6 @@
 //  Description: Main executable for Bloom-Filter-Tree
 
 
-#include <algorithm>
 #include "BloomFilterTree.hpp"
 
 using namespace std;
@@ -906,7 +905,6 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<v3.size(); i++) {
         jacc6 = L8->computeJaccard(L8->filters[1], &v3[i]);
         v4.push_back(make_pair(v3[i].getId(), jacc6));
-        // cout << "jacc(f609, f" << v3[i].getId() << "): " << jacc6 << endl;
     }
     
     cout << "8 nearest neighbors of f109 in ascending order:\n\n";

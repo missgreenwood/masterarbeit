@@ -130,6 +130,30 @@ vector<BloomFilter> BloomFilterTree::collectAllFilters() {
     }
 }
 
+vector<pair<int, double>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
+    vector<BloomFilter> filters = collectAllFilters();
+    vector<pair<int, double>> result;
+    double jacc;
+    for (int i=0; i<filters.size(); i++) {
+        jacc = root->computeJaccard(&filters[i], filter);
+        result.push_back(make_pair(filters[i].getId(), jacc));
+    }
+    return result;
+}
+
+vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter, int k) {
+    vector<pair<int, double>> allDistances = computeAllDistances(filter);
+    vector<pair<int, double>> result;
+    sort(allDistances.begin(), allDistances.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
+        return left.second < right.second;
+    });
+    for (int i=0; i<k; i++) {
+        cout << "jacc(" << filter->getId() << ", " << allDistances[i].first << ": " << allDistances[i].second << "\n";
+        result.push_back(allDistances[i]); 
+    }
+    return result;
+}
+
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
         root = new BloomFilterLeaf(t, filtersize, NULL, NULL);
