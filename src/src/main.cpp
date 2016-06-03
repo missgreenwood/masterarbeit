@@ -432,25 +432,23 @@ int main(int argc, const char *argv[]) {
         }
     }
     
-    vector<pair<int, double>> v5;
-    BloomFilterNode *L7 = b3.search(105);
-    double jacc4;
-    cout << "\nCompute all jacc distances of query filter f105 (";
+    cout << "\nCollect all filters in b3: ";
+    vector<BloomFilter> v7 = b3.collectAllFilters();
+    for (int i=0; i<v7.size(); i++) {
+        cout << v7[i].getId() << " ";
+    }
+    
+    cout << "\n\nCompute all jacc distances of query filter f105 (";
     f105.printArr();
     cout << ")\n\n";
-    for (int i=0; i<v2.size(); i++) {
-        jacc4 = L7->computeJaccard(L7->filters[2], &v2[i]);
-        v5.push_back(make_pair(v2[i].getId(), jacc4));
-        cout << "jacc(f105, f" << v2[i].getId() << "): " <<  jacc4 << endl;
+    vector<pair<int, double>> v6 = b3.computeAllDistances(&f105);
+    for (int i=0; i<v6.size(); i++) {
+        cout << "jacc(" << f105.getId() << ", " <<  v6[i].first << "): " << v6[i].second << endl;
     }
     
     cout << "\n4 nearest neighbors of f105 in ascending order:\n\n";
-    sort(v5.begin(), v5.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
-        return left.second < right.second;
-    });
-    for (int i=0; i<4; i++) {
-        cout << "f" << v5[i].first << " (" << v5[i].second << ")\n";
-    }
+    b3.computekDistances(&f105, 4);
+    
     cout << "\nCreate 42 instances of BloomFilter with array size 6, all possible and valid permutations\n\n";
     BloomFilter f600(6, 600);
     BloomFilter f601(6, 601);
@@ -896,31 +894,20 @@ int main(int argc, const char *argv[]) {
         }
     }
     
-    vector<pair<int, double>> v4;
-    BloomFilterNode *L8 = b4.search(609);
-    double jacc6;
-    cout << "\nCompute all jacc distances of query filter f609 (";
-    f609.printArr();
-    cout << ")\n";
-    for (int i=0; i<v3.size(); i++) {
-        jacc6 = L8->computeJaccard(L8->filters[1], &v3[i]);
-        v4.push_back(make_pair(v3[i].getId(), jacc6));
+    cout << "\nCollect all filters in b4: ";
+    vector<BloomFilter> v5 = b4.collectAllFilters();
+    for (int i=0; i<v5.size(); i++) {
+        cout << v5[i].getId() << " ";
     }
     
-    cout << "8 nearest neighbors of f109 in ascending order:\n\n";
-    sort(v4.begin(), v4.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
-        return left.second < right.second;
-    });
-    for (int i=0; i<8; i++) {
-        cout << "f" << v4[i].first << " (" << v4[i].second << ")\n";
-    }
-    
+    cout << "\n\n8 nearest neighbors of f109 in ascending order:\n\n";
+    b4.computekDistances(&f609, 8);
     
     // TODO
     
     // Subset insertion
     // Section insertion
-    // Search queries
+    // Search queries */
     
     cout << endl;
     return 0;

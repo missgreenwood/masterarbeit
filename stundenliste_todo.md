@@ -153,12 +153,12 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (noch 7 h)
+KW 22 (noch 3 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
 * Mi, 01.06. (7.5 h)
 * Do, 02.06. (8.75 h)
-* Fr, 03.06. (3 h)
+* Fr, 03.06. (7 h)
 
 
 ## TODO
@@ -169,9 +169,10 @@ KW 22 (noch 7 h)
 
 	* Jaccard-Berechnung 
 		-> 06.06. Mail an Mirco
+		-> eigene Funktion verwenden 
+		-> Übereinstimmung mit Teilmengen-Fkt checken 
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> k nearest neighbors (key/value pairs in vector, only for checks)
 		-> check new tree management methods 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente

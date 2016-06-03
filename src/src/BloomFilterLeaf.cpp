@@ -230,10 +230,10 @@ vector<BloomFilter> BloomFilterLeaf::collectAllFilters() {
     vector<BloomFilter> result;
     BloomFilterLeaf *tmp = this;
     while (tmp != NULL) {
-        for (int i=0; i<getCount(); i++) {
-            result.push_back(*filters[i]);
+        for (int i=0; i<tmp->getCount(); i++) {
+            result.push_back(*tmp->filters[i]);
         }
-        tmp = getNext();
+        tmp = tmp->getNext();
     }
     return result;
 }
