@@ -118,7 +118,3 @@ double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
     double e = f1->eSize() + f2->eSize() - union_size;
     return e;
 }
-
-double BloomFilterNode::jacc(BloomFilter *f1, BloomFilter *f2) {
-    return 1 - (eIntersect(f1, f2)/eUnion(f1, f2)); 
-}

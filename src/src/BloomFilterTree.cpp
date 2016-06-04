@@ -1,6 +1,7 @@
 //  BloomFilterTree.cpp, Judith Greif
 //  Description: Implementation of class BloomFilterTree
 
+#include <algorithm>
 #include "BloomFilterTree.hpp"
 
 
@@ -100,25 +101,18 @@ int BloomFilterTree::getMaxKey() {
     }
 }
 
-// Compute best id for filter
-// Treating filters as subsets of each other
+// Compute best subset id for filter
+// Treat filter as subset of tree filters
 int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!";
         return filter->getId();
     }
-    /* else if {
-        // Check if filter is subset of any tree nodes
-        
-        
-    } */
     else {
-        // Check if any tree nodes are subset of filter
+        return root->computeSubsetId(filter); 
     }
-    
-        // Best id for filter: in best similarity circle (take any free id from there)
-    return 0;
 }
+    
 
 vector<BloomFilter> BloomFilterTree::collectAllFilters() {
     if (root == NULL) {
@@ -130,10 +124,10 @@ vector<BloomFilter> BloomFilterTree::collectAllFilters() {
     }
 }
 
-vector<pair<int, double>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
+vector<pair<int, float>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
     vector<BloomFilter> filters = collectAllFilters();
-    vector<pair<int, double>> result;
-    double jacc;
+    vector<pair<int, float>> result;
+    float jacc;
     for (int i=0; i<filters.size(); i++) {
         jacc = root->computeJaccard(&filters[i], filter);
         result.push_back(make_pair(filters[i].getId(), jacc));
@@ -141,10 +135,10 @@ vector<pair<int, double>> BloomFilterTree::computeAllDistances(BloomFilter *filt
     return result;
 }
 
-vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter, int k) {
-    vector<pair<int, double>> allDistances = computeAllDistances(filter);
-    vector<pair<int, double>> result;
-    sort(allDistances.begin(), allDistances.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
+vector<pair<int, float>> BloomFilterTree::computekDistances(BloomFilter *filter, int k) {
+    vector<pair<int, float>> allDistances = computeAllDistances(filter);
+    vector<pair<int, float>> result;
+    sort(allDistances.begin(), allDistances.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
         return left.second < right.second;
     });
     for (int i=0; i<k; i++) {

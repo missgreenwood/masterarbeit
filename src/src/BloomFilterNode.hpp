@@ -36,34 +36,35 @@ public:
     void decrement();
     int getFilterSize();
     
+    // Tree management
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;
-    virtual bool contains(int k) = 0;
-    virtual BloomFilterNode *search(int k) = 0;
-    
-    // Insertion methods
-    virtual void shiftAndInsert(BloomFilter *filter);
-    virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
-    virtual void insert(BloomFilter *filter) = 0;
-
-    // Helper methods for tree management
     double computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2);
-    float computeJaccard(BloomFilter *f1, BloomFilter *f2); 
+    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
+    double eUnion(BloomFilter *f1, BloomFilter *f2);
+    double eIntersect(BloomFilter *f1, BloomFilter *f2);
     virtual void updateUnionFilter() = 0;
     virtual float computeMinJaccard(BloomFilter *filter) = 0;
     virtual int computeMinJaccardKey(BloomFilter *filter) = 0;
     virtual int getMinKey() = 0;
     virtual int getMaxKey() = 0;
     virtual vector<BloomFilter> collectAllFilters() = 0;
-    double eUnion(BloomFilter *f1, BloomFilter *f2);
-    double eIntersect(BloomFilter *f1, BloomFilter *f2);
-    double jacc(BloomFilter *f1, BloomFilter *f2);
+    virtual int computeSubsetId(BloomFilter *filter) = 0;
+    virtual bool contains(int k) = 0;
+    virtual BloomFilterNode *search(int k) = 0;
+    // virtual int computeSupersetId(BloomFilter *filter) = 0;
     
+    // Insertion methods
+    virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
+    virtual void insert(BloomFilter *filter) = 0;
+    // virtual void insertAsSets(BloomFilter *filter) = 0;
+
     // Query methods
-    virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;
-    virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
-    virtual vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k) = 0;
-    virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
+    // virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;
+    // virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
+    // virtual vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k) = 0;
+    // virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
 };
 
 #endif 

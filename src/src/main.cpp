@@ -173,17 +173,17 @@ int main(int argc, const char *argv[]) {
     cout << "\neIntersect(f6, f18): " << l4.eIntersect(l4.filters[2], l4.filters[4]);
     cout << "\neIntersect(f6, f19): " << l4.eIntersect(l4.filters[2], l4.filters[5]);
     
-    cout << "\n\njacc(f3, f16): " << l4.jacc(l4.filters[0], l4.filters[3]);
-    cout << "\njacc(f3, f18): " << l4.jacc(l4.filters[0], l4.filters[4]);
-    cout << "\njacc(f3, f19): " << l4.jacc(l4.filters[0], l4.filters[5]);
+    cout << "\n\njacc(f3, f16): " << l4.computeJaccard(l4.filters[0], l4.filters[3]);
+    cout << "\njacc(f3, f18): " << l4.computeJaccard(l4.filters[0], l4.filters[4]);
+    cout << "\njacc(f3, f19): " << l4.computeJaccard(l4.filters[0], l4.filters[5]);
     
-    cout << "\n\njacc(f5, f16): " << l4.jacc(l4.filters[1], l4.filters[3]);
-    cout << "\njacc(f5, f18): " << l4.jacc(l4.filters[1], l4.filters[4]);
-    cout << "\njacc(f5, f19): " << l4.jacc(l4.filters[1], l4.filters[5]);
+    cout << "\n\njacc(f5, f16): " << l4.computeJaccard(l4.filters[1], l4.filters[3]);
+    cout << "\njacc(f5, f18): " << l4.computeJaccard(l4.filters[1], l4.filters[4]);
+    cout << "\njacc(f5, f19): " << l4.computeJaccard(l4.filters[1], l4.filters[5]);
     
-    cout << "\n\njacc(f6, f16): " << l4.jacc(l4.filters[2], l4.filters[3]);
-    cout << "\njacc(f6, f18): " << l4.jacc(l4.filters[2], l4.filters[4]);
-    cout << "\njacc(f6, f19): " << l4.jacc(l4.filters[2], l4.filters[5]);
+    cout << "\n\njacc(f6, f16): " << l4.computeJaccard(l4.filters[2], l4.filters[3]);
+    cout << "\njacc(f6, f18): " << l4.computeJaccard(l4.filters[2], l4.filters[4]);
+    cout << "\njacc(f6, f19): " << l4.computeJaccard(l4.filters[2], l4.filters[5]);
     
     cout << "\n\nCompute Jaccard distance of filters f4, f7, f10, f17, f25, f2, f8, f9, f26, f96, f16 and  tree root:\n\n";
     BloomFilterNode *root = b1.root;
@@ -441,7 +441,7 @@ int main(int argc, const char *argv[]) {
     cout << "\n\nCompute all jacc distances of query filter f105 (";
     f105.printArr();
     cout << ")\n\n";
-    vector<pair<int, double>> v6 = b3.computeAllDistances(&f105);
+    vector<pair<int, float>> v6 = b3.computeAllDistances(&f105);
     for (int i=0; i<v6.size(); i++) {
         cout << "jacc(" << f105.getId() << ", " <<  v6[i].first << "): " << v6[i].second << endl;
     }
@@ -902,11 +902,61 @@ int main(int argc, const char *argv[]) {
     cout << "\n\n8 nearest neighbors of f109 in ascending order:\n\n";
     b4.computekDistances(&f609, 8);
     
-    // TODO
     
-    // Subset insertion
+    cout << "\n\nCheck subset insertion";
+    cout << "\n----------------------\n";
+    cout << "Remove f100 and f104 from b3 (subsets of query filter f105)";
+    b3 = *new BloomFilterTree(3, 4);
+    b3.insert(&f101);
+    b3.insert(&f102);
+    b3.insert(&f103);
+    b3.insert(&f105);
+    b3.insert(&f106);
+    b3.insert(&f107);
+    b3.insert(&f108);
+    b3.insert(&f109);
+    b3.insert(&f110);
+    cout << endl << endl;
+    b3.traverse();
+    cout << "\n\nRemove f608 and f609 from b4 (subsets of query filter f609)";
+    cout << "\nRemove f609, f623, f634 from b4 (supersets of query filter f609)";
+    b4 = *new BloomFilterTree(3, 6);
+    b4.insert(&f600);
+    b4.insert(&f601);
+    b4.insert(&f602);
+    b4.insert(&f603);
+    b4.insert(&f604);
+    b4.insert(&f605);
+    b4.insert(&f606);
+    b4.insert(&f607);
+    b4.insert(&f608);
+    b4.insert(&f610);
+    b4.insert(&f611);
+    b4.insert(&f612);
+    b4.insert(&f613);
+    cout << endl << endl;
+    b4.traverse();
+    
+    // Subset id for size 4
+    cout << "\n\nComputed free subset ids for f105 should be: 100, 104, 111";
+    cout << "\nBest subset id for f105 should be: 104";
+    cout << "\nComputed optimal subset id for f105: " << b3.computeSubsetId(&f105);
+    
+    // Subset id for size 6
+    
+    cout << "\n\nComputed free subset ids for f609 should be: 599, 609, 614";
+    cout << "\nBest subset id for f609 should be: 609";
+    cout << "\nComputed optimal subset id for f609: " << b4.computeSubsetId(&f609);
+    
+    // TODO
+    // Superset id for size 4
+    // Superset id for size 6
+    
+    // Set insertion
+    // Set search queries
+    
     // Section insertion
-    // Search queries */
+    // Section search queries
     
     cout << endl;
     return 0;

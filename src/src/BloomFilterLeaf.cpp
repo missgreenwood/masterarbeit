@@ -2,7 +2,9 @@
 //  Description: Implementation of class BloomFilterLeaf
 
 
+#include <algorithm>
 #include "BloomFilterLeaf.hpp"
+
 using namespace std;
 
 
@@ -238,273 +240,100 @@ vector<BloomFilter> BloomFilterLeaf::collectAllFilters() {
     return result;
 }
 
-BloomFilter * BloomFilterLeaf::simpleSimQuery(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
+int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
+    vector<pair<int, float>> subsets;
+    vector<int> freeIds;
+    vector<pair<int, int>> goodIds;
+    BloomFilterLeaf *tmp = this;
     float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
+    int minId = filters[0]->getId()-1;
+    int maxId;
+    int optId;
+    while (tmp != NULL) {
+        
+        // Collect all filters argument filter is subset of
+        for (int i=0; i<tmp->getCount(); i++) {
+            if ((tmp->filters[i])->isSubset(filter)) {
+                jacc = computeJaccard(tmp->filters[i], filter);
+                subsets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
+            }
         }
+        maxId = tmp->filters[tmp->getCount()-1]->getId()+1;
+        tmp = tmp->getNext();
     }
-    return filters[index]; 
-}
-
-// Identical to simpleSimQuery() because pruning happens in index nodes
-BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
-    int index = 0;
-    float max = 0;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    return filters[index];
-}
-
-// Function to return k nearest neighbors in tree
-// Checks only candidates in k-1-environment of nearest neighbor - use only on already sorted tree/leaf
-// If tree has less than k filters, return them all sorted by Jaccard coefficient
-vector<BloomFilter> BloomFilterLeaf::simpleSimQueryVec(BloomFilter *filter, int k) {
-    vector<BloomFilter> results(k);
-    int index = 0;
-    float max = 0;
-    float jacc;
     
-    // Determine nearest neighbor
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    results[0] = *filters[index];
-    cout << "\nNearest neighbor: " << results[0].getId() << " (";
-    results[0].printArr();
-    cout << ")\n";
+    // Sort subsets by jacc distances in ascending order
+    sort(subsets.begin(), subsets.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+        return left.second < right.second;
+    });
     
-    // Determine k-1 nearest neighbors
-    // Collect k-1 candidates with greater keys
-    int *ids = new int[(k-1)*2];
-    float *coefficients = new float[(k-1)*2];
-    BloomFilter **candidates = new BloomFilter *[(k-1)*2];
-    
-    // count = # of found candidates
-    int count = 0;
-    int first = 0;
-    for (int i=0; i<k-1; i++) {
-        if (index+1+i<getCount() && count<k-1) {
-            candidates[i] = filters[index+1+i];
-            count++;
-        }
-        else if (next && count<k-1) {
-            BloomFilterLeaf *tmp = next;
-            while (tmp && count<k-1) {
-                for (int j=0; j<k-1; j++) {
-                    if (tmp->filters[first] != NULL) {
-                        candidates[i+j] = tmp->filters[first];
-                        first++;
-                        count++;
-                    }
+    // Collect free ids
+    tmp = this;
+    freeIds.push_back(minId);
+    freeIds.push_back(maxId);
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount()-2; i++) {
+            for (int j=tmp->filters[i]->getId()+1; j<tmp->filters[i+1]->getId(); j++)
+                if (j < tmp->filters[i]->getId()) {
+                    freeIds.push_back(j);
                 }
-                tmp = tmp->next;
-                first = 0;
+            }
+        int start = tmp->filters[tmp->getCount()-1]->getId()+1;
+        int last;
+        if (tmp->getCount() < tmp->getMax()) {
+            if (tmp->next != NULL) {
+                last = tmp->getNext()->filters[0]->getId();
+            }
+            else {
+                last = start + tmp->getMax() - tmp->getCount()-1;
+            }
+            for (int j=start; j<last; j++) {
+                freeIds.push_back(j);
             }
         }
+        tmp = tmp->getNext();
+    }
+    sort(freeIds.begin(), freeIds.end(), less<int>());
+    for (int i=freeIds.size()-2; i>0; i--) {
+        if (freeIds[i] == freeIds[i+1]) {
+            freeIds.erase(freeIds.begin()+i+1);
+        }
     }
     
-    // Collect k-1 candidates with smaller keys
-    first = count;
-    for (int i=0; i<k-1; i++) {
-        if (index-1-i>-1 && count<(k-1)*2) {
-            candidates[count] = filters[index-1-i];
-            count++;
-        }
-        else if (prev && count<(k-1)*2) {
-            BloomFilterLeaf *tmp = prev;
-            first = prev->getCount()-1;
-            while (tmp && count<(k-1)*2) {
-                for (int j=0; j<k-1; j++) {
-                    if (tmp->filters[first] != NULL) {
-                        candidates[count] = tmp->filters[first];
-                        first--;
-                        count++;
-                    }
-                }
-                tmp = tmp->prev;
-                first = 0;
+    // Determine optimal id
+    // Check subsets in ascending order
+    // Get next greater and smaller id
+    int distNeg = subsets[0].first - minId;
+    int distPos = maxId - subsets[0].first;
+    for (int i=0; i<subsets.size(); i++) {
+        optId = subsets[i].first;
+        int j=0;
+        while ((freeIds[j] < subsets[i].first) && (j<freeIds.size())) {
+            if (optId-freeIds[j] < optId-minId) {
+                minId = freeIds[j];
+                distNeg = optId-minId;
             }
+            j++;
         }
-    }
-
-    // Determine k-1 best candidates
-    for (int i=0; i<(k-1)*2; i++) {
-        if (candidates[i]) {
-            coefficients[i] = computeJaccard(candidates[i], filter);
-            ids[i] = candidates[i]->getId();
-        }
-    }
-   
-    // Check if enough candidates have been found
-    if (count<(k-1)*2) {
-        cout << "Too little candidates for query! ";
-    }
-    else {
-        cout << "Jaccard coefficients of other candidates:\n";
-        for (int i=0; i<(k-1)*2; i++) {
-            cout << coefficients[i] << " (" << ids[i] << ")\n";
-        }
-    }
-    
-    index = 0;
-    int key = 0;
-    for (int i=0; i<k-1; i++) {
-        max = 0;
-        for (int j=0; j<count; j++) {
-            if (coefficients[j] > max) {
-                max = coefficients[j];
-                key = ids[j];
-                index = j;
+        
+        // TODO (class BloomFilterTree)
+        j=freeIds.size()-1;
+        while ((freeIds[j] > subsets[i].first) && (j>=0)) {
+            if (freeIds[j]-optId < maxId-optId) {
+                maxId = freeIds[i];
+                distPos = maxId-optId;
             }
+            j--;
         }
-        results[i+1] = *candidates[index];
-        coefficients[index] = 0;
+        goodIds.push_back(make_pair(minId, distNeg));
+        goodIds.push_back(make_pair(maxId, distPos));
     }
     
-    cout << "Result vector: ";
-    for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << " (";
-        results[i].printArr();
-        cout << "), "; 
-    }
-    cout << results[results.size()-1].getId() << " (";
-    results[results.size()-1].printArr();
-    cout << ")"; 
-    return results;
-}
-
-// Identical to simpleSimQueryVec() because pruning happens in index nodes
-vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
-    vector<BloomFilter> results(k);
-    int index = 0;
-    float max = 0;
-    float jacc;
+    // Sort next smaller and greater ids by numerical distance in ascending order
+    sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
+        return left.second < right.second;
+    });
     
-    // Determine nearest neighbor
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc > max) {
-            max = jacc;
-            index = i;
-        }
-    }
-    results[0] = *filters[index];
-    cout << "\nNearest neighbor: " << results[0].getId() << " (";
-    results[0].printArr();
-    cout << ")\n";
-    
-    // Determine k-1 nearest neighbors
-    // Collect k-1 candidates with greater keys
-    int *ids = new int[(k-1)*2];
-    float *coefficients = new float[(k-1)*2];
-    BloomFilter **candidates = new BloomFilter *[(k-1)*2];
-    
-    // count = # of found candidates
-    int count = 0;
-    int first = 0;
-    for (int i=0; i<k-1; i++) {
-        if (index+1+i<getCount() && count<k-1) {
-            candidates[i] = filters[index+1+i];
-            count++;
-        }
-        else if (next && count<k-1) {
-            BloomFilterLeaf *tmp = next;
-            while (tmp && count<k-1) {
-                for (int j=0; j<k-1; j++) {
-                    if (tmp->filters[first] != NULL) {
-                        candidates[i+j] = tmp->filters[first];
-                        first++;
-                        count++;
-                    }
-                }
-                tmp = tmp->next;
-                first = 0;
-            }
-        }
-    }
-    
-    // Collect k-1 candidates with smaller keys
-    first = count;
-    for (int i=0; i<k-1; i++) {
-        if (index-1-i>-1 && count<(k-1)*2) {
-            candidates[count] = filters[index-1-i];
-            count++;
-        }
-        else if (prev && count<(k-1)*2) {
-            BloomFilterLeaf *tmp = prev;
-            first = prev->getCount()-1;
-            while (tmp && count<(k-1)*2) {
-                for (int j=0; j<k-1; j++) {
-                    if (tmp->filters[first] != NULL) {
-                        candidates[count] = tmp->filters[first];
-                        first--;
-                        count++;
-                    }
-                }
-                tmp = tmp->prev;
-                first = 0;
-            }
-        }
-    }
-    
-    // Determine k-1 best candidates
-    for (int i=0; i<(k-1)*2; i++) {
-        if (candidates[i] != NULL) {
-            coefficients[i] = computeJaccard(candidates[i], filter);
-            ids[i] = candidates[i]->getId();
-        }
-    }
-    
-    // Check if enough candidates have been found
-    if (count<(k-1)*2) {
-        cout << "Too little candidates for query! ";
-    }
-    else {
-        cout << "Jaccard coefficients of other candidates:\n";
-        for (int i=0; i<(k-1)*2; i++) {
-            cout << coefficients[i] << " (" << ids[i] << ")\n";
-        }
-    }
-    
-    index = 0;
-    int key = 0;
-    for (int i=0; i<k-1; i++) {
-        max = 0;
-        for (int j=0; j<count; j++) {
-            if (coefficients[j] > max) {
-                max = coefficients[j];
-                key = ids[j];
-                index = j;
-            }
-        }
-        results[i+1] = *candidates[index];
-        coefficients[index] = 0;
-    }
-    
-    cout << "Result vector: ";
-    for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << " (";
-        results[i].printArr();
-        cout << "), ";
-    }
-    cout << results[results.size()-1].getId() << " (";
-    results[results.size()-1].printArr();
-    cout << ")";
-    return results;
+    // Return first element in list
+    return goodIds[0].first;
 }

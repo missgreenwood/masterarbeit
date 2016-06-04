@@ -152,10 +152,6 @@ BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
 
 // Determine if argument filter is my subset
 bool BloomFilter::isSubset(BloomFilter *filter) {
-    if (getSize() != filter->getSize()) {
-        cout << "\nError! Filters don't have the same size\n";
-        return false;
-    }
     int *arr2 = filter->getData();
     bool result = true;
     for (int i=0; i<getSize(); i++) {
@@ -169,10 +165,6 @@ bool BloomFilter::isSubset(BloomFilter *filter) {
 
 // Determine if argument filter is my superset
 bool BloomFilter::isSuperset(BloomFilter *filter) {
-    if (getSize() != filter->getSize()) {
-        cout << "\nError! Filters don't have the same size\n";
-        return false;
-    }
     int *arr2 = filter->getData();
     bool result = true;
     for (int i=0; i<getSize(); i++) {
