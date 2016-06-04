@@ -52,7 +52,7 @@ public:
     virtual int computeSubsetId(BloomFilter *filter) = 0;
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
-    // virtual int computeSupersetId(BloomFilter *filter) = 0;
+    virtual int computeSupersetId(BloomFilter *filter) = 0;
     
     // Insertion methods
     virtual void shiftAndInsert(BloomFilter *filter);

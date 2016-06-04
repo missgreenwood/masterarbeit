@@ -112,6 +112,18 @@ int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
         return root->computeSubsetId(filter); 
     }
 }
+
+// Compute best superset id for filter
+// Treat filter as superset of tree filters
+int BloomFilterTree::computeSupersetId(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!";
+        return filter->getId();
+    }
+    else {
+        return root->computeSupersetId(filter); 
+    }
+}
     
 
 vector<BloomFilter> BloomFilterTree::collectAllFilters() {

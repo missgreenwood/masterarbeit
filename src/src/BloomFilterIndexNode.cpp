@@ -277,3 +277,7 @@ vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
 int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
     return C[0]->computeSubsetId(filter); 
 }
+
+int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
+    return C[0]->computeSupersetId(filter); 
+}

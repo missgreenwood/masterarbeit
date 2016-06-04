@@ -153,12 +153,13 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (noch 3 h)
+KW 22 (38 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
 * Mi, 01.06. (7.5 h)
 * Do, 02.06. (8.75 h)
 * Fr, 03.06. (7 h)
+* Sa, 04.06. (7 h)
 
 
 ## TODO
@@ -169,23 +170,18 @@ KW 22 (noch 3 h)
 
 	* Jaccard-Berechnung 
 		-> 06.06. Mail an Mirco
-		-> eigene Funktion verwenden 
-		-> Übereinstimmung mit Teilmengen-Fkt checken 
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
+		-> check if subset id == superset id
+		-> check if subset/superset vectors are empty 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
 
 	* Filter dürfen mehrmals eingefügt werden 
 	* Alle Suchalgorithmen daran anpassen und checken 
-	 	-> immer k-1 gute Ergebnisse für Teilmengen und Supermengen (den trivialen Fall abziehen)
+	 	-> immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
 	
-	* Evtl.:
-		-> doppelte Methoden ändern in BloomFilterLeaf
-		-> compute possible + valid subsets
-		-> compute possible + valid supersets
-		-> compute possible + valid permutations
 		
 3. Evaluation 
 

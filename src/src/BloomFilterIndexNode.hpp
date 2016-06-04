@@ -28,9 +28,7 @@ public:
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
     int computeSubsetId(BloomFilter *filter);
-    
-    // TODO
-    // int computeSupersetId(BloomFilter *filter);
+    int computeSupersetId(BloomFilter *filter);
     
     // Insertion methods
     void shiftAndInsert(BloomFilter *filter);

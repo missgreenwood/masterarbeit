@@ -52,12 +52,10 @@ public:
     int getMinKey();
     int getMaxKey();
     int computeSubsetId(BloomFilter *filter);
+    int computeSupersetId(BloomFilter *filter);
     vector<BloomFilter> collectAllFilters();
     vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
-    
-    // TODO
-    // int computeSupersetId(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);

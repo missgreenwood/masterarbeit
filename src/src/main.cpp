@@ -937,21 +937,36 @@ int main(int argc, const char *argv[]) {
     cout << endl << endl;
     b4.traverse();
     
-    // Subset id for size 4
+    // Subset id for filter size 4
     cout << "\n\nComputed free subset ids for f105 should be: 100, 104, 111";
     cout << "\nBest subset id for f105 should be: 104";
     cout << "\nComputed optimal subset id for f105: " << b3.computeSubsetId(&f105);
     
-    // Subset id for size 6
-    
+    // Subset id for filter size 6
     cout << "\n\nComputed free subset ids for f609 should be: 599, 609, 614";
     cout << "\nBest subset id for f609 should be: 609";
     cout << "\nComputed optimal subset id for f609: " << b4.computeSubsetId(&f609);
     
-    // TODO
-    // Superset id for size 4
-    // Superset id for size 6
+    // Superset id for filter size 4
+    cout << "\n\nCheck superset insertion";
+    cout << "\n------------------------\n";
+    cout << "Compute possible and valid supersets of query filter f101 (";
+    f101.printArr();
+    cout << ")\n\n";
+    for (int i=0; i<v2.size(); i++) {
+        if (f101.isSuperset(&v2[i]) == true) {
+            cout << v2[i].getId() << " (";
+            v2[i].printArr();
+            cout << ")" << endl;
+        }
+    }
+    cout << "\nComputed free superset ids for f101 should be: 100, 104, 111";
+    cout << "\nBest superset id for f101 should be: 100";
+    cout << "\nComputed optimal superset id for f101: " << b3.computeSupersetId(&f101);
+
+    // Superset id for filter size 6
     
+    // TODO
     // Set insertion
     // Set search queries
     

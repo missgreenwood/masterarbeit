@@ -27,7 +27,6 @@ public:
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
-    int computeSubsetId(BloomFilter *filter);
     BloomFilterLeaf *split(BloomFilter *filter);
     void traverse();
     void traverseFilters();
@@ -38,9 +37,8 @@ public:
     BloomFilterLeaf *getNext();
     void setNext(BloomFilterLeaf *leaf);
     void updateUnionFilter();
-    
-    // TODO
-    // int computeSupersetId(BloomFilter *filter);
+    int computeSubsetId(BloomFilter *filter);
+    int computeSupersetId(BloomFilter *filter);
     
     // Insertion methods
     void insert(BloomFilter *filter);

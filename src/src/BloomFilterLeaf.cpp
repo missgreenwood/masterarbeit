@@ -251,7 +251,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     int optId;
     while (tmp != NULL) {
         
-        // Collect all filters argument filter is subset of
+        // Collect all filters that filter is subset of
         for (int i=0; i<tmp->getCount(); i++) {
             if ((tmp->filters[i])->isSubset(filter)) {
                 jacc = computeJaccard(tmp->filters[i], filter);
@@ -273,32 +273,25 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     freeIds.push_back(maxId);
     while (tmp != NULL) {
         for (int i=0; i<tmp->getCount()-2; i++) {
-            for (int j=tmp->filters[i]->getId()+1; j<tmp->filters[i+1]->getId(); j++)
-                if (j < tmp->filters[i]->getId()) {
+            for (int j=tmp->filters[i]->getId()+1; j<tmp->filters[i+1]->getId(); j++) {
+                if (j<tmp->filters[i+1]->getId()) {
                     freeIds.push_back(j);
                 }
             }
-        int start = tmp->filters[tmp->getCount()-1]->getId()+1;
-        int last;
-        if (tmp->getCount() < tmp->getMax()) {
-            if (tmp->next != NULL) {
-                last = tmp->getNext()->filters[0]->getId();
+            if (tmp->getCount() < tmp->getMax()) {
+                if (tmp->getNext() != NULL) {
+                    int start = tmp->filters[tmp->getCount()-1]->getId()+1;
+                    int last = tmp->getNext()->filters[0]->getId();
+                    for (int j=start; j<last; j++) {
+                        freeIds.push_back(j);
+                    }
+                }
             }
-            else {
-                last = start + tmp->getMax() - tmp->getCount()-1;
-            }
-            for (int j=start; j<last; j++) {
-                freeIds.push_back(j);
-            }
+            
         }
         tmp = tmp->getNext();
     }
     sort(freeIds.begin(), freeIds.end(), less<int>());
-    for (int i=freeIds.size()-2; i>0; i--) {
-        if (freeIds[i] == freeIds[i+1]) {
-            freeIds.erase(freeIds.begin()+i+1);
-        }
-    }
     
     // Determine optimal id
     // Check subsets in ascending order
@@ -308,7 +301,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     for (int i=0; i<subsets.size(); i++) {
         optId = subsets[i].first;
         int j=0;
-        while ((freeIds[j] < subsets[i].first) && (j<freeIds.size())) {
+        while (freeIds[j] < subsets[i].first) {
             if (optId-freeIds[j] < optId-minId) {
                 minId = freeIds[j];
                 distNeg = optId-minId;
@@ -316,11 +309,10 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
             j++;
         }
         
-        // TODO (class BloomFilterTree)
         j=freeIds.size()-1;
-        while ((freeIds[j] > subsets[i].first) && (j>=0)) {
+        while (freeIds[j] > subsets[i].first) {
             if (freeIds[j]-optId < maxId-optId) {
-                maxId = freeIds[i];
+                maxId = freeIds[j];
                 distPos = maxId-optId;
             }
             j--;
@@ -334,6 +326,96 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
         return left.second < right.second;
     });
     
-    // Return first element in list
+    // Return first element
+    return goodIds[0].first;
+}
+
+int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
+    vector<pair<int, float>> supersets;
+    vector<int> freeIds;
+    vector<pair<int, int>> goodIds;
+    BloomFilterLeaf *tmp = this;
+    float jacc;
+    int minId = filters[0]->getId()-1;
+    int maxId;
+    int optId;
+    while (tmp != NULL) {
+        
+        // Collect all filters that filter is superset of
+        for (int i=0; i<tmp->getCount(); i++) {
+            if ((tmp->filters[i])->isSuperset(filter)) {
+                jacc = computeJaccard(tmp->filters[i], filter);
+                supersets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
+            }
+        }
+        maxId = tmp->filters[tmp->getCount()-1]->getId()+1;
+        tmp = tmp->getNext();
+    }
+    
+    // Sort supersets by jacc distance in ascending order
+    sort(supersets.begin(), supersets.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+        return left.second < right.second;
+    });
+    
+    // Collect free ids
+    tmp = this;
+    freeIds.push_back(minId);
+    freeIds.push_back(maxId);
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount()-2; i++) {
+            for (int j=tmp->filters[i]->getId()+1; j<tmp->filters[i+1]->getId(); j++) {
+                if (j<tmp->filters[i+1]->getId()) {
+                    freeIds.push_back(j);
+                }
+            }
+            if (tmp->getCount() < tmp->getMax()) {
+                if (tmp->getNext() != NULL) {
+                    int start = tmp->filters[tmp->getCount()-1]->getId()+1;
+                    int last = tmp->getNext()->filters[0]->getId();
+                    for (int j=start; j<last; j++) {
+                        freeIds.push_back(j);
+                    }
+                }
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    sort(freeIds.begin(), freeIds.end(), less<int>());
+    
+    // Determine optimal id
+    // Check supersets in ascending order
+    // Get next greater and smaller id
+    int distNeg = supersets[0].first - minId;
+    int distPos = maxId - supersets[0].first;
+    for (int i=0; i<supersets.size(); i++) {
+        optId = supersets[i].first;
+        int j=0;
+        while ((freeIds[j] < supersets[i].first) && j<freeIds.size()) {
+            if (optId-freeIds[i] < optId - minId) {
+                minId = freeIds[j];
+                distNeg = optId-minId;
+            }
+            j++;
+        }
+        
+        j=freeIds.size()-1;
+        while (freeIds[j] > supersets[i].first) {
+            if (freeIds[j]-optId < maxId-optId) {
+                maxId = freeIds[j];
+                distPos = maxId-optId;
+            }
+            j--;
+            
+        }
+        goodIds.push_back(make_pair(minId, distNeg));
+        goodIds.push_back(make_pair(maxId, distPos));
+    }
+    
+    // Sort next smaller and greater ids by numerical distance in ascending order
+    sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
+        return left.second < right.second;
+    });
+    
+    // Return first element
     return goodIds[0].first;
 }
