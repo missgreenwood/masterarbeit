@@ -49,6 +49,7 @@ public:
     virtual int getMinKey() = 0;
     virtual int getMaxKey() = 0;
     virtual vector<BloomFilter> collectAllFilters() = 0;
+    virtual int countFilters() = 0; 
     virtual int computeSubsetId(BloomFilter *filter) = 0;
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
@@ -62,9 +63,7 @@ public:
     
 
     // Query methods
-    // virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;
-    // virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
-    // virtual vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k) = 0;
+    virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
     // virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
 };
 

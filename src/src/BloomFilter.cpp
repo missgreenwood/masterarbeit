@@ -263,3 +263,7 @@ float BloomFilter::setIntersection(BloomFilter *filter) {
     }
     return result; 
 }
+
+float BloomFilter::computeJaccard(BloomFilter *filter) {
+    return (float) 1-(setIntersection(filter)/setUnion(filter)); 
+}

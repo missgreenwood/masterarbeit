@@ -1045,9 +1045,21 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b3.traverseFilters();
     
-    // TODO
     // Set search queries
+    cout << "\n\n\nCheck set queries";
+    cout << "\n-----------------\n";
+    b3.compare(&f104, b3.countFilters());
+    cout << "\nLEAF QUERY for nearest neighbor of f104 (";
+    f104.printArr();
+    cout << ")\n";
+    cout << "Result should be: 93 (1100)";
+    BloomFilterNode *L1 = b3.search(93);
+    BloomFilter *result = L1->simQuery(&f104);
+    cout << "\nComputed result: " << result->getId() << " (";
+    result->printArr();
+    cout << ")\n";
     
+    // TODO
     // Section insertion
     // Section search queries
     

@@ -54,6 +54,7 @@ public:
     int computeSubsetId(BloomFilter *filter);
     int computeSupersetId(BloomFilter *filter);
     vector<BloomFilter> collectAllFilters();
+    int countFilters(); 
     vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
     
@@ -61,13 +62,12 @@ public:
     void insert(BloomFilter *filter);
     void insertAsSets(BloomFilter *filter);
     
-    // TODO
-    // Similarity queries
-    // BloomFilter *simpleSimQuery(BloomFilter *filter);
-    // BloomFilter *simQuery(BloomFilter *filter);
-    // vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);
-    // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    // Similarity queries and comparison methods
+    BloomFilter *simQuery(BloomFilter *filter);
+    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
     
+    // TODO
+    // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

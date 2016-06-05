@@ -27,6 +27,7 @@ public:
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
+    int countFilters(); 
     BloomFilterLeaf *split(BloomFilter *filter);
     void traverse();
     void traverseFilters();
@@ -43,11 +44,10 @@ public:
     // Insertion methods
     void insert(BloomFilter *filter);
     
-    // TODO
     // Similarity queries
-    // BloomFilter *simpleSimQuery(BloomFilter *filter);
-    // BloomFilter *simQuery(BloomFilter *filter);
-    // vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);
+    BloomFilter *simQuery(BloomFilter *filter);
+    
+    // TODO
     // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 

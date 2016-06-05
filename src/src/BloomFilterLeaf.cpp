@@ -208,6 +208,16 @@ vector<BloomFilter> BloomFilterLeaf::collectAllFilters() {
     return result;
 }
 
+int BloomFilterLeaf::countFilters() {
+    int result = 0;
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        result+=tmp->getCount();
+        tmp = tmp->getNext();
+    }
+    return result;
+}
+
 int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     vector<pair<int, float>> subsets;
     vector<int> freeIds;
@@ -436,5 +446,26 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
     }
     else {
         getParent()->updateUnionFilter();
+    }
+}
+
+BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
+    
+    // Check if leaf has only one filter
+    if (getCount() == 0) {
+        return filters[0];
+    }
+    else {
+        // Find filter with smallest jacc distance
+        float jacc;
+        float min = 1;
+        BloomFilter *result = filters[0];
+        for (int i=0; i<getCount(); i++) {
+            if (computeJaccard(filters[i], filter) < min) {
+                min = jacc;
+                result = filters[i];
+            }
+        }
+        return result;
     }
 }

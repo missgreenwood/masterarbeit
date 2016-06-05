@@ -153,14 +153,14 @@ KW 21 (35.25 h)
 * So, 29.05. (5.25 h)
 
 
-KW 22 (38 h)
+KW 22 (42 h)
 * Mo, 30.05. (3 h)
 * Di, 31.05. (4.75 h)
 * Mi, 01.06. (7.5 h)
 * Do, 02.06. (8.75 h)
 * Fr, 03.06. (7 h)
 * Sa, 04.06. (7 h)
-* So, 05.06. (11:45 - )
+* So, 05.06. (5 h)
 
 
 ## TODO
@@ -173,16 +173,13 @@ KW 22 (38 h)
 		-> 06.06. Mail an Mirco
 	
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> check if subset id == superset id
-		-> check if subset/superset vectors are empty 
+		-> Suchalgorithmen anpassen und checken (mind. size 4/size 6)
+		-> Sollte sein: immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
-
-	* Filter dürfen mehrmals eingefügt werden 
-	* Alle Suchalgorithmen daran anpassen und checken 
-	 	-> immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
-	
+		-> Filter dürfen mehrmals eingefügt werden 
+		-> Suchalgorithmen anpassen und checken (mind. size 4/size 6)
 		
 3. Evaluation 
 

@@ -27,6 +27,7 @@ public:
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
+    int countFilters(); 
     int computeSubsetId(BloomFilter *filter);
     int computeSupersetId(BloomFilter *filter);
     
@@ -35,11 +36,10 @@ public:
     void insert(BloomFilter *filter);
     void insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
     
-    // TODO
     // Similarity queries
-    // BloomFilter *simpleSimQuery(BloomFilter *filter);
-    // BloomFilter *simQuery(BloomFilter *filter);
-    // vector<BloomFilter> simpleSimQueryVec(BloomFilter *filter, int k);
+    BloomFilter *simQuery(BloomFilter *filter);
+    
+    // TODO
     // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 

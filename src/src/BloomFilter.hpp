@@ -58,6 +58,7 @@ public:
     int possibleAddedOnes();
     float setUnion(BloomFilter *filter);
     float setIntersection(BloomFilter *filter);
+    float computeJaccard(BloomFilter *filter); 
         
     friend class BloomFilterNode;
     friend class BloomFilterTree;

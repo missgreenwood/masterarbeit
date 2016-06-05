@@ -181,6 +181,10 @@ vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
     return C[0]->collectAllFilters(); 
 }
 
+int BloomFilterIndexNode::countFilters() {
+    return C[0]->countFilters();
+}
+
 int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
     return C[0]->computeSubsetId(filter); 
 }
@@ -280,4 +284,8 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
         s->updateUnionFilter();
         getParent()->updateUnionFilter();
     }
+}
+
+BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
+    return NULL; 
 }
