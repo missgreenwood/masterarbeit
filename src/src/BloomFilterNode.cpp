@@ -73,28 +73,10 @@ int BloomFilterNode::getFilterSize() {
     return filtersize;
 }
 
-void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
-    assert(getCount() < getMax());
-    int id = filter->getId();
-    int index = indexOfKey(id);
-    for (int i=getCount()-1; i>=index; i--) {
-        keys[i+1] = keys[i];
-        filters[i+1] = filters[i];
-    }
-    keys[index] = id;
-    filters[index] = filter;
-    increment();
-    return;
-}
-
-void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
-    assert(false);
-}
-
 double BloomFilterNode::computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2) {
     double intersect_size = eIntersect(f1, f2);
     double union_size = eUnion(f1, f2);
-    return 1 - (intersect_size/union_size); 
+    return 1 - (intersect_size/union_size);
 }
 
 float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
@@ -117,4 +99,43 @@ double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
     double union_size = eUnion(f1, f2);
     double e = f1->eSize() + f2->eSize() - union_size;
     return e;
+}
+
+void BloomFilterNode::shiftAndInsert(BloomFilter *filter) {
+    assert(getCount() < getMax());
+    int id = filter->getId();
+    int index = indexOfKey(id);
+    for (int i=getCount()-1; i>=index; i--) {
+        keys[i+1] = keys[i];
+        filters[i+1] = filters[i];
+    }
+    keys[index] = id;
+    filters[index] = filter;
+    increment();
+    return;
+}
+
+void BloomFilterNode::insertAsSets(BloomFilter *filter) {
+    
+    // Compute optimal subset and superset ids for filter
+    int subsetId = computeSubsetId(filter);
+    int supersetId = computeSupersetId(filter);
+    
+    // If they are identical: Change id of filter and insert it
+    filter->setId(subsetId);
+    BloomFilterNode *l = search(subsetId);
+    l->insert(filter);
+    
+    // Else create new BloomFilter with superset id and insert it
+    if (subsetId != supersetId) {
+        BloomFilter *f = new BloomFilter(*filter);
+        f->setId(supersetId);
+        BloomFilterNode *l2 = search(supersetId);
+        l2->insert(f);
+    }
+    return;
+}
+
+void BloomFilterNode::insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode) {
+    assert(false);
 }

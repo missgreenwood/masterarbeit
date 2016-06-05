@@ -56,9 +56,10 @@ public:
     
     // Insertion methods
     virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void insertAsSets(BloomFilter *filter);
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     virtual void insert(BloomFilter *filter) = 0;
-    // virtual void insertAsSets(BloomFilter *filter) = 0;
+    
 
     // Query methods
     // virtual BloomFilter *simpleSimQuery(BloomFilter *filter) = 0;

@@ -312,7 +312,7 @@ int main(int argc, const char *argv[]) {
     l2.getNext()->traverse();
 
     cout << "\n\n\nCheck subset relations";
-    cout << "\n----------------------\n\n";
+    cout << "\n----------------------\n";
     cout << "Create 11 instances of BloomFilter with array size 4, all possible and valid permutations\n";
     BloomFilter f100(4, 100);
     BloomFilter f101(4, 101);
@@ -899,7 +899,7 @@ int main(int argc, const char *argv[]) {
         cout << v5[i].getId() << " ";
     }
     
-    cout << "\n\n8 nearest neighbors of f109 in ascending order:\n\n";
+    cout << "\n\n8 nearest neighbors of f609 in ascending order:\n\n";
     b4.computekDistances(&f609, 8);
     
     
@@ -948,7 +948,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nComputed optimal subset id for f609: " << b4.computeSubsetId(&f609);
     
     // Superset id for filter size 4
-    cout << "\n\nCheck superset insertion";
+    cout << "\n\n\nCheck superset insertion";
     cout << "\n------------------------\n";
     cout << "Compute possible and valid supersets of query filter f101 (";
     f101.printArr();
@@ -969,8 +969,83 @@ int main(int argc, const char *argv[]) {
     cout << "\nBest supserset id for f609 should be: 614";
     cout << "\nComputed optimal superset id for f609: " << b4.computeSupersetId(&f609);
     
-    // TODO
     // Set insertion
+    cout << "\n\n\nCheck set insertion";
+    cout << "\n-------------------";
+    cout << "\nRemove all filters from b3 and insert filters f101..f103, f105..f110 as sets";
+    b3 = *new BloomFilterTree(3, 4);
+    cout << "\n\nInsert f101 (";
+    f101.printArr();
+    cout << ")\n\n";
+    b3.insertAsSets(&f101);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f102 (";
+    f102.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f102);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f102) << endl << endl;
+    b3.insertAsSets(&f102);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f103 (";
+    f103.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f103);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f103) << endl << endl;
+    b3.insertAsSets(&f103);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f105 (";
+    f105.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f105);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f105) << endl << endl;
+    b3.insertAsSets(&f105);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f106 (";
+    f106.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f106);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f106) << endl << endl;
+    b3.insertAsSets(&f106);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f107 (";
+    f107.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f107);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f107) << endl << endl;
+    b3.insertAsSets(&f107);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f108 (";
+    f108.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f108);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f108) << endl << endl;
+    b3.insertAsSets(&f108);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    cout << "\n\nInsert f109 (";
+    f109.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f109);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f109) << endl << endl;
+    b3.insertAsSets(&f109);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();cout << "\n\nInsert f110 (";
+    f110.printArr();
+    cout << ")\nComputed subset id: " << b3.computeSubsetId(&f110);
+    cout << "\nComputed superset id: " << b3.computeSupersetId(&f110) << endl << endl;
+    b3.insertAsSets(&f110);
+    b3.traverse();
+    cout << endl;
+    b3.traverseFilters();
+    
+    // TODO
     // Set search queries
     
     // Section insertion

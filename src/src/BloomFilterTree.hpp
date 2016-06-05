@@ -59,9 +59,7 @@ public:
     
     // Insertion methods
     void insert(BloomFilter *filter);
-    
-    // TODO
-    // void insertAsSets(BloomFilter *filter);
+    void insertAsSets(BloomFilter *filter);
     
     // TODO
     // Similarity queries

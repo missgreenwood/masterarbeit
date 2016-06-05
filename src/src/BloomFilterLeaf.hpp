@@ -44,9 +44,6 @@ public:
     void insert(BloomFilter *filter);
     
     // TODO
-    // void insertAsSets(BloomFilter *filter);
-    
-    // TODO
     // Similarity queries
     // BloomFilter *simpleSimQuery(BloomFilter *filter);
     // BloomFilter *simQuery(BloomFilter *filter);

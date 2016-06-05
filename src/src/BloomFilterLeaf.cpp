@@ -162,38 +162,6 @@ void BloomFilterLeaf::updateUnionFilter() {
     }
 }
 
-void BloomFilterLeaf::insert(BloomFilter *filter) {
-    
-    // Get Bloom filter values
-    if (getCount() < getMax()) {
-        shiftAndInsert(filter);
-        updateUnionFilter();
-    }
-    else {
-        BloomFilterLeaf *l = split(filter);
-        l->setPrev(this);
-        setNext(l);
-        BloomFilterNode *p = getParent();
-        if (p == NULL) {
-            p = new BloomFilterIndexNode(getOrder(), getFilterSize());
-            setParent(p);
-        }
-        l->setParent(p);
-        
-        // Get middle filter
-        BloomFilter *middle = l->filters[0];
-        p->insert(middle, this, l);
-    }    
-    
-    // Propagate insertion into union filter up to root node
-    if (getParent() == NULL) {
-        return;
-    }
-    else {
-        getParent()->updateUnionFilter();
-    }
-}
-
 float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
     float min = 1;
     float jacc;
@@ -249,6 +217,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     int minId = filters[0]->getId()-1;
     int maxId;
     int optId;
+    bool no_subsets = true;
     while (tmp != NULL) {
         
         // Collect all filters that filter is subset of
@@ -256,6 +225,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
             if ((tmp->filters[i])->isSubset(filter)) {
                 jacc = computeJaccard(tmp->filters[i], filter);
                 subsets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
+                no_subsets = false;
             }
         }
         maxId = tmp->filters[tmp->getCount()-1]->getId()+1;
@@ -293,39 +263,46 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     }
     sort(freeIds.begin(), freeIds.end(), less<int>());
     
-    // Determine optimal id
-    // Check subsets in ascending order
-    // Get next greater and smaller id
-    int distNeg = subsets[0].first - minId;
-    int distPos = maxId - subsets[0].first;
-    for (int i=0; i<subsets.size(); i++) {
-        optId = subsets[i].first;
-        int j=0;
-        while (freeIds[j] < subsets[i].first) {
-            if (optId-freeIds[j] < optId-minId) {
-                minId = freeIds[j];
-                distNeg = optId-minId;
+    // If there are no subsets, just return smallest free id as pair with numerical distance 0
+    if (no_subsets == false) {
+        
+        // Determine optimal id
+        // Check subsets in ascending order
+        // Get next greater and smaller id
+        int distNeg = subsets[0].first - minId;
+        int distPos = maxId - subsets[0].first;
+        for (int i=0; i<subsets.size(); i++) {
+            optId = subsets[i].first;
+            int j=0;
+            while (freeIds[j] < subsets[i].first) {
+                if (optId-freeIds[j] < optId-minId) {
+                    minId = freeIds[j];
+                    distNeg = optId-minId;
+                }
+                j++;
             }
-            j++;
+            
+            j=freeIds.size()-1;
+            while (freeIds[j] > subsets[i].first) {
+                if (freeIds[j]-optId < maxId-optId) {
+                    maxId = freeIds[j];
+                    distPos = maxId-optId;
+                }
+                j--;
+            }
+            goodIds.push_back(make_pair(minId, distNeg));
+            goodIds.push_back(make_pair(maxId, distPos));
         }
         
-        j=freeIds.size()-1;
-        while (freeIds[j] > subsets[i].first) {
-            if (freeIds[j]-optId < maxId-optId) {
-                maxId = freeIds[j];
-                distPos = maxId-optId;
-            }
-            j--;
-        }
-        goodIds.push_back(make_pair(minId, distNeg));
-        goodIds.push_back(make_pair(maxId, distPos));
+        // Sort next smaller and greater ids by numerical distance in ascending order
+        sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
+            return left.second < right.second;
+        });
     }
-    
-    // Sort next smaller and greater ids by numerical distance in ascending order
-    sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
-        return left.second < right.second;
-    });
-    
+    else {
+        goodIds.push_back(make_pair(freeIds[0], 0));
+    }
+        
     // Return first element
     return goodIds[0].first;
 }
@@ -339,6 +316,7 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
     int minId = filters[0]->getId()-1;
     int maxId;
     int optId;
+    bool no_supersets = true;
     while (tmp != NULL) {
         
         // Collect all filters that filter is superset of
@@ -346,6 +324,7 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
             if (filter->isSuperset(tmp->filters[i])) {
                 jacc = computeJaccard(tmp->filters[i], filter);
                 supersets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
+                no_supersets = false;
             }
         }
         maxId = tmp->filters[tmp->getCount()-1]->getId()+1;
@@ -382,40 +361,80 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
     }
     sort(freeIds.begin(), freeIds.end(), less<int>());
     
-    // Determine optimal id
-    // Check supersets in ascending order
-    // Get next greater and smaller id
-    int distNeg = supersets[0].first - minId;
-    int distPos = maxId - supersets[0].first;
-    for (int i=0; i<supersets.size(); i++) {
-        optId = supersets[i].first;
-        int j=0;
-        while ((freeIds[j] < supersets[i].first) && j<freeIds.size()) {
-            if (optId-freeIds[i] < optId - minId) {
-                minId = freeIds[j];
-                distNeg = optId-minId;
+    // If there are no supersets, just return smallest id as pair with numerical distance 0
+    if (no_supersets == false) {
+        
+        // Determine optimal id
+        // Check supersets in ascending order
+        // Get next greater and smaller id
+        int distNeg = supersets[0].first - minId;
+        int distPos = maxId - supersets[0].first;
+        for (int i=0; i<supersets.size(); i++) {
+            optId = supersets[i].first;
+            int j=0;
+            while ((freeIds[j] < supersets[i].first) && j<freeIds.size()) {
+                if (optId-freeIds[i] < optId - minId) {
+                    minId = freeIds[j];
+                    distNeg = optId-minId;
+                }
+                j++;
             }
-            j++;
+            
+            j=freeIds.size()-1;
+            while (freeIds[j] > supersets[i].first) {
+                if (freeIds[j]-optId < maxId-optId) {
+                    maxId = freeIds[j];
+                    distPos = maxId-optId;
+                }
+                j--;
+                
+            }
+            goodIds.push_back(make_pair(minId, distNeg));
+            goodIds.push_back(make_pair(maxId, distPos));
         }
         
-        j=freeIds.size()-1;
-        while (freeIds[j] > supersets[i].first) {
-            if (freeIds[j]-optId < maxId-optId) {
-                maxId = freeIds[j];
-                distPos = maxId-optId;
-            }
-            j--;
-            
-        }
-        goodIds.push_back(make_pair(minId, distNeg));
-        goodIds.push_back(make_pair(maxId, distPos));
+        // Sort next smaller and greater ids by numerical distance in ascending order
+        sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
+            return left.second < right.second;
+        });
     }
     
-    // Sort next smaller and greater ids by numerical distance in ascending order
-    sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, const pair<int, int> &right) {
-        return left.second < right.second;
-    });
+    else {
+        goodIds.push_back(make_pair(freeIds[0], 0));
+    }
     
     // Return first element
     return goodIds[0].first;
+}
+
+void BloomFilterLeaf::insert(BloomFilter *filter) {
+    
+    // Get Bloom filter values
+    if (getCount() < getMax()) {
+        shiftAndInsert(filter);
+        updateUnionFilter();
+    }
+    else {
+        BloomFilterLeaf *l = split(filter);
+        l->setPrev(this);
+        setNext(l);
+        BloomFilterNode *p = getParent();
+        if (p == NULL) {
+            p = new BloomFilterIndexNode(getOrder(), getFilterSize());
+            setParent(p);
+        }
+        l->setParent(p);
+        
+        // Get middle filter
+        BloomFilter *middle = l->filters[0];
+        p->insert(middle, this, l);
+    }
+    
+    // Propagate insertion into union filter up to root node
+    if (getParent() == NULL) {
+        return;
+    }
+    else {
+        getParent()->updateUnionFilter();
+    }
 }

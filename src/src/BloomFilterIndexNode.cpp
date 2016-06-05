@@ -143,6 +143,52 @@ void BloomFilterIndexNode::updateUnionFilter() {
     }
 }
 
+float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    for (int i=0; i<getCount()+1; i++) {
+        jacc = C[i]->computeMinJaccard(filter);
+        if (jacc < min) {
+            min = jacc;
+        }
+    }
+    return min;
+}
+
+int BloomFilterIndexNode::computeMinJaccardKey(BloomFilter *filter) {
+    int index = 0;
+    float min = 1;
+    float jacc;
+    for (int i=0; i<getCount()+1; i++) {
+        jacc = C[i]->computeMinJaccard(filter);
+        if (jacc < min) {
+            min = jacc;
+            index = i;
+        }
+    }
+    return C[index]->computeMinJaccardKey(filter);
+}
+
+int BloomFilterIndexNode::getMinKey() {
+    return C[0]->getMinKey();
+}
+
+int BloomFilterIndexNode::getMaxKey() {
+    return C[getCount()]->getMaxKey(); 
+}
+
+vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
+    return C[0]->collectAllFilters(); 
+}
+
+int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
+    return C[0]->computeSubsetId(filter); 
+}
+
+int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
+    return C[0]->computeSupersetId(filter); 
+}
+
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
     int id = filter->getId();
     int index = indexOfKey(id);
@@ -165,7 +211,7 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
     
     if (getCount()<getMax()) {
         int index = indexOfKey(id);
-        shiftAndInsert(filter);      
+        shiftAndInsert(filter);
         C[index] = leftNode;
         C[index+1] = rightNode;
         updateUnionFilter();
@@ -232,52 +278,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
         
         // Update union filters
         s->updateUnionFilter();
-        getParent()->updateUnionFilter(); 
+        getParent()->updateUnionFilter();
     }
-}
-
-float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMinJaccard(filter);
-        if (jacc < min) {
-            min = jacc;
-        }
-    }
-    return min;
-}
-
-int BloomFilterIndexNode::computeMinJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMinJaccard(filter);
-        if (jacc < min) {
-            min = jacc;
-            index = i;
-        }
-    }
-    return C[index]->computeMinJaccardKey(filter);
-}
-
-int BloomFilterIndexNode::getMinKey() {
-    return C[0]->getMinKey();
-}
-
-int BloomFilterIndexNode::getMaxKey() {
-    return C[getCount()]->getMaxKey(); 
-}
-
-vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
-    return C[0]->collectAllFilters(); 
-}
-
-int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
-    return C[0]->computeSubsetId(filter); 
-}
-
-int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
-    return C[0]->computeSupersetId(filter); 
 }

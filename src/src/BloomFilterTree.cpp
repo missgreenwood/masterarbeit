@@ -172,3 +172,16 @@ void BloomFilterTree::insert(BloomFilter *filter) {
         }
     }
 }
+
+void BloomFilterTree::insertAsSets(BloomFilter *filter) {
+    if (root == NULL) {
+        root = new BloomFilterLeaf(t, filtersize, NULL, NULL);
+        root->insert(filter);
+    }
+    else {
+        root->insertAsSets(filter);
+        if (root->getParent() != NULL) {
+            root = root->getParent();
+        }
+    }
+}

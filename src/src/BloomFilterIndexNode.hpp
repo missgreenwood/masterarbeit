@@ -36,9 +36,6 @@ public:
     void insert(BloomFilter *filter, BloomFilterNode *leftNode, BloomFilterNode *rightNode);
     
     // TODO
-    // void insertAsSets(BloomFilter *filter);
-    
-    // TODO
     // Similarity queries
     // BloomFilter *simpleSimQuery(BloomFilter *filter);
     // BloomFilter *simQuery(BloomFilter *filter);
