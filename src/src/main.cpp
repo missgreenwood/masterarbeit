@@ -965,6 +965,9 @@ int main(int argc, const char *argv[]) {
     cout << "\nComputed optimal superset id for f101: " << b3.computeSupersetId(&f101);
 
     // Superset id for filter size 6
+    cout << "\n\nComputed free superset ids for f609 should be: 599, 609, 614";
+    cout << "\nBest supserset id for f609 should be: 614";
+    cout << "\nComputed optimal superset id for f609: " << b4.computeSupersetId(&f609);
     
     // TODO
     // Set insertion

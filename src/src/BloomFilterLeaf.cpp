@@ -343,7 +343,7 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
         
         // Collect all filters that filter is superset of
         for (int i=0; i<tmp->getCount(); i++) {
-            if ((tmp->filters[i])->isSuperset(filter)) {
+            if (filter->isSuperset(tmp->filters[i])) {
                 jacc = computeJaccard(tmp->filters[i], filter);
                 supersets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
             }
