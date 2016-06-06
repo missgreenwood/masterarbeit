@@ -163,8 +163,8 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 29 h)
-* Mo, 06.06 (3 h, 17:15 - )
+KW 23 (noch 24.5 h)
+* Mo, 06.06 (7.5 h)
 
 
 ## TODO
@@ -174,8 +174,9 @@ KW 23 (noch 29 h)
 2. Implementierung
 
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> Suchalgorithmen anpassen und checken (mind. size 4/size 6)
+		-> Suchalgorithmen checken (realistische Größen)
 		-> Sollte sein: immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
+		-> evtl. Check in BloomFilterLeaf::SimSubtreeQueryVec(), ob genügend Filter im Range gefunden wurden 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind

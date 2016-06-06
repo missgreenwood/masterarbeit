@@ -39,7 +39,9 @@ public:
     
     // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
+    BloomFilter *simSubtreeQuery(BloomFilter *filter, int l);
     vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter> simSubtreeQueryVec(BloomFilter *filter, int k, int l);
 };
 
 #endif

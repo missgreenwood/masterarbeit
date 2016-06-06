@@ -62,10 +62,11 @@ public:
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     virtual void insert(BloomFilter *filter) = 0;
     
-
     // Query methods
     virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
+    virtual BloomFilter *simSubtreeQuery(BloomFilter *filter, int l) = 0;
     virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
+    virtual vector<BloomFilter> simSubtreeQueryVec(BloomFilter *filter, int k, int l) = 0;
 };
 
 #endif 

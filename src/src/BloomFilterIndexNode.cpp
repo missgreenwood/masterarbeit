@@ -276,11 +276,14 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     float min = 1;
     float jacc;
     BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
     
     // Check if query filter is subset or superset of any child's union filters
     // If more than one: Determine best result
     for (int i=0; i<getCount()+1; i++) {
         if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
             jacc = computeJaccard(C[i]->unionfilter, filter);
             if (jacc < min) {
                 min = jacc;
@@ -288,6 +291,7 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
             }
         }
         if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
             jacc = computeJaccard(C[i]->unionfilter, filter);
             if (jacc < min) {
                 min = jacc;
@@ -296,10 +300,57 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
         }
     }
     
-    // If both false: Conduct normal query starting from leftmost child
-    return path->simQuery(filter);
+    // If both false: Conduct normal subtree query
+    if (set == false) {
+        last = getParent()->getKeys()[getParent()->getCount()-1];
+        return path->simSubtreeQuery(filter, last);
+    }
+    else {
+        return path->simQuery(filter);
+    }
+}
+
+BloomFilter * BloomFilterIndexNode::simSubtreeQuery(BloomFilter *filter, int l) {
+    return C[0]->simSubtreeQuery(filter, l);
 }
 
 vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
-    return {}; 
+    float min = 1;
+    float jacc;
+    BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
+    // Check if query filter is subset or superset of any child's union filters
+    // If more than one: Determine best result
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+    }
+    
+    // If both false: Conduct normal subtree query
+    if (set == false) {
+        last = getParent()->getKeys()[getParent()->getCount()-1];
+        return path->simSubtreeQueryVec(filter, k, last);
+    }
+    else {
+        return path->simQueryVec(filter, k);
+    }
+}
+
+vector<BloomFilter> BloomFilterIndexNode::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
+    return C[0]->simSubtreeQueryVec(filter, k, l);
 }

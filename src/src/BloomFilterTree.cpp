@@ -203,14 +203,14 @@ void BloomFilterTree::insertAsSets(BloomFilter *filter) {
     }
 }
 
-// Simple approach, no pruning
 BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!\n";
         return filter;
     }
     else {
-        // Check if query filter is subset of my union filter
+
+        // Check if query filter is subset/superset of root's union filter
         if ((root->unionfilter->isSubset(filter) == false) && (root->unionfilter->isSuperset(filter) == false)) {
             return getMinJaccardFilter(filter);
         }

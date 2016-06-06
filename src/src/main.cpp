@@ -1072,8 +1072,6 @@ int main(int argc, const char *argv[]) {
     cout << "\n-----------------\n";
     b3.compare(&f104, b3.countFilters());
     cout << endl;
-    b4.compare(&f609, b4.countFilters());
-    cout << endl; 
     BloomFilter f595(f609);
     b4.compare(&f595, b4.countFilters());
     
@@ -1125,6 +1123,46 @@ int main(int argc, const char *argv[]) {
     cout << "Result should be: 595, 593, 591";
     L1 = b4.search(595);
     results = L1->simQueryVec(&f595, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << ", ";
+    }
+    cout << results[results.size()-1].getId();
+    
+    cout << "\n\nTREE QUERY for nearest neighbor of f104 (";
+    f104.printArr();
+    cout << ")\n";
+    cout << "Result should be: 93, 98 or 97";
+    result = b3.simQuery(&f104);
+    cout << "\nComputed result: " << result->getId() << " (";
+    result->printArr();
+    cout << ")\n";
+    
+    cout << "\nTREE QUERY for nearest neighbor of f595 (";
+    f595.printArr();
+    cout << ")\n";
+    cout << "Result should be: 595 (001001)";
+    result = b4.simQuery(&f595);
+    cout << "\nComputed result: " << result->getId() << " (";
+    result->printArr();
+    cout << ")\n";
+    
+    cout << "\nTREE QUERY for 3 nearest neighbors of f104 (";
+    f104.printArr();
+    cout << ")\n";
+    cout << "Result should be: 93, 98, 97 in any order";
+    results = b3.simQueryVec(&f104, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << ", ";
+    }
+    cout << results[results.size()-1].getId();
+    
+    cout << "\n\nTREE QUERY for 3 nearest neighbors of f595 (";
+    f595.printArr();
+    cout << ")\n";
+    cout << "Result should be: 595 and two filters out of 593/585/591 in any order";
+    results = b4.simQueryVec(&f595, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
         cout << results[i].getId() << ", ";

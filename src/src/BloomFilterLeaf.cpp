@@ -487,13 +487,39 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
         float min = 1;
         BloomFilter *result = filters[0];
         for (int i=0; i<getCount(); i++) {
-            if (computeJaccard(filters[i], filter) < min) {
+            jacc = computeJaccard(filters[i], filter);
+            if (jacc < min) {
                 min = jacc;
                 result = filters[i];
             }
         }
         return result;
     }
+}
+
+BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
+    BloomFilter *result = filters[0];
+    int last = filters[0]->getId();
+    float jacc;
+    int min = 1;
+    BloomFilterLeaf *tmp = this;
+    
+    // Collect candidates in range
+    while (tmp != NULL && last < l) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            if (last >= l) {
+                break;
+            }
+            jacc = computeJaccard(tmp->filters[i], filter);
+            last++;
+            if (jacc < min) {
+                min = jacc;
+                result = tmp->filters[i];
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return result;
 }
 
 vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
@@ -536,6 +562,41 @@ vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
         for (int i=0; i<k; i++) {
             results.push_back(distances[i].first);
         }
+    }
+    return results;
+}
+
+vector<BloomFilter> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
+    vector<BloomFilter> results;
+    vector<pair<BloomFilter, float>> distances;
+    int last = filters[0]->getId();
+    float jacc;
+    BloomFilterLeaf *tmp = this;
+    
+    // Collect candidates in range
+    while (tmp != NULL && last < l) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            if (last >= l) {
+                break;
+            }
+            jacc = computeJaccard(tmp->filters[i], filter);
+            distances.push_back(make_pair(*tmp->filters[i], jacc));
+            last++;
+        }
+        tmp = tmp->getNext();
+    }
+    
+    // Sort candidates by jaccard distance in ascending order
+    sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+        return left.second < right.second;
+    });
+    
+    // Evtl. TODO
+    // What if there are too little filters in range?
+    
+    // Return k results
+    for (int i=0; i<k; i++) {
+        results.push_back(distances[i].first);
     }
     return results;
 }
