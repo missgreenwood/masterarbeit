@@ -176,7 +176,6 @@ KW 23 (noch 24.5 h)
 	* 1. Einfüge-Operation: Über Teilmengen 
 		-> Suchalgorithmen checken (realistische Größen)
 		-> Sollte sein: immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
-		-> evtl. Check in BloomFilterLeaf::SimSubtreeQueryVec(), ob genügend Filter im Range gefunden wurden 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
@@ -188,7 +187,7 @@ KW 23 (noch 24.5 h)
 3. Evaluation 
 
 	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
-	* Bloom-Filter-Größe wie in Cassandra (z.B. 256/512 Bit), # Bloom-Filter z.B. 100
+	* Bloom-Filter-Größe 256/512 Bit, # Bloom-Filter 100
 	* z.B. in R
 
 4. Ausarbeitung 

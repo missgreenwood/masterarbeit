@@ -12,7 +12,7 @@ int main(int argc, const char *argv[]) {
     
     cout << "CLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
-    cout << "Create 22 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, array length 10\n";
+    cout << "Create 22 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, array length 10, random values\n";
     BloomFilter f1(10, 1);
     BloomFilter f2(10, 2);
     BloomFilter f3(10, 3);
@@ -81,10 +81,28 @@ int main(int argc, const char *argv[]) {
     f96.initRandom();
     f96.printData();
     
+    cout << "\nCreate 100 instances of BloomFilter with random ids, array length 256, random values";
+    cout << "\nCreate new BloomFilter vector (v4) and insert all filters";
+    BloomFilter *filter;
+    int id;
+    vector<BloomFilter> v4;
+    for (int i=0; i<100; i++) {
+        filter = new BloomFilter(256, rand());
+        id = filter->getId();
+        filter->initRandom();
+        v4.push_back(*filter);
+    }
+    
     // Class BloomFilterTree
     
     cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
+    
+    cout << "Create instance of BloomFilterTree with minimum degree 3/max elements 6, filter size 256 and insert all filters in v4 as sets";
+    BloomFilterTree b5(3, 256);
+    for (int i=0; i<v4.size(); i++) {
+        b5.insertAsSets(&v4[i]);
+    }
     
     cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b1)\n\n";
     BloomFilterTree b1(1, 10);
@@ -1074,6 +1092,10 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     BloomFilter f595(f609);
     b4.compare(&f595, b4.countFilters());
+    cout << endl; 
+    BloomFilter f20(256, 20);
+    f20.initRandom();
+    b5.compare(&f20, b5.countFilters());
     
     cout << "\nLEAF QUERY for nearest neighbor of f104 (";
     f104.printArr();
@@ -1168,6 +1190,8 @@ int main(int argc, const char *argv[]) {
         cout << results[i].getId() << ", ";
     }
     cout << results[results.size()-1].getId();
+    
+    
     
     // TODO
     // Section insertion
