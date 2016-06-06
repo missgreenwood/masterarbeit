@@ -20,10 +20,11 @@ public:
     bool contains(int k);
     void traverse();
     void traverseFilters();
+    float computeMinJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
     BloomFilterNode *search(int k);
     void updateUnionFilter();
-    float computeMinJaccard(BloomFilter *filter);
-    int computeMinJaccardKey(BloomFilter *filter);
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter); 
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();

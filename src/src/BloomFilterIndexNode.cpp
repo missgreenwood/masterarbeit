@@ -121,6 +121,14 @@ void BloomFilterIndexNode::traverseFilters() {
     }
 }
 
+float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+    return C[0]->computeMinJaccard(filter);
+}
+
+int BloomFilterIndexNode::getMinJaccardKey(BloomFilter *filter) {
+    return C[0]->getMinJaccardKey(filter); 
+}
+
 BloomFilterNode * BloomFilterIndexNode::search(int k) {
     int index = indexOfKey(k);
     return C[index]->search(k);
@@ -143,30 +151,8 @@ void BloomFilterIndexNode::updateUnionFilter() {
     }
 }
 
-float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMinJaccard(filter);
-        if (jacc < min) {
-            min = jacc;
-        }
-    }
-    return min;
-}
-
-int BloomFilterIndexNode::computeMinJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount()+1; i++) {
-        jacc = C[i]->computeMinJaccard(filter);
-        if (jacc < min) {
-            min = jacc;
-            index = i;
-        }
-    }
-    return C[index]->computeMinJaccardKey(filter);
+BloomFilter * BloomFilterIndexNode::getMinJaccardFilter(BloomFilter *filter) {
+    return C[0]->getMinJaccardFilter(filter);
 }
 
 int BloomFilterIndexNode::getMinKey() {
@@ -287,5 +273,29 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
 }
 
 BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
-    return NULL; 
+    float min = 1;
+    float jacc;
+    BloomFilterNode *path = C[0];
+    
+    // Check if query filter is subset or superset of any child's union filters
+    // If more than one: Determine best result
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+    }
+    
+    // If both false: Conduct normal query starting from leftmost child
+    return path->simQuery(filter);
 }

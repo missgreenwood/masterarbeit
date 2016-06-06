@@ -47,8 +47,9 @@ public:
     BloomFilterNode *getRoot();
     void traverse();
     void traverseFilters();
-    float computeMinJaccard(BloomFilter *filter); 
-    int computeMinJaccardKey(BloomFilter *filter);
+    float computeMinJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter); 
     int getMinKey();
     int getMaxKey();
     int computeSubsetId(BloomFilter *filter);

@@ -29,6 +29,24 @@ BloomFilterLeaf::~BloomFilterLeaf() {
     setPrev(NULL);
 }
 
+BloomFilter * BloomFilterLeaf::getMinJaccardFilter(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    BloomFilterLeaf *tmp = this;
+    BloomFilter *result = filters[0];
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            jacc = computeJaccard(tmp->filters[i], filter);
+            if (jacc < min) {
+                min = jacc;
+                result = tmp->filters[i];
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return result; 
+}
+
 BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     assert(getCount() == getMax());
     
@@ -113,6 +131,40 @@ void BloomFilterLeaf::traverseFilters() {
     }
 }
 
+float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            jacc = computeJaccard(tmp->filters[i], filter);
+            if (jacc < min) {
+                min = jacc;
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return min;
+}
+
+int BloomFilterLeaf::getMinJaccardKey(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    int k = filters[0]->getId();
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            jacc = computeJaccard(tmp->filters[i], filter);
+            if (jacc < min) {
+                min = jacc;
+                k = tmp->filters[i]->getId();
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return k; 
+}
+
 bool BloomFilterLeaf::contains(int k) {
     bool result = false;
     int *keys = getKeys();
@@ -160,32 +212,6 @@ void BloomFilterLeaf::updateUnionFilter() {
     for (int i=0; i<getFilterSize(); i++) {
         unionfilter->setValue(i, newUnion->getData()[i]);
     }
-}
-
-float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc < min) {
-            min = jacc;
-        }
-    }
-    return min;
-}
-
-int BloomFilterLeaf::computeMinJaccardKey(BloomFilter *filter) {
-    int index = 0;
-    float min = 1;
-    float jacc;
-    for (int i=0; i<getCount(); i++) {
-        jacc = computeJaccard(filters[i], filter);
-        if (jacc < min) {
-            min = jacc;
-            index = i;
-        }
-    }
-    return getKeys()[index];
 }
 
 int BloomFilterLeaf::getMinKey() {

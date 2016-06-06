@@ -163,6 +163,10 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
+KW 23 (noch 32 h)
+* Mo, 06.06 (11:30 - )
+
+
 ## TODO
 
 1. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995

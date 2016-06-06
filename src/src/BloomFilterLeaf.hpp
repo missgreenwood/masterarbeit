@@ -22,8 +22,7 @@ public:
     ~BloomFilterLeaf();
     
     // Tree management
-    float computeMinJaccard(BloomFilter *filter);
-    int computeMinJaccardKey(BloomFilter *filter);
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
@@ -31,6 +30,8 @@ public:
     BloomFilterLeaf *split(BloomFilter *filter);
     void traverse();
     void traverseFilters();
+    float computeMinJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
     bool contains(int k);
     BloomFilterNode *search(int k);
     BloomFilterLeaf *getPrev();

@@ -19,7 +19,7 @@ bool BloomFilterTree::contains(int k) {
     
     // If tree is empty return false
     if (root == NULL) {
-        cout << "Tree is empty!";
+        cout << "Tree is empty!\n";
         return false;
     }
     else {
@@ -29,7 +29,7 @@ bool BloomFilterTree::contains(int k) {
 
 BloomFilterNode * BloomFilterTree::search(int k) {
     if (root == NULL) {
-        cout << "Tree is empty!";
+        cout << "Tree is empty!\n";
         return NULL;
     }
     else return root->search(k);
@@ -41,7 +41,7 @@ BloomFilterNode * BloomFilterTree::getRoot() {
 
 void BloomFilterTree::traverse() {
     if (root == NULL) {
-        cout << "Tree is empty!";
+        cout << "Tree is empty!\n";
         return;
     }
     else {
@@ -51,7 +51,7 @@ void BloomFilterTree::traverse() {
 
 void BloomFilterTree::traverseFilters() {
     if (root == NULL) {
-        cout << "The tree is empty!";
+        cout << "Tree is empty!\n";
         return;
     }
     else {
@@ -61,7 +61,7 @@ void BloomFilterTree::traverseFilters() {
 
 float BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty!";
+        cout << "Tree is empty!\n";
         return 0;
     }
     else {
@@ -69,21 +69,29 @@ float BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     }
 }
 
-// Determine key with minimal Jaccard distance
-// Return first key if there are several with equal distance
-int BloomFilterTree::computeMinJaccardKey(BloomFilter *filter) {
+int BloomFilterTree::getMinJaccardKey(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty - this is the first filter!";
+        cout << "Tree is empty!\n";
         return filter->getId();
     }
     else {
-        return root->computeMinJaccardKey(filter);
+        return root->getMinJaccardKey(filter); 
+    }
+}
+
+BloomFilter * BloomFilterTree::getMinJaccardFilter(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return filter;
+    }
+    else {
+        return root->getMinJaccardFilter(filter);
     }
 }
 
 int BloomFilterTree::getMinKey() {
     if (root == NULL) {
-        cout << "Tree is emtpy!";
+        cout << "Tree is emtpy!\n";
         return 0;
     }
     else {
@@ -117,7 +125,7 @@ int BloomFilterTree::computeSubsetId(BloomFilter *filter) {
 // Treat filter as superset of tree filters
 int BloomFilterTree::computeSupersetId(BloomFilter *filter) {
     if (root == NULL) {
-        cout << "Tree is empty!";
+        cout << "Tree is empty!\n";
         return filter->getId();
     }
     else {
@@ -202,7 +210,13 @@ BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
         return filter;
     }
     else {
-        return root->simQuery(filter); 
+        // Check if query filter is subset of my union filter
+        if ((root->unionfilter->isSubset(filter) == false) && (root->unionfilter->isSuperset(filter) == false)) {
+            return getMinJaccardFilter(filter);
+        }
+        else {
+            return root->simQuery(filter);
+        }
     }
 }
 
