@@ -223,6 +223,7 @@ BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
 vector<pair<BloomFilter, float>> BloomFilterTree::compare(BloomFilter *filter, int k) {
     vector<pair<BloomFilter, float>> distances;
     if (root == NULL) {
+        cout << "Tree is empty!\n";
         distances.push_back(make_pair(*filter, 0));
     }
     else {
@@ -233,7 +234,7 @@ vector<pair<BloomFilter, float>> BloomFilterTree::compare(BloomFilter *filter, i
             distances.push_back(make_pair(allFilters[i], jacc));
         }
         
-        // Sort all filters in tree by jaccard distances in ascending order
+        // Sort all filters in tree by jaccard distance in ascending order
         sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
             return left.second < right.second;
         });
@@ -253,4 +254,16 @@ vector<pair<BloomFilter, float>> BloomFilterTree::compare(BloomFilter *filter, i
         cout << "jacc(" << filter->getId() << ", " << distances[i].first.getId() << "): " << distances[i].second << "\n"; 
     }
     return distances;
+}
+
+vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter> results;
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        results.push_back(*filter);
+    }
+    else {
+        return root->simQueryVec(filter, k); 
+    }
+    return results;
 }

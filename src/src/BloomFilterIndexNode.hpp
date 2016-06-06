@@ -39,9 +39,7 @@ public:
     
     // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
-    
-    // TODO
-    // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

@@ -163,8 +163,8 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 32 h)
-* Mo, 06.06 (11:30 - )
+KW 23 (noch 29 h)
+* Mo, 06.06 (3 h, 17:15 - )
 
 
 ## TODO
@@ -173,9 +173,6 @@ KW 23 (noch 32 h)
 
 2. Implementierung
 
-	* Jaccard-Berechnung 
-		-> 06.06. Mail an Mirco
-	
 	* 1. Einfüge-Operation: Über Teilmengen 
 		-> Suchalgorithmen anpassen und checken (mind. size 4/size 6)
 		-> Sollte sein: immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
@@ -184,6 +181,8 @@ KW 23 (noch 32 h)
 		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
 		-> Filter dürfen mehrmals eingefügt werden 
 		-> Suchalgorithmen anpassen und checken (mind. size 4/size 6)
+
+	* Berechnung Jaccard-Distanz ändern und testen 
 		
 3. Evaluation 
 
@@ -195,3 +194,4 @@ KW 23 (noch 32 h)
 
 - Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 - Sprache ändern zu Deutsch
+- LektorInnen fragen 

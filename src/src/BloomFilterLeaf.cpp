@@ -495,3 +495,47 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
         return result;
     }
 }
+
+vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter> results;
+    vector<pair<BloomFilter, float>> distances;
+    float jacc;
+    for (int i=0; i<getCount(); i++) {
+        jacc = computeJaccard(filters[i], filter);
+        distances.push_back(make_pair(*filters[i], jacc));
+    }
+    
+    // Collect candidates from previous leaf
+    if (prev != NULL) {
+        for (int i=0; i<prev->getCount(); i++) {
+            jacc = computeJaccard(prev->filters[i], filter);
+            distances.push_back(make_pair(*prev->filters[i], jacc));
+        }
+    }
+    
+    // Collect candidates from next leaf
+    if (next != NULL) {
+        for (int i=0; i<next->getCount(); i++) {
+            jacc = computeJaccard(next->filters[i], filter);
+            distances.push_back(make_pair(*next->filters[i], jacc));
+        }
+    }
+    
+    // Sort candidates by jaccard distance in ascending order
+    sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+        return left.second < right.second;
+    });
+    
+    // If tree does not hold enough filters, return all results
+    if (distances.size() < k) {
+        for (int i=0; i<distances.size(); i++) {
+            results.push_back(distances[i].first);
+        }
+    }
+    else {
+        for (int i=0; i<k; i++) {
+            results.push_back(distances[i].first);
+        }
+    }
+    return results;
+}

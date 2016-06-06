@@ -65,7 +65,7 @@ public:
 
     // Query methods
     virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
-    // virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
+    virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
 };
 
 #endif 

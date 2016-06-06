@@ -299,3 +299,7 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     // If both false: Conduct normal query starting from leftmost child
     return path->simQuery(filter);
 }
+
+vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
+    return {}; 
+}

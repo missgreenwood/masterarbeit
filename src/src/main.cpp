@@ -252,9 +252,7 @@ int main(int argc, const char *argv[]) {
     cout << "Min jacc(b2, f19): " << b2.computeMinJaccard(&f19);
     cout << " (key " << b2.getMinJaccardKey(&f19) << ")\n\n";
     b2.insert(&f16);
-    cout << endl;
     
-    cout << endl;
     cout << "\nCheck union filter construction";
     cout << "\n-------------------------------\n\n";
     b2.traverse();
@@ -1075,8 +1073,10 @@ int main(int argc, const char *argv[]) {
     b3.compare(&f104, b3.countFilters());
     cout << endl;
     b4.compare(&f609, b4.countFilters());
-    cout << endl;
-    b4.compare(&f605, b4.countFilters());
+    cout << endl; 
+    BloomFilter f595(f609);
+    b4.compare(&f595, b4.countFilters());
+    
     cout << "\nLEAF QUERY for nearest neighbor of f104 (";
     f104.printArr();
     cout << ")\n";
@@ -1085,7 +1085,7 @@ int main(int argc, const char *argv[]) {
     BloomFilter *result = L1->simQuery(&f104);
     cout << "\nComputed result: " << result->getId() << " (";
     result->printArr();
-    BloomFilter f595(f609);
+    
     cout << ")\n\nLEAF QUERY for nearest neighbor of f595 (";
     f595.printArr();
     cout << ")\n";
@@ -1094,6 +1094,7 @@ int main(int argc, const char *argv[]) {
     result = L1->simQuery(&f595);
     cout << "\nComputed result: " << result->getId() << " (";
     result->printArr();
+    
     cout << "\n\nLEAF QUERY for nearest neighbor of f605 (";
     f605.printArr();
     cout << ")\n";
@@ -1105,6 +1106,30 @@ int main(int argc, const char *argv[]) {
     cout << "Computed result: " << result->getId() << " (";
     result->printArr();
     cout << ")\n";
+    
+    cout << "\nLEAF QUERY for 3 nearest neighbors of f104 (";
+    f104.printArr();
+    cout << ")\n";
+    cout << "Result should be: 93, 98, 97";
+    L1 = b3.search(93);
+    vector<BloomFilter> results = L1->simQueryVec(&f104, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << ", ";
+    }
+    cout << results[results.size()-1].getId();
+    
+    cout << "\n\nLEAF QUERY for 3 nearest neighbors of f595 (";
+    f595.printArr();
+    cout << ")\n";
+    cout << "Result should be: 595, 593, 591";
+    L1 = b4.search(595);
+    results = L1->simQueryVec(&f595, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<results.size()-1; i++) {
+        cout << results[i].getId() << ", ";
+    }
+    cout << results[results.size()-1].getId();
     
     // TODO
     // Section insertion

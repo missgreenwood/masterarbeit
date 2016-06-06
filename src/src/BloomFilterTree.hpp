@@ -66,9 +66,7 @@ public:
     // Similarity queries and comparison methods
     BloomFilter *simQuery(BloomFilter *filter);
     vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
-    
-    // TODO
-    // vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif
