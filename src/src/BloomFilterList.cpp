@@ -54,11 +54,32 @@ void BloomFilterList::traverse() {
     cout << "|";
 }
 
-void BloomFilterList::updateNode(BloomFilter *filter, int index) {
+void BloomFilterList::printPosition(int index) {
     int idx = head->getPosition();
     BloomFilterListNode *tmp = head;
     while (idx < index) {
         tmp = head->getNext();
+        idx = tmp->getPosition();
+    }
+    cout << "Position: " << tmp->getPosition() << ", value: " << tmp->getValue() << "\n\nLink list:\n";
+    tmp->printLinkList();
+}
+
+void BloomFilterList::printAll() {
+    BloomFilterListNode *tmp = head;
+    while (tmp != NULL) {
+        cout << "Position: " << tmp->getPosition() << ", value: " << tmp->getValue();
+        tmp->printLinkList();
+        cout << endl;
+        tmp = tmp->getNext();
+    }
+}
+
+void BloomFilterList::updateNode(BloomFilter *filter, int index) {
+    int idx = head->getPosition();
+    BloomFilterListNode *tmp = head;
+    while (idx < index) {
+        tmp = tmp->getNext();
         idx = tmp->getPosition();
     }
     tmp->links.push_back(filter);

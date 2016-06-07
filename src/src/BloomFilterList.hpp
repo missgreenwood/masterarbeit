@@ -21,6 +21,8 @@ public:
     // List management methods
     void clear();
     void traverse();
+    void printPosition(int index);
+    void printAll(); 
     void updateNode(BloomFilter *filter, int index);
     void tailAppend(int value);
     

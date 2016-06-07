@@ -1208,6 +1208,44 @@ int main(int argc, const char *argv[]) {
     n1.printLinkList();
     
     cout << "\nCreate instance of BloomFilterList (l1), insert f1 and test all methods\n\n";
+    BloomFilterList l1(10);
+    l1.traverse();
+    l1.clear();
+    cout << endl;
+    l1.traverse();
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.tailAppend(0);
+    l1.tailAppend(1);
+    l1.traverse();
+    l1.updateNode(&f101, 1);
+    l1.updateNode(&f101, 2);
+    l1.updateNode(&f101, 4);
+    l1.updateNode(&f101, 6);
+    l1.updateNode(&f101, 8);
+    l1.updateNode(&f101, 11);
+    l1.updateNode(&f101, 13);
+    l1.updateNode(&f101, 14);
+    l1.updateNode(&f101, 16);
+    l1.updateNode(&f101, 18);
+    cout << endl; 
+    l1.printAll();
     
     // TODO
     // Section insertion
