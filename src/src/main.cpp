@@ -3,6 +3,7 @@
 
 
 #include "BloomFilterTree.hpp"
+#include "BloomFilterList.hpp"
 
 using namespace std;
 
@@ -1191,7 +1192,22 @@ int main(int argc, const char *argv[]) {
     }
     cout << results[results.size()-1].getId();
     
+    // Class BloomFilterListNode
     
+    cout << "\n\nCLASS BloomFilterListNode";
+    cout << "\n-------------------------\n";
+    
+    cout << "Create instance of BloomFilterListNode (n1) and test all methods\n\n";
+    BloomFilterListNode n1;
+    n1.setValue(0);
+    n1.setPosition(2);
+    cout << "Position: " << n1.getPosition() << ", value: " << n1.getValue() << "\n\nLink list:\n";
+    for (int i=0; i<v1.size(); i++) {
+        n1.links.push_back(&v1[i]);
+    }
+    n1.printLinkList();
+    
+    cout << "\nCreate instance of BloomFilterList (l1), insert f1 and test all methods\n\n";
     
     // TODO
     // Section insertion
