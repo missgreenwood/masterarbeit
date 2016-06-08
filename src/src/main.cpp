@@ -1271,7 +1271,8 @@ int main(int argc, const char *argv[]) {
     cout << "\nSection query for nearest neighbor of f104 (";
     f104.printArr();
     cout <<")\n";
-    cout << "Result should be: 97, 93 or 98";
+    cout << "Result should be: 97, 93 or 98\n";
+    l5.simQuery(&f104);
     /* result = l5.simQuery(&f104);
     cout << "\nComputed result: " << result->getId() << " (";
     result->printArr(); */

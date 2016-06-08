@@ -1,6 +1,8 @@
 //  BloomFilterList.cpp, Judith Greif
 //  Description: Implementation of class BloomFilterList
 
+
+#include <map>
 #include <algorithm>
 #include "BloomFilterList.hpp"
 
@@ -216,6 +218,43 @@ void BloomFilterList::insert(BloomFilter *filter) {
     }
 }
 
-/* BloomFilter * BloomFilterList::simQuery(BloomFilter *filter) {
+BloomFilter * BloomFilterList::simQuery(BloomFilter *filter) {
+    if (head == NULL) {
+        cout << "List is empty!\n";
+        return {};
+    }
+    if (size != filter->getSize()) {
+        cout << "List and filter have different sizes!\n";
+        return {};
+    }
+    vector<BloomFilter*> candidates;
+    BloomFilterListNode *tmp = head;
     
-} */
+    // Collect all candidates
+    int index = 0;
+    while (tmp != NULL) {
+        if (filter->getData()[index] == 0) {
+            for (int i=0; i<tmp->zeroLinks.size(); i++) {
+                candidates.push_back(tmp->zeroLinks[i]);
+            }
+        }
+        else {
+            for (int i=0; i<tmp->oneLinks.size(); i++) {
+                candidates.push_back(tmp->oneLinks[i]);
+            }
+        }
+        index++;
+        tmp = tmp->getNext();
+    }
+    
+    cout << "Found candidates:\n";
+    for (int i=0; i<candidates.size(); i++) {
+        cout << candidates[i]->getId() << endl;
+    }
+    
+    // TODO
+    // Sort candidates by frequency
+    
+    // Return first element
+    return candidates[0];
+}
