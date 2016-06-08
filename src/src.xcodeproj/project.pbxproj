@@ -11,12 +11,6 @@
 		BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* main.cpp */; };
 		BC7E2BE21CE63CA7003D9A8A /* BloomFilterLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC7E2BE11CE63CA7003D9A8A /* BloomFilterLeaf.cpp */; };
 		BC7E2BE61CE63CBC003D9A8A /* BloomFilterIndexNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC7E2BE51CE63CBC003D9A8A /* BloomFilterIndexNode.cpp */; };
-		BCBE162E1CF20A3900BEE749 /* BloomFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16161CF20A3900BEE749 /* BloomFilter.cpp */; };
-		BCBE162F1CF20A3900BEE749 /* BloomFilterIndexNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16181CF20A3900BEE749 /* BloomFilterIndexNode.cpp */; };
-		BCBE16301CF20A3900BEE749 /* BloomFilterLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE161A1CF20A3900BEE749 /* BloomFilterLeaf.cpp */; };
-		BCBE16311CF20A3900BEE749 /* BloomFilterNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE161C1CF20A3900BEE749 /* BloomFilterNode.cpp */; };
-		BCBE16321CF20A3900BEE749 /* BloomFilterTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE161E1CF20A3900BEE749 /* BloomFilterTree.cpp */; };
-		BCBE16331CF20A3900BEE749 /* BloomFilterVec.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16201CF20A3900BEE749 /* BloomFilterVec.cpp */; };
 		BCBE16341CF20A3900BEE749 /* BPlusIndexNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16221CF20A3900BEE749 /* BPlusIndexNode.cpp */; };
 		BCBE16351CF20A3900BEE749 /* BPlusLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16241CF20A3900BEE749 /* BPlusLeaf.cpp */; };
 		BCBE16361CF20A3900BEE749 /* BPlusNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCBE16261CF20A3900BEE749 /* BPlusNode.cpp */; };
@@ -61,19 +55,6 @@
 		BC7E2BE31CE63CB5003D9A8A /* BloomFilterLeaf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BloomFilterLeaf.hpp; path = src/BloomFilterLeaf.hpp; sourceTree = "<group>"; };
 		BC7E2BE41CE63CB5003D9A8A /* BloomFilterIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BloomFilterIndexNode.hpp; path = src/BloomFilterIndexNode.hpp; sourceTree = "<group>"; };
 		BC7E2BE51CE63CBC003D9A8A /* BloomFilterIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BloomFilterIndexNode.cpp; path = src/BloomFilterIndexNode.cpp; sourceTree = "<group>"; };
-		BCBE16151CF20A3900BEE749 /* bloom_filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = bloom_filter.hpp; sourceTree = "<group>"; };
-		BCBE16161CF20A3900BEE749 /* BloomFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilter.cpp; sourceTree = "<group>"; };
-		BCBE16171CF20A3900BEE749 /* BloomFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilter.hpp; sourceTree = "<group>"; };
-		BCBE16181CF20A3900BEE749 /* BloomFilterIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterIndexNode.cpp; sourceTree = "<group>"; };
-		BCBE16191CF20A3900BEE749 /* BloomFilterIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterIndexNode.hpp; sourceTree = "<group>"; };
-		BCBE161A1CF20A3900BEE749 /* BloomFilterLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterLeaf.cpp; sourceTree = "<group>"; };
-		BCBE161B1CF20A3900BEE749 /* BloomFilterLeaf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterLeaf.hpp; sourceTree = "<group>"; };
-		BCBE161C1CF20A3900BEE749 /* BloomFilterNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterNode.cpp; sourceTree = "<group>"; };
-		BCBE161D1CF20A3900BEE749 /* BloomFilterNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterNode.hpp; sourceTree = "<group>"; };
-		BCBE161E1CF20A3900BEE749 /* BloomFilterTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterTree.cpp; sourceTree = "<group>"; };
-		BCBE161F1CF20A3900BEE749 /* BloomFilterTree.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterTree.hpp; sourceTree = "<group>"; };
-		BCBE16201CF20A3900BEE749 /* BloomFilterVec.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BloomFilterVec.cpp; sourceTree = "<group>"; };
-		BCBE16211CF20A3900BEE749 /* BloomFilterVec.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BloomFilterVec.hpp; sourceTree = "<group>"; };
 		BCBE16221CF20A3900BEE749 /* BPlusIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusIndexNode.cpp; sourceTree = "<group>"; };
 		BCBE16231CF20A3900BEE749 /* BPlusIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BPlusIndexNode.hpp; sourceTree = "<group>"; };
 		BCBE16241CF20A3900BEE749 /* BPlusLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusLeaf.cpp; sourceTree = "<group>"; };
@@ -136,21 +117,11 @@
 		BC5861F71CCABB5C007CDEC0 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				BCBE163A1CF20A4300BEE749 /* Libraries */,
-				BCBE163D1CF20A7800BEE749 /* Bloom-Filter-Tree */,
 				BCBE163B1CF20A5600BEE749 /* B+Tree */,
 				BCBE163C1CF20A6700BEE749 /* B-Tree */,
 				BC5861F81CCABB5C007CDEC0 /* tests.cpp */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		BCBE163A1CF20A4300BEE749 /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				BCBE16151CF20A3900BEE749 /* bloom_filter.hpp */,
-			);
-			name = Libraries;
 			sourceTree = "<group>";
 		};
 		BCBE163B1CF20A5600BEE749 /* B+Tree */ = {
@@ -177,25 +148,6 @@
 				BCBE162D1CF20A3900BEE749 /* BTreeNode.hpp */,
 			);
 			name = "B-Tree";
-			sourceTree = "<group>";
-		};
-		BCBE163D1CF20A7800BEE749 /* Bloom-Filter-Tree */ = {
-			isa = PBXGroup;
-			children = (
-				BCBE16161CF20A3900BEE749 /* BloomFilter.cpp */,
-				BCBE16171CF20A3900BEE749 /* BloomFilter.hpp */,
-				BCBE16181CF20A3900BEE749 /* BloomFilterIndexNode.cpp */,
-				BCBE16191CF20A3900BEE749 /* BloomFilterIndexNode.hpp */,
-				BCBE161A1CF20A3900BEE749 /* BloomFilterLeaf.cpp */,
-				BCBE161B1CF20A3900BEE749 /* BloomFilterLeaf.hpp */,
-				BCBE161C1CF20A3900BEE749 /* BloomFilterNode.cpp */,
-				BCBE161D1CF20A3900BEE749 /* BloomFilterNode.hpp */,
-				BCBE161E1CF20A3900BEE749 /* BloomFilterTree.cpp */,
-				BCBE161F1CF20A3900BEE749 /* BloomFilterTree.hpp */,
-				BCBE16201CF20A3900BEE749 /* BloomFilterVec.cpp */,
-				BCBE16211CF20A3900BEE749 /* BloomFilterVec.hpp */,
-			);
-			name = "Bloom-Filter-Tree";
 			sourceTree = "<group>";
 		};
 		BCCE1F2A1CD625B6004382A8 /* src */ = {
@@ -328,18 +280,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BCBE162F1CF20A3900BEE749 /* BloomFilterIndexNode.cpp in Sources */,
 				BCBE16371CF20A3900BEE749 /* BPlusTree.cpp in Sources */,
 				BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */,
 				BCBE16361CF20A3900BEE749 /* BPlusNode.cpp in Sources */,
 				BCBE16381CF20A3900BEE749 /* BTree.cpp in Sources */,
-				BCBE16311CF20A3900BEE749 /* BloomFilterNode.cpp in Sources */,
 				BCBE16391CF20A3900BEE749 /* BTreeNode.cpp in Sources */,
-				BCBE162E1CF20A3900BEE749 /* BloomFilter.cpp in Sources */,
-				BCBE16331CF20A3900BEE749 /* BloomFilterVec.cpp in Sources */,
-				BCBE16301CF20A3900BEE749 /* BloomFilterLeaf.cpp in Sources */,
 				BCBE16351CF20A3900BEE749 /* BPlusLeaf.cpp in Sources */,
-				BCBE16321CF20A3900BEE749 /* BloomFilterTree.cpp in Sources */,
 				BCBE16341CF20A3900BEE749 /* BPlusIndexNode.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

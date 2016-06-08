@@ -1224,10 +1224,13 @@ int main(int argc, const char *argv[]) {
     l1.printAll();
     l1.clear();
     l1.printAll();
+    l1.insert(&f1);
+    BloomFilterList l5(10);
+    l5.insert(&f600);
     
     // TODO
     // Section insertion
-    // Section search queries 
+    // Section search queries
     
     cout << endl;
     return 0;

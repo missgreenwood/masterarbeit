@@ -92,18 +92,17 @@ int BloomFilterList::getSize() {
 }
 
 void BloomFilterList::insert(BloomFilter *filter) {
-    int positions = filter->getSize()*2;
-    int count = 0;
-    BloomFilterListNode *tmp = head;
-    
-    // Traverse through list
-    while (head != NULL) {
-        
-        // Check each position
-        
-        // For each position in Bloom filter, update link list of according position
-        
+    if (head == NULL) {
+        cout << "List does not exist!\n";
+        return;
+    }
+    if (size != filter->getSize()) {
+        cout << "List and filter have different sizes!\n";
+        return;
     }
     
-    // Update each BloomFilter* list of nodes with equal values
+    // Update corresponding node of each position in Bloom filter
+    for (int i=0; i<size; i++) {
+        updateNode(filter, i);
+    }
 }
