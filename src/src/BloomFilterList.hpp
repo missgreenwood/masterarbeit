@@ -24,15 +24,20 @@ public:
     void printAll(); 
     void updateNode(BloomFilter *filter, int index);
     void tailAppend(int position);
-    int getSize(); 
+    int getSize();
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter);
+    vector<BloomFilter> collectAllFilters();
+    int countFilters(); 
+    vector<pair<int, float>> computeAllDistances(BloomFilter *filter);
+    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k); 
     
     // Insertion
-    // TODO
     void insert(BloomFilter *filter);
     
     // Similarity queries
-    // TODO
     BloomFilter *simQuery(BloomFilter *filter);
+    
+    // TODO
     vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 

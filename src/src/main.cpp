@@ -1216,7 +1216,7 @@ int main(int argc, const char *argv[]) {
     
     cout << "\n\nCLASS BloomFilterList";
     cout << "\n---------------------\n";
-    cout << "Create instance of BloomFilterList (l1), insert f1 and test all methods\n\n";
+    cout << "Create 3 instances of BloomFilterList (l1, l5, l6) and test all methods\n\n";
     BloomFilterList l1(10);
     for (int i=0; i<l1.getSize(); i++) {
         l1.updateNode(&f1, i);
@@ -1224,13 +1224,59 @@ int main(int argc, const char *argv[]) {
     l1.printAll();
     l1.clear();
     l1.printAll();
-    l1.insert(&f1);
-    BloomFilterList l5(10);
+    BloomFilterList l5(4);
+    BloomFilterList l6(6);
     l5.insert(&f600);
     
-    // TODO
     // Section insertion
+    cout << "\n\nCheck section insertion";
+    cout << "\n-----------------------";
+    cout << "\nInsert filters f101..f103, f105..f110 into l5";
+    l5.insert(&f101);
+    l5.insert(&f102);
+    l5.insert(&f103);
+    l5.insert(&f105);
+    l5.insert(&f106);
+    l5.insert(&f107);
+    l5.insert(&f108);
+    l5.insert(&f109);
+    l5.insert(&f110);
+    cout << "\nBloomFilterList l5:\n\n";
+    l5.printAll();
+    cout << "Insert filters 601..604, 609..614, 619..624 into l6\n";
+    l6.insert(&f601);
+    l6.insert(&f602);
+    l6.insert(&f603);
+    l6.insert(&f604);
+    l6.insert(&f609);
+    l6.insert(&f610);
+    l6.insert(&f611);
+    l6.insert(&f612);
+    l6.insert(&f613);
+    l6.insert(&f614);
+    l6.insert(&f619);
+    l6.insert(&f620);
+    l6.insert(&f621);
+    l6.insert(&f622);
+    l6.insert(&f623);
+    l6.insert(&f624);
+    
     // Section search queries
+    cout << "\nCheck section queries";
+    cout << "\n---------------------\n";
+    l5.compare(&f104, l5.countFilters());
+    cout << endl;
+    l6.compare(&f595, l6.countFilters());
+    
+    cout << "\nSection query for nearest neighbor of f104 (";
+    f104.printArr();
+    cout <<")\n";
+    cout << "Result should be: 97, 93 or 98";
+    /* result = l5.simQuery(&f104);
+    cout << "\nComputed result: " << result->getId() << " (";
+    result->printArr(); */
+    
+    // TODO
     
     cout << endl;
     return 0;
