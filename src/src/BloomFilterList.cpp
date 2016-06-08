@@ -5,21 +5,15 @@
 #include "BloomFilterList.hpp"
 
 
-BloomFilterList::BloomFilterList(): size(2*filtersize) {
+BloomFilterList::BloomFilterList(): size(filtersize) {
     head = tail = NULL;
 }
 
-// Create new list with 2*filtersize nodes, two for each Bloom filter position
-// Initialize values with alternating 0 and 1 (both for each Bloom filter position)
-BloomFilterList::BloomFilterList(int _f): size(2*_f) {
+// Create new list with node for each Bloom filter position
+BloomFilterList::BloomFilterList(int _f): size(_f) {
     head = tail = NULL;
     for (int i=0; i<size; i++) {
-        if (i%2 == 0) {
-            tailAppend(0);
-        }
-        else {
-            tailAppend(1);
-        }
+        tailAppend(i);
     }
 }
 
@@ -37,23 +31,6 @@ void BloomFilterList::clear() {
     head = tail = NULL;
 }
 
-void BloomFilterList::traverse() {
-    BloomFilterListNode *tmp = head;
-    if (tmp == NULL) {
-        cout << "List is empty!\n";
-        return;
-    }
-    else {
-        cout << "|";
-        do {
-            cout << tmp->getValue();
-            tmp = tmp->getNext();
-        }
-        while (tmp != NULL);
-    }
-    cout << "|";
-}
-
 void BloomFilterList::printPosition(int index) {
     int idx = head->getPosition();
     BloomFilterListNode *tmp = head;
@@ -61,15 +38,21 @@ void BloomFilterList::printPosition(int index) {
         tmp = head->getNext();
         idx = tmp->getPosition();
     }
-    cout << "Position: " << tmp->getPosition() << ", value: " << tmp->getValue() << "\n\nLink list:\n";
-    tmp->printLinkList();
+    cout << "Position: " << tmp->getPosition() << endl;
+    tmp->printZeroLinks();
+    tmp->printOneLinks();
 }
 
 void BloomFilterList::printAll() {
+    if (head == NULL) {
+        cout << "List is empty!\n";
+        return; 
+    }
     BloomFilterListNode *tmp = head;
     while (tmp != NULL) {
-        cout << "Position: " << tmp->getPosition() << ", value: " << tmp->getValue();
-        tmp->printLinkList();
+        cout << "Position: " << tmp->getPosition() << endl;
+        tmp->printZeroLinks();
+        tmp->printOneLinks();
         cout << endl;
         tmp = tmp->getNext();
     }
@@ -82,19 +65,45 @@ void BloomFilterList::updateNode(BloomFilter *filter, int index) {
         tmp = tmp->getNext();
         idx = tmp->getPosition();
     }
-    tmp->links.push_back(filter);
+    if (filter->getData()[index] == 0) {
+        tmp->zeroLinks.push_back(filter);
+    }
+    else {
+        tmp->oneLinks.push_back(filter);
+    }
 }
 
 void BloomFilterList::tailAppend(int value) {
     if (head == NULL) {
-        head = tail = new BloomFilterListNode(value, 0);
+        head = tail = new BloomFilterListNode(0);
     }
     else {
         
         // Append new node to tail
-        tail->setNext(new BloomFilterListNode(value, tail->getPosition()+1));
+        tail->setNext(new BloomFilterListNode(tail->getPosition()+1));
         
         // Update tail pointer
         tail = tail->getNext(); 
     }
+}
+
+int BloomFilterList::getSize() {
+    return size;
+}
+
+void BloomFilterList::insert(BloomFilter *filter) {
+    int positions = filter->getSize()*2;
+    int count = 0;
+    BloomFilterListNode *tmp = head;
+    
+    // Traverse through list
+    while (head != NULL) {
+        
+        // Check each position
+        
+        // For each position in Bloom filter, update link list of according position
+        
+    }
+    
+    // Update each BloomFilter* list of nodes with equal values
 }

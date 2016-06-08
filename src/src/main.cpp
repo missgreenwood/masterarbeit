@@ -1194,62 +1194,40 @@ int main(int argc, const char *argv[]) {
     
     // Class BloomFilterListNode
     
-    cout << "\n\nCLASS BloomFilterListNode";
+    cout << "\n\n\nCLASS BloomFilterListNode";
     cout << "\n-------------------------\n";
     
     cout << "Create instance of BloomFilterListNode (n1) and test all methods\n\n";
     BloomFilterListNode n1;
-    n1.setValue(0);
     n1.setPosition(2);
-    cout << "Position: " << n1.getPosition() << ", value: " << n1.getValue() << "\n\nLink list:\n";
+    cout << "Position: " << n1.getPosition() << endl;
     for (int i=0; i<v1.size(); i++) {
-        n1.links.push_back(&v1[i]);
+        if (v1[i].getData()[2] == 0) {
+            n1.zeroLinks.push_back(&v1[i]);
+        }
+        else {
+            n1.oneLinks.push_back(&v1[i]);
+        }
     }
-    n1.printLinkList();
+    n1.printZeroLinks();
+    n1.printOneLinks(); 
     
-    cout << "\nCreate instance of BloomFilterList (l1), insert f1 and test all methods\n\n";
+    // Class BloomFilterList
+    
+    cout << "\n\nCLASS BloomFilterList";
+    cout << "\n---------------------\n";
+    cout << "Create instance of BloomFilterList (l1), insert f1 and test all methods\n\n";
     BloomFilterList l1(10);
-    l1.traverse();
+    for (int i=0; i<l1.getSize(); i++) {
+        l1.updateNode(&f1, i);
+    }
+    l1.printAll();
     l1.clear();
-    cout << endl;
-    l1.traverse();
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.tailAppend(0);
-    l1.tailAppend(1);
-    l1.traverse();
-    l1.updateNode(&f101, 1);
-    l1.updateNode(&f101, 2);
-    l1.updateNode(&f101, 4);
-    l1.updateNode(&f101, 6);
-    l1.updateNode(&f101, 8);
-    l1.updateNode(&f101, 11);
-    l1.updateNode(&f101, 13);
-    l1.updateNode(&f101, 14);
-    l1.updateNode(&f101, 16);
-    l1.updateNode(&f101, 18);
-    cout << endl; 
     l1.printAll();
     
     // TODO
     // Section insertion
-    // Section search queries
+    // Section search queries 
     
     cout << endl;
     return 0;

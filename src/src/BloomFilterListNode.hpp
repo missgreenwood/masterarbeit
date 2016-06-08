@@ -12,23 +12,22 @@
 
 class BloomFilterListNode {
 private:
-    int value;
     int pos;
     BloomFilterListNode *next;
     
 public:
-    vector<BloomFilter*> links;
+    vector<BloomFilter*> zeroLinks;
+    vector<BloomFilter*> oneLinks;
     BloomFilterListNode();
-    BloomFilterListNode(int _v, int _p);
-    BloomFilterListNode(int _v, int _p, BloomFilterListNode *_n);
+    BloomFilterListNode(int _p);
+    BloomFilterListNode(int _p, BloomFilterListNode *_n);
     
-    int getValue();
-    void setValue(int v);
     int getPosition();
     void setPosition(int p);
     BloomFilterListNode *getNext();
     void setNext(BloomFilterListNode *n);
-    void printLinkList();
+    void printZeroLinks();
+    void printOneLinks(); 
     
     friend class BloomFilterList;
 };

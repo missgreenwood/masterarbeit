@@ -11,7 +11,7 @@ class BloomFilterList {
 private:
     BloomFilterListNode *head;
     BloomFilterListNode *tail;
-    int size;                       // 2*filtersize, e.g. 0/1 for each position
+    int size;
     
 public:
     BloomFilterList();
@@ -20,16 +20,20 @@ public:
     
     // List management methods
     void clear();
-    void traverse();
     void printPosition(int index);
     void printAll(); 
     void updateNode(BloomFilter *filter, int index);
-    void tailAppend(int value);
+    void tailAppend(int position);
+    int getSize(); 
     
     // Insertion
+    // TODO
     void insert(BloomFilter *filter);
     
     // Similarity queries
+    // TODO
+    BloomFilter *simQuery(BloomFilter *filter);
+    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

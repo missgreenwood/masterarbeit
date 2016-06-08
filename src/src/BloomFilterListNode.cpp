@@ -6,23 +6,18 @@
 
 
 BloomFilterListNode::BloomFilterListNode(): next(NULL) {
-    links = *new vector<BloomFilter*>;
+    zeroLinks = *new vector<BloomFilter*>;
+    oneLinks = *new vector<BloomFilter*>;
 }
 
-BloomFilterListNode::BloomFilterListNode(int _v, int _p): value(_v), pos(_p), next(NULL) {
-    links = *new vector<BloomFilter*>;
+BloomFilterListNode::BloomFilterListNode(int _p): pos(_p), next(NULL) {
+    zeroLinks = *new vector<BloomFilter*>;
+    oneLinks = *new vector<BloomFilter*>;
 }
 
-BloomFilterListNode::BloomFilterListNode(int _v, int _p, BloomFilterListNode *_n): value(_v), pos(_p), next(_n) {
-    links = *new vector<BloomFilter*>;
-}
-
-int BloomFilterListNode::getValue() {
-    return value;
-}
-
-void BloomFilterListNode::setValue(int v) {
-    value = v;
+BloomFilterListNode::BloomFilterListNode(int _p, BloomFilterListNode *_n): pos(_p), next(_n) {
+    zeroLinks = *new vector<BloomFilter*>;
+    oneLinks = *new vector<BloomFilter*>;
 }
 
 int BloomFilterListNode::getPosition() {
@@ -41,10 +36,20 @@ void BloomFilterListNode::setNext(BloomFilterListNode *n) {
     next = n;
 }
 
-void BloomFilterListNode::printLinkList() {
-    for (int i=0; i<links.size(); i++) {
-        cout << links[i]->getId() << " (";
-        links[i]->printArr();
+void BloomFilterListNode::printZeroLinks() {
+    cout << "Zero links:\n";
+    for (int i=0; i<zeroLinks.size(); i++) {
+        cout << zeroLinks[i]->getId() << " (";
+        zeroLinks[i]->printArr();
         cout << ")\n";
+    }
+}
+
+void BloomFilterListNode::printOneLinks() {
+    cout << "One links:\n";
+    for (int i=0; i<oneLinks.size(); i++) {
+        cout << oneLinks[i]->getId() << " (";
+        oneLinks[i]->printArr();
+        cout << ")\n"; 
     }
 }
