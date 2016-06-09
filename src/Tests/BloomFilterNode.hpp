@@ -6,20 +6,21 @@
 
 #include <iostream>
 #include <assert.h>
+#include <math.h>
 #include "BloomFilter.hpp"
-#include "BloomFilterVec.hpp"
 
 
 class BloomFilterNode {
 private:
-    int n;                  // Current # of keys
+    int n;                      // Current # of keys
     int filtersize;
-    int t;                  // Order/minimum degree
-    int *keys;              // Array of keys
+    int t;                      // Order/minimum degree
+    int *keys;                  // Array of keys
     BloomFilterNode *parent;
     
 public:
     BloomFilter **filters;
+    BloomFilter *unionfilter;    // Union of all filters in subtree of this node
     BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
     
@@ -35,21 +36,37 @@ public:
     void decrement();
     int getFilterSize();
     
+    // Tree management
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;
+    virtual float computeMinJaccard(BloomFilter *filter) = 0;
+    virtual int getMinJaccardKey(BloomFilter *filter) = 0;
+    double computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2);
+    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
+    double eUnion(BloomFilter *f1, BloomFilter *f2);
+    double eIntersect(BloomFilter *f1, BloomFilter *f2);
+    virtual void updateUnionFilter() = 0;
+    virtual BloomFilter *getMinJaccardFilter(BloomFilter *filter) = 0;
+    virtual int getMinKey() = 0;
+    virtual int getMaxKey() = 0;
+    virtual vector<BloomFilter> collectAllFilters() = 0;
+    virtual int countFilters() = 0; 
+    virtual int computeSubsetId(BloomFilter *filter) = 0;
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
+    virtual int computeSupersetId(BloomFilter *filter) = 0;
     
     // Insertion methods
     virtual void shiftAndInsert(BloomFilter *filter);
+    virtual void insertAsSets(BloomFilter *filter);
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     virtual void insert(BloomFilter *filter) = 0;
-
-    // Helper methods for tree management
-    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
-    bool isSubset(BloomFilter *f1, BloomFilter *f2);
-    BloomFilter *logicalAnd(BloomFilter *f1, BloomFilter *f2);
-    BloomFilter *logicalOr(BloomFilter *f1, BloomFilter *f2);
+    
+    // Query methods
+    virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
+    virtual BloomFilter *simSubtreeQuery(BloomFilter *filter, int l) = 0;
+    virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
+    virtual vector<BloomFilter> simSubtreeQueryVec(BloomFilter *filter, int k, int l) = 0;
 };
 
 #endif 

@@ -20,6 +20,7 @@
 #ifndef BloomFilterTree_hpp
 #define BloomFilterTree_hpp
 
+
 #include "BloomFilterNode.hpp"
 #include "BloomFilterIndexNode.hpp"
 #include "BloomFilterLeaf.hpp"
@@ -31,37 +32,43 @@ using namespace std;
 class BloomFilterTree {
     
 private:
-    int t;                      // Order = minimum degree
-    int filtersize;             // Size of associated Bloom filters (# of bits)
-    BloomFilterVec *filtersvec; // Associated Bloom filter vector
+    int t;                          // Order = minimum degree
+    int filtersize;                 // Size of associated Bloom filters (# of bits)
     
 public:
     BloomFilterNode *root;      // Pointer to root node
     
-    // Constructor with parameters t and size
-    // Initializes tree as empty
     BloomFilterTree(int _t, int _s);
-
     ~BloomFilterTree();
     
-    // TODO
-    // Constructor with parameters t, size, *filtersvec
-    // Insert all filters from Bloom filter vector as BloomFilterNode instances in BloomFilterTree
-    BloomFilterTree(int _t, int _s, BloomFilterVec *_f);
-    
-    // TODO
-    // Search key in tree
-    // Return false if key is not present
+    // Tree management
     bool contains(int k);
-    
     BloomFilterNode *search(int k);
     BloomFilterNode *getRoot();
-    BloomFilterVec *getFiltersVec();
     void traverse();
     void traverseFilters();
+    float computeMinJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter); 
+    int getMinKey();
+    int getMaxKey();
+    int computeSubsetId(BloomFilter *filter);
+    int computeSupersetId(BloomFilter *filter);
+    vector<BloomFilter> collectAllFilters();
+    int countFilters(); 
+    vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
+    vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
     
-    // Insertion methods
+    // Comparison
+    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
+    
+    // Insertion
     void insert(BloomFilter *filter);
+    void insertAsSets(BloomFilter *filter);
+    
+    // Similarity queries
+    BloomFilter *simQuery(BloomFilter *filter);
+    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

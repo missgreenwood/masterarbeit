@@ -7,10 +7,14 @@
 #include <iostream>
 #include <vector>
 #include <cstdlib>
+#include <random>
+#include <math.h>
 
 using namespace std;
 
-const int filtersize = 32;   // # of bits in Bloom filter
+// TODO
+const int filtersize = 10;   // # of bits in Bloom filter
+const int d = 3;             // # of hash functions
 
 
 class BloomFilter {
@@ -18,26 +22,44 @@ class BloomFilter {
 private:
     int size;
     int id;
-    vector<int> data;
+    int *data;
     
 public:
-    int *dataArr;
     BloomFilter();
+    BloomFilter(const BloomFilter& fSource); 
     BloomFilter(int i);
     BloomFilter(int s, int i);
-    ~BloomFilter(); 
+    ~BloomFilter();
+    
+    // Overloaded assignment operator
+    BloomFilter & operator = (const BloomFilter &fSource); 
     
     void printData();
-    void printValue();
     void setId(int value);
     int getId();
     int getSize();
     void setValue(int index, int value);
-    int *getArr();
     void printArr();
+    int *getData();
     void initRandom();
+    double fractionOfZeros();
+    double eSize();
+    BloomFilter *logicalOr(BloomFilter *filter);
+    BloomFilter *logicalAnd(BloomFilter *filter);
+    bool isSubset(BloomFilter *filter);
+    bool isSuperset(BloomFilter *filter);
+    int mySupersetCount();
+    int mySubsetCount();
+    int binomialCoefficient(int n, int k);
+    int setOnes();
+    int setZeros();
+    int validOnes();
+    int possibleFreeZeros();
+    int possibleAddedOnes();
+    float setUnion(BloomFilter *filter);
+    float setIntersection(BloomFilter *filter);
+    float computeJaccard(BloomFilter *filter); 
         
-    friend class BloomFilterVec;
     friend class BloomFilterNode;
     friend class BloomFilterTree;
 };

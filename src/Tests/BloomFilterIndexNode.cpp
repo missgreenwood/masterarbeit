@@ -85,6 +85,9 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
         filters[i] = NULL;
     }
     
+    // Update union filter
+    updateUnionFilter(); 
+    
     delete[] merged;
     delete[] mergedNodes;
     return s;
@@ -118,9 +121,62 @@ void BloomFilterIndexNode::traverseFilters() {
     }
 }
 
+float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+    return C[0]->computeMinJaccard(filter);
+}
+
+int BloomFilterIndexNode::getMinJaccardKey(BloomFilter *filter) {
+    return C[0]->getMinJaccardKey(filter); 
+}
+
 BloomFilterNode * BloomFilterIndexNode::search(int k) {
     int index = indexOfKey(k);
     return C[index]->search(k);
+}
+
+void BloomFilterIndexNode::updateUnionFilter() {
+    
+    // Clear union filter
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, 0);
+    }
+    
+    // Calculate union of all children union filters
+    BloomFilter *newUnion = unionfilter;
+    for (int i=0; i<getCount()+1; i++) {
+        newUnion = newUnion->logicalOr(C[i]->unionfilter);
+    }
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, newUnion->getData()[i]);
+    }
+}
+
+BloomFilter * BloomFilterIndexNode::getMinJaccardFilter(BloomFilter *filter) {
+    return C[0]->getMinJaccardFilter(filter);
+}
+
+int BloomFilterIndexNode::getMinKey() {
+    return C[0]->getMinKey();
+}
+
+int BloomFilterIndexNode::getMaxKey() {
+    return C[getCount()]->getMaxKey(); 
+}
+
+vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
+    return C[0]->collectAllFilters(); 
+}
+
+int BloomFilterIndexNode::countFilters() {
+    return C[0]->countFilters();
+}
+
+int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
+    return C[0]->computeSubsetId(filter); 
+}
+
+int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
+    return C[0]->computeSupersetId(filter); 
 }
 
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
@@ -146,20 +202,9 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
     if (getCount()<getMax()) {
         int index = indexOfKey(id);
         shiftAndInsert(filter);
-        int *parentKeys = getKeys();
-        cout << "\nParent's new keys:";
-        for (int i=0; i<getCount(); i++) {
-            cout << " " << parentKeys[i];
-        }
-        cout << "\nParent's new filters: ";
-        for (int i=0; i<getCount(); i++) {
-            cout << "|";
-            filters[i]->printArr();
-        }
-        cout << "|" << endl;
-        
         C[index] = leftNode;
         C[index+1] = rightNode;
+        updateUnionFilter();
     }
     else {
         int mid;
@@ -173,10 +218,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            cout << "\nKey to be inserted into parent: " << middle->getId();
-            cout << "\nFilter to be inserted into parent: ";
-            middle->printArr();
-            cout << endl;
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
@@ -196,11 +237,6 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             for (int i=s->getMax()-1; i>s->getCount()-1; i--) {
                 s->filters[i] = NULL;
             }
-            
-            // Delete dangeling pointers in root
-            /* for (int i=p->getMax(); i>p->getCount(); i--) {
-                p->C[i] = NULL;
-            } */
         }
         else {
             BloomFilterNode *p = getParent();
@@ -208,16 +244,12 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
             
             // Get middle filter
             BloomFilter *middle = s->filters[0];
-            cout << "\nKey to be inserted into parent: " << middle->getId();
-            cout << "\nFilter to be inserted into parent: ";
-            middle->printArr();
-            cout << endl;
             p->insert(middle, this, s);
             
             // Shift right index node's keys and filters
             int *rightIndexKeys = s->getKeys();
             BloomFilter **rightIndexFilters = s->filters;
-            for (int i=0; i<s->getCount(); i++) {
+            for (int i=1; i<s->getCount(); i++) {
                 rightIndexKeys[i-1] = rightIndexKeys[i];
                 rightIndexFilters[i-1] = rightIndexFilters[i];
             }
@@ -232,27 +264,93 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
                 s->filters[i] = NULL;
             }
             
-            cout << "\nRight index node's new keys: ";
-            for (int i=0; i<s->getCount(); i++) {
-                cout << " " << rightIndexKeys[i];
+        }
+        
+        // Update union filters
+        s->updateUnionFilter();
+        getParent()->updateUnionFilter();
+    }
+}
+
+BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
+    
+    // Check if query filter is subset or superset of any child's union filters
+    // If more than one: Determine best result
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
             }
-            
-            cout << "\nRight index node's new filters: |";
-            for (int i=0; i<s->getCount(); i++) {
-                s->filters[i]->printArr();
-                cout << "|";
-            }
-            
-            cout << "\nRoot's new keys: ";
-            for (int i=0; i<p->getCount(); i++) {
-                cout << " " << p->getKeys()[i];
-            }
-            
-            cout << "\nRoot's new filters: |";
-            for (int i=0; i<p->getCount(); i++) {
-                p->filters[i]->printArr();
-                cout << "|";
+        }
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
             }
         }
     }
+    
+    // If both false: Conduct normal subtree query
+    if (set == false) {
+        last = getParent()->getKeys()[getParent()->getCount()-1];
+        return path->simSubtreeQuery(filter, last);
+    }
+    else {
+        return path->simQuery(filter);
+    }
+}
+
+BloomFilter * BloomFilterIndexNode::simSubtreeQuery(BloomFilter *filter, int l) {
+    return C[0]->simSubtreeQuery(filter, l);
+}
+
+vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
+    float min = 1;
+    float jacc;
+    BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
+    // Check if query filter is subset or superset of any child's union filters
+    // If more than one: Determine best result
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+        }
+    }
+    
+    // If both false: Conduct normal subtree query
+    if (set == false) {
+        last = getParent()->getKeys()[getParent()->getCount()-1];
+        return path->simSubtreeQueryVec(filter, k, last);
+    }
+    else {
+        return path->simQueryVec(filter, k);
+    }
+}
+
+vector<BloomFilter> BloomFilterIndexNode::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
+    return C[0]->simSubtreeQueryVec(filter, k, l);
 }

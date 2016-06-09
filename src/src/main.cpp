@@ -1260,7 +1260,7 @@ int main(int argc, const char *argv[]) {
     l6.insert(&f622);
     l6.insert(&f623);
     l6.insert(&f624);
-    l6.printAll(); 
+    l6.printAll();
     
     // Section search queries
     cout << "\nCheck section queries";
