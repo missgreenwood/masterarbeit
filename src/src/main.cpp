@@ -1242,7 +1242,7 @@ int main(int argc, const char *argv[]) {
     l5.insert(&f109);
     l5.insert(&f110);
     cout << "\nBloomFilterList l5:\n\n";
-    l5.printAll();
+    // l5.printAll();
     cout << "Insert filters 601..604, 609..614, 619..624 into l6\n";
     l6.insert(&f601);
     l6.insert(&f602);
@@ -1260,6 +1260,7 @@ int main(int argc, const char *argv[]) {
     l6.insert(&f622);
     l6.insert(&f623);
     l6.insert(&f624);
+    l6.printAll(); 
     
     // Section search queries
     cout << "\nCheck section queries";
@@ -1272,13 +1273,41 @@ int main(int argc, const char *argv[]) {
     f104.printArr();
     cout <<")\n";
     cout << "Result should be: 97, 93 or 98\n";
-    l5.simQuery(&f104);
-    /* result = l5.simQuery(&f104);
+    result = l5.simQuery(&f104);
+    cout << "Computed result: " << result->getId() << " (";
+    result->printArr();
+    cout << ")";
+    
+    cout << "\n\nSection query for nearest neighbor of f595 (";
+    f595.printArr();
+    cout << ")\n";
+    cout << "Result should be: 595 (001001)";
+    result = l6.simQuery(&f595);
     cout << "\nComputed result: " << result->getId() << " (";
-    result->printArr(); */
+    result->printArr();
+    cout << ")";
     
-    // TODO
+    cout << "\n\nSection query for 3 nearest neighbors of f104 (";
+    f104.printArr();
+    cout << ")\n";
+    cout << "Result should be: 93, 98, 97 in any order";
+    vector<BloomFilter*> pResults = l5.simQueryVec(&f104, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<pResults.size()-1; i++) {
+        cout << pResults[i]->getId() << ", ";
+    }
+    cout << pResults[pResults.size()-1]->getId();
     
+    cout << "\n\nSection query for 3 nearest neighbors of f595 (";
+    f595.printArr();
+    cout << ")\n";
+    cout << "Result should be: 595 and two filters out of 593/585/591 in any order";
+    pResults = l6.simQueryVec(&f595, 3);
+    cout << "\nComputed result: ";
+    for (int i=0; i<pResults.size()-1; i++) {
+        cout << pResults[i]->getId() << ", ";
+    }
+    cout << pResults[pResults.size()-1]->getId();
     cout << endl;
     return 0;
 }

@@ -29,6 +29,8 @@ public:
     vector<BloomFilter> collectAllFilters();
     int countFilters(); 
     vector<pair<int, float>> computeAllDistances(BloomFilter *filter);
+    
+    // Comparison
     vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k); 
     
     // Insertion
@@ -36,9 +38,7 @@ public:
     
     // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
-    
-    // TODO
-    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter*> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

@@ -163,10 +163,11 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 13.75 h)
+KW 23 (noch 10.75 h)
 * Mo, 06.06 (7.5 h)
 * Di, 07.06. (4.25 h)
 * Mi, 08.06. (6 h)
+* Do, 09.06. (3 h)
 
 
 ## TODO
@@ -178,12 +179,15 @@ KW 23 (noch 13.75 h)
 	* 1. Einfüge-Operation: Über Teilmengen 
 		-> Suchalgorithmen fertig checken (realistische Größen)
 		-> Sollte sein: immer k-1 gute Ergebnisse bei Teilmengen und Supermengen (minimaler Filter wird ersetzt)
+		-> evtl. Rückgabewert vector<BloomFilter> ändern in vector<BloomFilter*> (simQueryVec())
+		-> evtl. Suchalgorithmen optimieren 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
-		-> Bloom-Filter wird an der Stelle eingefügt, wo die meisten gleichen/ähnlichen Teilsegmente sind
-		-> Suchalgorithmen anpassen und checken (size 4/size 6, realistische Größen)
+		-> Suchalgorithmen fertig checken (realistische Größen)
+		-> evtl. Suchalgorithmen optimieren 
 
 	* Berechnung Jaccard-Distanz ändern und testen 
+	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
 		
 3. Evaluation 
 

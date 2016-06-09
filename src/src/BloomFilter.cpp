@@ -61,6 +61,8 @@ BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
     return *this; 
 }
 
+// Overloaded > operator
+
 void BloomFilter::printData() {
     cout << "Bloom filter " << getId() << ": ";
     for (int i=0; i<size; i++) {

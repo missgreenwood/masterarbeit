@@ -227,7 +227,7 @@ BloomFilter * BloomFilterList::simQuery(BloomFilter *filter) {
         cout << "List and filter have different sizes!\n";
         return {};
     }
-    vector<BloomFilter*> candidates;
+    vector<pair<BloomFilter*, int>> candidates;
     BloomFilterListNode *tmp = head;
     
     // Collect all candidates
@@ -235,26 +235,107 @@ BloomFilter * BloomFilterList::simQuery(BloomFilter *filter) {
     while (tmp != NULL) {
         if (filter->getData()[index] == 0) {
             for (int i=0; i<tmp->zeroLinks.size(); i++) {
-                candidates.push_back(tmp->zeroLinks[i]);
+                candidates.push_back(make_pair(tmp->zeroLinks[i], tmp->zeroLinks[i]->getId()));
             }
         }
         else {
             for (int i=0; i<tmp->oneLinks.size(); i++) {
-                candidates.push_back(tmp->oneLinks[i]);
+                candidates.push_back(make_pair(tmp->oneLinks[i], tmp->oneLinks[i]->getId()));
             }
         }
         index++;
         tmp = tmp->getNext();
     }
     
-    cout << "Found candidates:\n";
-    for (int i=0; i<candidates.size(); i++) {
-        cout << candidates[i]->getId() << endl;
+    // Sort candidates by id
+    sort(candidates.begin(), candidates.end(), [] (const pair<BloomFilter*, int> &left, const pair<BloomFilter*, int> &right) {
+        return left.second < right.second;
+    });
+    
+    // Fill result vector with pairs <BloomFilter*, frequency>
+    vector<pair<BloomFilter*, int>> result;
+    int count = 0;
+    for (int i=candidates.size()-1; i>0; i-=count) {
+        count = 0;
+        while (candidates[i].second == candidates[i-count].second) {
+            count++;
+        }
+        result.push_back(make_pair(candidates[i].first, count));
     }
     
-    // TODO
-    // Sort candidates by frequency
+    // Sort result vector by frequency
+    sort(result.begin(), result.end(), [] (const pair<BloomFilter*, int> &left, const pair<BloomFilter*, int> &right) {
+        return left.second > right.second;
+    });
     
     // Return first element
-    return candidates[0];
+    return result[0].first;
+}
+
+vector <BloomFilter*> BloomFilterList::simQueryVec(BloomFilter *filter, int k) {
+    if (head == NULL) {
+        cout << "List is empty!\n";
+        return {};
+    }
+    if (size != filter->getSize()) {
+        cout << "List and filter have different sizes!\n";
+        return {};
+    }
+    vector<pair<BloomFilter*, int>> candidates;
+    BloomFilterListNode *tmp = head;
+    
+    // Collect all candidates
+    int index = 0;
+    while (tmp != NULL) {
+        if (filter->getData()[index] == 0) {
+            for (int i=0; i<tmp->zeroLinks.size(); i++) {
+                candidates.push_back(make_pair(tmp->zeroLinks[i], tmp->zeroLinks[i]->getId()));
+            }
+        }
+        else {
+            for (int i=0; i<tmp->oneLinks.size(); i++) {
+                candidates.push_back(make_pair(tmp->oneLinks[i], tmp->oneLinks[i]->getId()));
+            }
+        }
+        index++;
+        tmp = tmp->getNext();
+    }
+    
+    // Sort candidates by id
+    sort(candidates.begin(), candidates.end(), [] (const pair<BloomFilter*, int> &left, const pair<BloomFilter*, int> &right) {
+        return left.second < right.second;
+    });
+    
+    // Fill intermediate vector with pairs <BloomFilter*, frequency>
+    vector<pair<BloomFilter*, int>> intermediate;
+    int count = 0;
+    for (int i=candidates.size()-1; i>0; i-=count) {
+        count = 0;
+        while (candidates[i].second == candidates[i-count].second) {
+            count++;
+        }
+        intermediate.push_back(make_pair(candidates[i].first, count));
+    }
+    vector<BloomFilter*> result;
+    
+    // Sort intermediate vector by frequency
+    sort(intermediate.begin(), intermediate.end(), [] (const pair<BloomFilter*, int> &left, const pair<BloomFilter*, int> &right) {
+        return left.second > right.second;
+    });
+    
+    // Check if enough intermediates have been found
+    if (intermediate.size() < k) {
+        cout << "Too little candidates in list!\n";
+        for (int i=0; i<intermediate.size(); i++) {
+            result.push_back(intermediate[i].first);
+        }
+    }
+    else {
+        
+        // Return first k Bloom filters from intermediate vector
+        for (int i=0; i<k; i++) {
+            result.push_back(intermediate[i].first);
+        }
+    }
+    return result;
 }

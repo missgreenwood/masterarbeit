@@ -59,13 +59,15 @@ public:
     vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
     
-    // Insertion methods
+    // Comparison
+    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
+    
+    // Insertion
     void insert(BloomFilter *filter);
     void insertAsSets(BloomFilter *filter);
     
-    // Similarity queries and comparison methods
+    // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
-    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
     vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
 };
 
