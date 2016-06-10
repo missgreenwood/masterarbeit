@@ -203,9 +203,7 @@ vector<pair<BloomFilter, float>> BloomFilterTree::compare(BloomFilter *filter, i
         }
     }
     
-    cout << k << " nearest neighbors of f" << filter->getId() << " (";
-    filter->printArr();
-    cout << ") in tree:\n\n";
+    cout << k << " nearest neighbors of f" << filter->getId() << " in tree:\n\n";
     for (int i=0; i<distances.size(); i++) {
         cout << "jacc(" << filter->getId() << ", " << distances[i].first.getId() << "): " << distances[i].second << "\n";
     }

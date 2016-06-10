@@ -10,9 +10,10 @@
 
 using namespace std;
 
+
 int main(int argc, const char *argv[]) {
     
-    // Test driver for class BTree
+    // Class BTree
     cout << "CLASS BTree";
     cout << "\n-----------";
     cout << "\nCreate instance of BTree with minimum degree 3 (t1)";
@@ -100,7 +101,7 @@ int main(int argc, const char *argv[]) {
     cout << endl << endl << endl;
     
     
-    // Test driver for class BPlusTree
+    // Class BPlusTree
     cout << "CLASS BPlusTree";
     cout << "\n----------------\n";
     cout << "Create leaf with minimum degree 3/max. elements 5 (l7)";

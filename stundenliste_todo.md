@@ -178,8 +178,31 @@ KW 23 (noch 5.75 h)
 2. Implementierung
 
 	* 1. Einfüge-Operation: Über Teilmengen 
-		-> Suchalgorithmen fertig checken (realistische Größen)
-		-> evtl. Rückgabewert vector<BloomFilter> ändern in vector<BloomFilter*> (simQueryVec())
+
+		Filtergröße 256: 
+		- mySubsetCount() lässt sich schon bei Filtergröße 100 nicht mehr sinnvoll berechnen 
+		- jeder Filter wird nur einmal eingefügt
+		- berechnete optimale subset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
+		- berechnete optimale superset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
+		- simQuery() liefert meist falsche Ergebnisse: 
+			Gefordert (Rang): 					Geliefert (Rang): 
+			1									10 
+												20
+												55
+												44
+												1
+												22
+		- simQueryVec() liefert meist gute Ergebnisse: 
+			Gefordert (Rang): 					Geliefert (Rang): 
+			1, 2, 3								1, 2, 3
+			1, 2, 3								1, 2, 5
+			1, 2, 3								1, 2, 3
+			1, 2, 3								1, 2, 4
+			1, 2, 3								1, 2, 4
+			1, 2, 3								4, 5, 6 
+
+		Filtergröße 512: 
+
 		-> evtl. Suchalgorithmen optimieren 
 		
 	* 2. Einfüge-Operation: Über Teilsegmente
@@ -188,12 +211,14 @@ KW 23 (noch 5.75 h)
 		-> evtl. destructor für BloomFilterListNode
 
 	* Berechnung Jaccard-Distanz ändern und testen 
-	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
+	* Initialisierung der Bloom-Filter checken (meistens jacc-Werte zw. 0.6 und 0.9)
 		
 3. Evaluation 
 
 	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
+	* Kombinationen Filtergröße/Filteranzahl/Verzweigungsgrad checken
 	* Bloom-Filter-Größe 256/512 Bit, # Bloom-Filter 100
+	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
 	* z.B. in R
 
 4. Ausarbeitung 
