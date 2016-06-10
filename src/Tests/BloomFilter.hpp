@@ -31,16 +31,16 @@ public:
     BloomFilter(int s, int i);
     ~BloomFilter();
     
-    // Overloaded assignment operator
-    BloomFilter & operator = (const BloomFilter &fSource); 
+    BloomFilter & operator = (const BloomFilter &fSource);
     
-    void printData();
     void setId(int value);
     int getId();
     int getSize();
     void setValue(int index, int value);
-    void printArr();
     int *getData();
+    
+    void printData();
+    void printArr();
     void initRandom();
     double fractionOfZeros();
     double eSize();
@@ -59,10 +59,6 @@ public:
     float setUnion(BloomFilter *filter);
     float setIntersection(BloomFilter *filter);
     float computeJaccard(BloomFilter *filter); 
-        
-    friend class BloomFilterNode;
-    friend class BloomFilterTree;
 };
-
 
 #endif

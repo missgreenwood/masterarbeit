@@ -15,7 +15,7 @@ int main(int argc, const char *argv[]) {
     // Test driver for class BTree
     cout << "CLASS BTree";
     cout << "\n-----------";
-    cout << "\n\nCreate instance of BTree with minimum degree 3 (t1)";
+    cout << "\nCreate instance of BTree with minimum degree 3 (t1)";
     BTree t1(3);
     cout << "\n\nInsert keys into t1: 10, 20, 30, 40, 50, 60, 70, 80, 90";
     t1.insert(10);
@@ -102,7 +102,7 @@ int main(int argc, const char *argv[]) {
     
     // Test driver for class BPlusTree
     cout << "CLASS BPlusTree";
-    cout << "\n----------------\n\n";
+    cout << "\n----------------\n";
     cout << "Create leaf with minimum degree 3/max. elements 5 (l7)";
     BPlusLeaf l7(3);
     cout << "\n\nInsert keys into l7: 1, 3, 7, 8, 9";
@@ -405,6 +405,7 @@ int main(int argc, const char *argv[]) {
     cout << endl;
     b6.traverse();
     
+    // TODO
     /* cout << "\n\nCASE 7a - Underflow in parent, merge parent with previous index node (11, 26):\n";
      b2.remove(11);
      b2.remove(26);
@@ -419,7 +420,7 @@ int main(int argc, const char *argv[]) {
     
     // Class BloomFilter
     
-    cout << "CLASS BloomFilter" << endl;
+    cout << "\n\n\nCLASS BloomFilter" << endl;
     cout << "-----------------" << endl << endl;
     cout << "Create 22 instances of BloomFilter with ids 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 25, 26, 96, array length 10, random values\n";
     BloomFilter f1(10, 1);
@@ -490,28 +491,10 @@ int main(int argc, const char *argv[]) {
     f96.initRandom();
     f96.printData();
     
-    cout << "\nCreate 100 instances of BloomFilter with random ids, array length 256, random values";
-    cout << "\nCreate new BloomFilter vector (v4) and insert all filters";
-    BloomFilter *filter;
-    int id;
-    vector<BloomFilter> v4;
-    for (int i=0; i<100; i++) {
-        filter = new BloomFilter(256, rand());
-        id = filter->getId();
-        filter->initRandom();
-        v4.push_back(*filter);
-    }
-    
     // Class BloomFilterTree
     
-    cout << "\n\nCLASS BloomFilterTree";
+    cout << "\n\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n\n";
-    
-    cout << "Create instance of BloomFilterTree with minimum degree 3/max elements 6, filter size 256 and insert all filters in v4 as sets";
-    BloomFilterTree b5(3, 256);
-    for (int i=0; i<v4.size(); i++) {
-        b5.insertAsSets(&v4[i]);
-    }
     
     cout << "Create instance of 4-level BloomFilterTree with minimum degree 1/max. elements 2, filter size 10 (b1)\n\n";
     BloomFilterTree b1(1, 10);
@@ -538,7 +521,7 @@ int main(int argc, const char *argv[]) {
     }
     
     cout << "\n\nCheck Jaccard distance computation";
-    cout << "\n----------------------------------\n";
+    cout << "\n----------------------------------";
     cout << "\nf3: ";
     f3.printArr();
     cout << "\nf5: ";
@@ -681,7 +664,7 @@ int main(int argc, const char *argv[]) {
     b2.insert(&f16);
     
     cout << "\nCheck union filter construction";
-    cout << "\n-------------------------------\n\n";
+    cout << "\n-------------------------------\n";
     b2.traverse();
     cout << endl;
     b2.traverseFilters();
@@ -710,7 +693,7 @@ int main(int argc, const char *argv[]) {
     // Class BloomFilterLeaf
     
     cout << "\n\n\nCLASS BloomFilterLeaf";
-    cout << "\n---------------------\n\n";
+    cout << "\n---------------------\n";
     cout << "Create leaves with minimum degree 3/max. elements 6 (l2, l3)\n\n";
     BloomFilterLeaf l2(3, f3.getSize());
     BloomFilterLeaf l3(3, f3.getSize());
@@ -1502,9 +1485,6 @@ int main(int argc, const char *argv[]) {
     BloomFilter f595(f609);
     b4.compare(&f595, b4.countFilters());
     cout << endl;
-    BloomFilter f20(256, 20);
-    f20.initRandom();
-    b5.compare(&f20, b5.countFilters());
     
     cout << "\nLEAF QUERY for nearest neighbor of f104 (";
     f104.printArr();
@@ -1541,12 +1521,12 @@ int main(int argc, const char *argv[]) {
     cout << ")\n";
     cout << "Result should be: 93, 98, 97";
     L1 = b3.search(93);
-    vector<BloomFilter> results = L1->simQueryVec(&f104, 3);
+    vector<BloomFilter*> results = L1->simQueryVec(&f104, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nLEAF QUERY for 3 nearest neighbors of f595 (";
     f595.printArr();
@@ -1556,9 +1536,9 @@ int main(int argc, const char *argv[]) {
     results = L1->simQueryVec(&f595, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nTREE QUERY for nearest neighbor of f104 (";
     f104.printArr();
@@ -1585,9 +1565,9 @@ int main(int argc, const char *argv[]) {
     results = b3.simQueryVec(&f104, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f595 (";
     f595.printArr();
@@ -1596,9 +1576,9 @@ int main(int argc, const char *argv[]) {
     results = b4.simQueryVec(&f595, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     // Class BloomFilterListNode
     

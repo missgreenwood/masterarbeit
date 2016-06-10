@@ -17,6 +17,91 @@ BloomFilterIndexNode::~BloomFilterIndexNode() {
     delete[] C;
 }
 
+void BloomFilterIndexNode::traverse() {
+    for (int i=0; i<getCount()+1; i++) {
+        C[i]->traverse();
+    }
+}
+
+void BloomFilterIndexNode::traverseFilters() {
+    for (int i=0; i<getCount()+1; i++) {
+        C[i]->traverseFilters();
+    }
+}
+
+float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+    return C[0]->computeMinJaccard(filter);
+}
+
+int BloomFilterIndexNode::getMinJaccardKey(BloomFilter *filter) {
+    return C[0]->getMinJaccardKey(filter);
+}
+
+void BloomFilterIndexNode::updateUnionFilter() {
+    
+    // Clear union filter
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, 0);
+    }
+    
+    // Calculate union of all children union filters
+    BloomFilter *newUnion = unionfilter;
+    for (int i=0; i<getCount()+1; i++) {
+        newUnion = newUnion->logicalOr(C[i]->unionfilter);
+    }
+    for (int i=0; i<getFilterSize(); i++) {
+        unionfilter->setValue(i, newUnion->getData()[i]);
+    }
+}
+
+BloomFilter * BloomFilterIndexNode::getMinJaccardFilter(BloomFilter *filter) {
+    return C[0]->getMinJaccardFilter(filter);
+}
+
+int BloomFilterIndexNode::getMinKey() {
+    return C[0]->getMinKey();
+}
+
+int BloomFilterIndexNode::getMaxKey() {
+    return C[getCount()]->getMaxKey();
+}
+
+vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
+    return C[0]->collectAllFilters();
+}
+
+int BloomFilterIndexNode::countFilters() {
+    return C[0]->countFilters();
+}
+
+int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
+    return C[0]->computeSubsetId(filter);
+}
+
+int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
+    return C[0]->computeSupersetId(filter);
+}
+
+// Return false if k is not in leaf of subtree, true otherwise
+bool BloomFilterIndexNode::contains(int k) {
+    int i=0;
+    while (getKeys()[i]<k && i<getCount()-1) {
+        i++;
+    }
+    if (k<getKeys()[i]) {
+        return C[i]->contains(k);
+    }
+    else if (k>=getKeys()[i] && C[i+1]) {
+        return C[i+1]->contains(k);
+    }
+    else return false;
+}
+
+BloomFilterNode * BloomFilterIndexNode::search(int k) {
+    int index = indexOfKey(k);
+    return C[index]->search(k);
+}
+
 BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle) {
     assert(getCount() == getMax());
     
@@ -91,92 +176,6 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
     delete[] merged;
     delete[] mergedNodes;
     return s;
-}
-
-// Returns false if k is not in leaf of subtree
-// Returns true if k is in leaf of subtree
-bool BloomFilterIndexNode::contains(int k) {
-    int i=0;
-    while (getKeys()[i]<k && i<getCount()-1) {
-        i++;
-    }
-    if (k<getKeys()[i]) {
-        return C[i]->contains(k);
-    }
-    else if (k>=getKeys()[i] && C[i+1]) {
-        return C[i+1]->contains(k);
-    }
-    else return false;
-}
-
-void BloomFilterIndexNode::traverse() {
-    for (int i=0; i<getCount()+1; i++) {
-        C[i]->traverse();
-    }
-}
-
-void BloomFilterIndexNode::traverseFilters() {
-    for (int i=0; i<getCount()+1; i++) {
-        C[i]->traverseFilters();
-    }
-}
-
-float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
-    return C[0]->computeMinJaccard(filter);
-}
-
-int BloomFilterIndexNode::getMinJaccardKey(BloomFilter *filter) {
-    return C[0]->getMinJaccardKey(filter); 
-}
-
-BloomFilterNode * BloomFilterIndexNode::search(int k) {
-    int index = indexOfKey(k);
-    return C[index]->search(k);
-}
-
-void BloomFilterIndexNode::updateUnionFilter() {
-    
-    // Clear union filter
-    for (int i=0; i<getFilterSize(); i++) {
-        unionfilter->setValue(i, 0);
-    }
-    
-    // Calculate union of all children union filters
-    BloomFilter *newUnion = unionfilter;
-    for (int i=0; i<getCount()+1; i++) {
-        newUnion = newUnion->logicalOr(C[i]->unionfilter);
-    }
-    for (int i=0; i<getFilterSize(); i++) {
-        unionfilter->setValue(i, newUnion->getData()[i]);
-    }
-}
-
-BloomFilter * BloomFilterIndexNode::getMinJaccardFilter(BloomFilter *filter) {
-    return C[0]->getMinJaccardFilter(filter);
-}
-
-int BloomFilterIndexNode::getMinKey() {
-    return C[0]->getMinKey();
-}
-
-int BloomFilterIndexNode::getMaxKey() {
-    return C[getCount()]->getMaxKey(); 
-}
-
-vector<BloomFilter> BloomFilterIndexNode::collectAllFilters() {
-    return C[0]->collectAllFilters(); 
-}
-
-int BloomFilterIndexNode::countFilters() {
-    return C[0]->countFilters();
-}
-
-int BloomFilterIndexNode::computeSubsetId(BloomFilter *filter) {
-    return C[0]->computeSubsetId(filter); 
-}
-
-int BloomFilterIndexNode::computeSupersetId(BloomFilter *filter) {
-    return C[0]->computeSupersetId(filter); 
 }
 
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
@@ -314,15 +313,16 @@ BloomFilter * BloomFilterIndexNode::simSubtreeQuery(BloomFilter *filter, int l) 
     return C[0]->simSubtreeQuery(filter, l);
 }
 
-vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
+vector<BloomFilter*> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
     float min = 1;
     float jacc;
     BloomFilterNode *path = C[0];
     bool set = false;
     int last;
-    // Check if query filter is subset or superset of any child's union filters
+    
+    // Check if query filter is subset or superset of childrens' union filters
     // If more than one: Determine best result
-    for (int i=0; i<getCount()+1; i++) {
+    for (int i=0; i<getCount(); i++) {
         if (C[i]->unionfilter->isSubset(filter)) {
             set = true;
             jacc = computeJaccard(C[i]->unionfilter, filter);
@@ -351,6 +351,6 @@ vector<BloomFilter> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k
     }
 }
 
-vector<BloomFilter> BloomFilterIndexNode::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
-    return C[0]->simSubtreeQueryVec(filter, k, l);
+vector <BloomFilter*> BloomFilterIndexNode::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
+    return C[0]->simSubtreeQueryVec(filter, k, l); 
 }

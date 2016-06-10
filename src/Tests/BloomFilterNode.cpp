@@ -42,6 +42,18 @@ void BloomFilterNode::setParent(BloomFilterNode *node) {
     parent = node;
 }
 
+int * BloomFilterNode::getKeys() {
+    return keys;
+}
+
+int BloomFilterNode::getMax() {
+    return 2*t;
+}
+
+int BloomFilterNode::getFilterSize() {
+    return filtersize;
+}
+
 int BloomFilterNode::indexOfKey(int k) {
     if (n == 0) {
         return 0;
@@ -53,24 +65,12 @@ int BloomFilterNode::indexOfKey(int k) {
     return i;
 }
 
-int * BloomFilterNode::getKeys() {
-    return keys;
-}
-
-int BloomFilterNode::getMax() {
-    return 2*t;
-}
-
 void BloomFilterNode::increment() {
     n++;
 }
 
 void BloomFilterNode::decrement() {
     n--;
-}
-
-int BloomFilterNode::getFilterSize() {
-    return filtersize;
 }
 
 double BloomFilterNode::computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2) {

@@ -1133,12 +1133,12 @@ int main(int argc, const char *argv[]) {
     cout << ")\n";
     cout << "Result should be: 93, 98, 97";
     L1 = b3.search(93);
-    vector<BloomFilter> results = L1->simQueryVec(&f104, 3);
+    vector<BloomFilter*> results = L1->simQueryVec(&f104, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nLEAF QUERY for 3 nearest neighbors of f595 (";
     f595.printArr();
@@ -1148,9 +1148,9 @@ int main(int argc, const char *argv[]) {
     results = L1->simQueryVec(&f595, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nTREE QUERY for nearest neighbor of f104 (";
     f104.printArr();
@@ -1177,9 +1177,9 @@ int main(int argc, const char *argv[]) {
     results = b3.simQueryVec(&f104, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f595 (";
     f595.printArr();
@@ -1188,9 +1188,9 @@ int main(int argc, const char *argv[]) {
     results = b4.simQueryVec(&f595, 3);
     cout << "\nComputed result: ";
     for (int i=0; i<results.size()-1; i++) {
-        cout << results[i].getId() << ", ";
+        cout << results[i]->getId() << ", ";
     }
-    cout << results[results.size()-1].getId();
+    cout << results[results.size()-1]->getId();
     
     // Class BloomFilterListNode
     

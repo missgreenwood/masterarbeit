@@ -7,6 +7,7 @@
 
 #include "BloomFilterListNode.hpp"
 
+
 class BloomFilterList {
 private:
     BloomFilterListNode *head;
@@ -18,13 +19,14 @@ public:
     BloomFilterList(int _f);
     ~BloomFilterList();
     
+    int getSize();
+    
     // List management methods
     void clear();
     void printPosition(int index);
     void printAll(); 
     void updateNode(BloomFilter *filter, int index);
     void tailAppend(int position);
-    int getSize();
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     vector<BloomFilter> collectAllFilters();
     int countFilters(); 

@@ -5,7 +5,6 @@
 #ifndef BloomFilterListNode_hpp
 #define BloomFilterListNode_hpp
 
-
 #include <iostream>
 #include "BloomFilter.hpp"
 
@@ -26,10 +25,10 @@ public:
     void setPosition(int p);
     BloomFilterListNode *getNext();
     void setNext(BloomFilterListNode *n);
+    
+    // List management methods
     void printZeroLinks();
     void printOneLinks(); 
-    
-    friend class BloomFilterList;
 };
 
 #endif 

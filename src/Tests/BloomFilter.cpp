@@ -61,16 +61,6 @@ BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
     return *this; 
 }
 
-// Overloaded > operator
-
-void BloomFilter::printData() {
-    cout << "Bloom filter " << getId() << ": ";
-    for (int i=0; i<size; i++) {
-        cout << data[i];
-    }
-    cout << endl;
-}
-
 void BloomFilter::setId(int value) {
     id = value;
 }
@@ -90,7 +80,15 @@ void BloomFilter::setValue(int index, int value) {
 int * BloomFilter::getData() {
     return data;
 }
- 
+
+void BloomFilter::printData() {
+    cout << "Bloom filter " << getId() << ": ";
+    for (int i=0; i<size; i++) {
+        cout << data[i];
+    }
+    cout << endl;
+}
+
 void BloomFilter::printArr() {
     for (int i=0; i<getSize(); i++) {
         cout << data[i]; 
@@ -244,6 +242,7 @@ int BloomFilter::possibleAddedOnes() {
     return validOnes() - setOnes();
 }
 
+// Compute the set union of two Bloom filters
 float BloomFilter::setUnion(BloomFilter *filter) {
     float result = 0;
     int *data2 = filter->getData();

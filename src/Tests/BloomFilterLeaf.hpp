@@ -21,35 +21,37 @@ public:
     BloomFilterLeaf(int _t, int _s, BloomFilterLeaf *_prev, BloomFilterLeaf *_next);
     ~BloomFilterLeaf();
     
+    BloomFilterLeaf *getPrev();
+    void setPrev(BloomFilterLeaf *leaf);
+    BloomFilterLeaf *getNext();
+    void setNext(BloomFilterLeaf *leaf);
+    
     // Tree management
+    void traverse();
+    void traverseFilters();
+    float computeMinJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
+    void updateUnionFilter();
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
     int countFilters(); 
-    BloomFilterLeaf *split(BloomFilter *filter);
-    void traverse();
-    void traverseFilters();
-    float computeMinJaccard(BloomFilter *filter);
-    int getMinJaccardKey(BloomFilter *filter);
-    bool contains(int k);
-    BloomFilterNode *search(int k);
-    BloomFilterLeaf *getPrev();
-    void setPrev(BloomFilterLeaf *leaf);
-    BloomFilterLeaf *getNext();
-    void setNext(BloomFilterLeaf *leaf);
-    void updateUnionFilter();
     int computeSubsetId(BloomFilter *filter);
     int computeSupersetId(BloomFilter *filter);
+    bool contains(int k);
+    BloomFilterNode *search(int k);
     
-    // Insertion methods
+    BloomFilterLeaf *split(BloomFilter *filter);
+        
+    // Insertion
     void insert(BloomFilter *filter);
     
     // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
     BloomFilter *simSubtreeQuery(BloomFilter *filter, int l);
-    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
-    vector<BloomFilter> simSubtreeQueryVec(BloomFilter *filter, int k, int l);
+    vector<BloomFilter*> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter*> simSubtreeQueryVec(BloomFilter *filter, int k, int l);
 };
 
 #endif

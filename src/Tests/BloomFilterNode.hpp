@@ -20,7 +20,7 @@ private:
     
 public:
     BloomFilter **filters;
-    BloomFilter *unionfilter;    // Union of all filters in subtree of this node
+    BloomFilter *unionfilter;    // Set union of all filters in subtree of this node
     BloomFilterNode(int _t, int _s);
     virtual ~BloomFilterNode();
     
@@ -29,12 +29,13 @@ public:
     void setCount(int count);
     BloomFilterNode *getParent();
     void setParent(BloomFilterNode *node);
-    int indexOfKey(int k);
     int *getKeys();
     int getMax();
+    int getFilterSize();
+    
+    int indexOfKey(int k);
     void increment();
     void decrement();
-    int getFilterSize();
     
     // Tree management
     virtual void traverse() = 0;
@@ -52,21 +53,21 @@ public:
     virtual vector<BloomFilter> collectAllFilters() = 0;
     virtual int countFilters() = 0; 
     virtual int computeSubsetId(BloomFilter *filter) = 0;
+    virtual int computeSupersetId(BloomFilter *filter) = 0;
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
-    virtual int computeSupersetId(BloomFilter *filter) = 0;
     
-    // Insertion methods
+    // Insertion
     virtual void shiftAndInsert(BloomFilter *filter);
-    virtual void insertAsSets(BloomFilter *filter);
     virtual void insert(BloomFilter *filter, BloomFilterNode *oldNode, BloomFilterNode *newNode);
     virtual void insert(BloomFilter *filter) = 0;
+    virtual void insertAsSets(BloomFilter *filter);
     
-    // Query methods
+    // Similarity queries
     virtual BloomFilter *simQuery(BloomFilter *filter) = 0;
     virtual BloomFilter *simSubtreeQuery(BloomFilter *filter, int l) = 0;
-    virtual vector<BloomFilter> simQueryVec(BloomFilter *filter, int k) = 0;
-    virtual vector<BloomFilter> simSubtreeQueryVec(BloomFilter *filter, int k, int l) = 0;
+    virtual vector<BloomFilter*> simQueryVec(BloomFilter *filter, int k) = 0;
+    virtual vector<BloomFilter*> simSubtreeQueryVec(BloomFilter *filter, int k, int l) = 0; 
 };
 
 #endif 

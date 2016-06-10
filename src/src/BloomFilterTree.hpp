@@ -41,21 +41,23 @@ public:
     BloomFilterTree(int _t, int _s);
     ~BloomFilterTree();
     
-    // Tree management
-    bool contains(int k);
-    BloomFilterNode *search(int k);
     BloomFilterNode *getRoot();
+    
+    // Tree management
     void traverse();
     void traverseFilters();
     float computeMinJaccard(BloomFilter *filter);
     int getMinJaccardKey(BloomFilter *filter);
-    BloomFilter *getMinJaccardFilter(BloomFilter *filter); 
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     int getMinKey();
     int getMaxKey();
+    vector<BloomFilter> collectAllFilters();
+    int countFilters();
     int computeSubsetId(BloomFilter *filter);
     int computeSupersetId(BloomFilter *filter);
-    vector<BloomFilter> collectAllFilters();
-    int countFilters(); 
+    bool contains(int k);
+    BloomFilterNode *search(int k);
+    
     vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
     
@@ -68,7 +70,7 @@ public:
     
     // Similarity queries
     BloomFilter *simQuery(BloomFilter *filter);
-    vector<BloomFilter> simQueryVec(BloomFilter *filter, int k);
+    vector<BloomFilter*> simQueryVec(BloomFilter *filter, int k);
 };
 
 #endif

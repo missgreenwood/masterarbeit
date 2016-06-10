@@ -255,14 +255,14 @@ BloomFilter * BloomFilterTree::simQuery(BloomFilter *filter) {
     }
 }
 
-vector<BloomFilter> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
-    vector<BloomFilter> results;
+vector <BloomFilter*> BloomFilterTree::simQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter*> results;
     if (root == NULL) {
         cout << "Tree is empty!\n";
-        results.push_back(*filter);
+        results.push_back(filter);
     }
     else {
-        return root->simQueryVec(filter, k); 
+        return root->simQueryVec(filter, k);
     }
-    return results;
+    return results; 
 }

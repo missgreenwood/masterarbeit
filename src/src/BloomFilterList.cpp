@@ -23,6 +23,10 @@ BloomFilterList::~BloomFilterList() {
     clear();
 }
 
+int BloomFilterList::getSize() {
+    return size;
+}
+
 void BloomFilterList::clear() {
     BloomFilterListNode *del = head;
     while (del != NULL) {
@@ -87,10 +91,6 @@ void BloomFilterList::tailAppend(int value) {
         // Update tail pointer
         tail = tail->getNext(); 
     }
-}
-
-int BloomFilterList::getSize() {
-    return size;
 }
 
 BloomFilter * BloomFilterList::getMinJaccardFilter(BloomFilter *filter) {
@@ -323,7 +323,7 @@ vector <BloomFilter*> BloomFilterList::simQueryVec(BloomFilter *filter, int k) {
         return left.second > right.second;
     });
     
-    // Check if enough intermediates have been found
+    // If list does not hold enough filters, return all results
     if (intermediate.size() < k) {
         cout << "Too little candidates in list!\n";
         for (int i=0; i<intermediate.size(); i++) {

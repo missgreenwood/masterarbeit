@@ -29,87 +29,20 @@ BloomFilterLeaf::~BloomFilterLeaf() {
     setPrev(NULL);
 }
 
-BloomFilter * BloomFilterLeaf::getMinJaccardFilter(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
-    BloomFilterLeaf *tmp = this;
-    BloomFilter *result = filters[0];
-    while (tmp != NULL) {
-        for (int i=0; i<tmp->getCount(); i++) {
-            jacc = computeJaccard(tmp->filters[i], filter);
-            if (jacc < min) {
-                min = jacc;
-                result = tmp->filters[i];
-            }
-        }
-        tmp = tmp->getNext();
-    }
-    return result; 
+BloomFilterLeaf * BloomFilterLeaf::getPrev() {
+    return prev;
 }
 
-BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
-    assert(getCount() == getMax());
-    
-    int *keys = getKeys();
-    int max = getMax();
-    int *merged = new int[max+1];
-    
-    BloomFilter **mergedFilters = new BloomFilter *[max+1];
-    
-    int id = f->getId();
-    int index = indexOfKey(id);
-    
-    // Merge keys and filters together
-    for (int i=0; i<index; i++) {
-        merged[i] = keys[i];
-        mergedFilters[i] = filters[i];
-    }
-    
-    merged[index] = id;
-    mergedFilters[index] = f;
-    
-    for (int i=index+1; i<max+1; i++) {
-        merged[i] = keys[i-1];
-        mergedFilters[i] = filters[i-1];
-    }
-    
-    BloomFilterLeaf *l = new BloomFilterLeaf(getOrder(), getFilterSize());
-    
-    int half = (max+1)/2;
-    setCount(half);
-    
-    for (int i=0; i<half; i++) {
-        keys[i] = merged[i];
-        filters[i] = mergedFilters[i];
-    }
-    
-    int *newNodeKeys = l->getKeys();
-    
-    // Hand over keys and filters to new sibling
-    for (int i=half; i<max+1; i++) {
-        newNodeKeys[i-half] = merged[i];
-        l->filters[i-half] = mergedFilters[i];
-        l->increment();
-    }
-    
-    // Delete filters that have been handed over
-    for (int i=half; i<max; i++) {
-        filters[i] = NULL;
-    }
-    
-    // Update union filters
-    updateUnionFilter();
-    l->updateUnionFilter();
-    
-    // Update sibling pointers
-    if (next) {
-        l->setNext(next);
-        next->setPrev(l);
-    }
-    
-    delete[] merged;
-    delete[] mergedFilters;
-    return l;
+void BloomFilterLeaf::setPrev(BloomFilterLeaf *leaf) {
+    prev = leaf;
+}
+
+BloomFilterLeaf * BloomFilterLeaf::getNext() {
+    return next;
+}
+
+void BloomFilterLeaf::setNext(BloomFilterLeaf *leaf) {
+    next = leaf;
 }
 
 void BloomFilterLeaf::traverse() {
@@ -162,39 +95,7 @@ int BloomFilterLeaf::getMinJaccardKey(BloomFilter *filter) {
         }
         tmp = tmp->getNext();
     }
-    return k; 
-}
-
-bool BloomFilterLeaf::contains(int k) {
-    bool result = false;
-    int *keys = getKeys();
-    for (int i=0; i<getCount(); i++) {
-        if (keys[i] == k) {
-            result = true;
-            break;
-        }
-    }
-    return result;
-}
-
-BloomFilterNode *BloomFilterLeaf::search(int k) {
-    return this;
-}
-
-BloomFilterLeaf * BloomFilterLeaf::getPrev() {
-    return prev;
-}
-
-void BloomFilterLeaf::setPrev(BloomFilterLeaf *leaf) {
-    prev = leaf;
-}
-
-BloomFilterLeaf * BloomFilterLeaf::getNext() {
-    return next;
-}
-
-void BloomFilterLeaf::setNext(BloomFilterLeaf *leaf) {
-    next = leaf;
+    return k;
 }
 
 void BloomFilterLeaf::updateUnionFilter() {
@@ -212,6 +113,24 @@ void BloomFilterLeaf::updateUnionFilter() {
     for (int i=0; i<getFilterSize(); i++) {
         unionfilter->setValue(i, newUnion->getData()[i]);
     }
+}
+
+BloomFilter * BloomFilterLeaf::getMinJaccardFilter(BloomFilter *filter) {
+    float min = 1;
+    float jacc;
+    BloomFilterLeaf *tmp = this;
+    BloomFilter *result = filters[0];
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            jacc = computeJaccard(tmp->filters[i], filter);
+            if (jacc < min) {
+                min = jacc;
+                result = tmp->filters[i];
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return result; 
 }
 
 int BloomFilterLeaf::getMinKey() {
@@ -338,7 +257,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     else {
         goodIds.push_back(make_pair(freeIds[0], 0));
     }
-        
+    
     // Return first element
     return goodIds[0].first;
 }
@@ -443,6 +362,87 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
     return goodIds[0].first;
 }
 
+bool BloomFilterLeaf::contains(int k) {
+    bool result = false;
+    int *keys = getKeys();
+    for (int i=0; i<getCount(); i++) {
+        if (keys[i] == k) {
+            result = true;
+            break;
+        }
+    }
+    return result;
+}
+
+BloomFilterNode *BloomFilterLeaf::search(int k) {
+    return this;
+}
+
+BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
+    assert(getCount() == getMax());
+    
+    int *keys = getKeys();
+    int max = getMax();
+    int *merged = new int[max+1];
+    
+    BloomFilter **mergedFilters = new BloomFilter *[max+1];
+    
+    int id = f->getId();
+    int index = indexOfKey(id);
+    
+    // Merge keys and filters together
+    for (int i=0; i<index; i++) {
+        merged[i] = keys[i];
+        mergedFilters[i] = filters[i];
+    }
+    
+    merged[index] = id;
+    mergedFilters[index] = f;
+    
+    for (int i=index+1; i<max+1; i++) {
+        merged[i] = keys[i-1];
+        mergedFilters[i] = filters[i-1];
+    }
+    
+    BloomFilterLeaf *l = new BloomFilterLeaf(getOrder(), getFilterSize());
+    
+    int half = (max+1)/2;
+    setCount(half);
+    
+    for (int i=0; i<half; i++) {
+        keys[i] = merged[i];
+        filters[i] = mergedFilters[i];
+    }
+    
+    int *newNodeKeys = l->getKeys();
+    
+    // Hand over keys and filters to new sibling
+    for (int i=half; i<max+1; i++) {
+        newNodeKeys[i-half] = merged[i];
+        l->filters[i-half] = mergedFilters[i];
+        l->increment();
+    }
+    
+    // Delete filters that have been handed over
+    for (int i=half; i<max; i++) {
+        filters[i] = NULL;
+    }
+    
+    // Update union filters
+    updateUnionFilter();
+    l->updateUnionFilter();
+    
+    // Update sibling pointers
+    if (next) {
+        l->setNext(next);
+        next->setPrev(l);
+    }
+    
+    delete[] merged;
+    delete[] mergedFilters;
+    return l;
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values
@@ -522,20 +522,24 @@ BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
     return result;
 }
 
-vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
-    vector<BloomFilter> results;
-    vector<pair<BloomFilter, float>> distances;
+vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
+    vector<BloomFilter*> results;
+    vector<pair<BloomFilter*, float>> distances;
     float jacc;
+    
+    // Collect all candidates
+    
+    // Collect own candidates
     for (int i=0; i<getCount(); i++) {
         jacc = computeJaccard(filters[i], filter);
-        distances.push_back(make_pair(*filters[i], jacc));
+        distances.push_back(make_pair(filters[i], jacc));
     }
     
     // Collect candidates from previous leaf
     if (prev != NULL) {
         for (int i=0; i<prev->getCount(); i++) {
             jacc = computeJaccard(prev->filters[i], filter);
-            distances.push_back(make_pair(*prev->filters[i], jacc));
+            distances.push_back(make_pair(prev->filters[i], jacc));
         }
     }
     
@@ -543,12 +547,12 @@ vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     if (next != NULL) {
         for (int i=0; i<next->getCount(); i++) {
             jacc = computeJaccard(next->filters[i], filter);
-            distances.push_back(make_pair(*next->filters[i], jacc));
+            distances.push_back(make_pair(next->filters[i], jacc));
         }
     }
     
     // Sort candidates by jaccard distance in ascending order
-    sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, float> &left, const pair<BloomFilter*, float> &right) {
         return left.second < right.second;
     });
     
@@ -559,6 +563,8 @@ vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
         }
     }
     else {
+        
+        // Return first k Bloom filters from distances vector
         for (int i=0; i<k; i++) {
             results.push_back(distances[i].first);
         }
@@ -566,37 +572,37 @@ vector<BloomFilter> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     return results;
 }
 
-vector<BloomFilter> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
-    vector<BloomFilter> results;
-    vector<pair<BloomFilter, float>> distances;
+vector<BloomFilter*> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
+    vector<BloomFilter*> results;
+    vector<pair<BloomFilter*, float>> distances;
     int last = filters[0]->getId();
     float jacc;
     BloomFilterLeaf *tmp = this;
     
-    // Collect candidates in range
+    // Collect candidates in subtree range
     while (tmp != NULL && last < l) {
         for (int i=0; i<tmp->getCount(); i++) {
             if (last >= l) {
                 break;
             }
             jacc = computeJaccard(tmp->filters[i], filter);
-            distances.push_back(make_pair(*tmp->filters[i], jacc));
+            distances.push_back(make_pair(tmp->filters[i], jacc));
             last++;
         }
         tmp = tmp->getNext();
     }
     
     // Sort candidates by jaccard distance in ascending order
-    sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, float> &left, const pair<BloomFilter*, float> &right) {
         return left.second < right.second;
     });
     
-    // Evtl. TODO
-    // What if there are too little filters in range?
-    
-    // Return k results
+    // TODO
+    // Check if subtree range holds enough filters
+         
+    // Return first k Bloom filters from distances vector
     for (int i=0; i<k; i++) {
         results.push_back(distances[i].first);
-    }
+    }    
     return results;
 }
