@@ -13,9 +13,8 @@
 using namespace std;
 
 // TODO
-const int filtersize = 10;   // # of bits in Bloom filter
-const int d = 3;             // # of hash functions
-
+const int filtersize = 256;     // # of bits in Bloom filter
+const int d = 3;                // # of hash functions
 
 class BloomFilter {
     
@@ -56,9 +55,12 @@ public:
     int validOnes();
     int possibleFreeZeros();
     int possibleAddedOnes();
-    float setUnion(BloomFilter *filter);
-    float setIntersection(BloomFilter *filter);
-    float computeJaccard(BloomFilter *filter); 
+    double setUnion(BloomFilter *filter) const;
+    double setIntersection(BloomFilter *filter) const;
+    double computeAmbienceJaccard(BloomFilter *filter);
+    double computeJaccard(BloomFilter *filter) const;
+    double eUnion(BloomFilter *filter);
+    double eIntersect(BloomFilter *filter); 
 };
 
 #endif

@@ -40,10 +40,10 @@ public:
     // Tree management
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;
-    virtual float computeMinJaccard(BloomFilter *filter) = 0;
+    virtual double computeMinJaccard(BloomFilter *filter) = 0;
     virtual int getMinJaccardKey(BloomFilter *filter) = 0;
+    double computeJaccard(BloomFilter *f1, BloomFilter *f2);
     double computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2);
-    float computeJaccard(BloomFilter *f1, BloomFilter *f2);
     double eUnion(BloomFilter *f1, BloomFilter *f2);
     double eIntersect(BloomFilter *f1, BloomFilter *f2);
     virtual void updateUnionFilter() = 0;

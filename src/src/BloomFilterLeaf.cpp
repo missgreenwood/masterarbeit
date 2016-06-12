@@ -64,9 +64,9 @@ void BloomFilterLeaf::traverseFilters() {
     }
 }
 
-float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
+double BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
+    double min = 1;
+    double jacc;
     BloomFilterLeaf *tmp = this;
     while (tmp != NULL) {
         for (int i=0; i<tmp->getCount(); i++) {
@@ -81,8 +81,8 @@ float BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
 }
 
 int BloomFilterLeaf::getMinJaccardKey(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
+    double min = 1;
+    double jacc;
     int k = filters[0]->getId();
     BloomFilterLeaf *tmp = this;
     while (tmp != NULL) {
@@ -116,8 +116,8 @@ void BloomFilterLeaf::updateUnionFilter() {
 }
 
 BloomFilter * BloomFilterLeaf::getMinJaccardFilter(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
+    double min = 1;
+    double jacc;
     BloomFilterLeaf *tmp = this;
     BloomFilter *result = filters[0];
     while (tmp != NULL) {
@@ -164,11 +164,11 @@ int BloomFilterLeaf::countFilters() {
 }
 
 int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
-    vector<pair<int, float>> subsets;
+    vector<pair<int, double>> subsets;
     vector<int> freeIds;
     vector<pair<int, int>> goodIds;
     BloomFilterLeaf *tmp = this;
-    float jacc;
+    double jacc;
     int minId = filters[0]->getId()-1;
     int maxId;
     int optId;
@@ -188,7 +188,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     }
     
     // Sort subsets by jacc distances in ascending order
-    sort(subsets.begin(), subsets.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+    sort(subsets.begin(), subsets.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
         return left.second < right.second;
     });
     
@@ -263,11 +263,11 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
 }
 
 int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
-    vector<pair<int, float>> supersets;
+    vector<pair<int, double>> supersets;
     vector<int> freeIds;
     vector<pair<int, int>> goodIds;
     BloomFilterLeaf *tmp = this;
-    float jacc;
+    double jacc;
     int minId = filters[0]->getId()-1;
     int maxId;
     int optId;
@@ -287,7 +287,7 @@ int BloomFilterLeaf::computeSupersetId(BloomFilter *filter) {
     }
     
     // Sort supersets by jacc distance in ascending order
-    sort(supersets.begin(), supersets.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+    sort(supersets.begin(), supersets.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
         return left.second < right.second;
     });
     
@@ -483,8 +483,8 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
     }
     else {
         // Find filter with smallest jacc distance
-        float jacc;
-        float min = 1;
+        double jacc;
+        double min = 1;
         BloomFilter *result = filters[0];
         for (int i=0; i<getCount(); i++) {
             jacc = computeJaccard(filters[i], filter);
@@ -500,7 +500,7 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
 BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
     BloomFilter *result = filters[0];
     int last = filters[0]->getId();
-    float jacc;
+    double jacc;
     int min = 1;
     BloomFilterLeaf *tmp = this;
     
@@ -524,8 +524,8 @@ BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
 
 vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     vector<BloomFilter*> results;
-    vector<pair<BloomFilter*, float>> distances;
-    float jacc;
+    vector<pair<BloomFilter*, double>> distances;
+    double jacc;
     
     // Collect all candidates
     
@@ -552,7 +552,7 @@ vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     }
     
     // Sort candidates by jaccard distance in ascending order
-    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, float> &left, const pair<BloomFilter*, float> &right) {
+    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, double> &left, const pair<BloomFilter*, double> &right) {
         return left.second < right.second;
     });
     
@@ -574,9 +574,9 @@ vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
 
 vector<BloomFilter*> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, int k, int l) {
     vector<BloomFilter*> results;
-    vector<pair<BloomFilter*, float>> distances;
+    vector<pair<BloomFilter*, double>> distances;
     int last = filters[0]->getId();
-    float jacc;
+    double jacc;
     BloomFilterLeaf *tmp = this;
     
     // Collect candidates in subtree range
@@ -593,7 +593,7 @@ vector<BloomFilter*> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, in
     }
     
     // Sort candidates by jaccard distance in ascending order
-    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, float> &left, const pair<BloomFilter*, float> &right) {
+    sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, double> &left, const pair<BloomFilter*, double> &right) {
         return left.second < right.second;
     });
     

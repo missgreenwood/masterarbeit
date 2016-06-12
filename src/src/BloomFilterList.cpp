@@ -101,8 +101,8 @@ BloomFilter * BloomFilterList::getMinJaccardFilter(BloomFilter *filter) {
     
     // All positions hold the same filters
     // Therefore it suffices to compare head's one and zero link lists
-    vector<pair<BloomFilter*, float>> candidates;
-    float jacc;
+    vector<pair<BloomFilter*, double>> candidates;
+    double jacc;
     
     // Retrieve all candidates
     for (int i=0; i<head->zeroLinks.size(); i++) {
@@ -113,7 +113,7 @@ BloomFilter * BloomFilterList::getMinJaccardFilter(BloomFilter *filter) {
         jacc = head->oneLinks[i]->computeJaccard(filter);
         candidates.push_back(make_pair(head->oneLinks[i], jacc));
     }
-    sort(candidates.begin(), candidates.end(), [](const pair<BloomFilter*, float> &left, const pair<BloomFilter*, float> &right) {
+    sort(candidates.begin(), candidates.end(), [](const pair<BloomFilter*, double> &left, const pair<BloomFilter*, double> &right) {
         return left.second < right.second;
     });
     return candidates[0].first;
@@ -151,10 +151,10 @@ int BloomFilterList::countFilters() {
     return count; 
 }
 
-vector<pair<int, float>> BloomFilterList::computeAllDistances(BloomFilter *filter) {
+vector<pair<int, double>> BloomFilterList::computeAllDistances(BloomFilter *filter) {
     vector<BloomFilter> filters = collectAllFilters();
-    vector<pair<int, float>> result;
-    float jacc;
+    vector<pair<int, double>> result;
+    double jacc;
     for (int i=0; i<head->zeroLinks.size(); i++) {
         jacc = head->zeroLinks[i]->computeJaccard(filter);
         result.push_back(make_pair(head->zeroLinks[i]->getId(), jacc));
@@ -166,22 +166,35 @@ vector<pair<int, float>> BloomFilterList::computeAllDistances(BloomFilter *filte
     return result;
 }
 
-vector<pair<BloomFilter, float>> BloomFilterList::compare(BloomFilter *filter, int k) {
-    vector<pair<BloomFilter, float>> distances;
+vector<pair<int, double>> BloomFilterList::computekDistances(BloomFilter *filter, int k) {
+    vector<pair<int, double>> allDistances = computeAllDistances(filter);
+    vector<pair<int, double>> result;
+    sort(allDistances.begin(), allDistances.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
+        return left.second < right.second;
+    });
+    for (int i=0; i<k; i++) {
+        cout << "jacc(" <<filter->getId() << ", " << allDistances[i].first << "): " << allDistances[i].second << "\n";
+        result.push_back(allDistances[i]);
+    }
+    return result; 
+}
+
+vector<pair<BloomFilter, double>> BloomFilterList::compare(BloomFilter *filter, int k) {
+    vector<pair<BloomFilter, double>> distances;
     if (head == NULL) {
         cout << "List is empty!\n";
         distances.push_back(make_pair(*filter, 0));
     }
     else {
         vector<BloomFilter> allFilters = collectAllFilters();
-        float jacc;
+        double jacc;
         for (int i=0; i<allFilters.size(); i++) {
             jacc = filter->computeJaccard(&allFilters[i]);
             distances.push_back(make_pair(allFilters[i], jacc));
         }
         
         // Sort all filters in list by jaccard distance in ascending order
-        sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+        sort(distances.begin(), distances.end(), [](const pair<BloomFilter, double> &left, const pair<BloomFilter, double> &right) {
             return left.second < right.second;
         });
         
@@ -337,5 +350,11 @@ vector <BloomFilter*> BloomFilterList::simQueryVec(BloomFilter *filter, int k) {
             result.push_back(intermediate[i].first);
         }
     }
+    
+    // TODO
+    // Sort result vector by jaccard distances in ascending order
+    /* sort(result.begin(), result.end(), [&] (BloomFilter *a, BloomFilter *b) {
+        return a->computeJaccard(filter) < b->computeJaccard(filter);
+    }); */
     return result;
 }

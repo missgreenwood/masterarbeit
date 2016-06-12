@@ -59,7 +59,7 @@ void BloomFilterTree::traverseFilters() {
     }
 }
 
-float BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
+double BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!\n";
         return 0;
@@ -153,10 +153,10 @@ int BloomFilterTree::countFilters() {
     }
 }
 
-vector<pair<int, float>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
+vector<pair<int, double>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
     vector<BloomFilter> filters = collectAllFilters();
-    vector<pair<int, float>> result;
-    float jacc;
+    vector<pair<int, double>> result;
+    double jacc;
     for (int i=0; i<filters.size(); i++) {
         jacc = root->computeJaccard(&filters[i], filter);
         result.push_back(make_pair(filters[i].getId(), jacc));
@@ -164,10 +164,10 @@ vector<pair<int, float>> BloomFilterTree::computeAllDistances(BloomFilter *filte
     return result;
 }
 
-vector<pair<int, float>> BloomFilterTree::computekDistances(BloomFilter *filter, int k) {
-    vector<pair<int, float>> allDistances = computeAllDistances(filter);
-    vector<pair<int, float>> result;
-    sort(allDistances.begin(), allDistances.end(), [](const pair<int, float> &left, const pair<int, float> &right) {
+vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter, int k) {
+    vector<pair<int, double>> allDistances = computeAllDistances(filter);
+    vector<pair<int, double>> result;
+    sort(allDistances.begin(), allDistances.end(), [](const pair<int, double> &left, const pair<int, double> &right) {
         return left.second < right.second;
     });
     for (int i=0; i<k; i++) {
@@ -177,22 +177,22 @@ vector<pair<int, float>> BloomFilterTree::computekDistances(BloomFilter *filter,
     return result;
 }
 
-vector<pair<BloomFilter, float>> BloomFilterTree::compare(BloomFilter *filter, int k) {
-    vector<pair<BloomFilter, float>> distances;
+vector<pair<BloomFilter, double>> BloomFilterTree::compare(BloomFilter *filter, int k) {
+    vector<pair<BloomFilter, double>> distances;
     if (root == NULL) {
         cout << "Tree is empty!\n";
         distances.push_back(make_pair(*filter, 0));
     }
     else {
         vector<BloomFilter> allFilters = collectAllFilters();
-        float jacc;
+        double jacc;
         for (int i=0; i<allFilters.size(); i++) {
             jacc = filter->computeJaccard(&allFilters[i]);
             distances.push_back(make_pair(allFilters[i], jacc));
         }
         
         // Sort all filters in tree by jaccard distance in ascending order
-        sort(distances.begin(), distances.end(), [](const pair<BloomFilter, float> &left, const pair<BloomFilter, float> &right) {
+        sort(distances.begin(), distances.end(), [](const pair<BloomFilter, double> &left, const pair<BloomFilter, double> &right) {
             return left.second < right.second;
         });
         

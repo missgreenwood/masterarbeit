@@ -29,7 +29,7 @@ void BloomFilterIndexNode::traverseFilters() {
     }
 }
 
-float BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
+double BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
     return C[0]->computeMinJaccard(filter);
 }
 
@@ -272,8 +272,8 @@ void BloomFilterIndexNode::insert(BloomFilter *filter, BloomFilterNode *leftNode
 }
 
 BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
-    float min = 1;
-    float jacc;
+    double min = 1;
+    double jacc;
     BloomFilterNode *path = C[0];
     bool set = false;
     int last;
@@ -314,8 +314,8 @@ BloomFilter * BloomFilterIndexNode::simSubtreeQuery(BloomFilter *filter, int l) 
 }
 
 vector<BloomFilter*> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int k) {
-    float min = 1;
-    float jacc;
+    double min = 1;
+    double jacc;
     BloomFilterNode *path = C[0];
     bool set = false;
     int last;

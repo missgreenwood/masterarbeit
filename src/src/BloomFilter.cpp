@@ -243,8 +243,8 @@ int BloomFilter::possibleAddedOnes() {
 }
 
 // Compute the set union of two Bloom filters
-float BloomFilter::setUnion(BloomFilter *filter) {
-    float result = 0;
+double BloomFilter::setUnion(BloomFilter *filter) const {
+    double result = 0;
     int *data2 = filter->getData();
     for (int i=0; i<size; i++) {
         if ((data[i] == 1) || (data2[i] == 1)) {
@@ -254,8 +254,8 @@ float BloomFilter::setUnion(BloomFilter *filter) {
     return result;
 }
 
-float BloomFilter::setIntersection(BloomFilter *filter) {
-    float result = 0;
+double BloomFilter::setIntersection(BloomFilter *filter) const {
+    double result = 0;
     int *data2 = filter->getData();
     for (int i=0; i<size; i++) {
         if ((data[i] == 1) && (data2[i] == 1)) {
@@ -265,6 +265,29 @@ float BloomFilter::setIntersection(BloomFilter *filter) {
     return result; 
 }
 
-float BloomFilter::computeJaccard(BloomFilter *filter) {
-    return (float) 1-(setIntersection(filter)/setUnion(filter)); 
+double BloomFilter::computeAmbienceJaccard(BloomFilter *filter) {
+    double intersect_size = eIntersect(filter);
+    double union_size = eUnion(filter);
+    return 1 - (intersect_size/union_size);
+}
+
+double BloomFilter::computeJaccard(BloomFilter *filter) const {
+    return (double) 1-(setIntersection(filter)/setUnion(filter));
+}
+
+double BloomFilter::eUnion(BloomFilter *filter) {
+    double dot = 0;
+    int *arr2 = filter->getData();
+    for (int i=0; i<size; i++) {
+        if (data[i] == 1 || arr2[i] == 1) {
+            dot++;
+        }
+    }
+    return -log(1-dot / (double) size) * size/d;
+}
+
+double BloomFilter::eIntersect(BloomFilter *filter) {
+    double unions_size = eUnion(filter);
+    double e = eSize() - filter->eSize() - unions_size;
+    return e; 
 }

@@ -79,8 +79,8 @@ double BloomFilterNode::computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2)
     return 1 - (intersect_size/union_size);
 }
 
-float BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
-    return (float) 1-(f1->setIntersection(f2)/f1->setUnion(f2));
+double BloomFilterNode::computeJaccard(BloomFilter *f1, BloomFilter *f2) {
+    return (double) 1-(f1->setIntersection(f2)/f1->setUnion(f2));
 }
 
 double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {

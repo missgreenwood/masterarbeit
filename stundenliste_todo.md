@@ -163,12 +163,13 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 5.75 h)
+KW 23 (noch 1.75 h)
 * Mo, 06.06 (7.5 h)
 * Di, 07.06. (4.25 h)
 * Mi, 08.06. (6 h)
 * Do, 09.06. (3 h)
 * Fr, 10.06. (5 h)
+* So, 12.06. (4 h)
 
 
 ## TODO
@@ -177,41 +178,60 @@ KW 23 (noch 5.75 h)
 
 2. Implementierung
 
-	* 1. Einfüge-Operation: Über Teilmengen 
+	* 1. Set insertion
+		-> Suchalgorithmen fertig checken (realistische Werte)
 
 		Filtergröße 256: 
 		- mySubsetCount() lässt sich schon bei Filtergröße 100 nicht mehr sinnvoll berechnen 
 		- jeder Filter wird nur einmal eingefügt
-		- berechnete optimale subset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
-		- berechnete optimale superset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
-		- simQuery() liefert meist falsche Ergebnisse: 
+		- berechnete optimale subset ids + superset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
+		- Ergebnisse simQuery():  
 			Gefordert (Rang): 					Geliefert (Rang): 
-			1									10 
-												20
-												55
-												44
+			1									35 
+												7
 												1
-												22
-		- simQueryVec() liefert meist gute Ergebnisse: 
+												9
+												30
+												7
+		- Ergebnisse simQueryVec(): 
 			Gefordert (Rang): 					Geliefert (Rang): 
+			1, 2, 3								1, 4, 5
+			1, 2, 3								3, 4, 5
+			1, 2, 3								1, 2, 6
+			1, 2, 3								1, 3, 5
 			1, 2, 3								1, 2, 3
-			1, 2, 3								1, 2, 5
-			1, 2, 3								1, 2, 3
-			1, 2, 3								1, 2, 4
-			1, 2, 3								1, 2, 4
-			1, 2, 3								4, 5, 6 
+			1, 2, 3								1, 2, 6 
 
 		Filtergröße 512: 
 
 		-> evtl. Suchalgorithmen optimieren 
 		
-	* 2. Einfüge-Operation: Über Teilsegmente
-		-> Suchalgorithmen fertig checken (realistische Größen)
+	* 2. Segment insertion 
+		-> Suchalgorithmen fertig checken (realistische Werte)
+
+		Filtergröße 256: 
+		- Ergebnisse simQuery(): 
+			Gefordert (Rang): 					Geliefert (Rang): 
+			1									7
+			1									4
+			1									7
+		- Ergebnisse simQueryVec(): 
+			Gefordert (Rang):					Geliefert (Rang): 
+			1, 2, 3								3, 9, 1
+			1, 2, 3								1, 6, 7
+			1, 2, 3								18, 6, 13
+
+
+		Filtergröße 512: 
+
 		-> evtl. Suchalgorithmen optimieren 
 		-> evtl. destructor für BloomFilterListNode
+		-> Sortierung falsch simQueryVec()
 
 	* Berechnung Jaccard-Distanz ändern und testen 
 	* Initialisierung der Bloom-Filter checken (meistens jacc-Werte zw. 0.6 und 0.9)
+	* Sinnvolle Werte für k und m?
+	* Initialisierung Bloom-Filter?
 		
 3. Evaluation 
 

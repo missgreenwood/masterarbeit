@@ -33,8 +33,6 @@ int main(int argc, const char *argv[]) {
     f2.initRandom();
     BloomFilter f3(256, 3);
     f3.initRandom();
-    BloomFilter f4(64, 4);
-    f4.initRandom();
     
     // Class BloomFilterTree
     
@@ -53,27 +51,23 @@ int main(int argc, const char *argv[]) {
         b2.insertAsSets(&v1[i]);
     }
     
-    cout << "Count filters in b1: " << b1.countFilters();
-    
-    cout << "\n\nCount filters in b2: " << b2.countFilters();
-    
-    cout << "\n\n10 nearest neighbors of f1 in b1:\n\n";
-    vector<pair<int, float>> res1 = b1.computekDistances(&f1, 10);
-    
+    cout << "10 nearest neighbors of f1 in b1:\n\n";
+    vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
+
     cout << "\n10 nearest neighbors of f1 in b2:\n\n";
-    vector<pair<int, float>> res2 = b2.computekDistances(&f1, 10);
+    vector<pair<int, double>> res2 = b2.computekDistances(&f1, 10);
     
     cout << "\n10 nearest neighbors of f2 in b1:\n\n";
-    vector<pair<int, float>> res3 = b1.computekDistances(&f2, 10);
+    vector<pair<int, double>> res3 = b1.computekDistances(&f2, 10);
     
     cout << "\n10 nearest neighbors of f2 in b2:\n\n";
-    vector<pair<int, float>> res4 = b2.computekDistances(&f2, 10);
+    vector<pair<int, double>> res4 = b2.computekDistances(&f2, 10);
     
     cout << "\n10 nearest neighbors of f3 in b1:\n\n";
-    vector<pair<int, float>> res5 = b1.computekDistances(&f3, 10);
+    vector<pair<int, double>> res5 = b1.computekDistances(&f3, 10);
     
     cout << "\n10 nearest neighbors of f3 in b2:\n\n";
-    vector<pair<int, float>> res6 = b2.computekDistances(&f3, 10);
+    vector<pair<int, double>> res6 = b2.computekDistances(&f3, 10);
     
     /* cout << "\n\nCheck subset insertion";
     cout << "\n----------------------";
@@ -105,198 +99,144 @@ int main(int argc, const char *argv[]) {
     
     cout << "\nTREE QUERY for nearest neighbor of f1 in b1";
     cout << "\nResult should be: " << res1[0].first;
-    BloomFilter *result = b1.simQuery(&f1);
-    cout << "\nComputed result: " << result->getId() << " (" << f1.computeJaccard(result) << ")";
+    BloomFilter *r1 = b1.simQuery(&f1);
+    cout << "\nComputed result: " << r1->getId() << " (" << f1.computeJaccard(r1) << ")";
     
     cout << "\n\nTREE QUERY for nearest neighbor of f1 in b2";
     cout << "\nResult should be: " << res2[0].first;
-    result = b2.simQuery(&f1);
-    cout << "\nComputed result: " << result->getId() << " (" << f1.computeJaccard(result) << ")";
+    BloomFilter *r2 = b2.simQuery(&f1);
+    cout << "\nComputed result: " << r2->getId() << " (" << f1.computeJaccard(r2) << ")";
     
     cout << "\n\nTREE QUERY for nearest neighbor of f2 in b1";
     cout << "\nResult should be: " << res3[0].first;
-    result = b1.simQuery(&f2);
-    cout << "\nComputed result: " << result->getId() << " (" << f2.computeJaccard(result) << ")";
+    BloomFilter *r3 = b1.simQuery(&f2);
+    cout << "\nComputed result: " << r3->getId() << " (" << f2.computeJaccard(r3) << ")";
     
     cout << "\n\nTREE QUERY for nearest neighbor of f2 in b2";
     cout << "\nResult should be: " << res4[0].first;
-    result = b2.simQuery(&f2);
-    cout << "\nComputed result: " << result->getId() << " (" << f2.computeJaccard(result) << ")";
+    BloomFilter* r4 = b2.simQuery(&f2);
+    cout << "\nComputed result: " << r4->getId() << " (" << f2.computeJaccard(r4) << ")";
     
     cout << "\n\nTREE QUERY for nearest neighbor of f3 in b1";
     cout << "\nResult should be: " << res5[0].first;
-    result = b1.simQuery(&f3);
-    cout << "\nComputed result: " << result->getId() << " (" << f3.computeJaccard(result) << ")";
+    BloomFilter* r5 = b1.simQuery(&f3);
+    cout << "\nComputed result: " << r5->getId() << " (" << f3.computeJaccard(r5) << ")";
     
     cout << "\n\nTREE QUERY for nearest neighbor of f3 in b2";
     cout << "\nResult should be: " << res6[0].first;
-    result = b2.simQuery(&f3);
-    cout << "\nComputed result: " << result->getId() << " (" << f3.computeJaccard(result) << ")";
+    BloomFilter* r6 = b2.simQuery(&f3);
+    cout << "\nComputed result: " << r6->getId() << " (" << f3.computeJaccard(r6) << ")";
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f1 in b1";
     cout << "\nResults should be: " << res1[0].first << ", " << res1[1].first << ", " << res1[2].first;
-    vector<BloomFilter*> results = b1.simQueryVec(&f1, 3);
+    vector<BloomFilter*> r7 = b1.simQueryVec(&f1, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f1.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f1.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f1.computeJaccard(results[2]) << ")";
+    cout << r7[0]->getId() << " (" << f1.computeJaccard(r7[0]) << ")\n";
+    cout << r7[1]->getId() << " (" << f1.computeJaccard(r7[1]) << ")\n";
+    cout << r7[2]->getId() << " (" << f1.computeJaccard(r7[2]) << ")";
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f1 in b2";
     cout << "\nResults should be: " << res2[0].first << ", " << res2[1].first << ", " << res2[2].first;
-    results = b2.simQueryVec(&f1, 3);
+    vector<BloomFilter*> r8 = b2.simQueryVec(&f1, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f1.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f1.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f1.computeJaccard(results[2]) << ")";
+    cout << r8[0]->getId() << " (" << f1.computeJaccard(r8[0]) << ")\n";
+    cout << r8[1]->getId() << " (" << f1.computeJaccard(r8[1]) << ")\n";
+    cout << r8[2]->getId() << " (" << f1.computeJaccard(r8[2]) << ")";
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f2 in b1";
     cout << "\nResults should be: " << res3[0].first << ", " << res3[1].first << ", " << res3[2].first;
-    results = b1.simQueryVec(&f2, 3);
+    vector<BloomFilter*> r9 = b1.simQueryVec(&f2, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f2.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f2.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f2.computeJaccard(results[2]) << ")";
+    cout << r9[0]->getId() << " (" << f2.computeJaccard(r9[0]) << ")\n";
+    cout << r9[1]->getId() << " (" << f2.computeJaccard(r9[1]) << ")\n";
+    cout << r9[2]->getId() << " (" << f2.computeJaccard(r9[2]) << ")";
 
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f2 in b2";
     cout << "\nResults should be: " << res4[0].first << ", " << res4[1].first << ", " << res4[2].first;
-    results = b2.simQueryVec(&f2, 3);
+    vector<BloomFilter*> r10 = b2.simQueryVec(&f2, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f2.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f2.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f2.computeJaccard(results[2]) << ")";
+    cout << r10[0]->getId() << " (" << f2.computeJaccard(r10[0]) << ")\n";
+    cout << r10[1]->getId() << " (" << f2.computeJaccard(r10[1]) << ")\n";
+    cout << r10[2]->getId() << " (" << f2.computeJaccard(r10[2]) << ")";
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f3 in b1";
     cout << "\nResults should be: " << res5[0].first << ", " << res5[1].first << ", " << res5[2].first;
-    results = b1.simQueryVec(&f3, 3);
+    vector<BloomFilter*> r11 = b1.simQueryVec(&f3, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f3.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f3.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f3.computeJaccard(results[2]) << ")";
+    cout << r11[0]->getId() << " (" << f3.computeJaccard(r11[0]) << ")\n";
+    cout << r11[1]->getId() << " (" << f3.computeJaccard(r11[1]) << ")\n";
+    cout << r11[2]->getId() << " (" << f3.computeJaccard(r11[2]) << ")";
     
     cout << "\n\nTREE QUERY for 3 nearest neighbors of f3 in b2";
     cout << "\nResults should be: " << res6[0].first << ", " << res6[1].first << ", " << res6[2].first;
-    results = b2.simQueryVec(&f3, 3);
+    vector<BloomFilter*> r12= b2.simQueryVec(&f3, 3);
     cout << "\nComputed results:\n";
-    cout << results[0]->getId() << " (" << f3.computeJaccard(results[0]) << ")\n";
-    cout << results[1]->getId() << " (" << f3.computeJaccard(results[1]) << ")\n";
-    cout << results[2]->getId() << " (" << f3.computeJaccard(results[2]) << ")";
+    cout << r12[0]->getId() << " (" << f3.computeJaccard(r12[0]) << ")\n";
+    cout << r12[1]->getId() << " (" << f3.computeJaccard(r12[1]) << ")\n";
+    cout << r12[2]->getId() << " (" << f3.computeJaccard(r12[2]) << ")";
 
-    /* // Class BloomFilterListNode
-    
-    cout << "\n\n\nCLASS BloomFilterListNode";
-    cout << "\n-------------------------\n";
-    
-    cout << "Create instance of BloomFilterListNode (n1) and test all methods\n\n";
-    BloomFilterListNode n1;
-    n1.setPosition(2);
-    cout << "Position: " << n1.getPosition() << endl;
-    for (int i=0; i<v1.size(); i++) {
-        if (v1[i].getData()[2] == 0) {
-            n1.zeroLinks.push_back(&v1[i]);
-        }
-        else {
-            n1.oneLinks.push_back(&v1[i]);
-        }
-    }
-    n1.printZeroLinks();
-    n1.printOneLinks(); 
-    
     // Class BloomFilterList
     
-    cout << "\n\nCLASS BloomFilterList";
+    cout << "\n\n\nCLASS BloomFilterList";
     cout << "\n---------------------\n";
-    cout << "Create 3 instances of BloomFilterList (l1, l5, l6) and test all methods\n\n";
-    BloomFilterList l1(10);
-    for (int i=0; i<l1.getSize(); i++) {
-        l1.updateNode(&f1, i);
+    cout << "Create instance of BloomFilterList (l1) with filtersize 256 and insert all filters in v1\n\n";
+    BloomFilterList l1(256);
+    for (int i=0; i<v1.size(); i++) {
+        l1.insert(&v1[i]);
     }
-    l1.printAll();
-    l1.clear();
-    l1.printAll();
-    BloomFilterList l5(4);
-    BloomFilterList l6(6);
-    l5.insert(&f600);
     
-    // Section insertion
-    cout << "\n\nCheck section insertion";
-    cout << "\n-----------------------";
-    cout << "\nInsert filters f101..f103, f105..f110 into l5";
-    l5.insert(&f101);
-    l5.insert(&f102);
-    l5.insert(&f103);
-    l5.insert(&f105);
-    l5.insert(&f106);
-    l5.insert(&f107);
-    l5.insert(&f108);
-    l5.insert(&f109);
-    l5.insert(&f110);
-    cout << "\nBloomFilterList l5:\n\n";
-    // l5.printAll();
-    cout << "Insert filters 601..604, 609..614, 619..624 into l6\n";
-    l6.insert(&f601);
-    l6.insert(&f602);
-    l6.insert(&f603);
-    l6.insert(&f604);
-    l6.insert(&f609);
-    l6.insert(&f610);
-    l6.insert(&f611);
-    l6.insert(&f612);
-    l6.insert(&f613);
-    l6.insert(&f614);
-    l6.insert(&f619);
-    l6.insert(&f620);
-    l6.insert(&f621);
-    l6.insert(&f622);
-    l6.insert(&f623);
-    l6.insert(&f624);
-    l6.printAll();
+    cout << "10 nearest neighbors of f1 in l1:\n\n";
+    vector<pair<int, double>> res7 = l1.computekDistances(&f1, 10);
+    
+    cout << "\n10 nearest neighbors of f2 in l1:\n\n";
+    vector<pair<int, double>> res8 = l1.computekDistances(&f2, 10);
+    
+    cout << "\n10 nearest neighbors of f3 in l1:\n\n";
+    vector<pair<int, double>> res9 = l1.computekDistances(&f3, 10);
     
     // Section search queries
-    cout << "\nCheck section queries";
+    cout << "\n\nCheck section queries";
     cout << "\n---------------------\n";
-    l5.compare(&f104, l5.countFilters());
-    cout << endl;
-    l6.compare(&f595, l6.countFilters());
     
-    cout << "\nSection query for nearest neighbor of f104 (";
-    f104.printArr();
-    cout <<")\n";
-    cout << "Result should be: 97, 93 or 98\n";
-    result = l5.simQuery(&f104);
-    cout << "Computed result: " << result->getId() << " (";
-    result->printArr();
-    cout << ")";
+    cout << "\nLIST QUERY for nearest neighbor of f1 in l1";
+    cout << "\nResult should be: " << res7[0].first;
+    BloomFilter *ra = l1.simQuery(&f1);
+    cout << "\nComputed result: " << ra->getId() << " (" << ra->computeJaccard(&f1) << ")";
     
-    cout << "\n\nSection query for nearest neighbor of f595 (";
-    f595.printArr();
-    cout << ")\n";
-    cout << "Result should be: 595 (001001)";
-    result = l6.simQuery(&f595);
-    cout << "\nComputed result: " << result->getId() << " (";
-    result->printArr();
-    cout << ")";
+    cout << "\n\nLIST QUERY for nearest neighbor of f2 in l1";
+    cout << "\nResult should be: " << res8[0].first;
+    BloomFilter *rb = l1.simQuery(&f2);
+    cout << "\nComputed result: " << rb->getId() << " (" << rb->computeJaccard(&f2) << ")";
     
-    cout << "\n\nSection query for 3 nearest neighbors of f104 (";
-    f104.printArr();
-    cout << ")\n";
-    cout << "Result should be: 93, 98, 97 in any order";
-    vector<BloomFilter*> pResults = l5.simQueryVec(&f104, 3);
-    cout << "\nComputed result: ";
-    for (int i=0; i<pResults.size()-1; i++) {
-        cout << pResults[i]->getId() << ", ";
-    }
-    cout << pResults[pResults.size()-1]->getId();
+    cout << "\n\nLIST QUERY for nearest neighbor of f3 in l1";
+    cout << "\nResult should be: " << res9[0].first;
+    BloomFilter *rc = l1.simQuery(&f3);
+    cout << "\nComputed result: " << rc->getId() << " (" << rc->computeJaccard(&f3) << ")";
     
-    cout << "\n\nSection query for 3 nearest neighbors of f595 (";
-    f595.printArr();
-    cout << ")\n";
-    cout << "Result should be: 595 and two filters out of 593/585/591 in any order";
-    pResults = l6.simQueryVec(&f595, 3);
-    cout << "\nComputed result: ";
-    for (int i=0; i<pResults.size()-1; i++) {
-        cout << pResults[i]->getId() << ", ";
-    }
-    cout << pResults[pResults.size()-1]->getId(); */
+    cout << "\n\nLIST QUERY for 3 nearest neighbors of f1 in l1";
+    vector<BloomFilter*> rd = l1.simQueryVec(&f1, 3);
+    cout << "\nResults should be: " << res7[0].first << ", " << res7[1].first << ", " << res7[2].first;
+    cout << "\nComputed results:\n";
+    cout << rd[0]->getId() << " (" << f1.computeJaccard(rd[0]) << ")\n";
+    cout << rd[1]->getId() << " (" << f1.computeJaccard(rd[1]) << ")\n";
+    cout << rd[2]->getId() << " (" << f1.computeJaccard(rd[2]) << ")";
+    
+    cout << "\n\nSection query for 3 nearest neighbors of f2 in l1";
+    vector<BloomFilter*> re = l1.simQueryVec(&f2, 3);
+    cout << "\nResults should be: " << res8[0].first << ", " << res8[1].first << ", " << res8[2].first;
+    cout << "\nComputed results:\n";
+    cout << re[0]->getId() << " (" << f1.computeJaccard(re[0]) << ")\n";
+    cout << re[1]->getId() << " (" << f1.computeJaccard(re[1]) << ")\n";
+    cout << re[2]->getId() << " (" << f1.computeJaccard(re[2]) << ")";
+    
+    cout << "\n\nSection query for 3 nearest neighbors of f3 in l1";
+    vector<BloomFilter*> rf = l1.simQueryVec(&f3, 3);
+    cout << "\nResults should be: " << res9[0].first << ", " << res9[1].first << ", " << res9[2].first;
+    cout << "\nComputed results:\n";
+    cout << rf[0]->getId() << " (" << f1.computeJaccard(rf[0]) << ")\n";
+    cout << rf[1]->getId() << " (" << f1.computeJaccard(rf[1]) << ")\n";
+    cout << rf[2]->getId() << " (" << f1.computeJaccard(rf[2]) << ")";
+
     cout << endl;
     return 0;
 }

@@ -46,7 +46,7 @@ public:
     // Tree management
     void traverse();
     void traverseFilters();
-    float computeMinJaccard(BloomFilter *filter);
+    double computeMinJaccard(BloomFilter *filter);
     int getMinJaccardKey(BloomFilter *filter);
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     int getMinKey();
@@ -58,11 +58,11 @@ public:
     bool contains(int k);
     BloomFilterNode *search(int k);
     
-    vector<pair<int, float>>computeAllDistances(BloomFilter *filter);
-    vector<pair<int, float>>computekDistances(BloomFilter *filter, int k);
+    vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
+    vector<pair<int, double>>computekDistances(BloomFilter *filter, int k);
     
     // Comparison
-    vector<pair<BloomFilter, float>> compare(BloomFilter *filter, int k);
+    vector<pair<BloomFilter, double>> compare(BloomFilter *filter, int k);
     
     // Insertion
     void insert(BloomFilter *filter);

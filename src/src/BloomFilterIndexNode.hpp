@@ -19,7 +19,7 @@ public:
     // Tree management
     void traverse();
     void traverseFilters();
-    float computeMinJaccard(BloomFilter *filter);
+    double computeMinJaccard(BloomFilter *filter);
     int getMinJaccardKey(BloomFilter *filter);
     void updateUnionFilter();
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);
