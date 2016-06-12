@@ -163,13 +163,13 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 1.75 h)
+KW 23 (noch 32 h)
 * Mo, 06.06 (7.5 h)
 * Di, 07.06. (4.25 h)
 * Mi, 08.06. (6 h)
 * Do, 09.06. (3 h)
 * Fr, 10.06. (5 h)
-* So, 12.06. (4 h)
+* So, 12.06. (5.75 h)
 
 
 ## TODO
@@ -188,11 +188,12 @@ KW 23 (noch 1.75 h)
 		- Ergebnisse simQuery():  
 			Gefordert (Rang): 					Geliefert (Rang): 
 			1									35 
-												7
-												1
-												9
-												30
-												7
+			1									7
+			1									1
+			1									9
+			1									30
+			1									7
+
 		- Ergebnisse simQueryVec(): 
 			Gefordert (Rang): 					Geliefert (Rang): 
 			1, 2, 3								1, 4, 5
@@ -224,9 +225,9 @@ KW 23 (noch 1.75 h)
 
 		Filtergröße 512: 
 
+		-> Sort result vector by jaccard distances in ascending order (BloomFilterList::simQueryVec())
 		-> evtl. Suchalgorithmen optimieren 
 		-> evtl. destructor für BloomFilterListNode
-		-> Sortierung falsch simQueryVec()
 
 	* Berechnung Jaccard-Distanz ändern und testen 
 	* Initialisierung der Bloom-Filter checken (meistens jacc-Werte zw. 0.6 und 0.9)

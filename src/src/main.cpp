@@ -15,7 +15,7 @@ int main(int argc, const char *argv[]) {
     cout << "CLASS BloomFilter\n";
     cout << "-----------------\n";
     
-    cout << "Create 100 instances of BloomFilter with random ids, array length 256, random values";
+    cout << "Create 100 instances of BloomFilter with random ids, array length 256 and random values";
     cout << "\nCreate new BloomFilter vector (v1) and insert all filters";
     BloomFilter *filter;
     int id;
@@ -26,13 +26,30 @@ int main(int argc, const char *argv[]) {
         filter->initRandom();
         v1.push_back(*filter);
     }
-    cout << "\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256, random values";
+    cout << "\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256 and random values";
     BloomFilter f1(256, 1);
     f1.initRandom();
     BloomFilter f2(256, 2);
     f2.initRandom();
     BloomFilter f3(256, 3);
     f3.initRandom();
+    
+    cout << "\n\nCreate 100 instances of BloomFilter with random ids, array length 512 and random values";
+    cout << "Create new BloomFilter vector (v2) and insert all filters";
+    BloomFilter *filter512;
+    int id512;
+    vector<BloomFilter> v2;
+    for (int i=0; i<100; i++) {
+        filter512 = new BloomFilter(512, rand());
+        id512 = filter512->getId();
+        filter512->initRandom();
+        v2.push_back(*filter512);
+    }
+    
+    cout << "Create 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and random values";
+    BloomFilter f4(512, 4);
+    BloomFilter f5(512, 5);
+    BloomFilter f6(512, 6);
     
     // Class BloomFilterTree
     
@@ -50,6 +67,14 @@ int main(int argc, const char *argv[]) {
     for (int i=0; i<v1.size(); i+=2) {
         b2.insertAsSets(&v1[i]);
     }
+    
+    cout << "Create instance of BloomFilterTree (b3) with minimum degree 3/max elements 6, filter size 512 and insert all filters in v2 as sets\n\n";
+    BloomFilterTree b3(3, 512);
+    for (int i=0; i<v2.size(); i++) {
+        b3.insertAsSets(&v2[i]);
+    }
+    
+    cout << "Create instance of BloomFilterTree (b4) with minimum degree 3/max elements 6, filter size 512 and insert every second filter in v2 as sets\n\n"; 
     
     cout << "10 nearest neighbors of f1 in b1:\n\n";
     vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
