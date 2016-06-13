@@ -173,67 +173,29 @@ KW 23 (32 h)
 
 
 KW 24 (noch 31.5 h)
-* Mo, 13.06. (0.5 h)
+* Mo, 13.06. (0.5 h, 15:20 - )
 
 
 ## TODO
 
-1. Set insertion
+1. Implementierung - Set insertion
 
-	-> läuft mit kleinen Werten (4/6/10)
-	-> läuft gut mit größeren Werten für vector query, schlecht für point query
-	-> Beispielergebnisse simQuery() für 256 Bit-Filter: 
-		Gefordert (Rang): 					Geliefert (Rang): 
-		1							35 
-		1							7
-		1							1
-		1							9
-		1							30
-		1							7
+	* simQuery() verbessern 
+	* Parameter anpassen: 50 String-Elemente zufällig erzeugen u. einfügen (n), FP-Rate minimieren, Filtergröße 256/512 Bit (m), Anzahl Hashfunktionen (d/k) entsprechend, evtl. Verzweigungsgrad
+	* Alternativ/zusätzlich: Cassandra-Parameter verwenden 
 
-	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
-		Gefordert (Rang): 					Geliefert (Rang): 
-		1, 2, 3							1, 4, 5
-		1, 2, 3							3, 4, 5
-		1, 2, 3							1, 2, 6
-		1, 2, 3							1, 3, 5
-		1, 2, 3							1, 2, 3
-		1, 2, 3							1, 2, 6 
-
-2. Segment insertion 
+2. Implementierung - Segment insertion
 	
-	-> läuft gut mit kleinen Werten (4/6/10)
-	-> läuft deutlich schlechter mit größeren Werten vector query und point query
-	-> Beispielergebnisse simQuery() für 256 Bit-Filter: 
-		Gefordert (Rang): 					Geliefert (Rang): 
-		1							7
-		1							4
-		1							7
-	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
-		Gefordert (Rang):					Geliefert (Rang): 
-		1, 2, 3							3, 9, 1
-		1, 2, 3							1, 6, 7
-		1, 2, 3							18, 6, 13
+	* erstmal nicht weiter verfolgen, höchstens zum Vergleich
+	* evtl. Ergebnisvektor nach Jaccard-Distanzen aufsteigend sortieren (BloomFilterList::simQueryVec())
 
 3. Evaluation 
 
-	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
-	* Kombinationen Filtergröße/Filteranzahl/Verzweigungsgrad checken
-	* Bloom-Filter-Größe 256/512 Bit, # Bloom-Filter 100
-	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
-	* z.B. in R
+	* Vergleich mit unsortierter Liste bzgl. Ergebnisqualität/Laufzeit in Sek./# Vergleiche/Speicher/Kosten für Baum-Aufbau
+	* Evaluation automatisisieren 
+	* Graphen erstellen (in R)
 
-4. Nächste Schritte
-
-	-> Suchalgorithmen fertig checken
-	-> Jaccard-Distanzen immer noch falsch (teilweise > 2 für große Filter!)
-	-> welche Kombinationen sind sinnvoll für d, m, n? 
-	-> Initialisierung Bloom-Filter?
-	-> Sort result vector by jaccard distances in ascending order (BloomFilterList::simQueryVec())
-	-> evtl. Suchalgorithmen optimieren 
-	-> evtl. destructor für BloomFilterListNode
-
-5. Ausarbeitung 
+4. Ausarbeitung 
 
 	* Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 	* Sprache ändern zu Deutsch
