@@ -163,7 +163,7 @@ KW 22 (42 h)
 * So, 05.06. (5 h)
 
 
-KW 23 (noch 32 h)
+KW 23 (32 h)
 * Mo, 06.06 (7.5 h)
 * Di, 07.06. (4.25 h)
 * Mi, 08.06. (6 h)
@@ -172,68 +172,49 @@ KW 23 (noch 32 h)
 * So, 12.06. (5.75 h)
 
 
+KW 24 (noch 31.5 h)
+* Mo, 13.06. (0.5 h)
+
+
 ## TODO
 
-1. Bisherige Quellen in Ausarbeitung: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
+1. Set insertion
 
-2. Implementierung
+	-> läuft mit kleinen Werten (4/6/10)
+	-> läuft gut mit größeren Werten für vector query, schlecht für point query
+	-> Beispielergebnisse simQuery() für 256 Bit-Filter: 
+		Gefordert (Rang): 					Geliefert (Rang): 
+		1							35 
+		1							7
+		1							1
+		1							9
+		1							30
+		1							7
 
-	* 1. Set insertion
-		-> Suchalgorithmen fertig checken (realistische Werte)
+	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
+		Gefordert (Rang): 					Geliefert (Rang): 
+		1, 2, 3							1, 4, 5
+		1, 2, 3							3, 4, 5
+		1, 2, 3							1, 2, 6
+		1, 2, 3							1, 3, 5
+		1, 2, 3							1, 2, 3
+		1, 2, 3							1, 2, 6 
 
-		Filtergröße 256: 
-		- mySubsetCount() lässt sich schon bei Filtergröße 100 nicht mehr sinnvoll berechnen 
-		- jeder Filter wird nur einmal eingefügt
-		- berechnete optimale subset ids + superset ids sind identisch für 3 Testfilter in beiden Testbäumen (weil Bäume so gefüllt werden, dass keine IDs frei bleiben)
-		- Ergebnisse simQuery():  
-			Gefordert (Rang): 					Geliefert (Rang): 
-			1									35 
-			1									7
-			1									1
-			1									9
-			1									30
-			1									7
+2. Segment insertion 
+	
+	-> läuft gut mit kleinen Werten (4/6/10)
+	-> läuft deutlich schlechter mit größeren Werten vector query und point query
+	-> Beispielergebnisse simQuery() für 256 Bit-Filter: 
+		Gefordert (Rang): 					Geliefert (Rang): 
+		1							7
+		1							4
+		1							7
+	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
+		Gefordert (Rang):					Geliefert (Rang): 
+		1, 2, 3							3, 9, 1
+		1, 2, 3							1, 6, 7
+		1, 2, 3							18, 6, 13
 
-		- Ergebnisse simQueryVec(): 
-			Gefordert (Rang): 					Geliefert (Rang): 
-			1, 2, 3								1, 4, 5
-			1, 2, 3								3, 4, 5
-			1, 2, 3								1, 2, 6
-			1, 2, 3								1, 3, 5
-			1, 2, 3								1, 2, 3
-			1, 2, 3								1, 2, 6 
-
-		Filtergröße 512: 
-
-		-> evtl. Suchalgorithmen optimieren 
-		
-	* 2. Segment insertion 
-		-> Suchalgorithmen fertig checken (realistische Werte)
-
-		Filtergröße 256: 
-		- Ergebnisse simQuery(): 
-			Gefordert (Rang): 					Geliefert (Rang): 
-			1									7
-			1									4
-			1									7
-		- Ergebnisse simQueryVec(): 
-			Gefordert (Rang):					Geliefert (Rang): 
-			1, 2, 3								3, 9, 1
-			1, 2, 3								1, 6, 7
-			1, 2, 3								18, 6, 13
-
-
-		Filtergröße 512: 
-
-		-> Sort result vector by jaccard distances in ascending order (BloomFilterList::simQueryVec())
-		-> evtl. Suchalgorithmen optimieren 
-		-> evtl. destructor für BloomFilterListNode
-
-	* Berechnung Jaccard-Distanz ändern und testen 
-	* Initialisierung der Bloom-Filter checken (meistens jacc-Werte zw. 0.6 und 0.9)
-	* Sinnvolle Werte für k und m?
-	* Initialisierung Bloom-Filter?
-		
 3. Evaluation 
 
 	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
@@ -242,8 +223,19 @@ KW 23 (noch 32 h)
 	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
 	* z.B. in R
 
-4. Ausarbeitung 
+4. Nächste Schritte
 
-- Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
-- Sprache ändern zu Deutsch
-- Korrektur lesen
+	-> Suchalgorithmen fertig checken
+	-> Jaccard-Distanzen immer noch falsch (teilweise > 2 für große Filter!)
+	-> welche Kombinationen sind sinnvoll für d, m, n? 
+	-> Initialisierung Bloom-Filter?
+	-> Sort result vector by jaccard distances in ascending order (BloomFilterList::simQueryVec())
+	-> evtl. Suchalgorithmen optimieren 
+	-> evtl. destructor für BloomFilterListNode
+
+5. Ausarbeitung 
+
+	* Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
+	* Sprache ändern zu Deutsch
+	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
+	* Korrektur lesen

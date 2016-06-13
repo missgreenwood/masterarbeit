@@ -1,0 +1,56 @@
+1. Set insertion
+
+	-> läuft mit kleinen Werten (4/6/10)
+	-> läuft gut mit größeren Werten für vector query, schlecht für point query
+	-> Beispielergebnisse simQuery() für 256 Bit-Filter:  
+		Gefordert (Rang): 				Geliefert (Rang): 
+		1						35 
+		1						7
+		1						1
+		1						9
+		1						30
+		1						7
+
+	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
+		Gefordert (Rang): 				Geliefert (Rang): 
+		1, 2, 3						1, 4, 5
+		1, 2, 3						3, 4, 5
+		1, 2, 3						1, 2, 6
+		1, 2, 3						1, 3, 5
+		1, 2, 3						1, 2, 3
+		1, 2, 3						1, 2, 6 
+
+2. Segment insertion 
+	
+	-> läuft gut mit kleinen Werten (4/6/10)
+	-> läuft deutlich schlechter mit größeren Werten vector query und point query
+	-> Beispielergebnisse simQuery() für 256 Bit-Filter: 
+		Gefordert (Rang): 				Geliefert (Rang): 
+		1						7
+		1						4
+		1						7
+	-> Beispielergebnisse simQueryVec() für 256 Bit-Filter: 
+		Gefordert (Rang):				Geliefert (Rang): 
+		1, 2, 3						3, 9, 1
+		1, 2, 3						1, 6, 7
+		1, 2, 3						18, 6, 13
+
+3. Evaluation 
+
+	* Vergleich mit unsortierter Liste (Ergebnisqualität + Zeit/# Vergleiche)
+	* Kombinationen Filtergröße/Filteranzahl/Verzweigungsgrad checken
+	* Bloom-Filter-Größe 256/512 Bit, # Bloom-Filter 100
+	* Prozentsatz an guten Suchergebnissen ermitteln ggü. vollständigem Ansatz 
+	* z.B. in R
+
+4. Nächste Schritte
+
+	-> Suchalgorithmen fertig checken
+	-> Jaccard-Distanzen immer noch falsch (teilweise > 2 für große Filter!)
+	-> welche Kombinationen sind sinnvoll für d, m, n? 
+	-> Initialisierung Bloom-Filter?
+	-> Sort result vector by jaccard distances in ascending order (BloomFilterList::simQueryVec())
+	-> evtl. Suchalgorithmen optimieren 
+	-> evtl. destructor für BloomFilterListNode
+
+
