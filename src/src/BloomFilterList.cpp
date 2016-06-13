@@ -7,7 +7,7 @@
 #include "BloomFilterList.hpp"
 
 
-BloomFilterList::BloomFilterList(): size(filtersize) {
+BloomFilterList::BloomFilterList(): size(0) {
     head = tail = NULL;
 }
 

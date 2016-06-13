@@ -4,8 +4,8 @@
 #include "BloomFilter.hpp"
 
 
-// Default constructor with no parameters
-BloomFilter::BloomFilter(): size(filtersize), id(rand()) {
+// Default constructor, sets size to 256
+BloomFilter::BloomFilter(): id(rand()), count(0), size(256), d(NUM_HASH){
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
@@ -15,8 +15,10 @@ BloomFilter::BloomFilter(): size(filtersize), id(rand()) {
 // Copy constructor
 // Usage: If a new object has to be created before the copying can occur
 BloomFilter::BloomFilter(const BloomFilter& fSource) {
-    size = fSource.size;
     id = fSource.id;
+    count = fSource.count;
+    size = fSource.size;
+    d = fSource.d;
     
     // Allocate memory (deep copy)
     data = new int[fSource.size];
@@ -25,21 +27,21 @@ BloomFilter::BloomFilter(const BloomFilter& fSource) {
     }
 };
 
-// Constructor with parameter id
-BloomFilter::BloomFilter(int i): size(filtersize), id(i) {
+// Constructor with parameters id and size
+BloomFilter::BloomFilter(int _id, int _size): id(_id), count(0), size(_size), d(NUM_HASH) {
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
     }
 }
 
-// Constructor with parameters size and id
-BloomFilter::BloomFilter(int s, int i): size(s), id(i) {
+// Constructor with parameters id, size, # of hash functions
+BloomFilter::BloomFilter(int _id, int _size, int _d): id(_id), count(0), size(_size), d(_d) {
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
     }
-};
+}
 
 BloomFilter::~BloomFilter() {}
 
@@ -49,8 +51,10 @@ BloomFilter & BloomFilter::operator= (const BloomFilter &fSource) {
     
     // Check for self assignment
     if (this != &fSource) {
-        size = fSource.size;
         id = fSource.id;
+        count = fSource.count;
+        size = fSource.size;
+        d = fSource.d;
         
         // Allocate memory (deep copy)
         data = new int[fSource.size];
@@ -126,7 +130,7 @@ BloomFilter * BloomFilter::logicalOr(BloomFilter *filter) {
         return this;
     }
     int *data2 = filter->getData();
-    BloomFilter *result = new BloomFilter(getSize(), rand());
+    BloomFilter *result = new BloomFilter(rand(), getSize(), d);
     for (int i=0; i<getSize(); i++) {
         if ((data[i] == 1) || (data2[i] == 1 )) {
             result->setValue(i, 1);
@@ -141,7 +145,7 @@ BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
         return this;
     }
     int *data2 = filter->getData();
-    BloomFilter *result = new BloomFilter(getSize(), rand());
+    BloomFilter *result = new BloomFilter(rand(), getSize(), d);
     for (int i=0; i<getSize(); i++) {
         if (data[i] == 1 && data2[i] == 1) {
             result->setValue(i, 1);
@@ -290,4 +294,18 @@ double BloomFilter::eIntersect(BloomFilter *filter) {
     double unions_size = eUnion(filter);
     double e = eSize() - filter->eSize() - unions_size;
     return e; 
+}
+
+void BloomFilter::add(string &elem) {
+    int max = size-1;
+    for (int i=0; i<d; i++) {
+        hash<string> hash_fn;
+        int k = (int) hash_fn(elem) % max;
+        setValue(k, 1);
+    }
+    increment();
+}
+
+void BloomFilter::increment() {
+    count++;
 }

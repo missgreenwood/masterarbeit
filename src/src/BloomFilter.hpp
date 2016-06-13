@@ -9,25 +9,29 @@
 #include <cstdlib>
 #include <random>
 #include <math.h>
+#include <string>
+#include <functional>
 
 using namespace std;
 
 // TODO
-const int filtersize = 256;     // # of bits in Bloom filter
-const int d = 3;                // # of hash functions
+const int NUM_HASH = 3;
+const int NUM_FILTERS = 100;
 
 class BloomFilter {
     
 private:
-    int size;
     int id;
+    int count;                  // # of elements inserted
+    int size;                   // # of bits
+    int d;                      // # of hash functions
     int *data;
     
 public:
     BloomFilter();
-    BloomFilter(const BloomFilter& fSource); 
-    BloomFilter(int i);
-    BloomFilter(int s, int i);
+    BloomFilter(const BloomFilter& fSource);
+    BloomFilter(int _id, int _size);
+    BloomFilter(int _id, int _size, int _d);
     ~BloomFilter();
     
     BloomFilter & operator = (const BloomFilter &fSource);
@@ -60,7 +64,9 @@ public:
     double computeAmbienceJaccard(BloomFilter *filter);
     double computeJaccard(BloomFilter *filter) const;
     double eUnion(BloomFilter *filter);
-    double eIntersect(BloomFilter *filter); 
+    double eIntersect(BloomFilter *filter);
+    void add(string &elem);
+    void increment();
 };
 
 #endif

@@ -13,7 +13,7 @@ BloomFilterNode::BloomFilterNode(int _t, int _s): t(_t), filtersize(_s), n(0), p
     for (int i=0; i<(2*_t); i++) {
         filters[i] = NULL;
     }
-    unionfilter = new BloomFilter(filtersize, rand());
+    unionfilter = new BloomFilter(rand(), _s);
 }
 
 BloomFilterNode::~BloomFilterNode() {
@@ -92,7 +92,7 @@ double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
             dot++;
         }
     }
-    return -log(1-dot / (double) f1->getSize()) * f1->getSize()/d;
+    return -log(1-dot / (double) f1->getSize()) * f1->getSize()/NUM_HASH;
 }
 
 double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
