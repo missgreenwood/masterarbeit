@@ -1,11 +1,12 @@
 //  BloomFilter.cpp, Judith Greif
 //  Description: Implementation of class BloomFilter
 
+# include "MurmurHash2.hpp"
 #include "BloomFilter.hpp"
 
 
 // Default constructor, sets size to 256
-BloomFilter::BloomFilter(): id(rand()), count(0), size(256), d(NUM_HASH){
+BloomFilter::BloomFilter(): id(rand()), count(0), size(256), d(NUM_HASHES){
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
@@ -28,7 +29,7 @@ BloomFilter::BloomFilter(const BloomFilter& fSource) {
 };
 
 // Constructor with parameters id and size
-BloomFilter::BloomFilter(int _id, int _size): id(_id), count(0), size(_size), d(NUM_HASH) {
+BloomFilter::BloomFilter(int _id, int _size): id(_id), count(0), size(_size), d(NUM_HASHES) {
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
@@ -297,10 +298,9 @@ double BloomFilter::eIntersect(BloomFilter *filter) {
 }
 
 void BloomFilter::add(string &elem) {
-    int max = size-1;
     for (int i=0; i<d; i++) {
-        hash<string> hash_fn;
-        int k = (int) hash_fn(elem) % max;
+        int seed = rand();
+        unsigned int k = MurmurHash2(&elem, (unsigned int) elem.length(), seed) % size;
         setValue(k, 1);
     }
     increment();

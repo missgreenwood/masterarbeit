@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC4D4E4C1D102E640003B892 /* MurmurHash2.hpp in Sources */ = {isa = PBXBuildFile; fileRef = BC4D4E4B1D102E640003B892 /* MurmurHash2.hpp */; };
 		BC5862011CCAC579007CDEC0 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5861F81CCABB5C007CDEC0 /* tests.cpp */; };
 		BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC5862081CCAD8CE007CDEC0 /* main.cpp */; };
 		BC7E2BE21CE63CA7003D9A8A /* BloomFilterLeaf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC7E2BE11CE63CA7003D9A8A /* BloomFilterLeaf.cpp */; };
@@ -53,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC4D4E4B1D102E640003B892 /* MurmurHash2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MurmurHash2.hpp; path = src/MurmurHash2.hpp; sourceTree = "<group>"; };
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tests.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -178,6 +180,7 @@
 		BCCE1F2A1CD625B6004382A8 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				BC4D4E4B1D102E640003B892 /* MurmurHash2.hpp */,
 				BCFB96FE1CD8AE0D009AB4A4 /* BloomFilter.hpp */,
 				BCFB96FD1CD8AE0D009AB4A4 /* BloomFilter.cpp */,
 				BCECF51E1CE8C26900E25698 /* Bloom-Filter-Tree */,
@@ -320,6 +323,7 @@
 				BCE5514F1D07330700C9DD58 /* BloomFilterListNode.cpp in Sources */,
 				BC7E2BE21CE63CA7003D9A8A /* BloomFilterLeaf.cpp in Sources */,
 				BC5862091CCAD8CE007CDEC0 /* main.cpp in Sources */,
+				BC4D4E4C1D102E640003B892 /* MurmurHash2.hpp in Sources */,
 				BCFB97021CD8AE0D009AB4A4 /* BloomFilter.cpp in Sources */,
 				BC7E2BE61CE63CBC003D9A8A /* BloomFilterIndexNode.cpp in Sources */,
 				BCE5514C1D0732FD00C9DD58 /* BloomFilterList.cpp in Sources */,

@@ -1,32 +1,58 @@
 //  main.cpp, Judith Greif
 //  Description: Main executable for Bloom filter data structures
 
-
+#include <iostream>
+#include <fstream>
+#include <random>
+#include <string>
+#include <vector>
+#include <algorithm>
 #include "BloomFilterTree.hpp"
 #include "BloomFilterList.hpp"
 
 using namespace std;
 
+int randomNumber() {
+    random_device rd;
+    mt19937 mt(rd());
+    uniform_real_distribution<double> dist(0.0, 235886.0);
+    return dist(mt);
+}
+
+const char* filename = "/Users/judith/Documents/MA/src/src/words.txt";
 
 int main(int argc, const char *argv[]) {
-    
+
     // Class BloomFilter
-    
     cout << "CLASS BloomFilter\n";
     cout << "-----------------\n";
+    cout << "Create 100 instances of BloomFilter with random ids, array length 256 and insert 50 random elements from dictionary";
     
-    /* cout << "Create 100 instances of BloomFilter with random ids, array length 256 and random values";
-    cout << "\nCreate new BloomFilter vector (v1) and insert all filters";
-    BloomFilter *filter;
-    int id;
-    vector<BloomFilter> v1;
-    for (int i=0; i<100; i++) {
-        filter = new BloomFilter(256, rand());
-        id = filter->getId();
-        filter->initRandom();
-        v1.push_back(*filter);
+    // Store all lines from large dictionary in vector
+    vector<string> words;
+    ifstream file(filename);
+    string word;
+    while (file >> word) {
+        words.push_back(word);
     }
-    cout << "\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256 and random values";
+    
+    // Repeat 100 times:
+    // Pick 50 lines at random and insert into new BloomFilter object
+    BloomFilter *filter;
+    vector<BloomFilter> v1;
+    
+    for (int i=0; i<NUM_FILTERS; i++) {
+        filter = new BloomFilter(rand(), 256, NUM_HASHES);
+        vector<int> rand_index(NUM_ELEMENTS);
+        for (auto i=0; i<rand_index.size(); i++) {
+            rand_index[i] = randomNumber();
+            filter->add(words[rand_index[i]]);
+        }
+        v1.push_back(*filter);
+        cout << endl;
+    }
+    
+    /* cout << "\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256 and random values";
     BloomFilter f1(256, 1);
     f1.initRandom();
     BloomFilter f2(256, 2);

@@ -14,9 +14,10 @@
 
 using namespace std;
 
-// TODO
-const int NUM_HASH = 3;
+const int NUM_HASHES = 3;
 const int NUM_FILTERS = 100;
+const int NUM_ELEMENTS = 50;
+
 
 class BloomFilter {
     
