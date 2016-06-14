@@ -6,7 +6,7 @@
 
 
 // Default constructor, sets size to 256
-BloomFilter::BloomFilter(): id(rand()), count(0), size(256), d(NUM_HASHES){
+BloomFilter::BloomFilter(): id(rand()), count(0), size(256), d(4) {
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
@@ -29,15 +29,8 @@ BloomFilter::BloomFilter(const BloomFilter& fSource) {
 };
 
 // Constructor with parameters id and size
-BloomFilter::BloomFilter(int _id, int _size): id(_id), count(0), size(_size), d(NUM_HASHES) {
-    data = new int[size];
-    for (int i=0; i<size; i++) {
-        data[i] = 0;
-    }
-}
-
-// Constructor with parameters id, size, # of hash functions
-BloomFilter::BloomFilter(int _id, int _size, int _d): id(_id), count(0), size(_size), d(_d) {
+BloomFilter::BloomFilter(int _id, int _size): id(_id), count(0), size(_size) {
+    d = ceil((double) size/NUM_ELEMENTS * log(2));
     data = new int[size];
     for (int i=0; i<size; i++) {
         data[i] = 0;
@@ -131,7 +124,7 @@ BloomFilter * BloomFilter::logicalOr(BloomFilter *filter) {
         return this;
     }
     int *data2 = filter->getData();
-    BloomFilter *result = new BloomFilter(rand(), getSize(), d);
+    BloomFilter *result = new BloomFilter(rand(), getSize());
     for (int i=0; i<getSize(); i++) {
         if ((data[i] == 1) || (data2[i] == 1 )) {
             result->setValue(i, 1);
@@ -146,7 +139,7 @@ BloomFilter * BloomFilter::logicalAnd(BloomFilter *filter) {
         return this;
     }
     int *data2 = filter->getData();
-    BloomFilter *result = new BloomFilter(rand(), getSize(), d);
+    BloomFilter *result = new BloomFilter(rand(), getSize());
     for (int i=0; i<getSize(); i++) {
         if (data[i] == 1 && data2[i] == 1) {
             result->setValue(i, 1);
@@ -298,14 +291,25 @@ double BloomFilter::eIntersect(BloomFilter *filter) {
 }
 
 void BloomFilter::add(string &elem) {
-    for (int i=0; i<d; i++) {
-        int seed = rand();
-        unsigned int k = MurmurHash2(&elem, (unsigned int) elem.length(), seed) % size;
+    
+    // Create first hash with random seed (one seed per application call)
+    unsigned int k = MurmurHash2(&elem, (unsigned int) elem.length(), seed) % size;
+    setValue(k, 1);
+    int myseed = k;
+    for (int i=0; i<d-1; i++) {
+ 
+        // Create additional hashes using the output of hash#i as the initial value for hash#i+1 (Hadoop approach)
+        unsigned int k = MurmurHash2(&elem, (unsigned int) elem.length(), myseed) % size;
         setValue(k, 1);
+        myseed = k;
     }
     increment();
 }
 
 void BloomFilter::increment() {
     count++;
+}
+
+int BloomFilter::getNumHashes() {
+    return d;
 }

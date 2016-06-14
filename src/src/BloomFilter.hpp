@@ -14,10 +14,9 @@
 
 using namespace std;
 
-const int NUM_HASHES = 3;
 const int NUM_FILTERS = 100;
 const int NUM_ELEMENTS = 50;
-
+const int seed = rand();
 
 class BloomFilter {
     
@@ -32,7 +31,6 @@ public:
     BloomFilter();
     BloomFilter(const BloomFilter& fSource);
     BloomFilter(int _id, int _size);
-    BloomFilter(int _id, int _size, int _d);
     ~BloomFilter();
     
     BloomFilter & operator = (const BloomFilter &fSource);
@@ -68,6 +66,7 @@ public:
     double eIntersect(BloomFilter *filter);
     void add(string &elem);
     void increment();
+    int getNumHashes(); 
 };
 
 #endif

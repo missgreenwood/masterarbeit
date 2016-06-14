@@ -53,7 +53,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BC4D4E4D1D1038750003B892 /* RandomFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RandomFunctions.hpp; sourceTree = "<group>"; };
 		BC4D4E4E1D103B340003B892 /* MurmurHash2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MurmurHash2.hpp; path = src/MurmurHash2.hpp; sourceTree = "<group>"; };
 		BC4D4E4F1D103D100003B892 /* RandomFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RandomFunctions.hpp; path = src/RandomFunctions.hpp; sourceTree = "<group>"; };
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +182,6 @@
 			children = (
 				BC4D4E4F1D103D100003B892 /* RandomFunctions.hpp */,
 				BC4D4E4E1D103B340003B892 /* MurmurHash2.hpp */,
-				BC4D4E4D1D1038750003B892 /* RandomFunctions.hpp */,
 				BCFB96FE1CD8AE0D009AB4A4 /* BloomFilter.hpp */,
 				BCFB96FD1CD8AE0D009AB4A4 /* BloomFilter.cpp */,
 				BCECF51E1CE8C26900E25698 /* Bloom-Filter-Tree */,

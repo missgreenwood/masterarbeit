@@ -92,7 +92,7 @@ double BloomFilterNode::eUnion(BloomFilter *f1, BloomFilter *f2) {
             dot++;
         }
     }
-    return -log(1-dot / (double) f1->getSize()) * f1->getSize()/NUM_HASHES;
+    return -log(1-dot / (double) f1->getSize()) * f1->getSize()/f1->getNumHashes();
 }
 
 double BloomFilterNode::eIntersect(BloomFilter *f1, BloomFilter *f2) {
