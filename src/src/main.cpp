@@ -4,20 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-#include <string>
-#include <vector>
-#include <algorithm>
+
+#include "RandomFunctions.hpp"
 #include "BloomFilterTree.hpp"
 #include "BloomFilterList.hpp"
 
-using namespace std;
 
-int randomNumber() {
-    random_device rd;
-    mt19937 mt(rd());
-    uniform_real_distribution<double> dist(0.0, 235886.0);
-    return dist(mt);
-}
+using namespace std;
 
 const char* filename = "/Users/judith/Documents/MA/src/src/words.txt";
 
@@ -37,7 +30,7 @@ int main(int argc, const char *argv[]) {
     }
     
     // Repeat 100 times:
-    // Pick 50 lines at random and insert into new BloomFilter object
+    // Pick 50 lines from dictionary at random and insert into new BloomFilter object (size 256)
     BloomFilter *filter;
     vector<BloomFilter> v1;
     
@@ -49,37 +42,77 @@ int main(int argc, const char *argv[]) {
             filter->add(words[rand_index[i]]);
         }
         v1.push_back(*filter);
-        cout << endl;
     }
     
-    /* cout << "\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256 and random values";
-    BloomFilter f1(256, 1);
-    f1.initRandom();
-    BloomFilter f2(256, 2);
-    f2.initRandom();
-    BloomFilter f3(256, 3);
-    f3.initRandom();
+    cout << "\n\nCreate 100 instances of BloomFilter with random ids, array length 512 and insert 50 random elements from dictionary";
     
-    cout << "\n\nCreate 100 instances of BloomFilter with random ids, array length 512 and random values";
-    cout << "Create new BloomFilter vector (v2) and insert all filters";
-    BloomFilter *filter512;
-    int id512;
+    // Repeat 100 times:
+    // Pick 50 lines from dictionary at random and insert into new BloomFilter object (size 512)
     vector<BloomFilter> v2;
-    for (int i=0; i<100; i++) {
-        filter512 = new BloomFilter(512, rand());
-        id512 = filter512->getId();
-        filter512->initRandom();
-        v2.push_back(*filter512);
+    
+    for (int i=0; i<NUM_FILTERS; i++) {
+        filter = new BloomFilter(rand(), 512, NUM_HASHES);
+        vector<int> rand_index(NUM_ELEMENTS);
+        for (auto i=0; i<rand_index.size(); i++) {
+            rand_index[i] = randomNumber();
+            filter->add(words[rand_index[i]]);
+        }
+        v2.push_back(*filter);
     }
     
-    cout << "Create 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and random values";
-    BloomFilter f4(512, 4);
-    f4.initRandom();
-    BloomFilter f5(512, 5);
-    f5.initRandom();
-    BloomFilter f6(512, 6);
-    f6.initRandom();
+    cout << "\n\nCreate 3 query filters f1, f2, f3 with ids 1, 2, 3, array length 256 and insert 50 random elements from dictionary";
+    BloomFilter f1(1, 256, NUM_HASHES);
+    BloomFilter f2(2, 256, NUM_HASHES);
+    BloomFilter f3(3, 256, NUM_HASHES);
+    vector<int> rand_index(NUM_ELEMENTS);
     
+    cout << "\n\nf1 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f1.add(words[rand_index[i]]);
+    }
+    
+    cout << "\nf2 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f2.add(words[rand_index[i]]);
+    }
+
+    cout << "\nf3 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f3.add(words[rand_index[i]]);
+    }
+
+    cout << "Create 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and random values";
+    BloomFilter f4(4, 512, NUM_HASHES);
+    BloomFilter f5(5, 512, NUM_HASHES);
+    BloomFilter f6(6, 512, NUM_HASHES);
+    
+    cout << "\nf4 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f4.add(words[rand_index[i]]);
+    }
+    
+    cout << "\nf5 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f5.add(words[rand_index[i]]);
+    }
+    
+    cout << "\nf6 contains:\n\n";
+    for (auto i=0; i<rand_index.size(); i++) {
+        rand_index[i] = randomNumber();
+        cout << words[rand_index[i]] << endl;
+        f6.add(words[rand_index[i]]);
+    }
+
     /* // Class BloomFilterTree
     
     cout << "\n\n\nCLASS BloomFilterTree";

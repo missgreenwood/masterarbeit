@@ -1,7 +1,7 @@
 //  BloomFilter.cpp, Judith Greif
 //  Description: Implementation of class BloomFilter
 
-# include "MurmurHash2.hpp"
+#include "MurmurHash2.hpp"
 #include "BloomFilter.hpp"
 
 
