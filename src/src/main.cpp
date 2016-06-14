@@ -81,7 +81,7 @@ int main(int argc, const char *argv[]) {
         f3.add(words[rand_index[i]]);
     }
 
-    cout << "Create 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and random values";
+    cout << "\n\nCreate 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and insert 50 random elements from dictionary";
     BloomFilter f4(4, 512);
     BloomFilter f5(5, 512);
     BloomFilter f6(6, 512);
@@ -101,7 +101,7 @@ int main(int argc, const char *argv[]) {
         f6.add(words[rand_index[i]]);
     }
 
-    /* // Class BloomFilterTree
+    // Class BloomFilterTree
     
     cout << "\n\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n";
@@ -133,7 +133,7 @@ int main(int argc, const char *argv[]) {
     cout << "10 nearest neighbors of f1 in b1:\n\n";
     vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
 
-    cout << "\n10 nearest neighbors of f1 in b2:\n\n";
+    /* cout << "\n10 nearest neighbors of f1 in b2:\n\n";
     vector<pair<int, double>> res2 = b2.computekDistances(&f1, 10);
     
     cout << "\n10 nearest neighbors of f2 in b1:\n\n";

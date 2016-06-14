@@ -172,9 +172,9 @@ KW 23 (32 h)
 * So, 12.06. (5.75 h)
 
 
-KW 24 (noch 22.25 h)
+KW 24 (noch 22 h)
 * Mo, 13.06. (4.25 h)
-* Di, 14.06. (5 h)
+* Di, 14.06. (5.75 h)
 
 
 ## TODO
@@ -182,8 +182,7 @@ KW 24 (noch 22.25 h)
 1. Implementierung - Set insertion
 
 	* simQuery() verbessern 
-	* Parameter anpassen: 50 String-Elemente zufällig erzeugen u. einfügen (n), FP-Rate minimieren, Filtergröße 256/512 Bit (m), Anzahl Hashfunktionen (d/k) entsprechend, evtl. Verzweigungsgrad
-	* Alternativ/zusätzlich: Cassandra-Parameter verwenden 
+	* Parameter anpassen: Verzweigungsgrad
 
 2. Implementierung - Segment insertion
 	
