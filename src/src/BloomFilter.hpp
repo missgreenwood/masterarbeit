@@ -66,7 +66,8 @@ public:
     double eIntersect(BloomFilter *filter);
     void add(string &elem);
     void increment();
-    int getNumHashes(); 
+    int getNumHashes();
+    bool checkCorrectFillDegree();
 };
 
 #endif

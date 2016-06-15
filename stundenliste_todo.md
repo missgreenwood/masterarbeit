@@ -172,18 +172,18 @@ KW 23 (32 h)
 * So, 12.06. (5.75 h)
 
 
-KW 24 (noch 22 h)
+KW 24 (noch 18.25 h)
 * Mo, 13.06. (4.25 h)
-* Di, 14.06. (5.75 h)
+* Di, 14.06. (6 h)
+* Mi, 15.06. (3.5 h)
 
 
 ## TODO
 
 1. Implementierung - Set insertion
 
-	* simQuery() verbessern 
-	* Parameter anpassen: Verzweigungsgrad
-
+	* simQuery() verbessern, simQueryVec() checken (warum gleiche Ergebnisse für alle Test-Anfragefilter?)
+	
 2. Implementierung - Segment insertion
 	
 	* erstmal nicht weiter verfolgen, höchstens zum Vergleich
@@ -201,3 +201,9 @@ KW 24 (noch 22 h)
 	* Sprache ändern zu Deutsch
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
 	* Korrektur lesen
+
+
+## MA-Besprechung
+
+	* Auch mit Filtergrößen 256, 512 und realistischen Werten noch häufig Jaccard-Distanzen > 1
+	* Evtl. noch Verzweigungsgrad + Füllgrad Bloom-Filter tunen (optimal NUM_ELEMENTS <= 7, um Füllgrad 50% nicht zu überschreiten) 

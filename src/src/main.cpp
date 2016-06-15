@@ -66,7 +66,7 @@ int main(int argc, const char *argv[]) {
     BloomFilter f3(3, 256);
     vector<int> rand_index(NUM_ELEMENTS);
     
-    for (auto i=0; i<rand_index.size(); i++) {
+    for (auto i=0; i<rand_index.size()-5; i++) {
         rand_index[i] = randomNumber();
         f1.add(words[rand_index[i]]);
     }
@@ -81,7 +81,7 @@ int main(int argc, const char *argv[]) {
         f3.add(words[rand_index[i]]);
     }
 
-    cout << "\n\nCreate 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and insert 50 random elements from dictionary";
+    cout << "\n\nCreate 3 query filters f4, f5, f6 with ids 4, 5, 6, array length 512 and insert 50 random elements from dictionary\n\n";
     BloomFilter f4(4, 512);
     BloomFilter f5(5, 512);
     BloomFilter f6(6, 512);
@@ -100,10 +100,24 @@ int main(int argc, const char *argv[]) {
         rand_index[i] = randomNumber();
         f6.add(words[rand_index[i]]);
     }
-
+    
+    // Check fill degree of all filters
+    /* for (int i=0; i<v1.size(); i++) {
+        v1[i].checkCorrectFillDegree();
+    }
+    for (int i=0; i<v2.size(); i++) {
+        v2[i].checkCorrectFillDegree();
+    }
+    f1.checkCorrectFillDegree();
+    f2.checkCorrectFillDegree();
+    f3.checkCorrectFillDegree();
+    f4.checkCorrectFillDegree();
+    f5.checkCorrectFillDegree();
+    f6.checkCorrectFillDegree(); */
+    
     // Class BloomFilterTree
     
-    cout << "\n\n\nCLASS BloomFilterTree";
+    cout << "\n\nCLASS BloomFilterTree";
     cout << "\n---------------------\n";
     
     cout << "Create instance of BloomFilterTree (b1) with minimum degree 3/max elements 6, filter size 256 and insert all filters in v1 as sets\n\n";
@@ -132,8 +146,8 @@ int main(int argc, const char *argv[]) {
     
     cout << "10 nearest neighbors of f1 in b1:\n\n";
     vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
-
-    /* cout << "\n10 nearest neighbors of f1 in b2:\n\n";
+    
+    cout << "\n10 nearest neighbors of f1 in b2:\n\n";
     vector<pair<int, double>> res2 = b2.computekDistances(&f1, 10);
     
     cout << "\n10 nearest neighbors of f2 in b1:\n\n";
@@ -166,35 +180,11 @@ int main(int argc, const char *argv[]) {
     cout << "\n10 nearest neighbors of f6 in b4:\n\n";
     vector<pair<int, double>> res12 = b4.computekDistances(&f6, 10);
     
-    cout << "\n\nCheck subset insertion";
-    cout << "\n----------------------";
-    
-    // Subset id for filter size 256
-    cout << "\nComputed optimal subset id for f1 in b1: " << b1.computeSubsetId(&f1);
-    cout << "\nComputed optimal subset id for f2 in b1: " << b1.computeSubsetId(&f2);
-    cout << "\nComputed optimal subset id for f3 in b1: " << b1.computeSubsetId(&f3);
-    
-    cout << "\n\nComputed optimal subset id for f1 in b2: " << b2.computeSubsetId(&f1);
-    cout << "\nComputed optimal subset id for f2 in b2: " << b2.computeSubsetId(&f2);
-    cout << "\nComputed optimal subset id for f3 in b2: " << b2.computeSubsetId(&f3);
-    
-    cout << "\n\n\nCheck superset insertion";
-    cout << "\n------------------------";
-    
-    // Superset id for filter size 256
-    cout << "\nComputed optimal superset id for f1 in b1: " << b1.computeSupersetId(&f1);
-    cout << "\nComputed optimal superset id for f1 in b1: " << b1.computeSupersetId(&f1);
-    cout << "\nComputed optimal superset id for f1 in b1: " << b1.computeSupersetId(&f1);
-    
-    cout << "\n\nComputed optimal superset id for f1 in b2: " << b2.computeSupersetId(&f1);
-    cout << "\nComputed optimal superset id for f1 in b2: " << b2.computeSupersetId(&f1);
-    cout << "\nComputed optimal superset id for f1 in b2: " << b2.computeSupersetId(&f1);
-    
     // Set search queries
     cout << "\n\nCheck set queries";
     cout << "\n-----------------";
     
-    /* cout << "\nTREE QUERY for nearest neighbor of f1 in b1";
+    cout << "\nTREE QUERY for nearest neighbor of f1 in b1";
     cout << "\nResult should be: " << res1[0].first;
     BloomFilter *r1 = b1.simQuery(&f1);
     cout << "\nComputed result: " << r1->getId() << " (" << f1.computeJaccard(r1) << ")";
@@ -348,7 +338,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nComputed results:\n";
     cout << rL[0]->getId() << " (" << f6.computeJaccard(rL[0]) << ")\n";
     cout << rL[1]->getId() << " (" << f6.computeJaccard(rL[1]) << ")\n";
-    cout << rL[2]->getId() << " (" << f6.computeJaccard(rL[2]) << ")"; */
+    cout << rL[2]->getId() << " (" << f6.computeJaccard(rL[2]) << ")"; 
 
     cout << endl;
     return 0;

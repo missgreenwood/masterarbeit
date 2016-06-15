@@ -286,7 +286,8 @@ double BloomFilter::eUnion(BloomFilter *filter) {
 
 double BloomFilter::eIntersect(BloomFilter *filter) {
     double unions_size = eUnion(filter);
-    double e = eSize() - filter->eSize() - unions_size;
+    // double e = eSize() - filter->eSize() - unions_size;
+    double e = eSize() + filter->eSize() - unions_size;
     return e; 
 }
 
@@ -312,4 +313,13 @@ void BloomFilter::increment() {
 
 int BloomFilter::getNumHashes() {
     return d;
+}
+
+bool BloomFilter::checkCorrectFillDegree() {
+    double fillDegree = (double) setOnes()/ (double) size;
+    if (fillDegree > 0.5) {
+        cout << "Fill degree (filter " << getId() << "): " << fillDegree << endl;
+        return false;
+    }
+    return true;
 }
