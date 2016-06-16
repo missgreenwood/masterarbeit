@@ -47,7 +47,7 @@
 % initialize macros
 % -------------------------------------------------------------------------------------------------
 %
-\lmutitle{Titel der Arbeit}                       % title: you can force a new line by
+\lmutitle{Organisation von Bloom-Filtern \\zur effizienten k-nächste-Nachbarn-Suche \\in einem kontextzentrischen sozialen Netz}                       % title: you can force a new line by
 %\lmutitle{Titel \\ der \\ Arbeit}                % inserting `\\'. However, this will cause
                                                   % a hyperref warning!
 \lmustudentone{Judith Greif}                    	 % first author's name
@@ -65,9 +65,9 @@
                                                   % (uncomment if not needed)
 %\lmuadvisorthree{Betreuer Name3}                  % third advisor's name
                                                   % (uncomment if not needed)
-\lmudraftdate{\today}                             % only for versioning during work!
+%\lmudraftdate{\today}                             % only for versioning during work!
                                                   % (uncomment for final version!)
-\lmudeadline{1. Januar 2099}                      % deadline (day of submission)
+\lmudeadline{26. Juli 2016}                      % deadline (day of submission)
 %
 % =================================================================================================
 % package selection (add additional packages if needed)
@@ -77,7 +77,8 @@
 \usepackage{cmap}                                 % to produce searchable PDF
 \usepackage[T1]{fontenc}                          % split german words with umlaut
 \usepackage{lmodern}
-\usepackage[english,ngerman]{babel}               % for german toc, ...
+% \usepackage[ngerman, english]{babel}              % for german toc, ...
+\usepackage[english,ngerman]{babel}
 \usepackage{bibgerm}                              % for german bibliography index
 \usepackage{tabularx}                             % more flexible table environment
 \usepackage{booktabs}                             % high quality tables
@@ -94,7 +95,6 @@
 \usepackage{url}                                  % nicer url style
 \usepackage{enumitem}                             % for tight lists
 \usepackage{textcomp}
-%\usepackage{...}                                 % add additional packages here
 
 \setcounter{tocdepth}{3}                          % sectioning depth in toc
 \setcounter{secnumdepth}{3}                       % sectioning depth in text
@@ -120,16 +120,22 @@
     \frontmatter                                  % start roman numbering
     \tableofcontents                              % toc
     \mainmatter                                   % start alpha numbering
+    
+    %\DefineVerbatimEnvironment{Sinput}{Verbatim}{xleftmargin=2em}
+    %\DefineVerbatimEnvironment{Soutput}{Verbatim}{xleftmargin=2em}
+    %\DefineVerbatimEnvironment{Scode}{Verbatim}{xleftmargin=2em}
+    %\fvset{listofparameters}={\setlength{\topsep}{Opt}}}
+    %\renewenvironment{Schunk}{\vspace{\topsep}}{\vspace{\topsep}}
 %
 % =================================================================================================
 % place your document text here (take care of encoding)
 % -------------------------------------------------------------------------------------------------
 %
-    \input{text/introduction}
-    \input{text/background}
-    \input{text/implementation}
+    \input{text/einleitung}
+    \input{text/hintergrund}
+    \input{text/implementierung}
     \input{text/evaluation}
-    \input{text/conclusions}
+    \input{text/schlussbemerkungen}
 %
 % =================================================================================================
 % place your appendix here
@@ -154,8 +160,8 @@
 %
     \begin{spacing}{0.9}                          % save some space
     	   %\nocite{*}
-       %\bibliographystyle{geralpha}               % for german thesis
-       \bibliographystyle{alpha}                 % for english thesis
+       \bibliographystyle{geralpha}               % for german thesis
+       %\bibliographystyle{alpha}                 % for english thesis
        \bibliography{bibliography}                % the location of bib file
     \end{spacing}
 \end{document}

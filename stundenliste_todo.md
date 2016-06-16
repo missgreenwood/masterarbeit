@@ -172,18 +172,18 @@ KW 23 (32 h)
 * So, 12.06. (5.75 h)
 
 
-KW 24 (noch 18.25 h)
+KW 24 (noch 11 h)
 * Mo, 13.06. (4.25 h)
 * Di, 14.06. (6 h)
 * Mi, 15.06. (3.5 h)
-* Do, 16.06. (12:10 - )
+* Do, 16.06. (7.25 h)
 
 
 ## TODO
 
 1. Implementierung - Set insertion
 
-	* simQuery() verbessern, simQueryVec() checken (warum gleiche Ergebnisse für alle Test-Anfragefilter?)
+	* Evtl. checken - warum können mehrere Filter dieselbe ID bekommen?
 	
 2. Implementierung - Segment insertion
 	
@@ -198,9 +198,8 @@ KW 24 (noch 18.25 h)
 
 4. Ausarbeitung 
 
-	* Anpassen in main.tex: \lmutitle, \lmudeadline, \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, further chapters, Erklärung zum eigenständigen Arbeiten, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
-	* Sprache ändern zu Deutsch
-	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Skript Anfragebearbeitung, Werner2015, Yang2002, Skript ADS2, Nafe2005, Bayardo2007, Jannink1995
+	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
+	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995
 	* Korrektur lesen
 
 
