@@ -338,7 +338,7 @@ int main(int argc, const char *argv[]) {
     cout << "\nComputed results:\n";
     cout << rL[0]->getId() << " (" << f6.computeJaccard(rL[0]) << ")\n";
     cout << rL[1]->getId() << " (" << f6.computeJaccard(rL[1]) << ")\n";
-    cout << rL[2]->getId() << " (" << f6.computeJaccard(rL[2]) << ")"; 
+    cout << rL[2]->getId() << " (" << f6.computeJaccard(rL[2]) << ")";
 
     cout << endl;
     return 0;

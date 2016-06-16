@@ -501,7 +501,7 @@ BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
     BloomFilter *result = filters[0];
     int last = filters[0]->getId();
     double jacc;
-    int min = 1;
+    double min = 1;
     BloomFilterLeaf *tmp = this;
     
     // Collect candidates in range
@@ -511,11 +511,11 @@ BloomFilter * BloomFilterLeaf::simSubtreeQuery(BloomFilter *filter, int l) {
                 break;
             }
             jacc = computeJaccard(tmp->filters[i], filter);
-            last++;
             if (jacc < min) {
                 min = jacc;
                 result = tmp->filters[i];
             }
+            last++;
         }
         tmp = tmp->getNext();
     }

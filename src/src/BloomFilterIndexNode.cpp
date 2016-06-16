@@ -278,7 +278,7 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     bool set = false;
     int last;
     
-    // Check if query filter is subset or superset of any child's union filters
+    // Check if query filter is subset or superset of any child's union filter
     // If more than one: Determine best result
     for (int i=0; i<getCount()+1; i++) {
         if (C[i]->unionfilter->isSubset(filter)) {
@@ -301,7 +301,8 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     
     // If both false: Conduct normal subtree query
     if (set == false) {
-        last = getParent()->getKeys()[getParent()->getCount()-1];
+        // last = getParent()->getKeys()[getParent()->getCount()-1];
+        last = getKeys()[getCount()-1]; 
         return path->simSubtreeQuery(filter, last);
     }
     else {
