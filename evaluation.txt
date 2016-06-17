@@ -1,8 +1,0 @@
-## Evaluation in R
-
-1. Daten einlesen: 
-
-* read.table(), read.csv() etc. 
-* z.B. 
-	carsdata=read.table(file.choose(), header=T)
-	attach(carsdata)

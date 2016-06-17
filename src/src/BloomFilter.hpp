@@ -16,6 +16,7 @@ using namespace std;
 
 const int NUM_FILTERS = 100;
 const int NUM_ELEMENTS = 50;
+const int NUM_QUERYFILTERS = 10;
 const int seed = rand();
 
 class BloomFilter {

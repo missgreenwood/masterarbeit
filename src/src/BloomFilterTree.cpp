@@ -171,7 +171,7 @@ vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter
         return left.second < right.second;
     });
     for (int i=0; i<k; i++) {
-        cout << "jacc(" << filter->getId() << ", " << allDistances[i].first << "): " << allDistances[i].second << "\n";
+        // cout << "jacc(" << filter->getId() << ", " << allDistances[i].first << "): " << allDistances[i].second << "\n";
         result.push_back(allDistances[i]); 
     }
     return result;
