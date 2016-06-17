@@ -173,6 +173,11 @@ int main(int argc, const char *argv[]) {
     
     cout << "EXPERIMENT SETTINGS\n";
     cout << "-------------------\n";
+    cout << "\nFilters: " << NUM_FILTERS;
+    cout << "\nElements: " << NUM_ELEMENTS;
+    cout << "\nFilter size: " << v1[0].getSize();
+    cout << "\nHash functions: " << v1[0].getNumHashes();
+    cout << "\nQuery filters: " << NUM_QUERYFILTERS << endl;
     
     vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
     vector<pair<int, double>> res2 = b1.computekDistances(&f2, 10);
@@ -187,13 +192,10 @@ int main(int argc, const char *argv[]) {
     
     // Create output csv files
     ofstream nn1_256;
-    /* ofstream nn3_256;
-     nn3_256.open("nn3_256.txt");
-     ofstream nn1_512;
-     nn1_512.open("nn1_512.txt");
-     ofstream nn3_512;
-     nn3_512.open("nn3_512.txt"); */
-
+    ofstream nn3_256;
+    ofstream nn1_512;
+    ofstream nn3_512;
+    
     // Set search queries
     BloomFilter *r1 = b1.simQuery(&f1);
     BloomFilter *r2 = b1.simQuery(&f2);
@@ -205,18 +207,21 @@ int main(int argc, const char *argv[]) {
     BloomFilter *r8 = b1.simQuery(&f8);
     BloomFilter *r9 = b1.simQuery(&f9);
     BloomFilter *r10 = b1.simQuery(&f10);
+    vector<BloomFilter*> rA = b1.simQueryVec(&f1, 3);
+    vector<BloomFilter*> rB = b1.simQueryVec(&f2, 3);
+    vector<BloomFilter*> rC = b1.simQueryVec(&f3, 3);
+    vector<BloomFilter*> rD = b1.simQueryVec(&f4, 3);
+    vector<BloomFilter*> rE = b1.simQueryVec(&f5, 3);
+    vector<BloomFilter*> rF = b1.simQueryVec(&f6, 3);
+    vector<BloomFilter*> rG = b1.simQueryVec(&f7, 3);
+    vector<BloomFilter*> rH = b1.simQueryVec(&f8, 3);
+    vector<BloomFilter*> rI = b1.simQueryVec(&f9, 3);
+    vector<BloomFilter*> rJ = b1.simQueryVec(&f10, 3);
     
-    cout << "\nFilters: " << NUM_FILTERS;
-    cout << "\nElements: " << NUM_ELEMENTS;
-    cout << "\nFilter size: " << v1[0].getSize();
-    cout << "\nHash functions: " << v1[0].getNumHashes();
-    cout << "\nQuery filters: " << NUM_QUERYFILTERS << endl;
-    
-    nn1_256.open("nn1_256.txt");
-    nn1_256 << "Filters: " << NUM_FILTERS << ", elements: " << NUM_ELEMENTS << ", filter size: " << v1[0].getSize() << ", hash functions: " << v1[0].getNumHashes() << ", query filters: " << NUM_QUERYFILTERS << endl;
-    
-    // Optimal
+    // Optimal (NN, 256)
     cout << "\nNN query, optimal results:\n";
+    nn1_256.open("nn1_256.csv");
+    nn1_256 << "Filters: " << NUM_FILTERS << ", elements: " << NUM_ELEMENTS << ", filter size: " << v1[0].getSize() << ", hash functions: " << v1[0].getNumHashes() << ", query filters: " << NUM_QUERYFILTERS << endl;
     cout << res1[0].first << " (" << res1[0].second << ")\n";
     cout << res2[0].first << " (" << res2[0].second << ")\n";
     cout << res3[0].first << " (" << res3[0].second << ")\n";
@@ -230,7 +235,7 @@ int main(int argc, const char *argv[]) {
     
     nn1_256 << res1[0].second << "," << res2[0].second << "," << "," << res3[0].second << "," << res4[0].second << "," << res5[0].second << "," << res6[0].second << "," << res7[0].second << "," << res8[0].second << "," << res9[0].second << "," << res10[0].second << endl;
     
-    // Computed
+    // Computed (NN, 256)
     cout << "\nNN query, computed results:\n";
     cout << r1->getId() << " (" << f1.computeJaccard(r1) << ")\n";
     cout << r2->getId() << " (" << f2.computeJaccard(r2) << ")\n";
@@ -246,10 +251,32 @@ int main(int argc, const char *argv[]) {
     nn1_256 << f1.computeJaccard(r1) << "," << f2.computeJaccard(r2) << "," << f3.computeJaccard(r3) << f4.computeJaccard(r4) << "," << f5.computeJaccard(r5) << "," << f6.computeJaccard(r6) <<f7.computeJaccard(r7) << "," << f8.computeJaccard(r8) << "," << f9.computeJaccard(r9) << "," << f10.computeJaccard(r10) << endl;
     nn1_256.close();
     
-    /* cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f1.getId();
-    cout << "\n\nResults should be: " << res1[0].first << ", " << res1[1].first << ", " << res1[2].first;
-    vector<BloomFilter*> rA = b1.simQueryVec(&f1, 3);
-    cout << "\nComputed results:\n";
+    // Optimal (3NN, 256)
+    nn3_256.open("nn3_256.csv");
+    nn3_256 << "Filters: " << NUM_FILTERS << ", elements: " << NUM_ELEMENTS << ", filter size: " << v1[0].getSize() << ", hash functions: " << v1[0].getNumHashes() << ", query filters: " << NUM_QUERYFILTERS << endl;
+    
+    cout << "\n3NN query, optimal results:\n";
+    cout << res1[0].first << " (" << res1[0].second << "), " << res1[1].first << " (" << res1[1].second << "), " << res1[2].first << " (" << res1[2].second << ")\n";
+    cout << res2[0].first << " (" << res2[0].second << "), " << res2[1].first << " (" << res2[1].second << "), " << res2[2].first << " (" << res2[2].second << ")\n";
+    cout << res1[0].first << " (" << res1[0].second << "), " << res1[1].first << " (" << res1[1].second << "), " << res3[2].first << " (" << res3[2].second << ")\n";
+    cout << res3[0].first << " (" << res3[0].second << "), " << res3[1].first << " (" << res3[1].second << "), " << res3[2].first << " (" << res3[2].second << ")\n";
+    cout << res4[0].first << " (" << res4[0].second << "), " << res4[1].first << " (" << res4[1].second << "), " << res4[2].first << " (" << res4[2].second << ")\n";
+    cout << res5[0].first << " (" << res5[0].second << "), " << res5[1].first << " (" << res5[1].second << "), " << res5[2].first << " (" << res5[2].second << ")\n";
+    cout << res6[0].first << " (" << res6[0].second << "), " << res6[1].first << " (" << res6[1].second << "), " << res6[2].first << " (" << res6[2].second << ")\n";
+    cout << res7[0].first << " (" << res7[0].second << "), " << res7[1].first << " (" << res7[1].second << "), " << res7[2].first << " (" << res7[2].second << ")\n";
+    cout << res8[0].first << " (" << res8[0].second << "), " << res8[1].first << " (" << res8[1].second << "), " << res8[2].first << " (" << res8[2].second << ")\n";
+    cout << res9[0].first << " (" << res9[0].second << "), " << res9[1].first << " (" << res9[1].second << "), " << res9[2].first << " (" << res9[2].second << ")\n";
+    cout << res10[0].first << " (" << res10[0].second << "), " << res10[1].first << " (" << res10[1].second << "), " << res10[2].first << " (" << res10[2].second << ")\n";
+    
+    nn3_256 << res1[0].second << "," << res2[0].second << "," << res3[0].second << "," << res4[0].second << "," << res5[0].second << "," << res6[0].second << "," << res7[0].second << "," << res8[0].second << "," << res9[0].second << "," << res10[0].second << endl;
+    
+    nn3_256 << res1[1].second << "," << res2[1].second << "," << res3[1].second << "," << res4[1].second << "," << res5[1].second << "," << res6[1].second << "," << res7[1].second << "," << res8[1].second << "," << res9[1].second << "," << res10[1].second << endl;
+    
+    nn3_256 << res1[2].second << "," << res2[2].second << "," << res3[2].second << "," << res4[2].second << "," << res5[2].second << "," << res6[2].second << "," << res7[2].second << "," << res8[2].second << "," << res9[2].second << "," << res10[2].second << endl;
+    
+    // Computed (3NN, 256)
+    
+    /* cout << "\nComputed results:\n";
     cout << rA[0]->getId() << " (" << f1.computeJaccard(rA[0]) << ")\n";
     cout << rA[1]->getId() << " (" << f1.computeJaccard(rA[1]) << ")\n";
     cout << rA[2]->getId() << " (" << f1.computeJaccard(rA[2]) << ")";
