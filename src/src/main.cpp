@@ -7,7 +7,6 @@
 
 #include "RandomFunctions.hpp"
 #include "BloomFilterTree.hpp"
-#include "BloomFilterList.hpp"
 
 
 using namespace std;
@@ -52,6 +51,7 @@ int main(int argc, const char *argv[]) {
     }
     
     // Create 10 query filters f1..f10 with random ids, size 256 and insert 50 random elements from dictionary
+    vector<int> rand_index(NUM_ELEMENTS);
     BloomFilter f1(rand(), 256);
     BloomFilter f2(rand(), 256);
     BloomFilter f3(rand(), 256);
@@ -62,9 +62,6 @@ int main(int argc, const char *argv[]) {
     BloomFilter f8(rand(), 256);
     BloomFilter f9(rand(), 256);
     BloomFilter f10(rand(), 256);
-    
-    vector<int> rand_index(NUM_ELEMENTS);
-    
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
         f1.add(words[rand_index[i]]);
@@ -117,7 +114,6 @@ int main(int argc, const char *argv[]) {
     BloomFilter f18(rand(), 512);
     BloomFilter f19(rand(), 512);
     BloomFilter f20(rand(), 512);
-    
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
         f11.add(words[rand_index[i]]);
@@ -132,31 +128,31 @@ int main(int argc, const char *argv[]) {
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f11.add(words[rand_index[i]]);
+        f14.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f12.add(words[rand_index[i]]);
+        f15.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f13.add(words[rand_index[i]]);
+        f16.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f11.add(words[rand_index[i]]);
+        f17.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f12.add(words[rand_index[i]]);
+        f18.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f13.add(words[rand_index[i]]);
+        f19.add(words[rand_index[i]]);
     }
     for (auto i=0; i<rand_index.size(); i++) {
         rand_index[i] = randomNumber();
-        f11.add(words[rand_index[i]]);
+        f20.add(words[rand_index[i]]);
     }
     
     // Create instance of BloomFilterTree (b1) with minimum degree 3/max elements 6, filter size 256 and insert all filters in v1 as sets
@@ -171,14 +167,7 @@ int main(int argc, const char *argv[]) {
         b2.insertAsSets(&v2[i]);
     }
     
-    cout << "EXPERIMENT SETTINGS\n";
-    cout << "-------------------\n";
-    cout << "\nFilters: " << NUM_FILTERS;
-    cout << "\nElements: " << NUM_ELEMENTS;
-    cout << "\nFilter size: " << v1[0].getSize();
-    cout << "\nHash functions: " << v1[0].getNumHashes();
-    cout << "\nQuery filters: " << NUM_QUERYFILTERS << endl;
-    
+    // Compute optimal results
     vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
     vector<pair<int, double>> res2 = b1.computekDistances(&f2, 10);
     vector<pair<int, double>> res3 = b1.computekDistances(&f3, 10);
@@ -189,6 +178,16 @@ int main(int argc, const char *argv[]) {
     vector<pair<int, double>> res8 = b1.computekDistances(&f8, 10);
     vector<pair<int, double>> res9 = b1.computekDistances(&f9, 10);
     vector<pair<int, double>> res10 = b1.computekDistances(&f10, 10);
+    vector<pair<int, double>> res11 = b2.computekDistances(&f11, 10);
+    vector<pair<int, double>> res12 = b2.computekDistances(&f12, 10);
+    vector<pair<int, double>> res13 = b2.computekDistances(&f13, 10);
+    vector<pair<int, double>> res14 = b2.computekDistances(&f14, 10);
+    vector<pair<int, double>> res15 = b2.computekDistances(&f15, 10);
+    vector<pair<int, double>> res16 = b2.computekDistances(&f16, 10);
+    vector<pair<int, double>> res17 = b2.computekDistances(&f17, 10);
+    vector<pair<int, double>> res18 = b2.computekDistances(&f18, 10);
+    vector<pair<int, double>> res19 = b2.computekDistances(&f19, 10);
+    vector<pair<int, double>> res20 = b2.computekDistances(&f20, 10);
     
     // Create output csv files
     ofstream nn1_256;
@@ -207,6 +206,16 @@ int main(int argc, const char *argv[]) {
     BloomFilter *r8 = b1.simQuery(&f8);
     BloomFilter *r9 = b1.simQuery(&f9);
     BloomFilter *r10 = b1.simQuery(&f10);
+    BloomFilter *r11 = b1.simQuery(&f11);
+    BloomFilter *r12 = b1.simQuery(&f12);
+    BloomFilter *r13 = b1.simQuery(&f13);
+    BloomFilter *r14 = b1.simQuery(&f14);
+    BloomFilter *r15 = b1.simQuery(&f15);
+    BloomFilter *r16 = b1.simQuery(&f16);
+    BloomFilter *r17 = b1.simQuery(&f17);
+    BloomFilter *r18 = b1.simQuery(&f18);
+    BloomFilter *r19 = b1.simQuery(&f19);
+    BloomFilter *r20 = b1.simQuery(&f20);
     vector<BloomFilter*> rA = b1.simQueryVec(&f1, 3);
     vector<BloomFilter*> rB = b1.simQueryVec(&f2, 3);
     vector<BloomFilter*> rC = b1.simQueryVec(&f3, 3);
@@ -217,128 +226,133 @@ int main(int argc, const char *argv[]) {
     vector<BloomFilter*> rH = b1.simQueryVec(&f8, 3);
     vector<BloomFilter*> rI = b1.simQueryVec(&f9, 3);
     vector<BloomFilter*> rJ = b1.simQueryVec(&f10, 3);
+    vector<BloomFilter*> rK = b1.simQueryVec(&f11, 3);
+    vector<BloomFilter*> rL = b1.simQueryVec(&f12, 3);
+    vector<BloomFilter*> rM = b1.simQueryVec(&f13, 3);
+    vector<BloomFilter*> rN = b1.simQueryVec(&f14, 3);
+    vector<BloomFilter*> rO = b1.simQueryVec(&f15, 3);
+    vector<BloomFilter*> rP = b1.simQueryVec(&f16, 3);
+    vector<BloomFilter*> rQ = b1.simQueryVec(&f17, 3);
+    vector<BloomFilter*> rR = b1.simQueryVec(&f18, 3);
+    vector<BloomFilter*> rS = b1.simQueryVec(&f19, 3);
+    vector<BloomFilter*> rT = b1.simQueryVec(&f20, 3);
     
-    // Optimal (NN, 256)
-    cout << "\nNN query, optimal results:\n";
+    // Write results
+    cout << "EXPERIMENT SETTINGS\n";
+    cout << "-------------------\n";
+    cout << "\nFilters: " << NUM_FILTERS;
+    cout << "\nElements: " << NUM_ELEMENTS;
+    cout << "\nFilter size: " << v1[0].getSize();
+    cout << "\nHash functions: " << v1[0].getNumHashes();
+    cout << "\nQuery filters: " << NUM_QUERYFILTERS;
+    cout << "\nRun 1: NN query\nRun 2: 3NN query\n";
+    
+    // Quality of result (NN, 256)
     nn1_256.open("nn1_256.csv");
-    nn1_256 << "Filters: " << NUM_FILTERS << ", elements: " << NUM_ELEMENTS << ", filter size: " << v1[0].getSize() << ", hash functions: " << v1[0].getNumHashes() << ", query filters: " << NUM_QUERYFILTERS << endl;
-    cout << res1[0].first << " (" << res1[0].second << ")\n";
-    cout << res2[0].first << " (" << res2[0].second << ")\n";
-    cout << res3[0].first << " (" << res3[0].second << ")\n";
-    cout << res4[0].first << " (" << res4[0].second << ")\n";
-    cout << res5[0].first << " (" << res5[0].second << ")\n";
-    cout << res6[0].first << " (" << res6[0].second << ")\n";
-    cout << res7[0].first << " (" << res7[0].second << ")\n";
-    cout << res8[0].first << " (" << res8[0].second << ")\n";
-    cout << res9[0].first << " (" << res9[0].second << ")\n";
-    cout << res10[0].first << " (" << res10[0].second << ")\n";
-    
-    nn1_256 << res1[0].second << "," << res2[0].second << "," << "," << res3[0].second << "," << res4[0].second << "," << res5[0].second << "," << res6[0].second << "," << res7[0].second << "," << res8[0].second << "," << res9[0].second << "," << res10[0].second << endl;
-    
-    // Computed (NN, 256)
-    cout << "\nNN query, computed results:\n";
-    cout << r1->getId() << " (" << f1.computeJaccard(r1) << ")\n";
-    cout << r2->getId() << " (" << f2.computeJaccard(r2) << ")\n";
-    cout << r3->getId() << " (" << f3.computeJaccard(r3) << ")\n";
-    cout << r4->getId() << " (" << f4.computeJaccard(r4) << ")\n";
-    cout << r5->getId() << " (" << f5.computeJaccard(r5) << ")\n";
-    cout << r6->getId() << " (" << f6.computeJaccard(r6) << ")\n";
-    cout << r7->getId() << " (" << f7.computeJaccard(r7) << ")\n";
-    cout << r8->getId() << " (" << f8.computeJaccard(r8) << ")\n";
-    cout << r9->getId() << " (" << f9.computeJaccard(r9) << ")\n";
-    cout << r10->getId() << " (" << f10.computeJaccard(r10) << ")\n";
-    
-    nn1_256 << f1.computeJaccard(r1) << "," << f2.computeJaccard(r2) << "," << f3.computeJaccard(r3) << f4.computeJaccard(r4) << "," << f5.computeJaccard(r5) << "," << f6.computeJaccard(r6) <<f7.computeJaccard(r7) << "," << f8.computeJaccard(r8) << "," << f9.computeJaccard(r9) << "," << f10.computeJaccard(r10) << endl;
+    nn1_256 << "Query filter,Optimal (NN 256),Computed (NN 256)\n";
+    nn1_256 << "1," << res1[0].second << "," << f1.computeJaccard(r1) << "\n";
+    nn1_256 << "2," << res2[0].second << "," << f2.computeJaccard(r2) << "\n";
+    nn1_256 << "3," << res3[0].second << "," << f3.computeJaccard(r3) << "\n";
+    nn1_256 << "4," << res4[0].second << "," << f4.computeJaccard(r4) << "\n";
+    nn1_256 << "5," << res5[0].second << "," << f5.computeJaccard(r5) << "\n";
+    nn1_256 << "6," << res6[0].second << "," << f6.computeJaccard(r6) << "\n";
+    nn1_256 << "7," << res7[0].second << "," << f7.computeJaccard(r7) << "\n";
+    nn1_256 << "8," << res8[0].second << "," << f8.computeJaccard(r8) << "\n";
+    nn1_256 << "9," << res9[0].second << "," << f9.computeJaccard(r9) << "\n";
+    nn1_256 << "10," << res10[0].second << "," << f10.computeJaccard(r10) << "\n";
     nn1_256.close();
     
-    // Optimal (3NN, 256)
+    // Quality of result (3NN, 256)
     nn3_256.open("nn3_256.csv");
-    nn3_256 << "Filters: " << NUM_FILTERS << ", elements: " << NUM_ELEMENTS << ", filter size: " << v1[0].getSize() << ", hash functions: " << v1[0].getNumHashes() << ", query filters: " << NUM_QUERYFILTERS << endl;
+    nn3_256 << "Query filter,Optimal (3NN 256),Computed (3NN 256)\n";
+    nn3_256 << "1," << res1[0].second << "," << f1.computeJaccard(rA[0]) << "\n";
+    nn3_256 << "1," << res1[1].second << "," << f1.computeJaccard(rA[1]) << "\n";
+    nn3_256 << "1," << res1[2].second << "," << f1.computeJaccard(rA[2]) << "\n";
+    nn3_256 << "2," << res2[0].second << "," << f2.computeJaccard(rB[0]) << "\n";
+    nn3_256 << "2," << res2[1].second << "," << f2.computeJaccard(rB[1]) << "\n";
+    nn3_256 << "2," << res2[2].second << "," << f2.computeJaccard(rB[2]) << "\n";
+    nn3_256 << "3," << res3[0].second << "," << f3.computeJaccard(rC[0]) << "\n";
+    nn3_256 << "3," << res3[1].second << "," << f3.computeJaccard(rC[1]) << "\n";
+    nn3_256 << "3," << res3[2].second << "," << f3.computeJaccard(rC[2]) << "\n";
+    nn3_256 << "4," << res4[0].second << "," << f4.computeJaccard(rD[0]) << "\n";
+    nn3_256 << "4," << res4[1].second << "," << f4.computeJaccard(rD[1]) << "\n";
+    nn3_256 << "4," << res4[2].second << "," << f4.computeJaccard(rD[2]) << "\n";
+    nn3_256 << "5," << res5[0].second << "," << f5.computeJaccard(rE[0]) << "\n";
+    nn3_256 << "5," << res5[1].second << "," << f5.computeJaccard(rE[1]) << "\n";
+    nn3_256 << "5," << res5[2].second << "," << f5.computeJaccard(rE[2]) << "\n";
+    nn3_256 << "6," << res6[0].second << "," << f6.computeJaccard(rF[0]) << "\n";
+    nn3_256 << "6," << res6[1].second << "," << f6.computeJaccard(rF[1]) << "\n";
+    nn3_256 << "6," << res6[2].second << "," << f6.computeJaccard(rF[2]) << "\n";
+    nn3_256 << "7," << res7[0].second << "," << f7.computeJaccard(rG[0]) << "\n";
+    nn3_256 << "7," << res7[1].second << "," << f7.computeJaccard(rG[1]) << "\n";
+    nn3_256 << "7," << res7[2].second << "," << f7.computeJaccard(rG[2]) << "\n";
+    nn3_256 << "8," << res8[0].second << "," << f8.computeJaccard(rH[0]) << "\n";
+    nn3_256 << "8," << res8[1].second << "," << f8.computeJaccard(rH[1]) << "\n";
+    nn3_256 << "8," << res8[2].second << "," << f8.computeJaccard(rH[2]) << "\n";
+    nn3_256 << "9," << res9[0].second << "," << f9.computeJaccard(rI[0]) << "\n";
+    nn3_256 << "9," << res9[1].second << "," << f9.computeJaccard(rI[1]) << "\n";
+    nn3_256 << "9," << res9[2].second << "," << f9.computeJaccard(rI[2]) << "\n";
+    nn3_256 << "10," << res10[0].second << "," << f10.computeJaccard(rJ[0]) << "\n";
+    nn3_256 << "10," << res10[1].second << "," << f10.computeJaccard(rJ[1]) << "\n";
+    nn3_256 << "10," << res10[2].second << "," << f10.computeJaccard(rJ[2]) << "\n";
+    nn3_256.close();
     
-    cout << "\n3NN query, optimal results:\n";
-    cout << res1[0].first << " (" << res1[0].second << "), " << res1[1].first << " (" << res1[1].second << "), " << res1[2].first << " (" << res1[2].second << ")\n";
-    cout << res2[0].first << " (" << res2[0].second << "), " << res2[1].first << " (" << res2[1].second << "), " << res2[2].first << " (" << res2[2].second << ")\n";
-    cout << res1[0].first << " (" << res1[0].second << "), " << res1[1].first << " (" << res1[1].second << "), " << res3[2].first << " (" << res3[2].second << ")\n";
-    cout << res3[0].first << " (" << res3[0].second << "), " << res3[1].first << " (" << res3[1].second << "), " << res3[2].first << " (" << res3[2].second << ")\n";
-    cout << res4[0].first << " (" << res4[0].second << "), " << res4[1].first << " (" << res4[1].second << "), " << res4[2].first << " (" << res4[2].second << ")\n";
-    cout << res5[0].first << " (" << res5[0].second << "), " << res5[1].first << " (" << res5[1].second << "), " << res5[2].first << " (" << res5[2].second << ")\n";
-    cout << res6[0].first << " (" << res6[0].second << "), " << res6[1].first << " (" << res6[1].second << "), " << res6[2].first << " (" << res6[2].second << ")\n";
-    cout << res7[0].first << " (" << res7[0].second << "), " << res7[1].first << " (" << res7[1].second << "), " << res7[2].first << " (" << res7[2].second << ")\n";
-    cout << res8[0].first << " (" << res8[0].second << "), " << res8[1].first << " (" << res8[1].second << "), " << res8[2].first << " (" << res8[2].second << ")\n";
-    cout << res9[0].first << " (" << res9[0].second << "), " << res9[1].first << " (" << res9[1].second << "), " << res9[2].first << " (" << res9[2].second << ")\n";
-    cout << res10[0].first << " (" << res10[0].second << "), " << res10[1].first << " (" << res10[1].second << "), " << res10[2].first << " (" << res10[2].second << ")\n";
-    
-    nn3_256 << res1[0].second << "," << res2[0].second << "," << res3[0].second << "," << res4[0].second << "," << res5[0].second << "," << res6[0].second << "," << res7[0].second << "," << res8[0].second << "," << res9[0].second << "," << res10[0].second << endl;
-    
-    nn3_256 << res1[1].second << "," << res2[1].second << "," << res3[1].second << "," << res4[1].second << "," << res5[1].second << "," << res6[1].second << "," << res7[1].second << "," << res8[1].second << "," << res9[1].second << "," << res10[1].second << endl;
-    
-    nn3_256 << res1[2].second << "," << res2[2].second << "," << res3[2].second << "," << res4[2].second << "," << res5[2].second << "," << res6[2].second << "," << res7[2].second << "," << res8[2].second << "," << res9[2].second << "," << res10[2].second << endl;
-    
-    // Computed (3NN, 256)
-    
-    /* cout << "\nComputed results:\n";
-    cout << rA[0]->getId() << " (" << f1.computeJaccard(rA[0]) << ")\n";
-    cout << rA[1]->getId() << " (" << f1.computeJaccard(rA[1]) << ")\n";
-    cout << rA[2]->getId() << " (" << f1.computeJaccard(rA[2]) << ")";
-    
-    cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f2.getId();
-    cout << "\nResults should be: " << res3[0].first << ", " << res3[1].first << ", " << res3[2].first;
-    vector<BloomFilter*> rC = b1.simQueryVec(&f2, 3);
-    cout << "\nComputed results:\n";
-    cout << rC[0]->getId() << " (" << f2.computeJaccard(rC[0]) << ")\n";
-    cout << rC[1]->getId() << " (" << f2.computeJaccard(rC[1]) << ")\n";
-    cout << rC[2]->getId() << " (" << f2.computeJaccard(rC[2]) << ")";
-    
-    cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f3.getId();
-    cout << "\nResults should be: " << res5[0].first << ", " << res5[1].first << ", " << res5[2].first;
-    vector<BloomFilter*> rE = b1.simQueryVec(&f3, 3);
-    cout << "\nComputed results:\n";
-    cout << rE[0]->getId() << " (" << f3.computeJaccard(rE[0]) << ")\n";
-    cout << rE[1]->getId() << " (" << f3.computeJaccard(rE[1]) << ")\n";
-    cout << rE[2]->getId() << " (" << f3.computeJaccard(rE[2]) << ")";
-    
+    cout << "\nFilters: " << NUM_FILTERS;
+    cout << "\nElements: " << NUM_ELEMENTS;
     cout << "\nFilter size: " << v2[0].getSize();
-    cout << "\nQuery filters: " << f4.getId() << ", " << f5.getId() << ", " << f6.getId() << endl << endl;
+    cout << "\nHash functions: " << v2[0].getNumHashes();
+    cout << "\nQuery filters: " << NUM_QUERYFILTERS;
+    cout << "\nRun 1: NN query\nRun 2: 3NN query\n";
     
-    cout <<"\n\nTREE QUERY for nearest neighbor of filter " << f4.getId();
-    cout << "\nResult should be: " << res7[0].first;
-    BloomFilter* r7 = b2.simQuery(&f4);
-    cout << "\nComputed result: " << r7->getId() << " (" << f4.computeJaccard(r7) << ")";
-
-    cout << "\n\nTREE QUERY for nearest neighbor of filter " << f5.getId();
-    cout << "\nResult should be: " << res9[0].first;
-    BloomFilter* r9 = b2.simQuery(&f5);
-    cout << "\nComputed result: " << r9->getId() << " (" << f5.computeJaccard(r9) << ")";
-
-    cout << "\n\nTREE QUERY for nearest neighbor of filter " << f6.getId();
-    cout << "\nResult should be: " << res11[0].first;
-    BloomFilter* r11 = b2.simQuery(&f6);
-    cout << "\nComputed result: " << r11->getId() << " (" << f6.computeJaccard(r11) << ")";
+    // Quality of result (NN, 512)
+    nn1_512.open("nn1_512.csv");
+    nn1_512 << "Query filter,Optimal (NN 512),Computed (NN 512)\n";
+    nn1_512 << "11," << res11[0].second << "," << f11.computeJaccard(r11) << "\n";
+    nn1_512 << "12," << res12[0].second << "," << f12.computeJaccard(r12) << "\n";
+    nn1_512 << "13," << res13[0].second << "," << f13.computeJaccard(r13) << "\n";
+    nn1_512 << "14," << res14[0].second << "," << f14.computeJaccard(r14) << "\n";
+    nn1_512 << "15," << res15[0].second << "," << f15.computeJaccard(r15) << "\n";
+    nn1_512 << "16," << res16[0].second << "," << f16.computeJaccard(r16) << "\n";
+    nn1_512 << "17," << res17[0].second << "," << f17.computeJaccard(r17) << "\n";
+    nn1_512 << "18," << res18[0].second << "," << f18.computeJaccard(r18) << "\n";
+    nn1_512 << "19," << res19[0].second << "," << f19.computeJaccard(r19) << "\n";
+    nn1_512 << "20," << res20[0].second << "," << f20.computeJaccard(r20) << "\n";
+    nn1_512.close();
     
-    cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f4.getId();
-    cout << "\nResults should be: " << res7[0].first << ", " << res7[1].first << ", " << res7[2].first;
-    vector<BloomFilter*> rG= b2.simQueryVec(&f4, 3);
-    cout << "\nComputed results:\n";
-    cout << rG[0]->getId() << " (" << f4.computeJaccard(rG[0]) << ")\n";
-    cout << rG[1]->getId() << " (" << f4.computeJaccard(rG[1]) << ")\n";
-    cout << rG[2]->getId() << " (" << f4.computeJaccard(rG[2]) << ")";
-    
-    cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f5.getId();
-    cout << "\nResults should be: " << res9[0].first << ", " << res9[1].first << ", " << res9[2].first;
-    vector<BloomFilter*> rI= b2.simQueryVec(&f5, 3);
-    cout << "\nComputed results:\n";
-    cout << rI[0]->getId() << " (" << f5.computeJaccard(rI[0]) << ")\n";
-    cout << rI[1]->getId() << " (" << f5.computeJaccard(rI[1]) << ")\n";
-    cout << rI[2]->getId() << " (" << f5.computeJaccard(rI[2]) << ")";
-
-    cout << "\n\nTREE QUERY for 3 nearest neighbors of filter " << f6.getId();
-    cout << "\nResults should be: " << res11[0].first << ", " << res11[1].first << ", " << res11[2].first;
-    vector<BloomFilter*> rK= b2.simQueryVec(&f6, 3);
-    cout << "\nComputed results:\n";
-    cout << rK[0]->getId() << " (" << f6.computeJaccard(rK[0]) << ")\n";
-    cout << rK[1]->getId() << " (" << f6.computeJaccard(rK[1]) << ")\n";
-    cout << rK[2]->getId() << " (" << f6.computeJaccard(rK[2]) << ")"; */
-    
+    // Quality of result (3NN, 512)
+    nn3_512.open("nn3_512.csv");
+    nn3_512 << "Query filter,Optimal (3NN 512),Computed (3NN 512)\n";
+    nn3_512 << "11," << res11[0].second << "," << f11.computeJaccard(rK[0]) << "\n";
+    nn3_512 << "11," << res11[1].second << "," << f11.computeJaccard(rK[1]) << "\n";
+    nn3_512 << "11," << res11[2].second << "," << f11.computeJaccard(rK[2]) << "\n";
+    nn3_512 << "12," << res12[0].second << "," << f12.computeJaccard(rL[0]) << "\n";
+    nn3_512 << "12," << res12[1].second << "," << f12.computeJaccard(rL[1]) << "\n";
+    nn3_512 << "12," << res12[2].second << "," << f12.computeJaccard(rL[2]) << "\n";
+    nn3_512 << "13," << res13[0].second << "," << f13.computeJaccard(rM[0]) << "\n";
+    nn3_512 << "13," << res13[1].second << "," << f13.computeJaccard(rM[1]) << "\n";
+    nn3_512 << "13," << res13[2].second << "," << f13.computeJaccard(rM[2]) << "\n";
+    nn3_512 << "14," << res14[0].second << "," << f14.computeJaccard(rN[0]) << "\n";
+    nn3_512 << "14," << res14[1].second << "," << f14.computeJaccard(rN[1]) << "\n";
+    nn3_512 << "14," << res14[2].second << "," << f14.computeJaccard(rN[2]) << "\n";
+    nn3_512 << "15," << res15[0].second << "," << f15.computeJaccard(rO[0]) << "\n";
+    nn3_512 << "15," << res15[1].second << "," << f15.computeJaccard(rO[1]) << "\n";
+    nn3_512 << "15," << res15[2].second << "," << f15.computeJaccard(rO[2]) << "\n";
+    nn3_512 << "16," << res16[0].second << "," << f16.computeJaccard(rP[0]) << "\n";
+    nn3_512 << "16," << res16[1].second << "," << f16.computeJaccard(rP[1]) << "\n";
+    nn3_512 << "16," << res16[2].second << "," << f16.computeJaccard(rP[2]) << "\n";
+    nn3_512 << "17," << res17[0].second << "," << f17.computeJaccard(rQ[0]) << "\n";
+    nn3_512 << "17," << res17[1].second << "," << f17.computeJaccard(rQ[1]) << "\n";
+    nn3_512 << "17," << res17[2].second << "," << f17.computeJaccard(rQ[2]) << "\n";
+    nn3_512 << "18," << res18[0].second << "," << f18.computeJaccard(rR[0]) << "\n";
+    nn3_512 << "18," << res18[1].second << "," << f18.computeJaccard(rR[1]) << "\n";
+    nn3_512 << "18," << res18[2].second << "," << f18.computeJaccard(rR[2]) << "\n";
+    nn3_512 << "19," << res19[0].second << "," << f19.computeJaccard(rS[0]) << "\n";
+    nn3_512 << "19," << res19[1].second << "," << f19.computeJaccard(rS[1]) << "\n";
+    nn3_512 << "19," << res19[2].second << "," << f19.computeJaccard(rS[2]) << "\n";
+    nn3_512 << "20," << res20[0].second << "," << f20.computeJaccard(rT[0]) << "\n";
+    nn3_512 << "20," << res20[1].second << "," << f20.computeJaccard(rT[1]) << "\n";
+    nn3_512 << "20," << res20[2].second << "," << f20.computeJaccard(rT[2]) << "\n";
+    nn3_512.close();
     cout << endl;
     return 0;
 }

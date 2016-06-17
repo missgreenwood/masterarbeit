@@ -1,12 +1,17 @@
-## Evaluation in R
+# Ergebnisse
 
-1. Daten einlesen
+	1. NN, 256
+	2. 3NN, 256
+	3. NN, 512
+	4. 3NN, 512
+
+# Daten einlesen
 
 * read.table(), read.csv() etc. 
 * z.B. carsdata=read.table(file.choose(), header=T)
 * evtl. attach(carsdata)
 
-2. Plotten 
+# Plotten 
 
 * prinzipiell: plot(x, y) -> Titel hinzufügen 
 * Histogramme: hist(x)
