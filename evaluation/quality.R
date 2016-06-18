@@ -1,2 +1,7 @@
-qualitynn1_256 <- read.table("/Users/judith/Documents/MA/src/src/nn1_256.csv", head=TRUE, sep=",")
-qualitynn1_256
+qualitynn1_256 <- read.csv("/Users/judith/Documents/MA/src/src/nn1_256.csv", sep=",")
+plot(Query.filter, Max..NN.256., col="red", xlab="Query filter", ylab="Jaccard distances of NN in tree", xlim=c(1,10), ylim=c(0.0, 0.8), type="l")
+lines(Query.filter, Computed..NN.256., col="blue")
+lines(Query.filter, Optimal..NN.256., col="darkgreen")
+text(9.5, 0.75, "Maximal value", cex=0.75)
+text(9.5, 0.6, "Computed value", cex=0.75)
+text(9.5, 0.5, "Optimal value", cex=0.75)

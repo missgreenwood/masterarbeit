@@ -33,6 +33,10 @@ double BloomFilterIndexNode::computeMinJaccard(BloomFilter *filter) {
     return C[0]->computeMinJaccard(filter);
 }
 
+double BloomFilterIndexNode::computeMaxJaccard(BloomFilter *filter) {
+    return C[0]->computeMaxJaccard(filter); 
+}
+
 int BloomFilterIndexNode::getMinJaccardKey(BloomFilter *filter) {
     return C[0]->getMinJaccardKey(filter);
 }

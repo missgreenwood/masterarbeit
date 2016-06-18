@@ -54,7 +54,6 @@
 
 /* Begin PBXFileReference section */
 		BC4D4E4E1D103B340003B892 /* MurmurHash2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MurmurHash2.hpp; path = src/MurmurHash2.hpp; sourceTree = "<group>"; };
-		BC4D4E4F1D103D100003B892 /* RandomFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RandomFunctions.hpp; path = src/RandomFunctions.hpp; sourceTree = "<group>"; };
 		BC5861E51CCABB13007CDEC0 /* src */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = src; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F61CCABB5C007CDEC0 /* Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Tests; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5861F81CCABB5C007CDEC0 /* tests.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = tests.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -64,6 +63,7 @@
 		BC7E2BE31CE63CB5003D9A8A /* BloomFilterLeaf.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = BloomFilterLeaf.hpp; path = src/BloomFilterLeaf.hpp; sourceTree = "<group>"; };
 		BC7E2BE41CE63CB5003D9A8A /* BloomFilterIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; name = BloomFilterIndexNode.hpp; path = src/BloomFilterIndexNode.hpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		BC7E2BE51CE63CBC003D9A8A /* BloomFilterIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = BloomFilterIndexNode.cpp; path = src/BloomFilterIndexNode.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		BC857DC41D153C8300283B3F /* HelperFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HelperFunctions.hpp; path = src/HelperFunctions.hpp; sourceTree = "<group>"; };
 		BCBE16221CF20A3900BEE749 /* BPlusIndexNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusIndexNode.cpp; sourceTree = "<group>"; };
 		BCBE16231CF20A3900BEE749 /* BPlusIndexNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BPlusIndexNode.hpp; sourceTree = "<group>"; };
 		BCBE16241CF20A3900BEE749 /* BPlusLeaf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BPlusLeaf.cpp; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		BCCE1F2A1CD625B6004382A8 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BC4D4E4F1D103D100003B892 /* RandomFunctions.hpp */,
+				BC857DC41D153C8300283B3F /* HelperFunctions.hpp */,
 				BC4D4E4E1D103B340003B892 /* MurmurHash2.hpp */,
 				BCFB96FE1CD8AE0D009AB4A4 /* BloomFilter.hpp */,
 				BCFB96FD1CD8AE0D009AB4A4 /* BloomFilter.cpp */,

@@ -80,6 +80,22 @@ double BloomFilterLeaf::computeMinJaccard(BloomFilter *filter) {
     return min;
 }
 
+double BloomFilterLeaf::computeMaxJaccard(BloomFilter *filter) {
+    double max = 0;
+    double jacc;
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            jacc = computeJaccard(tmp->filters[i], filter);
+            if (jacc > max) {
+                max = jacc;
+            }
+        }
+        tmp = tmp->getNext();
+    }
+    return max; 
+}
+
 int BloomFilterLeaf::getMinJaccardKey(BloomFilter *filter) {
     double min = 1;
     double jacc;

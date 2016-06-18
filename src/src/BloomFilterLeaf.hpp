@@ -30,6 +30,7 @@ public:
     void traverse();
     void traverseFilters();
     double computeMinJaccard(BloomFilter *filter);
+    double computeMaxJaccard(BloomFilter *filter);
     int getMinJaccardKey(BloomFilter *filter);
     void updateUnionFilter();
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);

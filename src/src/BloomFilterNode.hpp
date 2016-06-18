@@ -41,6 +41,7 @@ public:
     virtual void traverse() = 0;
     virtual void traverseFilters() = 0;
     virtual double computeMinJaccard(BloomFilter *filter) = 0;
+    virtual double computeMaxJaccard(BloomFilter *filter) = 0;
     virtual int getMinJaccardKey(BloomFilter *filter) = 0;
     double computeJaccard(BloomFilter *f1, BloomFilter *f2);
     double computeAmbienceJaccard(BloomFilter *f1, BloomFilter *f2);

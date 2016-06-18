@@ -47,6 +47,7 @@ public:
     void traverse();
     void traverseFilters();
     double computeMinJaccard(BloomFilter *filter);
+    double computeMaxJaccard(BloomFilter *filter);
     int getMinJaccardKey(BloomFilter *filter);
     BloomFilter *getMinJaccardFilter(BloomFilter *filter);
     int getMinKey();

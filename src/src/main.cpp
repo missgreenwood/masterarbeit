@@ -5,7 +5,7 @@
 #include <fstream>
 #include <random>
 
-#include "RandomFunctions.hpp"
+#include "HelperFunctions.hpp"
 #include "BloomFilterTree.hpp"
 
 
@@ -167,27 +167,27 @@ int main(int argc, const char *argv[]) {
         b2.insertAsSets(&v2[i]);
     }
     
-    // Compute optimal results
-    vector<pair<int, double>> res1 = b1.computekDistances(&f1, 10);
-    vector<pair<int, double>> res2 = b1.computekDistances(&f2, 10);
-    vector<pair<int, double>> res3 = b1.computekDistances(&f3, 10);
-    vector<pair<int, double>> res4 = b1.computekDistances(&f4, 10);
-    vector<pair<int, double>> res5 = b1.computekDistances(&f5, 10);
-    vector<pair<int, double>> res6 = b1.computekDistances(&f6, 10);
-    vector<pair<int, double>> res7 = b1.computekDistances(&f7, 10);
-    vector<pair<int, double>> res8 = b1.computekDistances(&f8, 10);
-    vector<pair<int, double>> res9 = b1.computekDistances(&f9, 10);
-    vector<pair<int, double>> res10 = b1.computekDistances(&f10, 10);
-    vector<pair<int, double>> res11 = b2.computekDistances(&f11, 10);
-    vector<pair<int, double>> res12 = b2.computekDistances(&f12, 10);
-    vector<pair<int, double>> res13 = b2.computekDistances(&f13, 10);
-    vector<pair<int, double>> res14 = b2.computekDistances(&f14, 10);
-    vector<pair<int, double>> res15 = b2.computekDistances(&f15, 10);
-    vector<pair<int, double>> res16 = b2.computekDistances(&f16, 10);
-    vector<pair<int, double>> res17 = b2.computekDistances(&f17, 10);
-    vector<pair<int, double>> res18 = b2.computekDistances(&f18, 10);
-    vector<pair<int, double>> res19 = b2.computekDistances(&f19, 10);
-    vector<pair<int, double>> res20 = b2.computekDistances(&f20, 10);
+    // Compute optimal results and reference values
+    vector<pair<int, double>> res1 = b1.computekDistances(&f1, NUM_FILTERS);
+    vector<pair<int, double>> res2 = b1.computekDistances(&f2, NUM_FILTERS);
+    vector<pair<int, double>> res3 = b1.computekDistances(&f3, NUM_FILTERS);
+    vector<pair<int, double>> res4 = b1.computekDistances(&f4, NUM_FILTERS);
+    vector<pair<int, double>> res5 = b1.computekDistances(&f5, NUM_FILTERS);
+    vector<pair<int, double>> res6 = b1.computekDistances(&f6, NUM_FILTERS);
+    vector<pair<int, double>> res7 = b1.computekDistances(&f7, NUM_FILTERS);
+    vector<pair<int, double>> res8 = b1.computekDistances(&f8, NUM_FILTERS);
+    vector<pair<int, double>> res9 = b1.computekDistances(&f9, NUM_FILTERS);
+    vector<pair<int, double>> res10 = b1.computekDistances(&f10, NUM_FILTERS);
+    vector<pair<int, double>> res11 = b2.computekDistances(&f11, NUM_FILTERS);
+    vector<pair<int, double>> res12 = b2.computekDistances(&f12, NUM_FILTERS);
+    vector<pair<int, double>> res13 = b2.computekDistances(&f13, NUM_FILTERS);
+    vector<pair<int, double>> res14 = b2.computekDistances(&f14, NUM_FILTERS);
+    vector<pair<int, double>> res15 = b2.computekDistances(&f15, NUM_FILTERS);
+    vector<pair<int, double>> res16 = b2.computekDistances(&f16, NUM_FILTERS);
+    vector<pair<int, double>> res17 = b2.computekDistances(&f17, NUM_FILTERS);
+    vector<pair<int, double>> res18 = b2.computekDistances(&f18, NUM_FILTERS);
+    vector<pair<int, double>> res19 = b2.computekDistances(&f19, NUM_FILTERS);
+    vector<pair<int, double>> res20 = b2.computekDistances(&f20, NUM_FILTERS);
     
     // Create output csv files
     ofstream nn1_256;
@@ -249,52 +249,52 @@ int main(int argc, const char *argv[]) {
     
     // Quality of result (NN, 256)
     nn1_256.open("nn1_256.csv");
-    nn1_256 << "Query filter,Optimal (NN 256),Computed (NN 256)\n";
-    nn1_256 << "1," << res1[0].second << "," << f1.computeJaccard(r1) << "\n";
-    nn1_256 << "2," << res2[0].second << "," << f2.computeJaccard(r2) << "\n";
-    nn1_256 << "3," << res3[0].second << "," << f3.computeJaccard(r3) << "\n";
-    nn1_256 << "4," << res4[0].second << "," << f4.computeJaccard(r4) << "\n";
-    nn1_256 << "5," << res5[0].second << "," << f5.computeJaccard(r5) << "\n";
-    nn1_256 << "6," << res6[0].second << "," << f6.computeJaccard(r6) << "\n";
-    nn1_256 << "7," << res7[0].second << "," << f7.computeJaccard(r7) << "\n";
-    nn1_256 << "8," << res8[0].second << "," << f8.computeJaccard(r8) << "\n";
-    nn1_256 << "9," << res9[0].second << "," << f9.computeJaccard(r9) << "\n";
-    nn1_256 << "10," << res10[0].second << "," << f10.computeJaccard(r10) << "\n";
+    nn1_256 << "Query filter,Optimal (NN 256),Computed (NN 256),Max (NN 256)\n";
+    nn1_256 << "1," << res1[0].second << "," << f1.computeJaccard(r1) << "," << res1[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "2," << res2[0].second << "," << f2.computeJaccard(r2) << "," << res2[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "3," << res3[0].second << "," << f3.computeJaccard(r3) << "," << res3[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "4," << res4[0].second << "," << f4.computeJaccard(r4) << "," << res4[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "5," << res5[0].second << "," << f5.computeJaccard(r5) << "," << res5[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "6," << res6[0].second << "," << f6.computeJaccard(r6) << "," << res6[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "7," << res7[0].second << "," << f7.computeJaccard(r7) << "," << res7[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "8," << res8[0].second << "," << f8.computeJaccard(r8) << "," << res8[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "9," << res9[0].second << "," << f9.computeJaccard(r9) << "," << res9[NUM_FILTERS-1].second << "\n";
+    nn1_256 << "10," << res10[0].second << "," << f10.computeJaccard(r10) << "," << res10[NUM_FILTERS-1].second << "\n";
     nn1_256.close();
     
     // Quality of result (3NN, 256)
     nn3_256.open("nn3_256.csv");
-    nn3_256 << "Query filter,Optimal (3NN 256),Computed (3NN 256)\n";
-    nn3_256 << "1," << res1[0].second << "," << f1.computeJaccard(rA[0]) << "\n";
-    nn3_256 << "1," << res1[1].second << "," << f1.computeJaccard(rA[1]) << "\n";
-    nn3_256 << "1," << res1[2].second << "," << f1.computeJaccard(rA[2]) << "\n";
-    nn3_256 << "2," << res2[0].second << "," << f2.computeJaccard(rB[0]) << "\n";
-    nn3_256 << "2," << res2[1].second << "," << f2.computeJaccard(rB[1]) << "\n";
-    nn3_256 << "2," << res2[2].second << "," << f2.computeJaccard(rB[2]) << "\n";
-    nn3_256 << "3," << res3[0].second << "," << f3.computeJaccard(rC[0]) << "\n";
-    nn3_256 << "3," << res3[1].second << "," << f3.computeJaccard(rC[1]) << "\n";
-    nn3_256 << "3," << res3[2].second << "," << f3.computeJaccard(rC[2]) << "\n";
-    nn3_256 << "4," << res4[0].second << "," << f4.computeJaccard(rD[0]) << "\n";
-    nn3_256 << "4," << res4[1].second << "," << f4.computeJaccard(rD[1]) << "\n";
-    nn3_256 << "4," << res4[2].second << "," << f4.computeJaccard(rD[2]) << "\n";
-    nn3_256 << "5," << res5[0].second << "," << f5.computeJaccard(rE[0]) << "\n";
-    nn3_256 << "5," << res5[1].second << "," << f5.computeJaccard(rE[1]) << "\n";
-    nn3_256 << "5," << res5[2].second << "," << f5.computeJaccard(rE[2]) << "\n";
-    nn3_256 << "6," << res6[0].second << "," << f6.computeJaccard(rF[0]) << "\n";
-    nn3_256 << "6," << res6[1].second << "," << f6.computeJaccard(rF[1]) << "\n";
-    nn3_256 << "6," << res6[2].second << "," << f6.computeJaccard(rF[2]) << "\n";
-    nn3_256 << "7," << res7[0].second << "," << f7.computeJaccard(rG[0]) << "\n";
-    nn3_256 << "7," << res7[1].second << "," << f7.computeJaccard(rG[1]) << "\n";
-    nn3_256 << "7," << res7[2].second << "," << f7.computeJaccard(rG[2]) << "\n";
-    nn3_256 << "8," << res8[0].second << "," << f8.computeJaccard(rH[0]) << "\n";
-    nn3_256 << "8," << res8[1].second << "," << f8.computeJaccard(rH[1]) << "\n";
-    nn3_256 << "8," << res8[2].second << "," << f8.computeJaccard(rH[2]) << "\n";
-    nn3_256 << "9," << res9[0].second << "," << f9.computeJaccard(rI[0]) << "\n";
-    nn3_256 << "9," << res9[1].second << "," << f9.computeJaccard(rI[1]) << "\n";
-    nn3_256 << "9," << res9[2].second << "," << f9.computeJaccard(rI[2]) << "\n";
-    nn3_256 << "10," << res10[0].second << "," << f10.computeJaccard(rJ[0]) << "\n";
-    nn3_256 << "10," << res10[1].second << "," << f10.computeJaccard(rJ[1]) << "\n";
-    nn3_256 << "10," << res10[2].second << "," << f10.computeJaccard(rJ[2]) << "\n";
+    nn3_256 << "Query filter,Optimal (3NN 256),Computed (3NN 256),Max (3NN 256)\n";
+    nn3_256 << "1," << res1[0].second << "," << f1.computeJaccard(rA[0]) << "," << res1[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "1," << res1[1].second << "," << f1.computeJaccard(rA[1]) << "," << res1[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "1," << res1[2].second << "," << f1.computeJaccard(rA[2]) << "," << res1[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "2," << res2[0].second << "," << f2.computeJaccard(rB[0]) << "," << res2[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "2," << res2[1].second << "," << f2.computeJaccard(rB[1]) << "," << res2[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "2," << res2[2].second << "," << f2.computeJaccard(rB[2]) << "," << res2[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "3," << res3[0].second << "," << f3.computeJaccard(rC[0]) << "," << res3[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "3," << res3[1].second << "," << f3.computeJaccard(rC[1]) << "," << res3[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "3," << res3[2].second << "," << f3.computeJaccard(rC[2]) << "," << res3[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "4," << res4[0].second << "," << f4.computeJaccard(rD[0]) << "," << res4[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "4," << res4[1].second << "," << f4.computeJaccard(rD[1]) << "," << res4[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "4," << res4[2].second << "," << f4.computeJaccard(rD[2]) << "," << res4[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "5," << res5[0].second << "," << f5.computeJaccard(rE[0]) << "," << res5[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "5," << res5[1].second << "," << f5.computeJaccard(rE[1]) << "," << res5[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "5," << res5[2].second << "," << f5.computeJaccard(rE[2]) << "," << res5[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "6," << res6[0].second << "," << f6.computeJaccard(rF[0]) << "," << res6[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "6," << res6[1].second << "," << f6.computeJaccard(rF[1]) << "," << res6[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "6," << res6[2].second << "," << f6.computeJaccard(rF[2]) << "," << res6[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "7," << res7[0].second << "," << f7.computeJaccard(rG[0]) << "," << res7[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "7," << res7[1].second << "," << f7.computeJaccard(rG[1]) << "," << res7[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "7," << res7[2].second << "," << f7.computeJaccard(rG[2]) << "," << res7[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "8," << res8[0].second << "," << f8.computeJaccard(rH[0]) << "," << res8[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "8," << res8[1].second << "," << f8.computeJaccard(rH[1]) << "," << res8[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "8," << res8[2].second << "," << f8.computeJaccard(rH[2]) << "," << res8[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "9," << res9[0].second << "," << f9.computeJaccard(rI[0]) << "," << res9[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "9," << res9[1].second << "," << f9.computeJaccard(rI[1]) << "," << res9[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "9," << res9[2].second << "," << f9.computeJaccard(rI[2]) << "," << res9[NUM_FILTERS-3].second << "\n";
+    nn3_256 << "10," << res10[0].second << "," << f10.computeJaccard(rJ[0]) << "," << res10[NUM_FILTERS-1].second << "\n";
+    nn3_256 << "10," << res10[1].second << "," << f10.computeJaccard(rJ[1]) << "," << res10[NUM_FILTERS-2].second << "\n";
+    nn3_256 << "10," << res10[2].second << "," << f10.computeJaccard(rJ[2]) << "," << res10[NUM_FILTERS-3].second << "\n";
     nn3_256.close();
     
     cout << "\nFilters: " << NUM_FILTERS;
@@ -306,52 +306,52 @@ int main(int argc, const char *argv[]) {
     
     // Quality of result (NN, 512)
     nn1_512.open("nn1_512.csv");
-    nn1_512 << "Query filter,Optimal (NN 512),Computed (NN 512)\n";
-    nn1_512 << "11," << res11[0].second << "," << f11.computeJaccard(r11) << "\n";
-    nn1_512 << "12," << res12[0].second << "," << f12.computeJaccard(r12) << "\n";
-    nn1_512 << "13," << res13[0].second << "," << f13.computeJaccard(r13) << "\n";
-    nn1_512 << "14," << res14[0].second << "," << f14.computeJaccard(r14) << "\n";
-    nn1_512 << "15," << res15[0].second << "," << f15.computeJaccard(r15) << "\n";
-    nn1_512 << "16," << res16[0].second << "," << f16.computeJaccard(r16) << "\n";
-    nn1_512 << "17," << res17[0].second << "," << f17.computeJaccard(r17) << "\n";
-    nn1_512 << "18," << res18[0].second << "," << f18.computeJaccard(r18) << "\n";
-    nn1_512 << "19," << res19[0].second << "," << f19.computeJaccard(r19) << "\n";
-    nn1_512 << "20," << res20[0].second << "," << f20.computeJaccard(r20) << "\n";
+    nn1_512 << "Query filter,Optimal (NN 512),Computed (NN 512),Max (NN 512)\n";
+    nn1_512 << "11," << res11[0].second << "," << f11.computeJaccard(r11) << "," << res11[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "12," << res12[0].second << "," << f12.computeJaccard(r12) << "," << res12[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "13," << res13[0].second << "," << f13.computeJaccard(r13) << "," << res13[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "14," << res14[0].second << "," << f14.computeJaccard(r14) << "," << res14[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "15," << res15[0].second << "," << f15.computeJaccard(r15) << "," << res15[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "16," << res16[0].second << "," << f16.computeJaccard(r16) << "," << res16[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "17," << res17[0].second << "," << f17.computeJaccard(r17) << "," << res17[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "18," << res18[0].second << "," << f18.computeJaccard(r18) << "," << res18[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "19," << res19[0].second << "," << f19.computeJaccard(r19) << "," << res19[NUM_FILTERS-1].second << "\n";
+    nn1_512 << "20," << res20[0].second << "," << f20.computeJaccard(r20) << "," << res20[NUM_FILTERS-1].second << "\n";
     nn1_512.close();
     
     // Quality of result (3NN, 512)
     nn3_512.open("nn3_512.csv");
-    nn3_512 << "Query filter,Optimal (3NN 512),Computed (3NN 512)\n";
-    nn3_512 << "11," << res11[0].second << "," << f11.computeJaccard(rK[0]) << "\n";
-    nn3_512 << "11," << res11[1].second << "," << f11.computeJaccard(rK[1]) << "\n";
-    nn3_512 << "11," << res11[2].second << "," << f11.computeJaccard(rK[2]) << "\n";
-    nn3_512 << "12," << res12[0].second << "," << f12.computeJaccard(rL[0]) << "\n";
-    nn3_512 << "12," << res12[1].second << "," << f12.computeJaccard(rL[1]) << "\n";
-    nn3_512 << "12," << res12[2].second << "," << f12.computeJaccard(rL[2]) << "\n";
-    nn3_512 << "13," << res13[0].second << "," << f13.computeJaccard(rM[0]) << "\n";
-    nn3_512 << "13," << res13[1].second << "," << f13.computeJaccard(rM[1]) << "\n";
-    nn3_512 << "13," << res13[2].second << "," << f13.computeJaccard(rM[2]) << "\n";
-    nn3_512 << "14," << res14[0].second << "," << f14.computeJaccard(rN[0]) << "\n";
-    nn3_512 << "14," << res14[1].second << "," << f14.computeJaccard(rN[1]) << "\n";
-    nn3_512 << "14," << res14[2].second << "," << f14.computeJaccard(rN[2]) << "\n";
-    nn3_512 << "15," << res15[0].second << "," << f15.computeJaccard(rO[0]) << "\n";
-    nn3_512 << "15," << res15[1].second << "," << f15.computeJaccard(rO[1]) << "\n";
-    nn3_512 << "15," << res15[2].second << "," << f15.computeJaccard(rO[2]) << "\n";
-    nn3_512 << "16," << res16[0].second << "," << f16.computeJaccard(rP[0]) << "\n";
-    nn3_512 << "16," << res16[1].second << "," << f16.computeJaccard(rP[1]) << "\n";
-    nn3_512 << "16," << res16[2].second << "," << f16.computeJaccard(rP[2]) << "\n";
-    nn3_512 << "17," << res17[0].second << "," << f17.computeJaccard(rQ[0]) << "\n";
-    nn3_512 << "17," << res17[1].second << "," << f17.computeJaccard(rQ[1]) << "\n";
-    nn3_512 << "17," << res17[2].second << "," << f17.computeJaccard(rQ[2]) << "\n";
-    nn3_512 << "18," << res18[0].second << "," << f18.computeJaccard(rR[0]) << "\n";
-    nn3_512 << "18," << res18[1].second << "," << f18.computeJaccard(rR[1]) << "\n";
-    nn3_512 << "18," << res18[2].second << "," << f18.computeJaccard(rR[2]) << "\n";
-    nn3_512 << "19," << res19[0].second << "," << f19.computeJaccard(rS[0]) << "\n";
-    nn3_512 << "19," << res19[1].second << "," << f19.computeJaccard(rS[1]) << "\n";
-    nn3_512 << "19," << res19[2].second << "," << f19.computeJaccard(rS[2]) << "\n";
-    nn3_512 << "20," << res20[0].second << "," << f20.computeJaccard(rT[0]) << "\n";
-    nn3_512 << "20," << res20[1].second << "," << f20.computeJaccard(rT[1]) << "\n";
-    nn3_512 << "20," << res20[2].second << "," << f20.computeJaccard(rT[2]) << "\n";
+    nn3_512 << "Query filter,Optimal (3NN 512),Computed (3NN 512),Max (3NN 512)\n";
+    nn3_512 << "11," << res11[0].second << "," << f11.computeJaccard(rK[0]) << "," << res11[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "11," << res11[1].second << "," << f11.computeJaccard(rK[1]) << "," << res11[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "11," << res11[2].second << "," << f11.computeJaccard(rK[2]) << "," << res11[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "12," << res12[0].second << "," << f12.computeJaccard(rL[0]) << "," << res12[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "12," << res12[1].second << "," << f12.computeJaccard(rL[1]) << "," << res12[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "12," << res12[2].second << "," << f12.computeJaccard(rL[2]) << "," << res12[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "13," << res13[0].second << "," << f13.computeJaccard(rM[0]) << "," << res13[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "13," << res13[1].second << "," << f13.computeJaccard(rM[1]) << "," << res13[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "13," << res13[2].second << "," << f13.computeJaccard(rM[2]) << "," << res13[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "14," << res14[0].second << "," << f14.computeJaccard(rN[0]) << "," << res14[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "14," << res14[1].second << "," << f14.computeJaccard(rN[1]) << "," << res14[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "14," << res14[2].second << "," << f14.computeJaccard(rN[2]) << "," << res14[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "15," << res15[0].second << "," << f15.computeJaccard(rO[0]) << "," << res15[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "15," << res15[1].second << "," << f15.computeJaccard(rO[1]) << "," << res15[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "15," << res15[2].second << "," << f15.computeJaccard(rO[2]) << "," << res15[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "16," << res16[0].second << "," << f16.computeJaccard(rP[0]) << "," << res16[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "16," << res16[1].second << "," << f16.computeJaccard(rP[1]) << "," << res16[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "16," << res16[2].second << "," << f16.computeJaccard(rP[2]) << "," << res16[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "17," << res17[0].second << "," << f17.computeJaccard(rQ[0]) << "," << res17[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "17," << res17[1].second << "," << f17.computeJaccard(rQ[1]) << "," << res17[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "17," << res17[2].second << "," << f17.computeJaccard(rQ[2]) << "," << res17[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "18," << res18[0].second << "," << f18.computeJaccard(rR[0]) << "," << res18[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "18," << res18[1].second << "," << f18.computeJaccard(rR[1]) << "," << res18[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "18," << res18[2].second << "," << f18.computeJaccard(rR[2]) << "," << res18[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "19," << res19[0].second << "," << f19.computeJaccard(rS[0]) << "," << res19[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "19," << res19[1].second << "," << f19.computeJaccard(rS[1]) << "," << res19[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "19," << res19[2].second << "," << f19.computeJaccard(rS[2]) << "," << res19[NUM_FILTERS-3].second << "\n";
+    nn3_512 << "20," << res20[0].second << "," << f20.computeJaccard(rT[0]) << "," << res20[NUM_FILTERS-1].second << "\n";
+    nn3_512 << "20," << res20[1].second << "," << f20.computeJaccard(rT[1]) << "," << res20[NUM_FILTERS-2].second << "\n";
+    nn3_512 << "20," << res20[2].second << "," << f20.computeJaccard(rT[2]) << "," << res20[NUM_FILTERS-3].second << "\n";
     nn3_512.close();
     cout << endl;
     return 0;

@@ -69,6 +69,16 @@ double BloomFilterTree::computeMinJaccard(BloomFilter *filter) {
     }
 }
 
+double BloomFilterTree::computeMaxJaccard(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return 0;
+    }
+    else {
+        return root->computeMaxJaccard(filter); 
+    }
+}
+
 int BloomFilterTree::getMinJaccardKey(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!\n";
