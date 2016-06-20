@@ -1,7 +1,0 @@
-qualitynn1_512 <- read.csv("/Users/judith/Documents/MA/src/src/nn1_512.csv", sep=",")
-plot(Query.filter, Max..NN.512., col="red", xlab="Query filter", ylab="Jaccard distances of NN in tree", xlim=c(1,10), ylim=c(0.0, 0.8), type="l")
-lines(Query.filter, Computed..NN.512., col="blue")
-lines(Query.filter, Optimal..NN.512., col="darkgreen")
-text(9.5, 0.75, "Maximal value", cex=0.75)
-text(9.5, 0.6, "Computed value", cex=0.75)
-text(9.5, 0.5, "Optimal value", cex=0.75)
