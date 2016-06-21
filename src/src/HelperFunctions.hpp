@@ -1,5 +1,5 @@
 //  HelperFunctions.hpp, Judith Greif
-//  Description: Random number generation, wall clock and cpu clock time etc.
+//  Description: Random number generation etc.
 
 #ifndef HelperFunctions_h
 #define HelperFunctions_h
@@ -10,9 +10,10 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <chrono>
+// #include "BloomFilter.hpp"
 
 using namespace std;
+
 
 // Generate random int between 0..235886 (number of entries in dictionary)
 int randomNumber() {
@@ -21,8 +22,4 @@ int randomNumber() {
     uniform_real_distribution<double> dist(0.0, 235886.0);
     return dist(mt);
 }
-
-// Measure cpu and wall clock time
-// Use std::chrono::system_clock for wall clock and std::clock for cpu clock
-
 #endif

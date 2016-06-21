@@ -8,7 +8,7 @@
 
 	2. Komplexität
 
-	3. Laufzeit
+	3. Laufzeit (CPU time)
 	
 	4. Speicher
 

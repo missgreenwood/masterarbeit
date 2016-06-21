@@ -4,12 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include <random>
-
+#include <chrono>
 #include "HelperFunctions.hpp"
 #include "BloomFilterTree.hpp"
 
-
 using namespace std;
+using namespace std::chrono;
+
 
 const char* filename = "/Users/judith/Documents/MA/src/src/words.txt";
 
@@ -48,7 +49,7 @@ int main(int argc, const char *argv[]) {
         v2.push_back(*filter);
     }
     
-    // Create test fitler vector (random ids, size 256)
+    // Create test filter vector (random ids, size 256)
     // Insert 50 random elements from dictionary into each
     vector<BloomFilter> q256;
     for (int i=0; i<NUM_QUERYFILTERS; i++) {
@@ -104,6 +105,10 @@ int main(int argc, const char *argv[]) {
     ofstream nn3_256;
     ofstream nn_512;
     ofstream nn3_512;
+    ofstream cputime_nn_256;
+    ofstream cputime_nn_512;
+    ofstream cputime_nn3_256;
+    ofstream cputime_nn3_512;
     
     // Create result vectors
     vector<BloomFilter*> res_nn_256;
@@ -112,14 +117,69 @@ int main(int argc, const char *argv[]) {
     vector<vector<BloomFilter*>> res_nn3_512;
     
     // Set search queries
+    // Incl. cpu time measurement, comparison with unsorted list and result writing
+    cputime_nn_256.open("cputime_nn_256.csv");
+    cputime_nn_256 << "QFNN256,CPUTimeBFTree,CPUTimeUList\n";
     for (int i=0; i<NUM_QUERYFILTERS; i++) {
-        res_nn_256.push_back(b1.simQuery(&q256[i]));
-        res_nn_512.push_back(b2.simQuery(&q512[i]));
-        res_nn3_256.push_back(b1.simQueryVec(&q256[i], 3));
-        res_nn3_512.push_back(b2.simQueryVec(&q512[i], 3));
+        high_resolution_clock::time_point t1 = high_resolution_clock::now();
+        filter = b1.simQuery(&q256[i]);
+        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+        b1.getMinJaccardFilter(&q256[i]);
+        high_resolution_clock::time_point t3 = high_resolution_clock::now();
+        auto durationTree = duration_cast<microseconds>(t2-t1).count();
+        auto durationList = duration_cast<microseconds>(t3-t2).count();
+        cputime_nn_256 << i << "," << durationTree << "," << durationList << "\n";
+        res_nn_256.push_back(filter);
     }
+    cputime_nn_256.close();
     
-    // Write results
+    cputime_nn_512.open("cputime_nn_512.csv");
+    cputime_nn_512 << "QFNN512,CPUTimeBFTree,CPUTimeUList\n";
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        high_resolution_clock::time_point t1 = high_resolution_clock::now();
+        filter = b2.simQuery(&q512[i]);
+        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+        b2.getMinJaccardFilter(&q512[i]);
+        high_resolution_clock::time_point t3 = high_resolution_clock::now();
+        auto durationTree = duration_cast<microseconds>(t2-t1).count();
+        auto durationList = duration_cast<microseconds>(t3-t2).count();
+        cputime_nn_512 << i << "," << durationTree << "," << durationList << "\n";
+        res_nn_512.push_back(filter);
+    }
+    cputime_nn_512.close();
+    
+    cputime_nn3_256.open("cputime_nn3_256.csv");
+    cputime_nn3_256 << "QF3NN256,CPUTimeBFTree,CPUTimeUList\n";
+    vector<BloomFilter*> refvec;
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        high_resolution_clock::time_point t1 = high_resolution_clock::now();
+        refvec = b1.simQueryVec(&q256[i], 3);
+        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+        b1.compare(&q256[i], 3);
+        high_resolution_clock::time_point t3 = high_resolution_clock::now();
+        auto durationTree = duration_cast<microseconds>(t2-t1).count();
+        auto durationList = duration_cast<microseconds>(t3-t2).count();
+        cputime_nn3_256 << i << "," << durationTree << "," << durationList << "\n";
+        res_nn3_256.push_back(refvec);
+    }
+    cputime_nn3_256.close();
+    
+    cputime_nn3_512.open("cputime_nn3_512.csv");
+    cputime_nn3_512 << "QF3NN512,CPUTimeBFTree, CPUTimeUList\n";
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        high_resolution_clock::time_point t1 = high_resolution_clock::now();
+        refvec = b2.simQueryVec(&q512[i], 3);
+        high_resolution_clock::time_point t2 = high_resolution_clock::now();
+        b2.compare(&q512[i], 3);
+        high_resolution_clock::time_point t3 = high_resolution_clock::now();
+        auto durationTree = duration_cast<microseconds>(t2-t1).count();
+        auto durationList = duration_cast<microseconds>(t3-t2).count();
+        cputime_nn3_512 << i << "," << durationTree << "," << durationList << "\n";
+        res_nn3_512.push_back(refvec);
+    }
+    cputime_nn3_512.close();
+    
+    // Display experiment settings
     cout << "EXPERIMENT SETTINGS\n";
     cout << "-------------------\n";
     cout << "\nFilters: " << NUM_FILTERS;
@@ -127,8 +187,20 @@ int main(int argc, const char *argv[]) {
     cout << "\nFilter size: " << v1[0].getSize();
     cout << "\nHash functions: " << v1[0].getNumHashes();
     cout << "\nQuery filters: " << NUM_QUERYFILTERS;
-    cout << "\nRun 1: NN query\nRun 2: 3NN query\n";
+    cout << "\nTests:\n";
+    cout << "1. Quality of result (NN query/3NN query)\n";
+    cout << "2. CPU time for NN query/3NN query (Bloom filter tree vs. unsorted list)\n";
     
+    cout << "\nFilters: " << NUM_FILTERS;
+    cout << "\nElements: " << NUM_ELEMENTS;
+    cout << "\nFilter size: " << v2[0].getSize();
+    cout << "\nHash functions: " << v2[0].getNumHashes();
+    cout << "\nQuery filters: " << NUM_QUERYFILTERS;
+    cout << "\nTests:\n";
+    cout << "1. Quality of result (NN query/3NN query)\n";
+    cout << "2. CPU time for NN query/3NN query (Bloom filter tree vs. unsorted list)\n";
+    
+    // Write results
     // Quality of result (NN, 256)
     nn_256.open("nn_256.csv");
     nn_256 << "QFNN256,OptimalNN256,ComputedNN256,MaxNN256\n";
@@ -146,13 +218,6 @@ int main(int argc, const char *argv[]) {
         nn3_256 << i << "," << refvec[0].second << "," << refvec[1].second << "," << refvec[2].second << "," << q256[i].computeJaccard(res_nn3_256[i][0]) << "," << q256[i].computeJaccard(res_nn3_256[i][1]) << "," << q256[i].computeJaccard(res_nn3_256[i][2]) << "," << refvec[NUM_FILTERS-1].second << "\n";
      }
     nn3_256.close();
-    
-    cout << "\nFilters: " << NUM_FILTERS;
-    cout << "\nElements: " << NUM_ELEMENTS;
-    cout << "\nFilter size: " << v2[0].getSize();
-    cout << "\nHash functions: " << v2[0].getNumHashes();
-    cout << "\nQuery filters: " << NUM_QUERYFILTERS;
-    cout << "\nRun 1: NN query\nRun 2: 3NN query\n";
     
     // Quality of result (NN, 512)
     nn_512.open("nn_512.csv");
