@@ -6,9 +6,13 @@
 		nn3_256.csv
 		nn3_512.csv
 
-	2. Komplexität
+	3. CPU-Zeit
+		cputime_nn_256.csv
+		cputime_nn_512.csv
+		cputime_nn3_256.csv
+		cputime_nn3_512.csv
 
-	3. Laufzeit (CPU time)
+	2. Komplexität
 	
 	4. Speicher
 
@@ -17,6 +21,11 @@
 	1. Qualität
 		quality_nn.R
 		quality_nn3.R
+		cputime_nn.R
+		cputime_nn3.R
+
+	2. CPU-Zeit 
+
 	
 # Ausgabedateien 
 

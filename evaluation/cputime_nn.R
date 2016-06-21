@@ -1,0 +1,27 @@
+percent_time = function(list, bftree) {((abs(list-bftree))/bftree)*100}
+lablist <- as.vector(0:9)
+t <- "CPU-Zeit für k-nächste-Nachbarn-Suche"
+s256 <- "n=1, Filtergröße 256"
+sub256 <- list(s256, col="black", cex=0.9)
+s512 <- "n=1, Filtergröße 512"
+sub512 <- list(s512, col="black", cex=0.9)
+cputimenn_256 <- read.csv("/Users/judith/Documents/MA/src/src/cputime_nn_256.csv", sep=",")
+attach(cputimenn_256)
+pdf('Documents/MA/evaluation/cputime_nn_256.pdf')
+plot(QFNN256, CPUTimeUList, col="darkolivegreen4", xlab="Query-Filter", ylab="CPU-Zeit in µs", xlim=c(0, 10), ylim=c(0, 1600), type="p", pch=16, xaxt="n", yaxs="i")
+lines(QFNN256, CPUTimeBFTree, col="dodgerblue4", type="p", pch=16)
+axis(1, at=0:9, labels=lablist)
+text(9.37, 650, "Unsortierte Liste", cex=0.75)
+text(9.4, 225, "BloomFilterTree", cex=0.75)
+title(main=t, line=3)
+title(sub256)
+dev.off()
+l256 <- c(CPUTimeUList)
+b256 <- c(CPUTimeBFTree)
+pdf('Documents/MA/evaluation/percent_time_nn_256.pdf')
+plot(percent_time(l256, b256), col="darkcyan", xlab="Query-Filter", ylab="Pozentuale Zeitdauer gengenüber unsortierter Liste", xlim=c(0, 10), ylim=c(0,100), type="p", pch=16, xaxt="n", yaxs="i")
+axis(1, at=1:10, labels=lablist)
+title(main=t, line=3)
+title(sub256)
+dev.off()
+detach(cputimenn_256)
