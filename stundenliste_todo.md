@@ -181,28 +181,23 @@ KW 24 (34.25 h)
 * Sa, 18.06. (6 h)
 
 
-KW 25 (noch 31.5 h)
-* Mo, 20.06. (0.5 h)
+KW 25 (8.5 h)
+* Mo, 20.06. (4.5 h)
+* Di, 21.06. (4 h)
 
 
 ## TODO
 
 1. Implementierung - Set insertion
 
-	* Evtl. checken - warum können mehrere Filter dieselbe ID bekommen?
+	* Algo. checken - warum simQueryVec() so viel besser auf NN als simQuery()?
 	
-2. Implementierung - Segment insertion
-	
-	* erstmal nicht weiter verfolgen, höchstens zum Vergleich
-	* evtl. Ergebnisvektor nach Jaccard-Distanzen aufsteigend sortieren (BloomFilterList::simQueryVec())
+2. Evaluation 
 
-3. Evaluation 
-
-	* Vergleich mit unsortierter Liste bzgl. Ergebnisqualität/Laufzeit in Sek./# Vergleiche/Speicher/Kosten für Baum-Aufbau
+	* Vergleich mit unsortierter Liste bzgl. Laufzeit in Sek./# Vergleiche/Speicher/Kosten für Baum-Aufbau
 	* Evaluation automatisisieren 
-	* Graphen erstellen (in R)
 
-4. Ausarbeitung 
+3. Ausarbeitung 
 
 	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995

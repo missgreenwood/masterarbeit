@@ -1,21 +1,36 @@
 # Ergebnisse
 
-	1. NN, 256
-	2. 3NN, 256
-	3. NN, 512
-	4. 3NN, 512
+	1. Qualität
+		nn_256.csv
+		nn_512.csv
+		nn3_256.csv
+		nn3_512.csv
 
-# Daten einlesen
+	2. Komplexität
 
-* read.table(), read.csv() etc. 
-* z.B. carsdata=read.table(file.choose(), header=T)
-* evtl. attach(carsdata)
+	3. Laufzeit
+	
+	4. Speicher
 
-# Plotten 
+# Skripte
 
-* prinzipiell: plot(x, y) -> Titel hinzufügen 
-* Histogramme: hist(x)
-* mean(x) -> Mittelwert
-* var(x) -> Varianz
-* Linear regression: lm 
-* Andere Verteilungen: glm 
+	1. Qualität
+		quality_nn.R
+		quality_nn3.R
+	
+# Ausgabedateien 
+
+	1. Qualität 
+		nn_256.pdf
+		nn_512.pdf
+		nn3_256-1.pdf
+		nn3_256-2.pdf
+		nn3_512-1.pdf
+		nn3_512-2.pdf
+		percent_dev_nn_256.pdf
+		percent_dev_nn_512.pdf
+		percent_dev_nn3_256.pdf
+		percent_dev_nn3_512.pdf
+
+
+
