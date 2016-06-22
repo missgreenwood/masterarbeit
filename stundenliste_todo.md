@@ -181,9 +181,10 @@ KW 24 (34.25 h)
 * Sa, 18.06. (6 h)
 
 
-KW 25 (9.75 h)
+KW 25 (13.75 h)
 * Mo, 20.06. (4.5 h)
 * Di, 21.06. (5.25 h)
+* Mi, 22.06. (4 h)
 
 
 ## TODO
@@ -194,7 +195,7 @@ KW 25 (9.75 h)
 	
 2. Evaluation 
 
-	* Vergleich mit unsortierter Liste bzgl. Laufzeit in Sek./# Vergleiche/Speicher
+	* Vergleich mit unsortierter Liste bzgl. # Vergleiche/Speicher
 	* Evtl. Vergleich mit unsortierter Liste bzgl. Kosten für Baum-Aufbau
 	* Evaluation fertig automatisieren 
 
