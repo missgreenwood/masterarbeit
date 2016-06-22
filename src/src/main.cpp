@@ -109,6 +109,21 @@ int main(int argc, const char *argv[]) {
     ofstream cputime_nn_512;
     ofstream cputime_nn3_256;
     ofstream cputime_nn3_512;
+    ofstream mem;
+    
+    // Memory measurement of std::vector vs. BloomFilterTree
+    size_t bfptr = sizeof(filter);
+    size_t f256 = sizeof(&v1[0]);
+    size_t vector1 = sizeof(v1);
+    size_t vector2 = sizeof(v2);
+    size_t tree1 = sizeof(b1);
+    size_t tree2 = sizeof(b2);
+    cout << "Size of BloomFilter*: " << bfptr << "\n";
+    cout << "Size of 256 Bit-Query filter: " << f256 << "\n";
+    cout << "Size of v1: " << vector1 << "\n";
+    cout << "Size of v2: " << vector2 << "\n";
+    cout << "Size of b1: " << tree1 << "\n";
+    cout << "Size of b2: " << tree2 << "\n";
     
     // Create result vectors
     vector<BloomFilter*> res_nn_256;
@@ -189,7 +204,8 @@ int main(int argc, const char *argv[]) {
     cout << "\nQuery filters: " << NUM_QUERYFILTERS;
     cout << "\nTests:\n";
     cout << "1. Quality of result (NN query/3NN query)\n";
-    cout << "2. CPU time for NN query/3NN query (Bloom filter tree vs. unsorted list)\n";
+    cout << "2. CPU time for NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
+    cout << "3. Memory consumption of data structures (BloomFilterTree vs. unsorted list)\n";
     
     cout << "\nFilters: " << NUM_FILTERS;
     cout << "\nElements: " << NUM_ELEMENTS;
@@ -198,7 +214,8 @@ int main(int argc, const char *argv[]) {
     cout << "\nQuery filters: " << NUM_QUERYFILTERS;
     cout << "\nTests:\n";
     cout << "1. Quality of result (NN query/3NN query)\n";
-    cout << "2. CPU time for NN query/3NN query (Bloom filter tree vs. unsorted list)\n";
+    cout << "2. CPU time for NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
+    cout << "3. Memory consumption of data structures (BloomFilterTree vs. unsorted list)\n";
     
     // Write results
     // Quality of result (NN, 256)
