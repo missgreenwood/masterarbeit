@@ -232,8 +232,8 @@ vector<pair<BloomFilter, double>> BloomFilterTree::compare(BloomFilter *filter, 
 }
 
 // Compute memory allocated by BloomFilterTree object vs. std::vector
-// Returns memory consumption of std::vector with NUM_FILTERS BloomFilter objects as first element
-// Returns memory consumption of this BloomFilterTree with NUM_FILTERS BloomFilter objects as second element
+// Return memory consumption of std::vector with NUM_FILTERS BloomFilter objects as first element
+// Return memory consumption of this BloomFilterTree with NUM_FILTERS BloomFilter objects as second element
 vector<int> BloomFilterTree::compareMem() {
     if (root == NULL) {
         cout << "Tree is empty!\n";
@@ -266,6 +266,13 @@ vector<int> BloomFilterTree::compareMem() {
         res.push_back(memTree);
         return res; 
     }
+}
+
+// Compute number of comparisons for simQuery() for BloomFilterTree vs. std::vector
+// Return number of comparisons for std::vector with NUM_FILTERS BloomFilter objects as first element
+// Return number of comparisons for BloomFilterTree with NUM_FILTERS as second element
+vector<int> BloomFilterTree::compareComplSimQuery() {
+    
 }
 
 void BloomFilterTree::insert(BloomFilter *filter) {

@@ -113,8 +113,10 @@ int main(int argc, const char *argv[]) {
     
     // Memory measurement of BloomFilterTree vs. unsorted list (std::vector)
     mem.open("mem.csv");
-    mem << "MemUList256,MemBFTree256,MemUList512,MemBFTree512\n";
-    mem << b1.compareMem()[0] << "," << b1.compareMem()[1] << "," << b2.compareMem()[0] << "," << b2.compareMem()[1] << "\n";
+    mem << "Filtergröße 256,Filtergröße 512\n";
+    mem << b1.compareMem()[0] << "," << b2.compareMem()[0] << "\n";
+    mem << b1.compareMem()[1] << "," << b2.compareMem()[1] << "\n";
+    mem.close();
     
     // Create result vectors
     vector<BloomFilter*> res_nn_256;

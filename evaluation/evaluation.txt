@@ -6,25 +6,32 @@
 		nn3_256.csv
 		nn3_512.csv
 
-	3. CPU-Zeit
+	2. CPU-Zeit
 		cputime_nn_256.csv
 		cputime_nn_512.csv
 		cputime_nn3_256.csv
 		cputime_nn3_512.csv
 
-	2. Komplexität
+	3. Speicher
+		mem.csv
+
+	4. Komplexität
 	
-	4. Speicher
 
 # Skripte
 
 	1. Qualität
 		quality_nn.R
 		quality_nn3.R
+
+	2. CPU-Zeit 
 		cputime_nn.R
 		cputime_nn3.R
 
-	2. CPU-Zeit 
+	3. Speicher
+		mem.R
+
+	4. Komplexität
 
 	
 # Ausgabedateien 
@@ -41,5 +48,12 @@
 		percent_dev_nn3_256.pdf
 		percent_dev_nn3_512.pdf
 
-
-
+	2. CPU-Zeit
+		cputime_nn_256.pdf
+		cputime_nn_512.pdf
+		cputime_nn3_256.pdf
+		cputime_nn3_512.pdf
+		percent_time_nn_256.pdf
+		percent_time_nn_512.pdf
+		percent_time_nn3_256.pdf
+		percent_time_nn3_512.pdf
