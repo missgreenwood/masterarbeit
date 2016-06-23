@@ -271,9 +271,9 @@ vector<int> BloomFilterTree::compareMem() {
 // Compute number of comparisons for simQuery() for BloomFilterTree vs. std::vector
 // Return number of comparisons for std::vector with NUM_FILTERS BloomFilter objects as first element
 // Return number of comparisons for BloomFilterTree with NUM_FILTERS as second element
-vector<int> BloomFilterTree::compareComplSimQuery() {
+/* vector<int> BloomFilterTree::compareComplSimQuery() {
     
-}
+} */ 
 
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {
