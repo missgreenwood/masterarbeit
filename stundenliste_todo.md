@@ -185,6 +185,7 @@ KW 25 (11.75 h)
 * Mo, 20.06. (4.5 h)
 * Di, 21.06. (5.25 h)
 * Mi, 22.06. (2 h)
+* Do, 23.06. (15:45 -)
 
 
 ## TODO
@@ -210,4 +211,6 @@ KW 25 (11.75 h)
 
 	* Auch mit Filtergrößen 256, 512 und realistischen Werten noch häufig Jaccard-Distanzen > 1
 	* Evtl. noch Verzweigungsgrad + Füllgrad Bloom-Filter tunen (optimal NUM_ELEMENTS <= 7, um Füllgrad 50% nicht zu überschreiten) 
-	* Evtl. Minimum nehmen f. Benchmark?
+	* Evaluation Speicherplatz: 
+		-> Datenstrukturen sind sehr klein, da nur wenige Pointer verwendet werden
+		-> BloomFilterTree dabei noch kleiner als std::vector<BloomFilter*>

@@ -163,6 +163,17 @@ int BloomFilterTree::countFilters() {
     }
 }
 
+int BloomFilterTree::countUnionFilters() {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return 0;
+    }
+    else {
+        int count = root->countUnionFilters();
+        return count;
+    }
+}
+
 vector<pair<int, double>> BloomFilterTree::computeAllDistances(BloomFilter *filter) {
     vector<BloomFilter> filters = collectAllFilters();
     vector<pair<int, double>> result;
@@ -218,6 +229,43 @@ vector<pair<BloomFilter, double>> BloomFilterTree::compare(BloomFilter *filter, 
         cout << "jacc(" << filter->getId() << ", " << distances[i].first.getId() << "): " << distances[i].second << "\n";
     } */
     return distances;
+}
+
+// Compute memory allocated by BloomFilterTree object vs. std::vector
+// Returns memory consumption of std::vector with NUM_FILTERS BloomFilter objects as first element
+// Returns memory consumption of this BloomFilterTree with NUM_FILTERS BloomFilter objects as second element
+vector<int> BloomFilterTree::compareMem() {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return {};
+    }
+    else {
+        vector<int> res;
+        int memFilter = 0;
+        int memVector = 0;
+        int memTree = 0;
+        
+        // Count filters and union filters
+        int allFilters = countFilters() + countUnionFilters();
+        
+        // Calculate size of one BloomFilter object
+        for (int i=0; i<filtersize; i++) {
+            memFilter += sizeof(int);
+        }
+        
+        // Calculate size of std::vector with NUM_FILTERS BloomFilter objects
+        for (int i=0; i<NUM_FILTERS; i++) {
+            memVector += memFilter;
+        }
+         
+        // Calculate size of BloomFilterTree with NUM_FILTERS BloomFilter objects
+        for (int i=0; i<allFilters; i++) {
+            memTree += memFilter;
+        }
+        res.push_back(memVector);
+        res.push_back(memTree);
+        return res; 
+    }
 }
 
 void BloomFilterTree::insert(BloomFilter *filter) {

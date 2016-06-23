@@ -54,16 +54,17 @@ public:
     int getMaxKey();
     vector<BloomFilter> collectAllFilters();
     int countFilters();
+    int countUnionFilters(); 
     int computeSubsetId(BloomFilter *filter);
     int computeSupersetId(BloomFilter *filter);
     bool contains(int k);
     BloomFilterNode *search(int k);
-    
     vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, double>>computekDistances(BloomFilter *filter, int k);
     
-    // Comparison
+    // Measurement and comparison
     vector<pair<BloomFilter, double>> compare(BloomFilter *filter, int k);
+    vector<int> compareMem();
     
     // Insertion
     void insert(BloomFilter *filter);

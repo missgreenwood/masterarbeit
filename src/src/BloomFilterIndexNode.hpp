@@ -32,8 +32,8 @@ public:
     int computeSupersetId(BloomFilter *filter);
     bool contains(int k);
     BloomFilterNode *search(int k);
-    
     BloomFilterIndexNode *split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle);
+    int countUnionFilters(); 
     
     // Insertion
     void shiftAndInsert(BloomFilter *filter);

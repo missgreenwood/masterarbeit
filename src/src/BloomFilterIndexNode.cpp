@@ -182,6 +182,16 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
     return s;
 }
 
+
+int BloomFilterIndexNode::countUnionFilters() {
+    int res = 1;
+    int childrenCount = getCount()+1;
+    for (int i=0; i<childrenCount; i++) {
+        res += C[i]->countUnionFilters();
+    }
+    return res;
+}
+
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
     int id = filter->getId();
     int index = indexOfKey(id);

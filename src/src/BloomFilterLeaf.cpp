@@ -459,6 +459,10 @@ BloomFilterLeaf * BloomFilterLeaf::split(BloomFilter *f) {
     return l;
 }
 
+int BloomFilterLeaf::countUnionFilters() {
+    return 1; 
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values

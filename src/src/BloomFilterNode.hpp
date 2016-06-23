@@ -57,6 +57,7 @@ public:
     virtual int computeSupersetId(BloomFilter *filter) = 0;
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
+    virtual int countUnionFilters() = 0;
     
     // Insertion
     virtual void shiftAndInsert(BloomFilter *filter);
