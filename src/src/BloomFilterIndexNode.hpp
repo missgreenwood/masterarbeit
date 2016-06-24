@@ -33,7 +33,9 @@ public:
     bool contains(int k);
     BloomFilterNode *search(int k);
     BloomFilterIndexNode *split(BloomFilter *filter, BloomFilterNode *left, BloomFilterNode *right, int &middle);
-    int countUnionFilters(); 
+    int countUnionFilters();
+    int countComparisons(BloomFilter *filter);
+    int allComparisons(BloomFilter *filter, int l);
     
     // Insertion
     void shiftAndInsert(BloomFilter *filter);

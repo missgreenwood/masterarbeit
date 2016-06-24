@@ -100,6 +100,11 @@ int main(int argc, const char *argv[]) {
         ref512.push_back(tmp);
     }
     
+    vector<int> ref_nn_256;
+    vector<int> ref_nn_512;
+    vector<vector<int>> ref_nn3_256;
+    vector<vector<int>> ref_nn3_512;
+    
     // Create output csv files
     ofstream nn_256;
     ofstream nn3_256;
@@ -110,8 +115,12 @@ int main(int argc, const char *argv[]) {
     ofstream cputime_nn3_256;
     ofstream cputime_nn3_512;
     ofstream mem;
+    ofstream compl_nn_256;
+    ofstream compl_nn_512;
+    ofstream compl_nn3_256;
+    ofstream compl_nn3_512;
     
-    // Memory measurement of BloomFilterTree vs. unsorted list (std::vector)
+    // Memory measurement of BloomFilterTree vs. unsorted list
     mem.open("mem.csv");
     mem << "Filtergröße 256,Filtergröße 512\n";
     mem << b1.compareMem()[0] << "," << b2.compareMem()[0] << "\n";
@@ -222,6 +231,34 @@ int main(int argc, const char *argv[]) {
     }
     nn_256.close();
     
+    // Complexity test
+    BloomFilterTree b3(2, 256);
+    for (int i=0; i<10; i++) {
+        b3.insertAsSets(&v1[i]);
+    }
+    /* vector<vector<int>> ref;
+    vector<int> r;
+    for (int i=0; i<10; i++) {
+        r = b3.compareComplSimQuery(&q256[i]);
+        ref.push_back(r);
+    }
+    ofstream compl_ref;
+    compl_ref.open("compl_ref.csv");
+    compl_ref << "QFNN256,ComplBFTree,ComplUList\n";
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        compl_ref << i << "," << ref[i][1] << "," << ref[i][0] << "\n";
+    }
+    compl_ref.close(); */
+    
+    // Complexity (NN, 256)
+    compl_nn_256.open("compl_nn_256.csv");
+    compl_nn_256 << "QFNN256,ComplBFTree,ComplUList\n";
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        ref_nn_256 = b1.compareComplSimQuery(&v1[i]);
+        compl_nn_256 << i << "," << ref_nn_256[1] << "," << ref_nn_256[0] << "\n";
+    }
+    compl_nn_256.close();
+    
     // Quality of result (3NN, 256)
     nn3_256.open("nn3_256.csv");
     nn3_256 << "QF3NN256,Optimal1NN256,Optimal2NN256,Optimal3NN256,Computed1NN256,Computed2NN256,Computed3NN256,Max3NN256\n";
@@ -239,6 +276,15 @@ int main(int argc, const char *argv[]) {
         nn_512 << i << "," << refvec[0].second << "," << q512[i].computeJaccard(res_nn_512[i]) << ","<< refvec[NUM_FILTERS-1].second << "\n";
      }
     nn_512.close();
+    
+    // Complexity (NN, 512)
+    compl_nn_512.open("compl_nn_512.csv");
+    compl_nn_512 << "QFNN512,ComplBFTree,ComplUList\n";
+    for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        ref_nn_512 = b2.compareComplSimQuery(&v1[i]);
+        compl_nn_512 << i << "," << ref_nn_512[1] << "," << ref_nn_512[0] << "\n";
+    }
+    compl_nn_512.close();
     
     // Quality of result (3NN, 512)
     nn3_512.open("nn3_512.csv");

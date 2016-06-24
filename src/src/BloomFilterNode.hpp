@@ -58,6 +58,8 @@ public:
     virtual bool contains(int k) = 0;
     virtual BloomFilterNode *search(int k) = 0;
     virtual int countUnionFilters() = 0;
+    virtual int countComparisons(BloomFilter *filter) = 0;
+    virtual int allComparisons(BloomFilter *filter, int l) = 0;
     
     // Insertion
     virtual void shiftAndInsert(BloomFilter *filter);

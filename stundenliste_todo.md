@@ -181,11 +181,12 @@ KW 24 (34.25 h)
 * Sa, 18.06. (6 h)
 
 
-KW 25 (15.75 h)
+KW 25 (18.75 h)
 * Mo, 20.06. (4.5 h)
 * Di, 21.06. (5.25 h)
 * Mi, 22.06. (2 h)
 * Do, 23.06. (4 h)
+* Fr, 24.06. (3.5 h)
 
 
 ## TODO
@@ -196,8 +197,7 @@ KW 25 (15.75 h)
 	
 2. Evaluation 
 
-	* Vergleich mit unsortierter Liste bzgl. # Vergleiche/Speicher
-	* Evtl. Vergleich mit unsortierter Liste bzgl. Kosten für Baum-Aufbau
+	* Vergleich mit unsortierter Liste bzgl. # Vergleiche fertig
 	* Evaluation fertig automatisieren 
 
 3. Ausarbeitung 
@@ -210,7 +210,7 @@ KW 25 (15.75 h)
 ## MA-Besprechung
 
 	* Auch mit Filtergrößen 256, 512 und realistischen Werten noch häufig Jaccard-Distanzen > 1
-	* Evtl. noch Verzweigungsgrad + Füllgrad Bloom-Filter tunen (optimal NUM_ELEMENTS <= 7, um Füllgrad 50% nicht zu überschreiten) 
 	* Evaluation Speicherplatz: 
 		-> Datenstrukturen sind sehr klein, da nur wenige Pointer verwendet werden
 		-> BloomFilterTree dabei noch kleiner als std::vector<BloomFilter*>
+	* Evaluation Komplexität: Einfach quadratisch annehmen oder genau berechnen für unsortierte Liste?

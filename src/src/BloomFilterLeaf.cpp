@@ -463,6 +463,28 @@ int BloomFilterLeaf::countUnionFilters() {
     return 1; 
 }
 
+int BloomFilterLeaf::countComparisons(BloomFilter *filter) {
+    return getCount(); 
+}
+
+int BloomFilterLeaf::allComparisons(BloomFilter *filter, int l) {
+    int res = 0;
+    int last = filters[0]->getId();
+    BloomFilterLeaf *tmp = this;
+    
+    // Collect filters in range
+    while (tmp != NULL && last < l) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            if (last >= l) {
+                break;
+            }
+            last++;
+            res++; 
+        }
+    }
+    return res;
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values
@@ -498,7 +520,7 @@ void BloomFilterLeaf::insert(BloomFilter *filter) {
 BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
     
     // Check if leaf has only one filter
-    if (getCount() == 0) {
+    if (getCount() == 1) {
         return filters[0];
     }
     else {

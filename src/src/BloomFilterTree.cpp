@@ -269,11 +269,32 @@ vector<int> BloomFilterTree::compareMem() {
 }
 
 // Compute number of comparisons for simQuery() for BloomFilterTree vs. std::vector
-// Return number of comparisons for std::vector with NUM_FILTERS BloomFilter objects as first element
-// Return number of comparisons for BloomFilterTree with NUM_FILTERS as second element
-/* vector<int> BloomFilterTree::compareComplSimQuery() {
-    
-} */ 
+// First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
+// Second element of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects
+vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return {};
+    }
+    else {
+        vector<int> res;
+        
+        // Compute max number of comparisons
+        int max = countFilters() * countFilters(); 
+        res.push_back(max);
+        
+        // Check if query filter is subset/superset of root's union filter
+        if ((root->unionfilter->isSubset(filter) == false) &&(root->unionfilter->isSuperset(filter) == false)) {
+            res.push_back(max);
+            return res;
+        }
+        else {
+            int comp = root->countComparisons(filter);
+            res.push_back(comp); 
+            return res;
+        }
+    }
+}
 
 void BloomFilterTree::insert(BloomFilter *filter) {
     if (root == NULL) {

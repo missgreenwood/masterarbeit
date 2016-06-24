@@ -16,7 +16,10 @@
 		mem.csv
 
 	4. Komplexität
-	
+		compl_nn_256.csv
+		compl_nn_512.csv
+		compl_nn3_256.csv
+		compl_nn3_512.csv
 
 # Skripte
 
@@ -57,3 +60,8 @@
 		percent_time_nn_512.pdf
 		percent_time_nn3_256.pdf
 		percent_time_nn3_512.pdf
+
+	3. Speicher
+		mem.pdf
+
+	4. Komplexität

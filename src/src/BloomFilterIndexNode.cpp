@@ -182,7 +182,6 @@ BloomFilterIndexNode * BloomFilterIndexNode::split(BloomFilter *filter, BloomFil
     return s;
 }
 
-
 int BloomFilterIndexNode::countUnionFilters() {
     int res = 1;
     int childrenCount = getCount()+1;
@@ -190,6 +189,58 @@ int BloomFilterIndexNode::countUnionFilters() {
         res += C[i]->countUnionFilters();
     }
     return res;
+}
+
+int BloomFilterIndexNode::countComparisons(BloomFilter *filter) {
+    double min = 1;
+    double jacc;
+    BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
+    int res = 0;
+    
+    // Check if query filter is subset or superset of any child's union filter
+    // If more than one: Determine best result
+    for (int i=0; i<getCount()+1; i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+            res++;
+        }
+        res++;
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+            res++; 
+        }
+        res++;
+    }
+    
+    // If both false: Conduct normal subtree query
+    if (set == false) {
+        last = getKeys()[getCount()-1];
+        return res + path->allComparisons(filter, last);
+    }
+    else {
+        return res + path->countComparisons(filter);
+    }
+}
+
+int BloomFilterIndexNode::allComparisons(BloomFilter *filter, int last) {
+    int res = 0;
+    int childrenCount = getCount()+1;
+    for (int i=0; i<childrenCount; i++) {
+        res += C[i]->allComparisons(filter, last);
+    }
+    return res; 
 }
 
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
