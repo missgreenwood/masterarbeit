@@ -268,6 +268,8 @@ vector<int> BloomFilterTree::compareMem() {
     }
 }
 
+
+
 // Compute number of comparisons for NN-query on BloomFilterTree vs. unsorted list
 // First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
 // Second element of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects

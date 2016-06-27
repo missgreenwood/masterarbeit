@@ -16,10 +16,7 @@
 		mem.csv
 
 	4. Komplexität
-		compl_nn_256.csv
-		compl_nn_512.csv
-		compl_nn3_256.csv
-		compl_nn3_512.csv
+		complexity.csv
 
 	5. Aufbaukosten
 
@@ -71,9 +68,6 @@
 		mem.pdf
 
 	4. Komplexität
-		compl_nn_256.pdf
-		compl_nn_512.pdf
-		compl_nn3_256.pdf
-		compl_nn3_512.pdf
+		complexity.pdf
 
 	5. Aufbaukosten

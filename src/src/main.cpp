@@ -115,10 +115,7 @@ int main(int argc, const char *argv[]) {
     ofstream cputime_nn3_256;
     ofstream cputime_nn3_512;
     ofstream mem;
-    ofstream compl_nn_256;
-    ofstream compl_nn_512;
-    ofstream compl_nn3_256;
-    ofstream compl_nn3_512;
+    ofstream complexity;
     
     // Memory measurement of BloomFilterTree vs. unsorted list
     mem.open("mem.csv");
@@ -224,25 +221,6 @@ int main(int argc, const char *argv[]) {
     cout << "5. Construction cost (BloomFilterTree vs. unsorted list)\n";
     
     // Write results
-    // Complexity test
-    BloomFilterTree b3(2, 512);
-    for (int i=0; i<10; i++) {
-        b3.insertAsSets(&v2[i]);
-    }
-    vector<vector<int>> ref;
-    vector<int> r;
-    for (int i=0; i<10; i++) {
-        r = b3.compareComplSimQueryVec(&q512[i], 3);
-        ref.push_back(r);
-    }
-    ofstream compl_ref;
-    compl_ref.open("compl_ref.csv");
-    compl_ref << "QF3NN512,ComplBFTree,ComplUList\n";
-    for (int i=0; i<NUM_QUERYFILTERS; i++) {
-        compl_ref << i << "," << ref[i][1] << "," << ref[i][0] << "\n";
-    }
-    compl_ref.close();
-
     // Quality of result (NN, 256)
     nn_256.open("nn_256.csv");
     nn_256 << "QFNN256,OptimalNN256,ComputedNN256,MaxNN256\n";
@@ -251,15 +229,6 @@ int main(int argc, const char *argv[]) {
         nn_256 << i << "," << refvec[0].second << "," << q256[i].computeJaccard(res_nn_256[i]) << "," << refvec[NUM_FILTERS-1].second << "\n";
     }
     nn_256.close();
-    
-    // Complexity (NN, 256)
-    compl_nn_256.open("compl_nn_256.csv");
-    compl_nn_256 << "QFNN256,ComplBFTree,ComplUList\n";
-    for (int i=0; i<NUM_QUERYFILTERS; i++) {
-        ref_nn_256 = b1.compareComplSimQuery(&v1[i]);
-        compl_nn_256 << i << "," << ref_nn_256[1] << "," << ref_nn_256[0] << "\n";
-    }
-    compl_nn_256.close();
     
     // Quality of result (3NN, 256)
     nn3_256.open("nn3_256.csv");
@@ -270,15 +239,6 @@ int main(int argc, const char *argv[]) {
      }
     nn3_256.close();
     
-    // Complexity (3NN, 256)
-    compl_nn3_256.open("compl_nn3_256.csv");
-    compl_nn3_256 << "QF3NN,ComplBFTree,ComplUList\n";
-    for (int i=0; i<NUM_QUERYFILTERS; i++) {
-        ref_nn3_256 = b1.compareComplSimQueryVec(&v1[i], 3);
-        compl_nn3_256 << i << "," << ref_nn3_256[1] << "," << ref_nn3_256[0] << "\n";
-    }
-    compl_nn3_256.close();
-    
     // Quality of result (NN, 512)
     nn_512.open("nn_512.csv");
     nn_512 << "QFNN512,OptimalNN512,ComputedNN512,MaxNN512\n";
@@ -287,15 +247,6 @@ int main(int argc, const char *argv[]) {
         nn_512 << i << "," << refvec[0].second << "," << q512[i].computeJaccard(res_nn_512[i]) << ","<< refvec[NUM_FILTERS-1].second << "\n";
      }
     nn_512.close();
-    
-    // Complexity (NN, 512)
-    compl_nn_512.open("compl_nn_512.csv");
-    compl_nn_512 << "QFNN512,ComplBFTree,ComplUList\n";
-    for (int i=0; i<NUM_QUERYFILTERS; i++) {
-        ref_nn_512 = b2.compareComplSimQuery(&v1[i]);
-        compl_nn_512 << i << "," << ref_nn_512[1] << "," << ref_nn_512[0] << "\n";
-    }
-    compl_nn_512.close();
     
     // Quality of result (3NN, 512)
     nn3_512.open("nn3_512.csv");
@@ -306,14 +257,18 @@ int main(int argc, const char *argv[]) {
     }
     nn3_512.close();
     
-    // Complexity (3NN, 512)
-    compl_nn3_512.open("compl_nn3_512.csv");
-    compl_nn3_512 << "QF3NN512,ComplBFTree,ComplUList\n";
+    // Complexity
+    complexity.open("complexity.csv");
+    complexity << "ComplNNBFTree256,ComplNNUList256,ComplNNBFTree512,ComplNNUList512,Compl3NNBFTree256,Compl3NNUList256,Compl3NNBFTree512,Compl3NNUlist512\n";
     for (int i=0; i<NUM_QUERYFILTERS; i++) {
+        ref_nn_256 = b1.compareComplSimQuery(&v1[i]);
+        ref_nn3_256 = b1.compareComplSimQueryVec(&v1[i], 3);
+        ref_nn_512 = b2.compareComplSimQuery(&v1[i]);
         ref_nn3_512 = b2.compareComplSimQueryVec(&v2[i], 3);
-        compl_nn3_512 << i << "," << ref_nn3_512[1] << "," << ref_nn3_512[0] << "\n";
+        complexity << ref_nn_256[1] << "," << ref_nn_256[0] << "," << ref_nn3_256[1] << "," << ref_nn3_256[0] << "," << ref_nn_512[1] << "," << ref_nn_512[0] << "," << ref_nn3_512[1] << "," << ref_nn3_512[0] << "\n";
+        
     }
-    compl_nn3_512.close();
+    complexity.close();
     cout << endl;
     return 0;
 }

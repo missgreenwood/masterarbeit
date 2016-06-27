@@ -189,15 +189,16 @@ KW 25 (18.75 h)
 * Fr, 24.06. (3.5 h)
 
 
-KW 26 (4 h)
-* Mo, 27.06. (4 h)
+KW 26 (6.25 h)
+* Mo, 27.06. (6.25 h)
 
 
 ## TODO
 
 1. Evaluation 
 
-	* Vergleich mit unsortierter Liste bzgl. # Vergleiche fertig + Aufbau Baum (Kosten)
+	* # Vergleiche fertig (Labels in barplot zentrieren, Anzahl Vergleiche checken f. Liste)
+	* Aufbau Baum (Kosten) fertig 
 	* Evaluation fertig automatisieren 
 	* Ergänzen in Ergebnisqualität: quadratischer Fehler bzw. Spektrum
 	* Repräsentativer Lauf mit möglichst wenig Last
