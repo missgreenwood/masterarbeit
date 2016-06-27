@@ -13,6 +13,6 @@ compl2 <- as.numeric(compl[1,])
 
 pdf('/Users/judith/Documents/MA/evaluation/compl.pdf')
 
-barplot(compl2, ylab="Anzahl Vergleiche", main="Komplexität der k-nächsten-Nachbarn-Suche", col=c("dodgerblue3", "darkolivegreen3"), beside=TRUE, ylim=c(0,650), names.arg=c("Filtergröße 256\nk=1", "Filtergröße 256\nk=1", "Filtergröße 256\nk=3", "Filtergröße 256\nk=3", "Filtergröße 512\nk=1", "Filtergröße 512\nk=1", "Filtergröße 512\nk=3", "Filtergröße 512\nk=3"), cex.axis=0.8, cex.names=0.8)
+barplot(compl2, ylab="Anzahl Vergleiche", main="Komplexität der k-nächsten-Nachbarn-Suche", col=c("dodgerblue3", "darkolivegreen3"), beside=TRUE, ylim=c(0,650), names.arg=c("Filtergröße 256\nk=1", "Filtergröße 256\nk=1", "Filtergröße 256\nk=3", "Filtergröße 256\nk=3", "Filtergröße 512\nk=1", "Filtergröße 512\nk=1", "Filtergröße 512\nk=3", "Filtergröße 512\nk=3"), cex.axis=0.5, cex.names=0.5)
 
 detach(compl)
