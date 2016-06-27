@@ -189,28 +189,22 @@ KW 25 (18.75 h)
 * Fr, 24.06. (3.5 h)
 
 
+KW 26 (4 h)
+* Mo, 27.06. (4 h)
+
+
 ## TODO
 
-1. Implementierung - Set insertion
+1. Evaluation 
 
-	* Algo. checken - warum simQueryVec() so viel besser auf NN als simQuery()?
-	
-2. Evaluation 
-
-	* Vergleich mit unsortierter Liste bzgl. # Vergleiche fertig
+	* Vergleich mit unsortierter Liste bzgl. # Vergleiche fertig + Aufbau Baum (Kosten)
 	* Evaluation fertig automatisieren 
+	* Ergänzen in Ergebnisqualität: quadratischer Fehler bzw. Spektrum
+	* Repräsentativer Lauf mit möglichst wenig Last
 
-3. Ausarbeitung 
+2. Ausarbeitung 
 
 	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995
 	* Korrektur lesen
-
-
-## MA-Besprechung
-
-	* Auch mit Filtergrößen 256, 512 und realistischen Werten noch häufig Jaccard-Distanzen > 1
-	* Evaluation Speicherplatz: 
-		-> Datenstrukturen sind sehr klein, da nur wenige Pointer verwendet werden
-		-> BloomFilterTree dabei noch kleiner als std::vector<BloomFilter*>
-	* Evaluation Komplexität: Einfach quadratisch annehmen oder genau berechnen für unsortierte Liste?
+	* Titel nachschauen

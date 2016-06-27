@@ -268,7 +268,7 @@ vector<int> BloomFilterTree::compareMem() {
     }
 }
 
-// Compute number of comparisons for simQuery() for BloomFilterTree vs. std::vector
+// Compute number of comparisons for NN-query on BloomFilterTree vs. unsorted list
 // First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
 // Second element of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects
 vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
@@ -280,17 +280,47 @@ vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
         vector<int> res;
         
         // Compute max number of comparisons
-        int max = countFilters() * countFilters(); 
+        // int max = countFilters() * countFilters();
+        int max = countFilters() * 2;
         res.push_back(max);
         
         // Check if query filter is subset/superset of root's union filter
-        if ((root->unionfilter->isSubset(filter) == false) &&(root->unionfilter->isSuperset(filter) == false)) {
+        if ((root->unionfilter->isSubset(filter) == false) && (root->unionfilter->isSuperset(filter) == false)) {
             res.push_back(max);
             return res;
         }
         else {
-            int comp = root->countComparisons(filter);
+            int comp = 2 + root->countComparisons(filter);
             res.push_back(comp); 
+            return res;
+        }
+    }
+}
+
+// Compute number of comparisons for kNN-query on BloomFilterTree vs. unsorted list
+// First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
+// second..last elements of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects for kNN
+vector<int> BloomFilterTree::compareComplSimQueryVec(BloomFilter *filter, int k) {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return {};
+    }
+    else {
+        vector<int> res;
+        
+        // Compute max number of comparisons
+        // int max = countFilters() * countFilters();
+        int max = countFilters() * 2 * k; 
+        res.push_back(max);
+        
+        // Check if query filter is subset/superset of root's union filter
+        if ((root->unionfilter->isSubset(filter) == false) && (root->unionfilter->isSuperset(filter) == false)) {
+            res.push_back(max);
+            return res;
+        }
+        else {
+            int comp = 2 + root->countVecComparisons(filter, k);
+            res.push_back(comp);
             return res;
         }
     }

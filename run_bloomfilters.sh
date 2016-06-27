@@ -5,7 +5,6 @@ rm *.csv
 make clean
 make 
 ./bloomfilters
-make clean
 rm ../../evaluation/*.pdf
 ../../evaluation/quality_nn.R
 ../../evaluation/quality_nn3.R

@@ -21,6 +21,9 @@
 		compl_nn3_256.csv
 		compl_nn3_512.csv
 
+	5. Aufbaukosten
+
+
 # Skripte
 
 	1. Qualität
@@ -35,6 +38,9 @@
 		mem.R
 
 	4. Komplexität
+		compl.R
+
+	5. Aufbaukosten
 
 	
 # Ausgabedateien 
@@ -65,3 +71,9 @@
 		mem.pdf
 
 	4. Komplexität
+		compl_nn_256.pdf
+		compl_nn_512.pdf
+		compl_nn3_256.pdf
+		compl_nn3_512.pdf
+
+	5. Aufbaukosten

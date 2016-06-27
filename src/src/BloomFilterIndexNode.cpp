@@ -225,7 +225,14 @@ int BloomFilterIndexNode::countComparisons(BloomFilter *filter) {
     }
     
     // If both false: Conduct normal subtree query
+    res++;
     if (set == false) {
+        if (getParent() != NULL) {
+            last = getParent()->getKeys()[getParent()->getCount()-1];
+        }
+        else {
+            last = getKeys()[getCount()-1];
+        }
         last = getKeys()[getCount()-1];
         return res + path->allComparisons(filter, last);
     }
@@ -241,6 +248,65 @@ int BloomFilterIndexNode::allComparisons(BloomFilter *filter, int last) {
         res += C[i]->allComparisons(filter, last);
     }
     return res; 
+}
+
+int BloomFilterIndexNode::countVecComparisons(BloomFilter *filter, int k) {
+    double min = 1;
+    double jacc;
+    BloomFilterNode *path = C[0];
+    bool set = false;
+    int last;
+    int res = 0;
+    
+    // Check if query filter is subset or superset of children's union filters
+    // If more than one: Determine best result
+    for (int i=0; i<getCount(); i++) {
+        if (C[i]->unionfilter->isSubset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+            res++;
+        }
+        res++;
+        if (C[i]->unionfilter->isSuperset(filter)) {
+            set = true;
+            jacc = computeJaccard(C[i]->unionfilter, filter);
+            if (jacc < min) {
+                min = jacc;
+                path = C[i];
+            }
+            res++;
+        }
+        res++;
+    }
+    
+    // If both false: Conduct normal subtree query
+    res++;
+    if (set == false) {
+        res++;
+        if (getParent() != NULL) {
+            last = getParent()->getKeys()[getParent()->getCount()-1];
+        }
+        else {
+            last = getKeys()[getCount()-1];
+        }
+        return res + path->allVecComparisons(filter, k, last);
+    }
+    else {
+        return res + path->countVecComparisons(filter, k);
+    }
+}
+
+int BloomFilterIndexNode::allVecComparisons(BloomFilter *filter, int k, int l) {
+    int res = 0;
+    int childrenCount = getCount()+1;
+    for (int i=0; i<childrenCount; i++) {
+        res += C[i]->allVecComparisons(filter, k, l);
+    }
+    return res;
 }
 
 void BloomFilterIndexNode::shiftAndInsert(BloomFilter *filter) {
@@ -366,8 +432,12 @@ BloomFilter * BloomFilterIndexNode::simQuery(BloomFilter *filter) {
     
     // If both false: Conduct normal subtree query
     if (set == false) {
-        // last = getParent()->getKeys()[getParent()->getCount()-1];
-        last = getKeys()[getCount()-1]; 
+        if (getParent() != NULL) {
+            last = getParent()->getKeys()[getParent()->getCount()-1];
+        }
+        else {
+            last = getKeys()[getCount()-1];
+        }
         return path->simSubtreeQuery(filter, last);
     }
     else {
@@ -409,7 +479,12 @@ vector<BloomFilter*> BloomFilterIndexNode::simQueryVec(BloomFilter *filter, int 
     
     // If both false: Conduct normal subtree query
     if (set == false) {
-        last = getParent()->getKeys()[getParent()->getCount()-1];
+        if (getParent() != NULL) {
+            last = getParent()->getKeys()[getParent()->getCount()-1];
+        }
+        else {
+            last = getKeys()[getCount()-1];
+        }
         return path->simSubtreeQueryVec(filter, k, last);
     }
     else {

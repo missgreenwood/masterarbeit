@@ -46,7 +46,9 @@ public:
     int countUnionFilters();
     int countComparisons(BloomFilter *filter);
     int allComparisons(BloomFilter *filter, int l);
-     
+    int countVecComparisons(BloomFilter *filter, int k);
+    int allVecComparisons(BloomFilter *filter, int k, int l);
+    
     // Insertion
     void insert(BloomFilter *filter);
     

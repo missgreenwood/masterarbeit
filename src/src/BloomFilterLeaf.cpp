@@ -472,7 +472,7 @@ int BloomFilterLeaf::allComparisons(BloomFilter *filter, int l) {
     int last = filters[0]->getId();
     BloomFilterLeaf *tmp = this;
     
-    // Collect filters in range
+    // Collect candidates in range
     while (tmp != NULL && last < l) {
         for (int i=0; i<tmp->getCount(); i++) {
             if (last >= l) {
@@ -483,6 +483,29 @@ int BloomFilterLeaf::allComparisons(BloomFilter *filter, int l) {
         }
     }
     return res;
+}
+
+int BloomFilterLeaf::countVecComparisons(BloomFilter *filter, int k) {
+    return ((getCount() + prev->getCount() + next->getCount())*k);
+}
+
+int BloomFilterLeaf::allVecComparisons(BloomFilter *filter, int k, int l) {
+    int res = 0;
+    int last = filters[0]->getId();
+    BloomFilterLeaf *tmp = this;
+    
+    // Collect filters in subtree range
+    while (tmp != NULL && last < l) {
+        for (int i=0; i<tmp->getCount(); i++) {
+            if (last >= l) {
+                break;
+            }
+            last++;
+            res++;
+        }
+        tmp = tmp->getNext();
+    }
+    return res * k;
 }
 
 void BloomFilterLeaf::insert(BloomFilter *filter) {
@@ -524,6 +547,7 @@ BloomFilter * BloomFilterLeaf::simQuery(BloomFilter *filter) {
         return filters[0];
     }
     else {
+        
         // Find filter with smallest jacc distance
         double jacc;
         double min = 1;
@@ -570,7 +594,6 @@ vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {
     double jacc;
     
     // Collect all candidates
-    
     // Collect own candidates
     for (int i=0; i<getCount(); i++) {
         jacc = computeJaccard(filters[i], filter);
@@ -638,9 +661,6 @@ vector<BloomFilter*> BloomFilterLeaf::simSubtreeQueryVec(BloomFilter *filter, in
     sort(distances.begin(), distances.end(), [] (const pair<BloomFilter*, double> &left, const pair<BloomFilter*, double> &right) {
         return left.second < right.second;
     });
-    
-    // TODO
-    // Check if subtree range holds enough filters
          
     // Return first k Bloom filters from distances vector
     for (int i=0; i<k; i++) {
