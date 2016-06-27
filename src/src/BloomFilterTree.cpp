@@ -192,7 +192,6 @@ vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter
         return left.second < right.second;
     });
     for (int i=0; i<k; i++) {
-        // cout << "jacc(" << filter->getId() << ", " << allDistances[i].first << "): " << allDistances[i].second << "\n";
         result.push_back(allDistances[i]); 
     }
     return result;
@@ -223,17 +222,12 @@ vector<pair<BloomFilter, double>> BloomFilterTree::compare(BloomFilter *filter, 
             distances.pop_back();
         }
     }
-    
-    /* cout << k << " nearest neighbors of f" << filter->getId() << " in tree:\n\n";
-    for (int i=0; i<distances.size(); i++) {
-        cout << "jacc(" << filter->getId() << ", " << distances[i].first.getId() << "): " << distances[i].second << "\n";
-    } */
     return distances;
 }
 
 // Compute memory allocated by BloomFilterTree object vs. std::vector
-// Return memory consumption of std::vector with NUM_FILTERS BloomFilter objects as first element
-// Return memory consumption of this BloomFilterTree with NUM_FILTERS BloomFilter objects as second element
+// First element of return vector: Memory consumption of std::vector with NUM_FILTERS
+// Second element of return vector: Memory consumption of this BloomFilterTree
 vector<int> BloomFilterTree::compareMem() {
     if (root == NULL) {
         cout << "Tree is empty!\n";
@@ -253,12 +247,12 @@ vector<int> BloomFilterTree::compareMem() {
             memFilter += sizeof(int);
         }
         
-        // Calculate size of std::vector with NUM_FILTERS BloomFilter objects
-        for (int i=0; i<NUM_FILTERS; i++) {
+        // Calculate size of std::vector with NUM_FILTERS
+        for (int i=0; i<countFilters(); i++) {
             memVector += memFilter;
         }
          
-        // Calculate size of BloomFilterTree with NUM_FILTERS BloomFilter objects
+        // Calculate size of BloomFilterTree with NUM_FILTERS
         for (int i=0; i<allFilters; i++) {
             memTree += memFilter;
         }
@@ -268,11 +262,29 @@ vector<int> BloomFilterTree::compareMem() {
     }
 }
 
-
+// Compute construction cost for BloomFilterTree object vs. std::vector
+// Second element in return vector: Construction cost of std::vector with NUM_FILTERS
+// Second element of return vector: Construction cost of this BloomFilterTree
+vector<int> BloomFilterTree::compareConstrCost() {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return {};
+    }
+    else {
+        vector<int> res;
+        
+        // Calculate construction cost of std::vector with NUM_FILTERS
+        res.push_back(countFilters());
+        
+        // Calculate construction cost of BloomFilterTree with NUM_FILTERS
+        
+        return res;
+    }
+}
 
 // Compute number of comparisons for NN-query on BloomFilterTree vs. unsorted list
-// First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
-// Second element of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects
+// First element of result: Number of comparisons for std::vector with NUM_FILTERS
+// Second element of result: Number of comparisons for BloomFilterTree with NUM_FILTERS
 vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
     if (root == NULL) {
         cout << "Tree is empty!\n";
@@ -282,7 +294,6 @@ vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
         vector<int> res;
         
         // Compute max number of comparisons
-        // int max = countFilters() * countFilters();
         int max = countFilters() * 2;
         res.push_back(max);
         
@@ -300,8 +311,8 @@ vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
 }
 
 // Compute number of comparisons for kNN-query on BloomFilterTree vs. unsorted list
-// First element of result: Number of comparisons for std::vector with NUM_FILTERS BloomFilter objects
-// second..last elements of result: Number of comparisons for BloomFilterTree with NUM_FILTERS BloomFilter objects for kNN
+// First element of result vector: Number of comparisons for std::vector with NUM_FILTERS
+// second..last elements of result vector: Number of comparisons for BloomFilterTree
 vector<int> BloomFilterTree::compareComplSimQueryVec(BloomFilter *filter, int k) {
     if (root == NULL) {
         cout << "Tree is empty!\n";
@@ -311,8 +322,8 @@ vector<int> BloomFilterTree::compareComplSimQueryVec(BloomFilter *filter, int k)
         vector<int> res;
         
         // Compute max number of comparisons
-        // int max = countFilters() * countFilters();
-        int max = countFilters() * 2 * k; 
+        int numFilters = countFilters();
+        int max = numFilters * 2 + numFilters * (log(numFilters)/log(2));
         res.push_back(max);
         
         // Check if query filter is subset/superset of root's union filter

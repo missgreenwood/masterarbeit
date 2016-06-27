@@ -350,11 +350,5 @@ vector <BloomFilter*> BloomFilterList::simQueryVec(BloomFilter *filter, int k) {
             result.push_back(intermediate[i].first);
         }
     }
-    
-    // TODO
-    // Sort result vector by jaccard distances in ascending order
-    /* sort(result.begin(), result.end(), [&] (BloomFilter *a, BloomFilter *b) {
-        return a->computeJaccard(filter) < b->computeJaccard(filter);
-    }); */
     return result;
 }

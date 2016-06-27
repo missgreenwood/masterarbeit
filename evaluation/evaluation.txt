@@ -19,6 +19,7 @@
 		complexity.csv
 
 	5. Aufbaukosten
+		cost.csv
 
 
 # Skripte
@@ -38,6 +39,7 @@
 		compl.R
 
 	5. Aufbaukosten
+		cost.R
 
 	
 # Ausgabedateien 
@@ -71,3 +73,4 @@
 		complexity.pdf
 
 	5. Aufbaukosten
+		cost.pdf

@@ -197,7 +197,6 @@ KW 26 (6.5 h)
 
 1. Evaluation 
 
-	* # Vergleiche fertig (Labels in barplot zentrieren, Anzahl Vergleiche checken f. Liste)
 	* Aufbau Baum (Kosten) fertig 
 	* Evaluation fertig automatisieren 
 	* Ergänzen in Ergebnisqualität: quadratischer Fehler bzw. Spektrum
