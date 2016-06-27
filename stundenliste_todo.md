@@ -189,15 +189,15 @@ KW 25 (18.75 h)
 * Fr, 24.06. (3.5 h)
 
 
-KW 26 (6.5 h)
-* Mo, 27.06. (6.5 h)
+KW 26 (6.75 h)
+* Mo, 27.06. (6.75 h)
 
 
 ## TODO
 
 1. Evaluation 
 
-	* Aufbau Baum (Kosten) fertig 
+	* Aufbau Baum (Kosten) fertig (Funktion testen, R-Skript fertig, auskommentieren in run_bloomfilters.sh)
 	* Evaluation fertig automatisieren 
 	* Ergänzen in Ergebnisqualität: quadratischer Fehler bzw. Spektrum
 	* Repräsentativer Lauf mit möglichst wenig Last
@@ -208,3 +208,9 @@ KW 26 (6.5 h)
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995
 	* Korrektur lesen
 	* Titel nachschauen
+
+3. Abgabe
+
+	* 2 Exemplare 
+	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
+	* Abgabeort: bei Herrn Letz, u.U. auch bei Frau Roden oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin)

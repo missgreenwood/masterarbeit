@@ -12,3 +12,4 @@ rm ../../evaluation/*.pdf
 ../../evaluation/cputime_nn3.R
 ../../evaluation/mem.R
 ../../evaluation/compl.R
+# ../../evaluation/cost.R

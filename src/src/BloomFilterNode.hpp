@@ -62,6 +62,7 @@ public:
     virtual int allComparisons(BloomFilter *filter, int l) = 0;
     virtual int countVecComparisons(BloomFilter *filter, int k) = 0;
     virtual int allVecComparisons(BloomFilter *filter, int k, int l) = 0;
+    virtual int countLeaves() = 0; 
     
     // Insertion
     virtual void shiftAndInsert(BloomFilter *filter);

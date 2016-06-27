@@ -36,7 +36,7 @@ private:
     int filtersize;                 // Size of associated Bloom filters (# of bits)
     
 public:
-    BloomFilterNode *root;      // Pointer to root node
+    BloomFilterNode *root;          // Pointer to root node
     
     BloomFilterTree(int _t, int _s);
     ~BloomFilterTree();
@@ -61,6 +61,7 @@ public:
     BloomFilterNode *search(int k);
     vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
     vector<pair<int, double>>computekDistances(BloomFilter *filter, int k);
+    int countLeaves(); 
     
     // Measurement and comparison
     vector<pair<BloomFilter, double>> compare(BloomFilter *filter, int k);

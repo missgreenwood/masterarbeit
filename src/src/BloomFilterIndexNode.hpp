@@ -38,6 +38,7 @@ public:
     int allComparisons(BloomFilter *filter, int l);
     int countVecComparisons(BloomFilter *filter, int k);
     int allVecComparisons(BloomFilter *filter, int k, int l);
+    int countLeaves();
     
     // Insertion
     void shiftAndInsert(BloomFilter *filter);

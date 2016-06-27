@@ -250,6 +250,10 @@ int BloomFilterIndexNode::allComparisons(BloomFilter *filter, int last) {
     return res; 
 }
 
+int BloomFilterIndexNode::countLeaves() {
+    return C[0]->countLeaves();
+}
+
 int BloomFilterIndexNode::countVecComparisons(BloomFilter *filter, int k) {
     double min = 1;
     double jacc;

@@ -508,6 +508,16 @@ int BloomFilterLeaf::allVecComparisons(BloomFilter *filter, int k, int l) {
     return res * k;
 }
 
+int BloomFilterLeaf::countLeaves() {
+    int count = 1;
+    BloomFilterLeaf *tmp = this;
+    while (tmp != NULL) {
+        tmp = tmp->getNext();
+        count++;
+    }
+    return count; 
+}
+
 void BloomFilterLeaf::insert(BloomFilter *filter) {
     
     // Get Bloom filter values

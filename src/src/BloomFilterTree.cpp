@@ -197,6 +197,24 @@ vector<pair<int, double>> BloomFilterTree::computekDistances(BloomFilter *filter
     return result;
 }
 
+int BloomFilterTree::countLeaves() {
+    if (root == NULL) {
+        cout << "Tree is empty!\n";
+        return 0;
+    }
+    else {
+        BloomFilterNode *first = search(getMinKey());
+        BloomFilterNode *last = search(getMaxKey());
+        if (first == last) {
+            return 1;
+        }
+        else {
+            return root->countLeaves();
+        }
+    }
+}
+
+
 vector<pair<BloomFilter, double>> BloomFilterTree::compare(BloomFilter *filter, int k) {
     vector<pair<BloomFilter, double>> distances;
     if (root == NULL) {
@@ -277,7 +295,9 @@ vector<int> BloomFilterTree::compareConstrCost() {
         res.push_back(countFilters());
         
         // Calculate construction cost of BloomFilterTree with NUM_FILTERS
-        
+        int fanout = 2*t+1;
+        int leafCount = countLeaves();
+        res.push_back(log(leafCount)/log(fanout));
         return res;
     }
 }
