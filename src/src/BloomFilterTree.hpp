@@ -66,7 +66,7 @@ public:
     // Measurement and comparison
     vector<pair<BloomFilter, double>> compare(BloomFilter *filter, int k);
     vector<int> compareMem();
-    vector<int> compareConstrCost();
+    vector<double> compareConstrCost();
     vector<int> compareComplSimQuery(BloomFilter *filter);
     vector<int> compareComplSimQueryVec(BloomFilter *filter, int k);
     

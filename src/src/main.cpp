@@ -116,6 +116,7 @@ int main(int argc, const char *argv[]) {
     ofstream cputime_nn3_512;
     ofstream mem;
     ofstream complexity;
+    ofstream cost;
     
     // Memory measurement of BloomFilterTree vs. unsorted list
     mem.open("mem.csv");
@@ -269,6 +270,13 @@ int main(int argc, const char *argv[]) {
         
     }
     complexity.close();
+    
+    // Construction cost
+    cost.open("cost.csv");
+    cost << "CostUList,CostBFTree\n";
+    vector<double> ref_cost = b1.compareConstrCost();
+    cost << ref_cost[0] << "," << ref_cost[1] << "\n";
+    cost.close();
     cout << endl;
     return 0;
 }

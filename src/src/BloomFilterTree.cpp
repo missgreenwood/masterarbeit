@@ -281,23 +281,42 @@ vector<int> BloomFilterTree::compareMem() {
 }
 
 // Compute construction cost for BloomFilterTree object vs. std::vector
-// Second element in return vector: Construction cost of std::vector with NUM_FILTERS
-// Second element of return vector: Construction cost of this BloomFilterTree
-vector<int> BloomFilterTree::compareConstrCost() {
+// First element of result: Construction cost for std::vector with NUM_FILTERS
+// Second element of result: Construction cost for BloomFilterTree with NUM_FILTERS
+vector<double> BloomFilterTree::compareConstrCost() {
     if (root == NULL) {
         cout << "Tree is empty!\n";
         return {};
     }
     else {
-        vector<int> res;
+        vector<double> res;
         
         // Calculate construction cost of std::vector with NUM_FILTERS
-        res.push_back(countFilters());
+        res.push_back(1);
         
         // Calculate construction cost of BloomFilterTree with NUM_FILTERS
         int fanout = 2*t+1;
-        int leafCount = countLeaves();
-        res.push_back(log(leafCount)/log(fanout));
+        
+        // Collect subset filters in tree: O(n)
+        // Collect free ids: O(n)
+        // Sort free ids: O(n log n)
+        // Determine best ids: O(n)
+        // Sort good ids: O(n log n)
+        // Complexity of subset id calculation = 3*O(n) 2*O(n log n) = O(n log n)
+        
+        // Collect superset filters in tree: O(n)
+        // Collect free ids: O(n)
+        // Sort free ids: O(n log n)
+        // Determine best ids: O(n)
+        // Sort good ids: O(n log n)
+        // Complexity of superset id calculation = 3*O(n) 2*O(n log n) = O(n log n)
+        
+        // Complexity of id calculation + insertion = O(n log n) + O(log_b n) = O(n log n)
+        
+        double insertionCost = log(countFilters())/log(fanout);
+        double idCost = countFilters() * log(countFilters());
+        double treeCost = insertionCost + idCost;
+        res.push_back(treeCost);
         return res;
     }
 }
@@ -331,8 +350,8 @@ vector<int> BloomFilterTree::compareComplSimQuery(BloomFilter *filter) {
 }
 
 // Compute number of comparisons for kNN-query on BloomFilterTree vs. unsorted list
-// First element of result vector: Number of comparisons for std::vector with NUM_FILTERS
-// second..last elements of result vector: Number of comparisons for BloomFilterTree
+// First element of result: Number of comparisons for std::vector with NUM_FILTERS
+// Second to last elements of result: Number of comparisons for BloomFilterTree with NUM_FILTERS
 vector<int> BloomFilterTree::compareComplSimQueryVec(BloomFilter *filter, int k) {
     if (root == NULL) {
         cout << "Tree is empty!\n";

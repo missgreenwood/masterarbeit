@@ -198,9 +198,6 @@ KW 26 (11.25 h)
 
 1. Evaluation 
 
-	* Aufbau Baum (Kosten) fertig (Funktion testen, R-Skript fertig, auskommentieren in run_bloomfilters.sh)
-	* Evaluation fertig automatisieren 
-	* Ergänzen in Ergebnisqualität: quadratischer Fehler bzw. Spektrum
 	* Repräsentativer Lauf mit möglichst wenig Last
 
 2. Ausarbeitung 
