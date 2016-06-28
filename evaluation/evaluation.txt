@@ -51,10 +51,6 @@
 		nn3_256-2.pdf
 		nn3_512-1.pdf
 		nn3_512-2.pdf
-		percent_dev_nn_256.pdf
-		percent_dev_nn_512.pdf
-		percent_dev_nn3_256.pdf
-		percent_dev_nn3_512.pdf
 
 	2. CPU-Zeit
 		cputime_nn_256.pdf
