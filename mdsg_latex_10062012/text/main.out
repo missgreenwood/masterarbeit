@@ -1,14 +1,13 @@
 \BOOKMARK [0][]{chapter.1}{1 Einleitung}{}% 1
-\BOOKMARK [1][]{section.1.1}{1.1 Problembeschreibung}{chapter.1}% 2
-\BOOKMARK [0][]{chapter.2}{2 Hintergrund}{}% 3
-\BOOKMARK [1][]{section.2.1}{2.1 Bloom-Filter}{chapter.2}% 4
-\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Grundlagen}{section.2.1}% 5
-\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Mathematische Prinzipien und Operationen}{section.2.1}% 6
-\BOOKMARK [1][]{section.2.2}{2.2 Indexstrukturen}{chapter.2}% 7
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 B- und B+-B\344ume}{section.2.2}% 8
-\BOOKMARK [1][]{section.2.3}{2.3 AMBIENCE}{chapter.2}% 9
-\BOOKMARK [0][]{chapter.3}{3 Vewandte Themen}{}% 10
-\BOOKMARK [0][]{chapter.4}{4 Eigene Arbeiten}{}% 11
-\BOOKMARK [0][]{chapter.5}{5 Evaluation}{}% 12
-\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 13
-\BOOKMARK [0][]{appendix*.2}{Literaturverzeichnis}{}% 14
+\BOOKMARK [0][]{chapter.2}{2 Hintergrund}{}% 2
+\BOOKMARK [1][]{section.2.1}{2.1 Bloom-Filter}{chapter.2}% 3
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Grundlagen}{section.2.1}% 4
+\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Mathematische Prinzipien und Operationen}{section.2.1}% 5
+\BOOKMARK [1][]{section.2.2}{2.2 Indexstrukturen}{chapter.2}% 6
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 B- und B+-B\344ume}{section.2.2}% 7
+\BOOKMARK [1][]{section.2.3}{2.3 AMBIENCE}{chapter.2}% 8
+\BOOKMARK [0][]{chapter.3}{3 Vewandte Themen}{}% 9
+\BOOKMARK [0][]{chapter.4}{4 Implementierung}{}% 10
+\BOOKMARK [0][]{chapter.5}{5 Evaluation}{}% 11
+\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 12
+\BOOKMARK [0][]{appendix*.2}{Literaturverzeichnis}{}% 13

@@ -189,26 +189,23 @@ KW 25 (18.75 h)
 * Fr, 24.06. (3.5 h)
 
 
-KW 26 (11.25 h)
+KW 26 (14.75 h)
 * Mo, 27.06. (6.75 h)
 * Di, 28.06. (4.5 h)
+* Mi, 29.06. (3.5 h)
 
 
 ## TODO
 
-1. Evaluation 
+1. Ausarbeitung 
 
-	* Repräsentativer Lauf mit möglichst wenig Last
-
-2. Ausarbeitung 
-
-	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, \include{text/abstract}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
+	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995
+	* Vorversion an Mirco, Änderungen einarbeiten 
 	* Korrektur lesen
-	* Titel nachschauen
 
-3. Abgabe
+2. Abgabe
 
-	* 2 Exemplare 
+	* 3 Exemplare 
 	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
 	* Abgabeort: bei Herrn Letz, u.U. auch bei Frau Roden oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin)

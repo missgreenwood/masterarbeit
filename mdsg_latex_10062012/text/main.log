@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  27 JUN 2016 22:56
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  29 JUN 2016 13:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1022,7 +1022,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
-<./pictures/./lmu_header.pdf, id=61, 845.0471pt x 113.8112pt>
+<./pictures/./lmu_header.pdf, id=57, 845.0471pt x 113.8112pt>
 File: ./pictures/./lmu_header.pdf Graphic file (type pdf)
 
 <use ./pictures/./lmu_header.pdf>
@@ -1034,7 +1034,7 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 111.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<./pictures/lmu_seal.pdf, id=62, 324.37186pt x 324.37186pt>
+<./pictures/lmu_seal.pdf, id=58, 324.37186pt x 324.37186pt>
 File: ./pictures/lmu_seal.pdf Graphic file (type pdf)
 
 <use ./pictures/lmu_seal.pdf>
@@ -1140,23 +1140,48 @@ Class scrbook Warning: \float@addtolists detected!
 (scrbook)              Support for \float@addtolists may be removed from
 (scrbook)              `scrbook' soon .
 
-
-Overfull \hbox (4.00531pt too wide) in paragraph at lines 4--5
-\T1/lmr/m/n/10.95 [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]],
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 4.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 4.
+(/usr/local/texlive/2012/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Underfull \hbox (badness 10000) in paragraph at lines 4--4
+[][][]\T1/lmr/m/n/9 Vgl. z.B. []$\T1/lmtt/m/n/9 http : / / www . fairrank . de 
+/ blog / wissenswertes-[]aus-[]der-[]branche /
  []
 
-) (./text/hintergrund.tex [1
 
+Overfull \hbox (20.95694pt too wide) in paragraph at lines 8--9
+\T1/lmr/m/n/10.95 kon-text-zen-tri-sches so-zia-les Netz[][][] grün-det struk-t
+u-rell nicht auf Ende-zu-Ende-Kommunikation,
+ []
 
-] [2
+[1
 
 
 ]
+Overfull \hbox (5.74902pt too wide) in paragraph at lines 12--13
+[]\T1/lmr/m/n/10.95 Daneben ist die Form der Nach-rich-ten von zen-tra-ler Be-d
+eu-tung. Wie kön-nen Multimedia-
+ []
+
+) (./text/hintergrund.tex
+Overfull \hbox (4.00531pt too wide) in paragraph at lines 16--1
+\T1/lmr/m/n/10.95 [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]],
+ []
+
+[2]
 Kapitel 2.
 LaTeX Font Info:    Try loading font information for TS1+lmr on input line 23.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [3])
+) [3
+
+
+])
 (./text/related.tex [4]
 Kapitel 3.
 ) (./text/implementierung.tex [5
@@ -1191,17 +1216,17 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 1BC27937E15ADDF3EDE416ECE73A64F3;858.
+(rerunfilecheck)             Checksum: 07FCFA38D06A4A60728E6DD450A132EF;789.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
  ) 
 Here is how much of TeX's memory you used:
- 12284 strings out of 493488
- 185004 string characters out of 3141326
- 299108 words of memory out of 3000000
- 15212 multiletter control sequences out of 15000+200000
- 73341 words of font info for 51 fonts, out of 3000000 for 9000
+ 12371 strings out of 493488
+ 186223 string characters out of 3141326
+ 300053 words of memory out of 3000000
+ 15266 multiletter control sequences out of 15000+200000
+ 94913 words of font info for 66 fonts, out of 3000000 for 9000
  958 hyphenation exceptions out of 8191
- 50i,9n,54p,1358b,513s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 50i,9n,54p,1717b,513s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2012/
 texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2012/texmf-dist/fon
@@ -1209,15 +1234,18 @@ ts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/p
 ublic/lm/lmbxi10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/
 lmcsc10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr10.pfb
 ></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/loca
-l/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/20
-12/texmf-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2012/texmf-d
-ist/fonts/type1/public/lm/lmri12.pfb></usr/local/texlive/2012/texmf-dist/fonts/
-type1/public/lm/lmro10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/publ
-ic/lm/lmssbx10.pfb>
-Output written on main.pdf (24 pages, 2871615 bytes).
+l/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/20
+12/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2012/texmf-dis
+t/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2012/texmf-dist/fonts/type
+1/public/lm/lmri10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/l
+m/lmri12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmri9.pf
+b></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmro10.pfb></usr/lo
+cal/texlive/2012/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texl
+ive/2012/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
+Output written on main.pdf (24 pages, 2977581 bytes).
 PDF statistics:
- 337 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
- 68 named destinations out of 1000 (max. 500000)
- 143 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 368 PDF objects out of 1000 (max. 8388607)
+ 292 compressed objects within 3 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 135 words of extra memory for PDF output out of 10000 (max. 10000000)
 
