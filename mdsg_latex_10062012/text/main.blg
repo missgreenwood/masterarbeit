@@ -4,44 +4,44 @@ The top-level auxiliary file: main.aux
 A level-1 auxiliary file: text/abstract.aux
 The style file: geralpha.bst
 Database file #1: bibliography.bib
-You've used 25 entries,
+You've used 26 entries,
             2768 wiz_defined-function locations,
-            778 strings with 9931 characters,
-and the built_in function-call counts, 12456 in all, are:
-= -- 1327
-> -- 510
-< -- 17
-+ -- 178
-- -- 173
-* -- 954
-:= -- 1850
-add.period$ -- 58
-call.type$ -- 25
-change.case$ -- 137
-chr.to.int$ -- 25
-cite$ -- 25
-duplicate$ -- 571
-empty$ -- 965
-format.name$ -- 201
-if$ -- 2770
+            785 strings with 10045 characters,
+and the built_in function-call counts, 12833 in all, are:
+= -- 1369
+> -- 518
+< -- 18
++ -- 180
+- -- 175
+* -- 984
+:= -- 1907
+add.period$ -- 60
+call.type$ -- 26
+change.case$ -- 141
+chr.to.int$ -- 26
+cite$ -- 26
+duplicate$ -- 587
+empty$ -- 997
+format.name$ -- 205
+if$ -- 2851
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 33
-newline$ -- 104
-num.names$ -- 75
-pop$ -- 173
+missing$ -- 35
+newline$ -- 108
+num.names$ -- 78
+pop$ -- 176
 preamble$ -- 1
-purify$ -- 187
+purify$ -- 193
 quote$ -- 0
-skip$ -- 505
+skip$ -- 519
 stack$ -- 0
-substring$ -- 708
-swap$ -- 215
-text.length$ -- 17
-text.prefix$ -- 6
+substring$ -- 740
+swap$ -- 217
+text.length$ -- 18
+text.prefix$ -- 7
 top$ -- 0
-type$ -- 192
+type$ -- 200
 warning$ -- 0
-while$ -- 116
-width$ -- 29
-write$ -- 308
+while$ -- 120
+width$ -- 30
+write$ -- 320

@@ -50,7 +50,7 @@ Zusammenfassung Broder2004 _(referenziert in AMBIENCE)_
 2.3 Hashing vs. Bloom Filters 
 
 - Generelle Erklärung von Hashing: Vgl. S. 491
-- "Bloom filters can be interpreted as a natural generalization of hashing that allows more interesting tradeoffs between the number of bits used per set element and the porbability of false positives" (S. 491; ein Bloom-Filter mit nur einer Hashfunktion ist äquivalent zu normalem Hashing!)
+- "Bloom filters can be interpreted as a natural generalization of hashing that allows more interesting tradeoffs between the number of bits used per set element and the probability of false positives" (S. 491; ein Bloom-Filter mit nur einer Hashfunktion ist äquivalent zu normalem Hashing!)
 - Bloom-Filter werden aber nur in der Praxis angewandt, weil für eine theoretische Betrachtung i.d.R. die Fehlerrate approximativ "verschwinden" müsste 
 
 2.4 Standard Bloom Filter Tricks

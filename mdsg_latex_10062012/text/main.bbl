@@ -20,6 +20,11 @@
 \newblock \Btxinlong{}\ {\em {BU} {C}omputer {S}cience {TR}}, \btxpageslong{}\
   2002--2019, 2002.
 
+\bibitem[Blo70]{Bloom1970}
+{\sc Bloom, Burton}: {\em Space/{T}ime {T}rade-offs in {H}ash {C}oding with
+  {A}llowable {E}rrors}.
+\newblock Communications of the ACM, 13(7):422--426, 1970.
+
 \bibitem[BM04]{Broder2004}
 {\sc Broder, Andrei} \btxandlong{}\ {\sc Michael Mitzenmacher}: {\em {N}etwork
   {A}pplications of {B}loom {F}ilters: {A} {S}urvey}.
