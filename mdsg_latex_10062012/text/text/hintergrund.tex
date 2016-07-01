@@ -13,11 +13,27 @@ Aus der Kollisionseigenschaft folgt auch, dass ein einmal eingefügtes Objekt ni
   \includegraphics[width=0.8\textwidth]{pictures/1280px-Bloom_filter.png}\\
   \caption[Bloomfilter-Beispiel, Bildnachweis: \url{https://commons.wikimedia.org/wiki/File:Bloom_filter.svg}.]{Beispiel für einen Bloomfilter, in den die Objekte \textit{x}, \textit{y} und \textit{z} eingefügt wurden. Das Objekt \textit{w} ist nicht im Filter vorhanden.}\label{fig:pic0}
 \end{figure}
-\subsection{Die Jaccard-Distanz}\label{jacc}
-Um die Ähnlichkeit zweier Mengen zu ermitteln, werden verschiedene Distanzmetriken oder Ähnlichkeitsmaße eingesetzt. Um Bloom-Filter miteinander zu vergleichen und insbesondere für die \textit{k}-nächste-Nachbarn-Suche muss ein geeignetes Ähnlichkeitsmaß zur Anwendung kommen. Bayardo et al. verwenden dazu die Kosinus-Ähnlichkeit\footnote{Vgl. \cite{Bayardo2007}.}. Sakuma und Sato definieren die Ähnlichkeit von Bloom-Filtern über die Anzahl gleicher 1-Bits\footnote{Vgl. \cite{Sakuma2011}: 321.}. Ist diese für zwei Anfragefilter identisch, werden die Bit-Arrays negiert und die Anzahl gleicher 0-Bits verglichen. 
+\subsection{Distanzmaße und Teilmengenbeziehung}\label{sec:bloom-operationen}
+Um die Ähnlichkeit zweier Mengen zu ermitteln, werden verschiedene Distanzmetriken oder Ähnlichkeitsmaße eingesetzt. Um Bloom-Filter miteinander zu vergleichen und insbesondere für die \textit{k}-nächste-Nachbarn-Suche muss ein geeignetes Ähnlichkeitsmaß zur Anwendung kommen. Bayardo et al. verwenden dazu die \textit{Kosinus-Ähnlichkeit}\footnote{Vgl. \cite{Bayardo2007}.}. Sakuma und Sato definieren die Ähnlichkeit von Bloom-Filtern über die Anzahl gleicher 1-Bits\footnote{Vgl. \cite{Sakuma2011}: 321.}. Ist diese für zwei Anfragefilter identisch, werden die Bit-Arrays negiert und die Anzahl gleicher 0-Bits verglichen. 
 
-AMBIENCE verwendet eine Abschätzung der Jaccard-Distanz zur Ermittlung der Ähnlichkeit von Bloom-Filtern. Die Jaccard-Distanz zwischen zwei Mengen \textit{A} und \textit{B} ist definiert als 
-\[J_{delta}(A,B) = 1 - J(A,B) = \frac{|A\cap B| - |A\cup B|}{|A\cup B|},\]
+AMBIENCE verwendet eine Abschätzung der \textit{Jaccard-Distanz} zur Ermittlung der Ähnlichkeit von Bloom-Filtern. Die Jaccard-Distanz zwischen zwei Mengen \textit{A} und \textit{B} ist definiert als 
+\[J_{\delta}(A,B) = 1 - J(A,B) = \frac{|A\cap B| - |A\cup B|}{|A\cup B|}, \]
+wobei 
+\[J(A,B) = \frac{|A\cap B|}{|A\cup B|}\] den \textit{Jaccard-Koeffizienten} bezeichnet. Die Jaccard-Distanz nimmt Werte im Bereich $\left[0,1\right]$ an. Identische Mengen haben eine Jaccard-Distanz von \textit{0}, Mengen ohne gemeinsame Elemente haben die Jaccard-Distanz \textit{1}. 
+Für Bloom-Filter lässt sich die Jaccard-Distanz analog berechnen. Die Vereinigungsmenge zweier Bloom-Filter \textit{F} und \textit{G} lässt sich als bitweises logisches Oder, die Schnittmenge als bitweises logisches Und repräsentieren. Auch hier nimmt die Jaccard-Distanz offensichtlich Werte zwischen \textit{0} und \textit{1} an. Je ähnlicher die Filter sind, desto kleiner ist ihre Jaccard-Distanz. 
+Die Jaccard-Distanz zwischen Bloom-Filtern ist, anders als die von Sakuma und Sato verwendete Distanz-Metrik, nicht transitiv in dem Sinne, dass zwei Filter, die beide eine geringe Jaccard-Distanz zu einem dritten Filter aufweisen, untereinander nicht ähnlich sein müssen. Man betrachte z.B. die Filter \textit{F1}, \textit{F2} und \textit{F3} mit folgenden Werten: 
+\begin{figure}[hpbt]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pictures/filters.png}\\
+  \caption[Jaccard-Distanzen zwischen Bloom-Filtern]{Jaccard-Distanzen zwischen Bloom-Filtern.}\label{fig:pic1}
+\end{figure}
+\newpage
+\noindent
+Die Jaccard-Distanzen zwischen \textit{F1}, \textit{F2} und \textit{F3} betragen somit: 
+\[J_{\delta}(F1,F3) = 1 - J(F1,F3) = 1 - \frac{|F1\cap F3|}{|F1\cup F3|} = 1 - \frac{5}{10} = 0.5\]
+\[J_{\delta}(F2,F3) = 1 - J(F2,F3) = 1 - \frac{|F2\cap F3|}{|F2\cup F3|} = 1 - \frac{5}{10} = 0.5\]
+\[J_{\delta}(F1,F2) = 1 - J(F1,F2) = 1 - \frac{|F1\cap F2|}{|F1\cup F2|} = 1 - 0 = 1\]
+Daran wird deutlich: Obwohl \textit{F1} und \textit{F2} jeweils die Hälfte der Elemente mit \textit{F3} gemeinsam haben, lässt sich daraus kein Wert für die Ähnlichkeit zwischen \textit{F1} und \textit{F2} ableiten. Sie sind sich im Gegenteil maximal unähnlich. 
 \subsection{Hashfunktionen}\label{sec:hashfunktionen}
 Die Frage, welche Hashfunktionen optimalerweise für einen Bloom-Filter verwendet werden sollten, ist nicht eindeutig zu beantworten\footnote{Vgl. \cite{Broder2004}: 487.}. Grundsätzlich muss zwischen kryptografischen Hashfunktionen wie MD5 und SHA und gewöhnlichen Hashfunktionen wie Murmur- oder Jenkins-Hashfunktionen unterschieden werden. Die Berechnung von kryptografischen Hashfunktionen dauert in der Regel länger, dafür haben sie bestimmte Eigenschaften wie eine hohe Kollisionsresistenz und Gleichverteilung der Ergebniswerte. 
 
@@ -30,8 +46,6 @@ Neben Hadoop und Cassandra werden Bloom-Filter in unzähligen, zum Teil hoch ska
 \begin{quote}
 Wherever a list or set is used, and space is at a premium, consider using a Bloom filter if the effect of false positives can be mitigated\footnote{Vgl. \cite{Broder2004}: 486.}.
 \end{quote}
-
-\subsection{Mathematische Prinzipien und Operationen}\label{sec:mathe}
 \section{Indexstrukturen}\label{sec:indexstrukturen}
 % TODO: Überarbeiten/übersetzen 
 To support query processing and operations in an efficient manner, the internal layer of a database system uses specific data strucures and memory methods. These are called \textit{index structures}. They organize the data to support the required operations using its \textit{indices}.
