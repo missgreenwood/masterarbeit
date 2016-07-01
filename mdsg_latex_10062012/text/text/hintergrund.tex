@@ -13,20 +13,21 @@ Aus der Kollisionseigenschaft folgt auch, dass ein einmal eingefügtes Objekt ni
   \includegraphics[width=0.8\textwidth]{pictures/1280px-Bloom_filter.png}\\
   \caption[Bloomfilter-Beispiel, Bildnachweis: \url{https://commons.wikimedia.org/wiki/File:Bloom_filter.svg}.]{Beispiel für einen Bloomfilter, in den die Objekte \textit{x}, \textit{y} und \textit{z} eingefügt wurden. Das Objekt \textit{w} ist nicht im Filter vorhanden.}\label{fig:pic0}
 \end{figure}
-\subsection{Distanzmaße und Teilmengenbeziehung}\label{sec:bloom-operationen}
+\subsection{Distanzmaße}\label{sec:distanzmasse}
 Um die Ähnlichkeit zweier Mengen zu ermitteln, werden verschiedene Distanzmetriken oder Ähnlichkeitsmaße eingesetzt. Um Bloom-Filter miteinander zu vergleichen und insbesondere für die \textit{k}-nächste-Nachbarn-Suche muss ein geeignetes Ähnlichkeitsmaß zur Anwendung kommen. Bayardo et al. verwenden dazu die \textit{Kosinus-Ähnlichkeit}\footnote{Vgl. \cite{Bayardo2007}.}. Sakuma und Sato definieren die Ähnlichkeit von Bloom-Filtern über die Anzahl gleicher 1-Bits\footnote{Vgl. \cite{Sakuma2011}: 321.}. Ist diese für zwei Anfragefilter identisch, werden die Bit-Arrays negiert und die Anzahl gleicher 0-Bits verglichen. 
 
 AMBIENCE verwendet eine Abschätzung der \textit{Jaccard-Distanz} zur Ermittlung der Ähnlichkeit von Bloom-Filtern. Die Jaccard-Distanz zwischen zwei Mengen \textit{A} und \textit{B} ist definiert als 
 \[J_{\delta}(A,B) = 1 - J(A,B) = \frac{|A\cap B| - |A\cup B|}{|A\cup B|}, \]
 wobei 
-\[J(A,B) = \frac{|A\cap B|}{|A\cup B|}\] den \textit{Jaccard-Koeffizienten} bezeichnet. Die Jaccard-Distanz nimmt Werte im Bereich $\left[0,1\right]$ an. Identische Mengen haben eine Jaccard-Distanz von \textit{0}, Mengen ohne gemeinsame Elemente haben die Jaccard-Distanz \textit{1}. 
-Für Bloom-Filter lässt sich die Jaccard-Distanz analog berechnen. Die Vereinigungsmenge zweier Bloom-Filter \textit{F} und \textit{G} lässt sich als bitweises logisches Oder, die Schnittmenge als bitweises logisches Und repräsentieren. Auch hier nimmt die Jaccard-Distanz offensichtlich Werte zwischen \textit{0} und \textit{1} an. Je ähnlicher die Filter sind, desto kleiner ist ihre Jaccard-Distanz. 
+\[J(A,B) = \frac{|A\cap B|}{|A\cup B|}\] den \textit{Jaccard-Koeffizienten} bezeichnet. Die Jaccard-Distanz nimmt Werte im Bereich $\left[0,1\right]$ an. Identische Mengen haben eine Jaccard-Distanz von 0, Mengen ohne gemeinsame Elemente haben eine Jaccard-Distanz von 1. 
+Für Bloom-Filter lässt sich die Jaccard-Distanz analog berechnen. Die Vereinigungsmenge zweier Bloom-Filter \textit{F} und \textit{G} lässt sich als bitweises logisches Oder, die Schnittmenge als bitweises logisches Und repräsentieren. Auch hier nimmt die Jaccard-Distanz offensichtlich Werte zwischen 0 und 1 an. Je ähnlicher die Filter sind, desto kleiner ist ihre Jaccard-Distanz. 
 Die Jaccard-Distanz zwischen Bloom-Filtern ist, anders als die von Sakuma und Sato verwendete Distanz-Metrik, nicht transitiv in dem Sinne, dass zwei Filter, die beide eine geringe Jaccard-Distanz zu einem dritten Filter aufweisen, untereinander nicht ähnlich sein müssen. Man betrachte z.B. die Filter \textit{F1}, \textit{F2} und \textit{F3} mit folgenden Werten: 
 \begin{figure}[hpbt]
   \centering
   \includegraphics[width=1.0\textwidth]{pictures/filters.png}\\
   \caption[Jaccard-Distanzen zwischen Bloom-Filtern]{Jaccard-Distanzen zwischen Bloom-Filtern.}\label{fig:pic1}
 \end{figure}
+% TODO: Farben änden Grafik 
 \newpage
 \noindent
 Die Jaccard-Distanzen zwischen \textit{F1}, \textit{F2} und \textit{F3} betragen somit: 
@@ -34,12 +35,34 @@ Die Jaccard-Distanzen zwischen \textit{F1}, \textit{F2} und \textit{F3} betragen
 \[J_{\delta}(F2,F3) = 1 - J(F2,F3) = 1 - \frac{|F2\cap F3|}{|F2\cup F3|} = 1 - \frac{5}{10} = 0.5\]
 \[J_{\delta}(F1,F2) = 1 - J(F1,F2) = 1 - \frac{|F1\cap F2|}{|F1\cup F2|} = 1 - 0 = 1\]
 Daran wird deutlich: Obwohl \textit{F1} und \textit{F2} jeweils die Hälfte der Elemente mit \textit{F3} gemeinsam haben, lässt sich daraus kein Wert für die Ähnlichkeit zwischen \textit{F1} und \textit{F2} ableiten. Sie sind sich im Gegenteil maximal unähnlich. 
+\subsection{Teil- und Obermengenbeziehung}\label{sec:mengenbeziehungen}
+Will man Bloom-Filter z.B. nach Ähnlichkeit gruppieren, kann man stattdessen Teil- und Obermengenbeziehungen zwischen ihnen betrachten. Die \textit{Teilmengenbeziehung} zwischen zwei Bloom-Filtern sei hier wie folgt definiert: 
+\begin{quote}
+Ein Bloom-Filter \textit{F} ist \textbf{\textit{Teilmenge}} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 0-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 0-Bits).
+\end{quote}
+Die Obermengenbeziehung zwischen zwei Bloom-Filtern sei hier wie folgt definiert: 
+\begin{quote}
+Ein Bloom-Filter \textit{F} ist \textbf{\textit{Obermenge}} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 1-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 1-Bits).
+\end{quote}
+Der maximal gefüllte Filter, in dem alle Bits gesetzt sind, ist damit Obermenge aller Filter derselben Länge (auch von sich selbst). Der leere Filter ist die (triviale) Teilmenge aller Filter derselben Länge (auch von sich selbst). Teil- und Obermengen sind Umkehrungen voneinander, d.h. wenn \textit{F} Teilmenge von \textit{G} ist, folgt daraus, dass \textit{G} Obermenge von \textit{F} ist, und umgekehrt.  
+
+% TODO: Zitate Sakuma/Werner 
+Zwischen den Bloom-Filter aus Abb. \ref{fig:pic1} bestehen folgende Teil- und Obermengenbeziehungen: \textit{F1} und \textit{F2} sind Teilmengen von \textit{F3}. \textit{F3} ist Obermenge von \textit{F1} und \textit{F2}. Zwischen den maximal unähnlichen Filtern \textit{F1} und \textit{F2} bestehen keine Teil- und Obermengenbeziehungen. 
+% TODO: Grafik für Mengenbeziehungen 
+\begin{figure}[hpbt]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pictures/filters.png}\\
+  \caption[Teil- und Obermengenbeziehungen zwischen Bloom-Filtern]{Teil- und Obermengenbeziehungen zwischen Bloom-Filtern.}\label{fig:pic2}
+\end{figure}
+Teil- und Obermengenbeziehung sind außerdem transitiv, was an Abb. \ref{fig:pic2} deutlich wird: \textit{F1} ist Teilmenge von \textit{F2}, damit auch Teilmenge von \textit{F3}. \textit{F3} ist Obermenge von \textit{F2}, damit auch Obermenge von \textit{F1}. 
+
+Teil- und Obermengenbeziehungen sind also im Gegensatz zur Jaccard-Distanz dazu geeignet, transitive Ähnlichkeitsbeziehungen zwischen Bloom-Filtern abzubilden. Diese Eigenschaft spielt eine zentrale Rolle im hier entwickelten Verfahren, das in Kap. \ref{ch:implementierung} ausführlich dargestellt wird. 
 \subsection{Hashfunktionen}\label{sec:hashfunktionen}
 Die Frage, welche Hashfunktionen optimalerweise für einen Bloom-Filter verwendet werden sollten, ist nicht eindeutig zu beantworten\footnote{Vgl. \cite{Broder2004}: 487.}. Grundsätzlich muss zwischen kryptografischen Hashfunktionen wie MD5 und SHA und gewöhnlichen Hashfunktionen wie Murmur- oder Jenkins-Hashfunktionen unterschieden werden. Die Berechnung von kryptografischen Hashfunktionen dauert in der Regel länger, dafür haben sie bestimmte Eigenschaften wie eine hohe Kollisionsresistenz und Gleichverteilung der Ergebniswerte. 
 
 Werden Bloom-Filter z.B. zum schnellen Nachschlagen in großen, verteilten Datenbanken eingesetzt, wird auf die kryptografischen Eigenschaften zu Gunsten des verminderten Rechenaufwandes verzichtet. Das NoSQL-Datenbanksystem Cassandra und das Hadoop-Framework für skalierte, verteilt arbeitende Software verwenden beispielsweise Bloom-Filter in Kombination mit Murmur- und Jenkins-Hashfunktionen. Darüber hinaus ist MD5 für Bloom-Filter weit verbreitet. Die Murmur-Hashfunktionen weisen gleichzeitig gute Verteilungseigenschaften auf und lassen sich vergleichsweise schnell berechnen, weswegen sie generell für den Einsatz in Bloom-Filtern empfohlen werden\footnote{Vgl. \url{http://spyced.blogspot.de/2009/01/all-you-ever-wanted-to-know-about.html}.}. AMBIENCE verwendet Murmur-Hashfunktionen zur Generierung der Bloom-Filter. Für die eigene Implementierung wurde der Murmur2-Hash verwendet\footnote{Vgl. \url{https://sites.google.com/site/murmurhash/MurmurHash2.cpp} für den Quellcode.}.  
 \subsection{Varianten und Anwendungen}\label{sec:bloom-anwendungen}
-Bloom-Filter erfreuen sich in verschiedenen Versionen großer Beliebtheit. Wichtige Varianten sind \textit{Attenuated Bloom Filter}\footnote{Vgl. \cite{Sakuma2011}: 316 und 318.}, \textit{Counting Bloom Filter}\footnote{Vgl. \cite{Fan2000}.} und \textit{Compressed Bloom Filter}\footnote{Vgl. \cite{Mitzenmacher2002}.}. Wegen der guten Kompressionseigenschaften und des geringen Speicherbedarfs kommen Bloom-Filter häufig in verteilten Anwendungen und Netzwerkdiensten zum Einsatz\footnote{Vgl. \cite{Broder2004} für eine ausführliche Darstellung.}. 
+Bloom-Filter erfreuen sich in verschiedenen Versionen großer Beliebtheit. Wichtige Varianten sind z.B. \textit{Attenuated Bloom Filter}\footnote{Vgl. \cite{Sakuma2011}: 316 und 318.}, \textit{Counting Bloom-Filter} und \textit{Compressed Bloom Filter}. Ein Counting Bloom-Filter benötigt mehr Speicherplatz als ein klassischer Bloom-Filter, dafür können Objekte wieder daraus entfernt werden\footnote{Vgl. \cite{Fan2000}.}. Komprimierte Bloom-Filter werden eingesetzt, wenn Bloom-Filter als Nachrichten versendet werden und die Nachrichtenlänge begrenzt ist oder die übertragene Datenmenge minimiert werden soll\footnote{Vgl. \cite{Mitzenmacher2002}.}. Attenuated Bloom-Filter können als Array von Bloom-Filtern betrachtet werden und können z.B. in einem Netzwerk Informationen darüber enthalten, welche Dienste an einem anderen Knoten im Netzwerk verfügbar sind. Wegen der guten Kompressionseigenschaften und des geringen Speicherbedarfs kommen Bloom-Filter häufig in verteilten Anwendungen und Netzwerkdiensten zum Einsatz\footnote{Vgl. \cite{Broder2004} für eine ausführliche Darstellung.}. 
 
 \noindent
 Neben Hadoop und Cassandra werden Bloom-Filter in unzähligen, zum Teil hoch skalierenden Anwendungen eingesetzt. Weitere Beispiele sind der quelloffene Webproxy Squid und der Chrome-Browser, wo Bloom-Filter zum schnellen Nachschlagen von als bösartig eingestuften Webseiten verwendet werden. Broder und Mitzenmacher fassen das Bloom-Filter-Prinzip wie folgt zusammen: 
