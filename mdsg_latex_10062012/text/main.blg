@@ -4,44 +4,46 @@ The top-level auxiliary file: main.aux
 A level-1 auxiliary file: text/abstract.aux
 The style file: geralpha.bst
 Database file #1: bibliography.bib
-You've used 26 entries,
+Warning--empty note in Kriegel1994--2013
+You've used 29 entries,
             2768 wiz_defined-function locations,
-            785 strings with 10045 characters,
-and the built_in function-call counts, 12833 in all, are:
-= -- 1369
-> -- 518
-< -- 18
-+ -- 180
-- -- 175
-* -- 984
-:= -- 1907
-add.period$ -- 60
-call.type$ -- 26
-change.case$ -- 141
-chr.to.int$ -- 26
-cite$ -- 26
-duplicate$ -- 587
-empty$ -- 997
-format.name$ -- 205
-if$ -- 2851
+            803 strings with 10562 characters,
+and the built_in function-call counts, 14264 in all, are:
+= -- 1529
+> -- 570
+< -- 21
++ -- 197
+- -- 192
+* -- 1085
+:= -- 2114
+add.period$ -- 68
+call.type$ -- 29
+change.case$ -- 156
+chr.to.int$ -- 29
+cite$ -- 30
+duplicate$ -- 656
+empty$ -- 1108
+format.name$ -- 226
+if$ -- 3178
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 35
-newline$ -- 108
-num.names$ -- 78
-pop$ -- 176
+missing$ -- 37
+newline$ -- 120
+num.names$ -- 87
+pop$ -- 196
 preamble$ -- 1
-purify$ -- 193
+purify$ -- 214
 quote$ -- 0
-skip$ -- 519
+skip$ -- 580
 stack$ -- 0
-substring$ -- 740
-swap$ -- 217
-text.length$ -- 18
-text.prefix$ -- 7
+substring$ -- 817
+swap$ -- 246
+text.length$ -- 21
+text.prefix$ -- 8
 top$ -- 0
-type$ -- 200
-warning$ -- 0
-while$ -- 120
-width$ -- 30
-write$ -- 320
+type$ -- 224
+warning$ -- 1
+while$ -- 134
+width$ -- 33
+write$ -- 356
+(There was 1 warning)

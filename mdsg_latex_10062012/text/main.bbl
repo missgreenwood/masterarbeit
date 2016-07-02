@@ -36,6 +36,12 @@
 \newblock \Btxinlong{}\ {\em Proceedings of the 16th international conference
   on {W}orld {W}ide {W}eb}, \btxpageslong{}\ 131--140. ACM, 2007.
 
+\bibitem[DA99]{Dey1999}
+{\sc Dey, Anind} \btxandlong{}\ {\sc Gregory Abowd}: {\em {T}owards a {B}etter
+  {U}nderstanding of {C}ontext and {C}ontext-{A}wareness}.
+\newblock \Btxinlong{}\ {\em {H}andheld and {U}biquitous {C}omputing},
+  \btxpageslong{}\ 304--307. Springer, 1999.
+
 \bibitem[DWM10]{Duerr2010}
 {\sc D{\"u}rr, Michael}, {\sc Martin Werner} \btxandlong{}\ {\sc Marco Maier}:
   {\em Re-{S}ocializing {O}nline {S}ocial {N}etworks}.
@@ -64,6 +70,11 @@
 {\sc Knuth, Donald}: {\em The art of computer programming, Volume 3, Sorting
   and searching}.
 \newblock Addison Wesley Longman, 1998.
+
+\bibitem[Kri14]{Kriegel1994--2013}
+{\sc Kriegel, Hans-Peter}: {\em Skript zur {V}orlesung {A}nfragebearbeitung und
+  {I}ndexstrukturen in {D}atenbanksystemen}.
+\newblock 1994--2014.
 
 \bibitem[LC86]{Lehman1986}
 {\sc Lehman, Tobin} \btxandlong{}\ {\sc Michael Carey}: {\em A {S}tudy of
@@ -94,6 +105,13 @@
 {\sc Ruppel, Peter} \btxandlong{}\ {\sc Axel K{\"u}pper}: {\em Geocookie: {A}
   {S}pace-{E}fficient {R}epresentation of {G}eographic {L}ocation {S}ets}.
 \newblock Journal of Information Processing, 22(3):418--424, 2014.
+
+\bibitem[SAW94]{Schilit1994}
+{\sc Schilit, Bill}, {\sc Norman Adams} \btxandlong{}\ {\sc Roy Want}: {\em
+  Context-aware {C}omputing {A}pplications}.
+\newblock \Btxinlong{}\ {\em Mobile {C}omputing {S}ystems and {A}pplications,
+  1994. {WMCSA} 1994. {F}irst {W}orkshop on}, \btxpageslong{}\ 85--90. IEEE,
+  1994.
 
 \bibitem[SBE{\etalchar{+}}12]{Sarwat2012}
 {\sc Sarwat, Mohamed}, {\sc Jie Bao}, {\sc Ahmed Eldawy}, {\sc Justin

@@ -1,16 +1,18 @@
 \BOOKMARK [0][]{chapter.1}{1 Einleitung}{}% 1
 \BOOKMARK [0][]{chapter.2}{2 Hintergrund}{}% 2
-\BOOKMARK [1][]{section.2.1}{2.1 Bloom-Filter}{chapter.2}% 3
-\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 Distanzma\337e}{section.2.1}% 4
-\BOOKMARK [2][]{subsection.2.1.2}{2.1.2 Teil- und Obermengenbeziehung}{section.2.1}% 5
-\BOOKMARK [2][]{subsection.2.1.3}{2.1.3 Hashfunktionen}{section.2.1}% 6
-\BOOKMARK [2][]{subsection.2.1.4}{2.1.4 Varianten und Anwendungen}{section.2.1}% 7
-\BOOKMARK [1][]{section.2.2}{2.2 Indexstrukturen}{chapter.2}% 8
-\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 B- und B+-B\344ume}{section.2.2}% 9
-\BOOKMARK [1][]{section.2.3}{2.3 AMBIENCE}{chapter.2}% 10
-\BOOKMARK [0][]{chapter.3}{3 Verwandte Themen}{}% 11
-\BOOKMARK [0][]{chapter.4}{4 Implementierung}{}% 12
-\BOOKMARK [0][]{chapter.5}{5 Evaluation}{}% 13
-\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 14
-\BOOKMARK [0][]{chapter*.5}{Abbildungsverzeichnis}{}% 15
-\BOOKMARK [0][]{chapter*.6}{Literaturverzeichnis}{}% 16
+\BOOKMARK [1][]{section.2.1}{2.1 Kontextzentrische soziale Netze}{chapter.2}% 3
+\BOOKMARK [2][]{subsection.2.1.1}{2.1.1 AMBIENCE}{section.2.1}% 4
+\BOOKMARK [1][]{section.2.2}{2.2 Bloom-Filter}{chapter.2}% 5
+\BOOKMARK [2][]{subsection.2.2.1}{2.2.1 Distanzma\337e}{section.2.2}% 6
+\BOOKMARK [2][]{subsection.2.2.2}{2.2.2 Teil- und Obermengenbeziehung}{section.2.2}% 7
+\BOOKMARK [2][]{subsection.2.2.3}{2.2.3 Hashfunktionen}{section.2.2}% 8
+\BOOKMARK [2][]{subsection.2.2.4}{2.2.4 Bloom-Filter-Varianten und Anwendungen}{section.2.2}% 9
+\BOOKMARK [1][]{section.2.3}{2.3 Indexstrukturen}{chapter.2}% 10
+\BOOKMARK [2][]{subsection.2.3.1}{2.3.1 B+-B\344ume}{section.2.3}% 11
+\BOOKMARK [2][]{subsection.2.3.2}{2.3.2 Doppelt verkettete Listen}{section.2.3}% 12
+\BOOKMARK [0][]{chapter.3}{3 Verwandte Themen}{}% 13
+\BOOKMARK [0][]{chapter.4}{4 Implementierung}{}% 14
+\BOOKMARK [0][]{chapter.5}{5 Evaluation}{}% 15
+\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 16
+\BOOKMARK [0][]{appendix*.5}{Abbildungsverzeichnis}{}% 17
+\BOOKMARK [0][]{appendix*.6}{Literaturverzeichnis}{}% 18
