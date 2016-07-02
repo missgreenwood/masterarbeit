@@ -42,7 +42,7 @@ AMBIENCE verwendet eine Abschätzung der \textit{Jaccard-Distanz} zur Ermittlung
 wobei 
 \[J(A,B) = \frac{|A\cap B|}{|A\cup B|}\] den \textit{Jaccard-Koeffizienten} bezeichnet. Die Jaccard-Distanz nimmt Werte im Bereich $\left[0,1\right]$ an. Identische Mengen haben eine Jaccard-Distanz von 0, Mengen ohne gemeinsame Elemente haben eine Jaccard-Distanz von 1. 
 Für Bloom-Filter lässt sich die Jaccard-Distanz analog berechnen. Die Vereinigungsmenge zweier Bloom-Filter \textit{F} und \textit{G} lässt sich als bitweises logisches Oder, die Schnittmenge als bitweises logisches Und repräsentieren. Auch hier nimmt die Jaccard-Distanz offensichtlich Werte zwischen 0 und 1 an. Je ähnlicher die Filter sind, desto kleiner ist ihre Jaccard-Distanz. 
-Die Jaccard-Distanz zwischen Bloom-Filtern ist, anders als die von Sakuma und Sato verwendete Distanz-Metrik, nicht transitiv in dem Sinne, dass zwei Filter, die beide eine geringe Jaccard-Distanz zu einem dritten Filter aufweisen, untereinander nicht ähnlich sein müssen. Man betrachte z.B. die Filter \textit{F1}, \textit{F2} und \textit{F3} mit folgenden Werten: 
+Die Jaccard-Distanz zwischen Bloom-Filtern ist, anders als die von Sakuma und Sato verwendete Distanzmetrik, nicht transitiv in dem Sinne, dass zwei Filter, die beide eine geringe Jaccard-Distanz zu einem dritten Filter aufweisen, untereinander nicht ähnlich sein müssen. Man betrachte z.B. die Filter \textit{F1}, \textit{F2} und \textit{F3} mit folgenden Werten: 
 \begin{figure}
   \centering
   \includegraphics[width=1.0\textwidth]{pictures/filters.png}\\
@@ -57,11 +57,11 @@ Daran wird deutlich: Obwohl \textit{F1} und \textit{F2} jeweils die Hälfte der 
 \subsection{Teil- und Obermengenbeziehung}\label{sec:mengenbeziehungen}
 Will man Bloom-Filter z.B. nach Ähnlichkeit gruppieren, kann man stattdessen Teil- und Obermengenbeziehungen zwischen ihnen betrachten. Die Teilmengenbeziehung zwischen zwei Bloom-Filtern sei hier wie folgt definiert: 
 \begin{quote}
-Ein Bloom-Filter \textit{F} ist \textbf{\textit{Teilmenge}} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 0-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 0-Bits).
+Ein Bloom-Filter \textit{F} ist \textit{Teilmenge} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 0-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 0-Bits).
 \end{quote}
 Die Obermengenbeziehung zwischen zwei Bloom-Filtern sei hier wie folgt definiert: 
 \begin{quote}
-Ein Bloom-Filter \textit{F} ist \textbf{\textit{Obermenge}} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 1-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 1-Bits).
+Ein Bloom-Filter \textit{F} ist \textit{Obermenge} eines Bloom-Filters \textit{G}, wenn darin mindestens die gleichen 1-Bits gesetzt sind wie in \textit{G} (und möglicherweise weitere, zusätzliche 1-Bits).
 \end{quote}
 Der maximal gefüllte Filter, in dem alle Bits gesetzt sind, ist damit Obermenge aller Filter derselben Länge (auch von sich selbst). Der leere Filter ist die (triviale) Teilmenge aller Filter derselben Länge (auch von sich selbst). Teil- und Obermengen sind Umkehrungen voneinander, d.h. wenn \textit{F} Teilmenge von \textit{G} ist, folgt daraus, dass \textit{G} Obermenge von \textit{F} ist, und umgekehrt.  
 
@@ -91,23 +91,39 @@ Wherever a list or set is used, and space is at a premium, consider using a Bloo
 Zur effizienten Bearbeitung von Anfragen und Operationen kommen in der internen Schicht von Datenbanksystemen spezielle Datenstrukturen und Speicherverfahren zum Einsatz. Sie werden \textit{Indexstrukturen} genannt und organisieren die Daten an Hand von Indizes, um die gewünschten Operationen zu unterstützen\footnote{Trotz der großen Verbreitung von Indexstrukturen in Datenbanksystemen scheinen in der Literatur keine überblicksartigen Darstellungen zu existieren. Der aktuelle Abschnitt stützt sich daher im Wesentlichen auf das Skript zur Vorlesung \textit{Anfragebearbeitung und Indexstrukturen in Datenbanksystemen} im Wintersemester 2013/2014 an der Ludwig-Maximilians-Universität München (vgl. \cite{Kriegel1994--2013}).}.
 
 Ein \textit{Index} oder \textit{Verzeichnis} einer Datei enthält Informationen über ihre Struktur, wobei mit "`Datei"' in diesem Zusammenhang eine komplette Datenstruktur gemeint ist, also z.B. ein Suchbaum oder ein Array. Indexstrukturen lassen sich danach klassifizieren, wie sie die Daten organisieren: 
+\enlargethispage{\baselineskip}
 \begin{enumerate}
 	\item \textit{Daten-organisierende Indexstrukturen} werden zur Organisation der tatsächlich anfallenden Daten eingesetzt -- meist in Form von \textit{Suchbäumen}. 
 	\item \textit{Raum-organisierende Indexstrukturen} werden zur Organisation des Speichers eingesetzt, in dem die Daten gehalten werden. Sie verwenden vor allem \textit{dynamische Hashverfahren}. 
 	\item \textit{Hybride Indexstrukturen} sind eine Kombination der vorgenannten Klassen und basieren auf \textit{Hashbäumen}.   
 \end{enumerate}
-Anforderungen an eine gute oder effektive Indexstruktur können sein: 
-\begin{itemize}
-	\item \textit{Effiziente Suche:} Eine Suchanfrage auf der Indexstruktur soll in optimaler Zeit ein Ergebnis liefern. D.h. die Anfrage soll in möglichst wenig Schritten an die Seite oder Seiten weiter geleitet werden, die die angefragten Daten enthält oder enthalten.
+Eine gute bzw. effektive Indexstruktur sollte folgenden Anforderungen genügen: 
+\begin{enumerate}
+	\item \textit{Effiziente Suche:} Eine Suchanfrage auf der Indexstruktur soll in optimaler Zeit ein Ergebnis liefern. D.h. die Anfrage soll in möglichst wenig Schritten an die Seite oder Seiten weiter geleitet werden, die die angefragten Daten enthalten.
 	\item \textit{Dynamisches Einfügen, Modifizieren und Löschen von Datensätzen:} Die zu organisierende Datenmenge verändert sich möglicherweise über die Zeit, was durch die Indexstruktur widergespiegelt und unterstützt werden muss.  
-	\item \textit{Erhalt der lokalen Ordnung:} Falls es Datensätze gibt, deren Schlüssel in der angewandten Ordnungsrelation (z.B. die Kleiner-Gleich-Ordnung) aufeinander folgen, sollte die Indexstruktur das widerspiegeln. Diese Eigenschaft wird von Suchbäumen erfüllt, nicht aber von linearen Hashverfahren. Die Wahl bzw. Implementierung der Indexstruktur muss also nach dem jeweiligen Anwendungsfall erfolgen. 
-	\item \textit{Speichereffizienz:} Effiziente Speichernutzung ist vor allem in der realen Welt und in hoch skalierenden Anwendungen von zentraler Bedeutung. 
-\end{itemize}
-Weitere Anforderungen beinhalten \textit{Machbarkeit} und \textit{Implementierungskosten}. Für die hier vorgestellte Implementierung wird darauf nicht näher eingegangen.  
-\cite{Ottmann2012}
-\subsection{B+-Bäume}\label{sec:b+bäume}
-\cite{Knuth1998}	
+	\item \textit{Erhalt der lokalen Ordnung:} Falls es Datensätze gibt, deren Schlüssel in der angewandten Ordnungsrelation (z.B. die Kleiner-Gleich-Ordnung) aufeinander folgen, sollte die Indexstruktur diese Ordnung übernehmen. Suchbäumen erfüllen diese Eigenschaft, nicht aber lineare Hashverfahren. Die Wahl bzw. Implementierung der Indexstruktur muss also zum Anwendungsfall passen. 
+	\item \textit{Speichereffizienz:} Effiziente Speichernutzung ist vor allem für real existierende und/oder hoch skalierende Anwendungen essentiell. 
+\end{enumerate}
+Weitere mögliche Anforderungen sind \textit{Machbarkeit} und \textit{Implementierungskosten}. Sie sind für die vorgestellte Implementierung nachrangig in dem Sinne, dass der Nachweis der Machbarkeit durch die Implementierung selbst erfolgt. Da AMBIENCE ein Prototyp ist und im akademischen Umfeld entwickelt wurde, kann die wirtschaftliche Kalkulation der Kosten, wie sie ein Unternehmen vornehmen würde, außer Acht gelassen werden. 
+
+Für Implementierung (vgl. Kap. \ref{ch:implementierung}) und Evaluation (vgl. \ref{ch:evaluation}) stehen daher die Anforderungen 1--4 im Mittelpunkt. Als weiteres Kriterium, das nicht zu den allgemeinen Anforderungen an Indexstrukturen zählt, wurden die Aufbaukosten der Indexstruktur betrachtet. 
+\subsection{B$^+$-Bäume}\label{sec:b+bäume}
+Das entwickelte Verfahren stützt sich stark auf \textit{B$^+$-Bäume}. Diese Suchbäume sind eine weit verbreitete Variante der \textit{B-Bäume}. Sie haben folgende Eigenschaften mit ihnen gemeinsam: 
+\begin{enumerate}
+	\item \textit{Aufbau:} B- und B$^+$-Bäume wachsen und schrumpfen von der Wurzel ausgehend.
+	\item \textit{Balanciertheit:} Alle Blätter sind auf demselben Level. 
+	\item \textit{Minimaler Grad/Ordnung:} B- und B$^+$-Bäume sind definiert durch die Ordnung oder den minimalen Grad \textit{t}, d.h. jeder Knoten außer der Wurzel enthält mindestens \textit{t} Schlüssel. 
+	\item \textit{Suchbaumeigenschaft:} Schlüssel sind aufsteigend sortiert.
+	\item \textit{Verzweigungsgrad:} Ein innerer Knoten mit \textit{k} Schlüsseln hat genau \textit{k+1} Kinder\footnote{Vgl. \cite{Ottmann2012}: 339--348. Den Grad bzw. die minimale Ordnung betreffend ist die Nomenklatur in der Literatur uneinheitlich. \cite{Ottmann2012} sprechen in Anlehnung an \cite{Knuth1998}	 von B-Bäumen der Ordnung \textit{m} und fordern, dass jeder Knoten mit Ausnahme der Wurzel und der Blätter mindestens $\lceil\frac{m}{2}\rceil$ enthalte (vgl. ebd.: 342f.). Stein et al. definieren den minimalen Grad wie oben beschrieben (vgl. \cite{Stein2009}:  489
+). Kriegel verwendet dasselbe Kriterium, bezeichnet es jedoch als Grad \textit{m} (vgl. \cite{Kriegel1994--2013}: 9).}.
+\end{enumerate} 
+\begin{figure}[hpbt]
+  \centering
+  \includegraphics[width=1.0\textwidth]{pictures/b-baum.png}\\
+  \caption[Ein B-Baum der Ordnung 2, Bildnachweis: \cite{Kriegel1994-2013}: 9.]{Ein B-Baum der Ordnung 2.}\label{fig:pic3}
+\end{figure}
 \subsection{Doppelt verkettete Listen}\label{sec:listen}	
+
 
 
 %\subsection{Tabellen}

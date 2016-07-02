@@ -189,22 +189,24 @@ KW 25 (18.75 h)
 * Fr, 24.06. (3.5 h)
 
 
-KW 26 (27.75 h)
+KW 26 (30.25 h)
 * Mo, 27.06. (6.75 h)
 * Di, 28.06. (4.5 h)
 * Mi, 29.06. (3.5 h)
 * Do, 30.06. (4.75 h)
 * Fr, 01.07. (3.5 h)
-* Sa, 02.07. (4.75 h)
+* Sa, 02.07. (7.25 h)
 
 ## TODO
 
 1. Ausarbeitung 
 
-	* Anpassen in main.tex: \input{text/appendix}, \input{listoffigures}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Bilder/Programmcode (vgl. introduction.tex)
+	* Anpassen in main.tex: \input{text/appendix}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Programmcode (vgl. introduction.tex)
 	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Mitzenmacher2002, Ruppel2014, Sakuma2011, Shiraki2009, Werner2015, Yang2002, Nafe2005, Bayardo2007, Jannink1995
+	* Namen anpassen (2. Vorname Abkürzung)
 	* Vorversion an Mirco, Änderungen einarbeiten 
 	* Korrektur lesen
+	* Abgabedatum anpassen
 
 2. Abgabe
 
