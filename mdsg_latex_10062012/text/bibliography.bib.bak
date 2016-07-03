@@ -283,11 +283,12 @@
   Timestamp                = {2016.05.06}
 }
 
-@Book{Knuth1998,
-  Title                    = {The art of computer programming, Volume 3, Sorting and searching},
-  Author                   = {Donald Knuth},
+@Book{Knuth1999,
+  Title                    = {The {A}rt of {C}omputer {P}rogramming},
+  Author                   = {Donald E. Knuth},
   Publisher                = {Addison Wesley Longman},
-  Year                     = {1998},
+  Year                     = {1999},
+  Volume                   = {3},
 
   Owner                    = {judith},
   Timestamp                = {2015.11.22}

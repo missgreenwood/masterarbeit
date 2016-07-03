@@ -66,10 +66,10 @@
 {\sc Jannink, Jan}: {\em Implementing {D}eletion in {B}+-{T}rees}.
 \newblock ACM Sigmod Record, 24(1):33--38, 1995.
 
-\bibitem[Knu98]{Knuth1998}
-{\sc Knuth, Donald}: {\em The art of computer programming, Volume 3, Sorting
-  and searching}.
-\newblock Addison Wesley Longman, 1998.
+\bibitem[Knu99]{Knuth1999}
+{\sc Knuth, Donald~E.}: {\em The {A}rt of {C}omputer {P}rogramming},
+  \btxvolumelong{}~3.
+\newblock Addison Wesley Longman, 1999.
 
 \bibitem[Kri14]{Kriegel1994--2013}
 {\sc Kriegel, Hans-Peter}: {\em Skript zur {V}orlesung {A}nfragebearbeitung und

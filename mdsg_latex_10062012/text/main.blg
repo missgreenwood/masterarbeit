@@ -4,19 +4,18 @@ The top-level auxiliary file: main.aux
 A level-1 auxiliary file: text/abstract.aux
 The style file: geralpha.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "Kriegel1994-2013"
 Warning--empty note in Kriegel1994--2013
 You've used 30 entries,
             2768 wiz_defined-function locations,
-            811 strings with 10756 characters,
-and the built_in function-call counts, 14721 in all, are:
-= -- 1571
+            808 strings with 10696 characters,
+and the built_in function-call counts, 14734 in all, are:
+= -- 1573
 > -- 601
-< -- 21
+< -- 22
 + -- 209
 - -- 204
-* -- 1125
-:= -- 2191
+* -- 1128
+:= -- 2192
 add.period$ -- 70
 call.type$ -- 30
 change.case$ -- 163
@@ -25,26 +24,26 @@ cite$ -- 31
 duplicate$ -- 675
 empty$ -- 1138
 format.name$ -- 239
-if$ -- 3272
+if$ -- 3275
 int.to.chr$ -- 1
 int.to.str$ -- 0
 missing$ -- 39
 newline$ -- 124
 num.names$ -- 90
-pop$ -- 206
+pop$ -- 205
 preamble$ -- 1
 purify$ -- 223
 quote$ -- 0
-skip$ -- 595
+skip$ -- 596
 stack$ -- 0
 substring$ -- 824
-swap$ -- 251
-text.length$ -- 21
+swap$ -- 252
+text.length$ -- 22
 text.prefix$ -- 8
 top$ -- 0
 type$ -- 228
 warning$ -- 1
 while$ -- 137
 width$ -- 34
-write$ -- 368
-(There were 2 warnings)
+write$ -- 369
+(There was 1 warning)
