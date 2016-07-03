@@ -1,44 +1,34 @@
 \chapter{Verwandte Themen}\label{ch:related}
-%Related Work / Verwandte Themen
-%An dieser Stelle stellen Sie die aktuellen Stand der Technik/Forschung dar. Geben Sie eine Übersicht über Veröffentlichungen und Forschungsthemen, die sich mit ähnlichen oder sogar dem selben Thema beschäftigen. Grenzen Sie sich von anderen Veröffentlichungen ab, sodass die Frage "Warum wird diese Arbeit durchgeführt, wenn es doch schon etliche andere in diesem Bereich gibt?" beantwortet wird.
-%Tip: legen Sie sich bereits während der Durchführung der Arbeit eine stichpunktartige Liste darüber an, welche Arbeiten Sie hier warum aufnehmen wollen.
+Wie in Abschnitt \ref{sec:bloom-anwendungen} erwähnt, sind Bloom-Filter eine häufig verwendete Datenstruktur. Auch in der Referenz-Implementier\-ung AMBIENCE spielen sie eine wichtige Rolle. Somit stellte sich für die eigene Arbeit weder die Frage, ob überhaupt Bloom-Filter eingesetzt werden sollen, noch nach ihrer optimalen Implementierung. AMBIENCE diente vielmehr als Schnittstelle für den eigenen Entwurf. 
+
+Dennoch wurden auch in dieser Arbeit Bloom-Filter implementiert, um die eigenen Berechnungen zu überprüfen und mit realistischen Werten arbeiten zu können. Das folgende Kapitel stellt zunächst bewährte Techniken zur Implementierung von Bloom-Filtern dar. Die Darstellung des aktuellen Forschungsstandes beschränkt sich im Folgenden wegen der Fülle der Einsatzmöglichkeiten auf Bloom-Filter im Zusammenhang mit Indexstrukturen und die \textit{k}-nächste-Nachbarn-Suche. 
+
+Ziel dieser Arbeit war eine optimale Lösung für das Anwendungsszenario von AMBIENCE. Eine solche wird vom aktuellen Stand der Forschung nicht abgedeckt. Überlegungen und Arbeiten, die Eingang in die eigene Implementierung gefunden haben, werden in den kommenden Abschnitten vorgestellt. 
+\section{Implementierung von Bloom-Filtern}\label{sec:bloom-implementierung}
+Wie in Abschnitt \ref{sec:bloom-anwendungen} dargestellt, bietet sich die Verwendung von Bloom-Filtern an, wenn Speicherplatz effektiv genutzt werden soll und die Auswirkungen von falsch Positiven zu verkraften sind. Die mathematischen Grundlagen wie Minimierung der Falsch-Positiv-Rate, Abschätzung der Anzahl eingefügter Elemente, Abschätzung der Jaccard-Distanz etc. werden von Bloom\footnote{Vgl. \cite{Bloom1970}.}, Broder, Mitzenmacher \footnote{Vgl. \cite{Broder2004} und \cite{Mitzenmacher2002} und Werner\footnote{Vgl. \cite{Werner2015}.}.} ausführlich dargestellt, um nur einige zu nennen. 
+
+Wie in den Abschnitten \ref{sec:hashfunktionen} und \ref{sec:bloom-anwendungen} erwähnt, werden Bloom-Filter im Apache-Projekt Cassandra eingesetzt. Sie dienen dort zum schnellen Nachschlagen in Tabellen, den so genannten \textit{SSTables}. Die Cassandra-Entwickler, namentlich Jonathan Ellis, haben sich ausführlich mit der Implementierung von Bloom-Filtern und optimalen Hashfunktionen beschäftigt, ohne dass dies Eingang in wissenschaftliche Veröffentlichungen gefunden hätte. Die von ihnen getätigten Überlegungen sind dennoch sehr praxisrelevant\footnote{\url{http://cassandra.apache.org/} ist die Hauptseite des Cassandra-Projekts. Der Cassandra-Quellcode ist frei verfügbar unter \url{https://github.com/apache/cassandra}. Datenmodell und Architektur werden z.B. auf \url{http://wiki.apache.org/cassandra/DataModel}, \url{http://wiki.apache.org/cassandra/ArchitectureOverview} und \url{http://prettyprint.me/prettyprint.me/2010/05/02/understanding-cassandra-code-base/index.html} beleuchtet. Für die vorliegende Arbeit wurden auch eine programmatische Rede (vgl. \url{https://youtu.be/WD1v6jr5fKY}) und Jonathan Ellis' Blog berücksichtigt (vgl. \url{http://spyced.blogspot.de/}).}. Zur Wahl der Hashfunktionen schreibt Ellis: 
+\begin{quote}
+[I]t turns out that it's surprisingly hard to find good information on one part of the implementation: how do you generate an indefinite number of hashes? Even small filters will use three or four; a dozen or more is not unheard of\footnote{Vgl. \url{http://spyced.blogspot.de/2009/01/all-you-ever-wanted-to-know-about.html}.}. 
+\end{quote}
+Die mathtmatischen Grundlagen finden sich z.B. bei Kirsch und Mitzenmacher\footnote{Vgl. \cite{Kirsch2006}.}. Viele Bloom-Filter-Implementierungen wie z.B. \textit{PyBloom} verwenden jedoch Hashfunktionen, deren Ergebnisse nicht gleich verteilt sind. Das führt zu einer deutlich höheren Falsch-Positiv-Rate im Bloom-Filter als rechnerisch angenommen. 
+
+Der Grund dafür ist laut Ellis, dass die meisten Implementierungen von Hash-Funktionen auf schnelle Berechnung abzielten statt auf Gleichverteilung der Ergebnisse. Das ist aber für einen Bloom-Filter essentiell, wenn z.B. wie in Cassandra teure Eingabe/Ausgabe-Operationen durch den Einsatz von Bloom-Filtern minimiert werden sollen. Weist der Bloom-Filter eine erhöhte Falsch-Positiv-Rate auf, beispielsweise von 140\% gegenüber dem erwarteten Wert, reduziert das die positiven Effekte des Bloom-Filters.  
+
+Ellis sieht hierfür zwei Lösungsansätze: Entweder die Verwendung von kryptografischen Hashfunktionen oder von Hashfunktionen mit guter Gleichverteilung der Ergebnisse wie Murmur- und Jenkins-Hashfunktionen. Kryptografische Hashfunktionen wurden bereits in Abschnitt \ref{sec:hashfunktionen} dargestellt. Der Nachteil daran ist, dass ihre Berechnung in der Regel aufwändiger sind als als von gewöhnlicher Hashfunktionen. Das spielt z.B. keine wichtige Rolle bei der einmaligen Berechnung eines Fingerabdrucks. Die Performance von Bloom-Filtern kann dadurch aber beeinträchtigt werden. 
+
+Beim Einsatz von Murmur- oder Jenkins-Hashfunktionen gibt es zwei Möglichkeiten, um eine beliebige Anzahl von Hashfunktionen mit guter Gleichverteilung der Ergebnisse zu erzeugen. Entweder berechnet man den \textit{i}-ten Hashwert als $\text{hash0 }+ i\ast \text{hash1}$ wie von Kirsch und Mitzenmacher beschrieben\footnote{Vgl. ebd..} und in Cassandra angewendet. Alternativ nimmt man den \textit{i}-ten Hashwert als Startwert für die Berechnung des \textit{i+1}-ten Hashwerts. Dieser Ansatz wurde in Hadoop gewählt und auch in der eigenen Implementierung verwendet. 
+
+Zur Organisation der Bloom-Filter äußert sich Ellis ebenfalls, jedoch nur auf seinem Twitter-Account und ohne auf Details einzugehen. Er schreibt hierzu: 
+\begin{quote}
+Rather than naively checking every Bloom Filter for the element, organize the BF in a hierarchy akin to B+ tree\footnote{Vgl. \url{https://twitter.com/spyced/status/707266703751651328}.}.
+\end{quote}
+% TODO Abschluss
+\section{k-nächste-Nachbarn-Suche}
+\section{Bloom-Filter in Indexstrukturen}
 % TODO Einarbeiten: 
-\cite{Agarwal2006}, \cite{Byers2002}, \cite{Duerr2010}, \cite{Hellerstein1994}, \cite{Lehman1986}, \cite{Nafe2005}, \cite{Qiao2014}, \cite{Ruppel2014}, \cite{Sarwat2012}, \cite{Schnell2013}, \cite{Schoenfeld2014}, \cite{Shiraki2009}, \cite{Yang2002}, \cite{Zhang2012}, \cite{Zhu2004}, \cite{Jannink1995}.
+%\cite{Agarwal2006}, \cite{Byers2002}, \cite{Duerr2010}, \cite{Hellerstein1994}, \cite{Lehman1986}, \cite{Nafe2005}, \cite{Qiao2014}, \cite{Ruppel2014}, \cite{Sarwat2012}, \cite{Schnell2013}, \cite{Schoenfeld2014}, \cite{Shiraki2009}, \cite{Yang2002}, \cite{Zhang2012}, \cite{Zhu2004}, \cite{Jannink1995}.
 
-%Es lassen sich auch mehrere Bilder nebeneinander platzieren wie z.B. in Abbildung
-%\ref{fig:multipic} zu sehen ist.
-%\begin{figure}[hpbt]
-% \centering
-%  %%----start of first subfigure----
-%  \subfloat[FIFO size limited to 20 entries]{
-%   \label{fig:multipic:a} %% label for first subfigure
-%   \includegraphics[width=0.48\linewidth]{pic1}}
-%  \hspace{0.01\textwidth}
-%  %%----start of second subfigure----
-%  \subfloat[FIFO size limited to 30 entries]{
-%   \label{fig:multipic:b} %% label for second subfigure
-%   \includegraphics[width=0.48\linewidth]{pic2}}\\[0pt] % horizontal break
-%  %%----start of third subfigure----
-%  \subfloat[FIFO size limited to 40 entries]{
-%   \label{fig:multipic:c} %% label for third subfigure
-%   \includegraphics[width=0.48\linewidth]{pic3}}
-%  \hspace{0.01\textwidth}
-%  %%----start of fourth subfigure----
-%  \subfloat[FIFO size limited to 50 entries]{
-%   \label{fig:multipic:d} %% label for fourth subfigure
-%   \includegraphics[width=0.48\linewidth]{pic4}}
-% \caption[Observed message fractions and 95\% confidence intervals for Chord]{Observed message fractions and 95\% confidence intervals for Chord without the influence of churn. The FIFO capacity varies from 20 (\ref{fig:multipic:a}) -- 50 (\ref{fig:multipic:d}) entries (decadic steps).}
-% \label{fig:multipic} %% label for entire figure
-%\end{figure}
-%
-%\subsection{Programm Code}
-%Eine elegante Möglichkeit, Programmtext einzubinden, lässt sich mit dem listings-Paket erreichen.
-%Das \verb|HelloWorld| Programm aus Listing \ref{lst:hw} hat in Zeile \ref{line:hw3} übrigens einen Programmierfehler.
-%\begin{lstlisting}[float=htp,caption=Hello World,label=lst:hw,language=Java, numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=8pt, escapeinside={//@}{@//},backgroundcolor=\color{yellow},xleftmargin=3ex,xrightmargin=1ex]
-%public class HelloWorld {
-%    public static void main(String[] args) {
-%        Syste.out.println("Hello, World"); //@\label{line:hw3}@//
-%    }
-%}
-%\end{lstlisting}
-
+% Sakuma 
+% Bayardo 
+% Shiraki 

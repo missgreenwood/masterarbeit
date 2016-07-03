@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  3 JUL 2016 12:31
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012) (format=pdflatex 2012.6.30)  3 JUL 2016 19:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1022,7 +1022,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: hypcap package is loaded.
 Package caption Info: End \AtBeginDocument code.
 
-<./pictures/./lmu_header.pdf, id=77, 845.0471pt x 113.8112pt>
+<./pictures/./lmu_header.pdf, id=89, 845.0471pt x 113.8112pt>
 File: ./pictures/./lmu_header.pdf Graphic file (type pdf)
 
 <use ./pictures/./lmu_header.pdf>
@@ -1034,7 +1034,7 @@ LaTeX Font Info:    Try loading font information for T1+lmss on input line 113.
 (/usr/local/texlive/2012/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<./pictures/lmu_seal.pdf, id=78, 324.37186pt x 324.37186pt>
+<./pictures/lmu_seal.pdf, id=90, 324.37186pt x 324.37186pt>
 File: ./pictures/lmu_seal.pdf Graphic file (type pdf)
 
 <use ./pictures/lmu_seal.pdf>
@@ -1156,7 +1156,7 @@ Kapitel 2.
 [3
 
 
-] <pictures/1280px-Bloom_filter.png, id=243, 1284.8pt x 461.725pt>
+] <pictures/1280px-Bloom_filter.png, id=258, 1284.8pt x 461.725pt>
 File: pictures/1280px-Bloom_filter.png Graphic file (type png)
 
 <use pictures/1280px-Bloom_filter.png>
@@ -1164,14 +1164,14 @@ Package pdftex.def Info: pictures/1280px-Bloom_filter.png used on input line 32
 .
 (pdftex.def)             Requested size: 338.02007pt x 121.47588pt.
  [4]
-<pictures/filters.png, id=264, 1475.5125pt x 572.1375pt>
+<pictures/filters.png, id=279, 1475.5125pt x 572.1375pt>
 File: pictures/filters.png Graphic file (type png)
 
 <use pictures/filters.png>
 Package pdftex.def Info: pictures/filters.png used on input line 46.
 (pdftex.def)             Requested size: 422.52348pt x 163.82912pt.
  [5 <./pictures/1280px-Bloom_filter.png>] [6 <./pictures/filters.png>] <picture
-s/distances.png, id=282, 1475.5125pt x 572.1375pt>
+s/distances.png, id=297, 1475.5125pt x 572.1375pt>
 File: pictures/distances.png Graphic file (type png)
 
 <use pictures/distances.png>
@@ -1183,7 +1183,7 @@ Overfull \hbox (3.85498pt too wide) in paragraph at lines 82--83
 ple-men-tie-rung er-freu-en sich Bloom-
  []
 
-[8] <pictures/b-baum.png, id=335, 482.10583pt x 155.26758pt>
+[8] <pictures/b-baum.png, id=350, 482.10583pt x 155.26758pt>
 File: pictures/b-baum.png Graphic file (type png)
 
 <use pictures/b-baum.png>
@@ -1206,7 +1206,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 124.
 
 [10 <./pictures/b-baum.png>]
-<pictures/b+baum.png, id=368, 461.63873pt x 163.59557pt>
+<pictures/b+baum.png, id=383, 461.63873pt x 163.59557pt>
 File: pictures/b+baum.png Graphic file (type png)
 
 <use pictures/b+baum.png>
@@ -1223,16 +1223,23 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 ]
 Kapitel 3.
 
-Overfull \hbox (2.82584pt too wide) in paragraph at lines 6--7
-\T1/lmr/m/n/10.95 [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]], [[]],
+Underfull \hbox (badness 5260) in paragraph at lines 10--10
+[][][][]$\T1/lmtt/m/n/9 http : / / cassandra . apache . org/$[] \T1/lmr/m/n/9 i
+st die Haupt-sei-te des Cassandra-Projekts. Der Cassandra-
  []
 
-) (./text/implementierung.tex [13] [14
+[13]
+Overfull \hbox (4.87479pt too wide) in paragraph at lines 16--17
+[]\T1/lmr/m/n/10.95 Der Grund da-für ist laut El-lis, dass die meis-ten Im-ple-
+men-tie-run-gen von Hash-Funktionen
+ []
 
-
-]
+) (./text/implementierung.tex [14]
 Kapitel 4.
-) (./text/evaluation.tex [15] [16
+) (./text/evaluation.tex [15
+
+
+] [16
 
 
 ]
@@ -1261,52 +1268,55 @@ Overfull \hbox (16.42068pt too wide) in paragraph at lines 5--5
 ] [22
 
 
-] [23] [24])
+] [23])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 170.
- [25]
+ [24]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 170.
  (./main.aux (./text/abstract.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 170.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 170.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F2E9200B604596A80663974257700EEC;1163.
+(rerunfilecheck)             Checksum: 27C9E60667D4B6FF5E58D2557C283545;1404.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 170.
  ) 
 Here is how much of TeX's memory you used:
- 12499 strings out of 493488
- 187710 string characters out of 3141326
- 303081 words of memory out of 3000000
- 15308 multiletter control sequences out of 15000+200000
+ 12483 strings out of 493488
+ 187491 string characters out of 3141326
+ 302591 words of memory out of 3000000
+ 15297 multiletter control sequences out of 15000+200000
  114603 words of font info for 84 fonts, out of 3000000 for 9000
  958 hyphenation exceptions out of 8191
- 50i,12n,54p,1421b,563s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2012/t
-exmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2012/texmf-dist/
-fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/
-dvips/lm/lm-mathex.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/l
-m/lmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmcsc10.
-pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/
-local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texl
-ive/2012/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2012/te
-xmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2012/texmf-dist/fo
-nts/type1/public/lm/lmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/p
-ublic/lm/lmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lm
-r6.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr
-/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texli
-ve/2012/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2012/texm
-f-dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2012/texmf-dist/fon
-ts/type1/public/lm/lmri12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/p
-ublic/lm/lmri9.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lm
-ro10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb
-></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/loc
-al/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/
-2012/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2012/texmf
--dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on main.pdf (35 pages, 3810019 bytes).
+ 50i,12n,54p,1421b,522s stack positions out of 5000i,500n,10000p,200000b,50000s
+pdfTeX warning (dest): name{Hfootnote.26} has been referenced but does not ex
+ist, replaced by a fixed one
+
+{/usr/local/texlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/te
+xlive/2012/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2012/tex
+mf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2012/texmf-dist/fo
+nts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2012/texmf-dist/fonts/enc/dv
+ips/lm/lm-mathex.enc}</usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/
+lmbx10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmcsc10.pf
+b></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/lo
+cal/texlive/2012/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/local/texliv
+e/2012/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2012/texm
+f-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2012/texmf-dist/font
+s/type1/public/lm/lmr10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/pub
+lic/lm/lmr12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr6
+.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/l
+ocal/texlive/2012/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive
+/2012/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/local/texlive/2012/texmf-
+dist/fonts/type1/public/lm/lmri10.pfb></usr/local/texlive/2012/texmf-dist/fonts
+/type1/public/lm/lmri12.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/pub
+lic/lm/lmri9.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmro
+10.pfb></usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><
+/usr/local/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local
+/texlive/2012/texmf-dist/fonts/type1/public/lm/lmsy9.pfb></usr/local/texlive/20
+12/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2012/texmf-d
+ist/fonts/type1/public/lm/lmtt9.pfb>
+Output written on main.pdf (34 pages, 3814417 bytes).
 PDF statistics:
- 585 PDF objects out of 1000 (max. 8388607)
- 479 compressed objects within 5 object streams
- 130 named destinations out of 1000 (max. 500000)
- 200 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 601 PDF objects out of 1000 (max. 8388607)
+ 495 compressed objects within 5 object streams
+ 125 named destinations out of 1000 (max. 500000)
+ 224 words of extra memory for PDF output out of 10000 (max. 10000000)
 
