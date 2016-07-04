@@ -54,6 +54,10 @@
 \newblock \Btxtechreplong{}, University of {W}isconsin-{M}adison, {C}omputer
   {S}ciences {D}epartment, 1994.
 
+\bibitem[Jan95]{Jannink1995}
+{\sc Jannink, Jan}: {\em Implementing {D}eletion in {B}+-{T}rees}.
+\newblock ACM Sigmod Record, 24(1):33--38, 1995.
+
 \bibitem[KM06]{Kirsch2006}
 {\sc Kirsch, Adam} \btxandlong{}\ {\sc Michael Mitzenmacher}: {\em Less
   {H}ashing, {S}ame {P}erformance: {B}uilding a {B}etter {B}loom {F}ilter}.
@@ -69,6 +73,11 @@
 {\sc Kriegel, Hans-Peter}: {\em Skript zur {V}orlesung {A}nfragebearbeitung und
   {I}ndexstrukturen in {D}atenbanksystemen}.
 \newblock 1994--2014.
+
+\bibitem[LC86]{Lehman1986}
+{\sc Lehman, Tobin~J.} \btxandlong{}\ {\sc Michael~J. Carey}: {\em A {S}tudy of
+  {I}ndex {S}tructures for {M}ain {M}emory {D}atabase {M}anagement {S}ystems}.
+\newblock \Btxinlong{}\ {\em Proc. {VLDB}}, 1986.
 
 \bibitem[Mit02]{Mitzenmacher2002}
 {\sc Mitzenmacher, Michael}: {\em Compressed {B}loom {F}ilters}.

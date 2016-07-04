@@ -1,0 +1,13 @@
+1. Ausarbeitung 
+
+	* Anpassen in main.tex: \input{text/appendix}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Programmcode (vgl. introduction.tex)
+	* Bisherige Quellen einarbeiten: Sakuma2011, Bayardo2007, Jannink1995	
+	* Vorversion an Mirco, Änderungen einarbeiten 
+	* Korrektur lesen
+	* Abgabedatum anpassen
+
+2. Abgabe
+
+	* 3 Exemplare 
+	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
+	* Abgabeort: bei Herrn Letz, u.U. auch bei Frau Roden oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin)
