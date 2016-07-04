@@ -198,12 +198,17 @@ KW 26 (35.75)
 * Sa, 02.07. (7.25 h)
 * So, 03.07. (5.5 h)
 
+
+KW 27 (4.5 h)
+* Mo, 04.07. (4.5 h)
+
+
 ## TODO
 
 1. Ausarbeitung 
 
 	* Anpassen in main.tex: \input{text/appendix}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Programmcode (vgl. introduction.tex)
-	* Bisherige Quellen einarbeiten: Ahlgren2012, Broder2004, Byers2002, Hellerstein1994, Ruppel2014, Sakuma2011, Shiraki2009, Yang2002, Nafe2005, Bayardo2007, Jannink1995	
+	* Bisherige Quellen einarbeiten: Sakuma2011, Bayardo2007, Jannink1995	
 	* Vorversion an Mirco, Änderungen einarbeiten 
 	* Korrektur lesen
 	* Abgabedatum anpassen

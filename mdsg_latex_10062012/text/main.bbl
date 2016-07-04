@@ -7,6 +7,19 @@
   {I}nformation-{C}entric {N}etworking}.
 \newblock {C}ommunications {M}agazine, {IEEE}, 50(7):26--36, 2012.
 
+\bibitem[AT06]{Agarwal2006}
+{\sc Agarwal, Sachin} \btxandlong{}\ {\sc Ari Trachtenberg}: {\em Approximating
+  the number of differences between remote sets}.
+\newblock \Btxinlong{}\ {\em {I}nformation {T}heory {W}orkshop, 2006. {ITW} '06
+  {P}unta del {E}ste. {IEEE}}, \btxpageslong{}\ 217--221, March 2006.
+
+\bibitem[BCM02]{Byers2002}
+{\sc Byers, John}, {\sc Jeffrey Considine} \btxandlong{}\ {\sc Michael
+  Mitzenmacher}: {\em {F}ast {A}pproximate {R}econciliation of {S}et
+  {D}ifferences}.
+\newblock \Btxinlong{}\ {\em {BU} {C}omputer {S}cience {TR}}, \btxpageslong{}\
+  2002--2019, 2002.
+
 \bibitem[Blo70]{Bloom1970}
 {\sc Bloom, Burton~H.}: {\em Space/{T}ime {T}rade-offs in {H}ash {C}oding with
   {A}llowable {E}rrors}.
@@ -34,6 +47,12 @@
   Broder}: {\em Summary {C}ache: A {S}calable {W}ide-{A}rea {W}eb {C}ache
   {S}haring {P}rotocol}.
 \newblock IEEE/ACM Transactions on Networking (TON), 8(3):281--293, 2000.
+
+\bibitem[HP94]{Hellerstein1994}
+{\sc Hellerstein, Joseph~M.} \btxandlong{}\ {\sc Avi Pfeffer}: {\em The
+  {RD}-{T}ree: {A}n {I}ndex {S}tructure for {S}ets}.
+\newblock \Btxtechreplong{}, University of {W}isconsin-{M}adison, {C}omputer
+  {S}ciences {D}epartment, 1994.
 
 \bibitem[KM06]{Kirsch2006}
 {\sc Kirsch, Adam} \btxandlong{}\ {\sc Michael Mitzenmacher}: {\em Less
@@ -79,11 +98,41 @@
   {A}pplications {(AINA)}, 2011 {IEEE} {I}nternational {C}onference on},
   \btxpageslong{}\ 316--323, \btxmonmarlong{} 2011.
 
+\bibitem[STT{\etalchar{+}}09]{Shiraki2009}
+{\sc Shiraki, Toru}, {\sc Yuichi Teranishi}, {\sc Susumu Takeuchi}, {\sc Kaname
+  Harumoto} \btxandlong{}\ {\sc Shojiro Nishio}: {\em {A} {B}loom
+  {F}ilter-{B}ased {U}ser {S}earch {M}ethod {B}ased on {M}ovement {R}ecords for
+  {P2P} {N}etwork}.
+\newblock \Btxinlong{}\ {\em {A}pplications and the {I}nternet, 2009. {SAINT}
+  '09. {N}inth {I}nternational {S}ymposium on}, \btxpageslong{}\ 177--180.
+  IEEE, \btxmonjullong{} 2009.
+
 \bibitem[WDS15]{Werner2015}
 {\sc Werner, Martin}, {\sc Florian Dorfmeister} \btxandlong{}\ {\sc Mirco
   Sch{\"o}nfeld}: {\em {AMBIENCE}: {A} {C}ontext-{C}entric {O}nline {S}ocial
   {N}etwork}.
 \newblock \Btxinlong{}\ {\em {12th {IEEE} {W}orkshop on {P}ositioning,
   {N}avigation and {C}ommunications ({WPNC} {\rq}15)}}, 2015.
+
+\bibitem[YL02]{Yang2002}
+{\sc Yang, Congjun} \btxandlong{}\ {\sc King-Ip Lin}: {\em An {I}ndex
+  {S}tructure for {I}mproving {C}losest {P}airs and {R}elated {J}oin {Q}ueries
+  in {S}patial {D}atabases}.
+\newblock \Btxinlong{}\ {\em Database {E}ngineering and {A}pplications
+  {S}ymposium, 2002. {P}roceedings. {I}nternational}, \btxpageslong{}\
+  140--149. IEEE, 2002.
+
+\bibitem[Zha12]{Zhang2012}
+{\sc Zhang, Zhenghao}: {\em {A}nalog {B}loom {F}ilter: {E}fficient simultaneous
+  query for wireless networks}.
+\newblock \Btxinlong{}\ {\em {G}lobal {C}ommunications {C}onference
+  ({GLOBECOM}), 2012 {IEEE}}, \btxpageslong{}\ 3340--3346. {IEEE}, 2012.
+
+\bibitem[ZJW04]{Zhu2004}
+{\sc Zhu, Yifeng}, {\sc Hong Jiang} \btxandlong{}\ {\sc Jun Wang}: {\em
+  {H}ierarchical {B}loom {F}ilter {A}rrays ({HBA}): {A} {N}ovel, {S}calable
+  {M}etadata {M}anagement {S}ystem for {L}arge {C}luster-based {S}torage}.
+\newblock \Btxinlong{}\ {\em {C}luster {C}omputing, 2004 {IEEE} {I}nternational
+  {C}onference on}, \btxpageslong{}\ 165--174. IEEE, 2004.
 
 \end{thebibliography}
