@@ -13,7 +13,7 @@
 
 //  Properties (different from B+Tree):
 //  * Bloom filters are data sets
-//  * Each has pointers to n data sets
+//  * Each leaf has pointers to n data sets
 //  * No remove function
 
 

@@ -12,42 +12,150 @@
 % -------------------------------------------------------------------------------------------------
 %
 \chapter{Anhang}\label{ch:anhang}
+\section{Die Klasse \textit{BloomFilterTree}}\label{sec:BloomFilterTree.hpp}
 \small{
 \begin{verbatim}
-/*
-* This code serves the initialization of an auxiliary probability array.
-* The array holds at each position a pre-calculated probability for the index
-* of that position. The probability reflects the Zipf-distribution for the
-* corresponding indexes
-*/
-Set zipfExponent to 1.4
-Set sum to 0
-Set maxInteger to 65535
-FOR i = 0 to maxInteger
-probArray[i] = 1/pow(i + 1, zipfExponent)
-Set sum = sum + probArray[i]
-END FOR
-FOR i = 0 to maxInteger
-Set probArray[i] = probArray[i]/sum
-END FOR
-FOR i = 1 to maxInteger
-Set probArray[i] = probArray[i] + probArray[i] = probArray[i-1]
-END FOR
+//  bloom_filter_tree.hpp, Judith Greif
+//  Description: Header for class BloomFilterTree
 
-/*
-* This code gets called in case a Zipf-distributed number is required. It
-* iterates over the probability array until the chosen random number v
-* is less than the value stored at the current array position i. The value of
-* the array position will be returned as the calculated Zipf-distributed
-* number
-*/
-Set v to a random number between 0 and 1
-FOR i = 0 to maxInteger
-IF v < probArray[i] THEN
-RETURN i
-END IF
-END FOR
-RETURN 0
+#ifndef BloomFilterTree_hpp
+#define BloomFilterTree_hpp
 
+#include "BloomFilterNode.hpp"
+#include "BloomFilterIndexNode.hpp"
+#include "BloomFilterLeaf.hpp"
+
+using namespace std;
+
+class BloomFilterTree {
+    
+private:
+    int t;                          // Order = minimum degree
+    int filtersize;                 // Size of associated Bloom filters (# of bits)
+    
+public:
+    BloomFilterNode *root;          // Pointer to root node
+    
+    BloomFilterTree(int _t, int _s);
+    ~BloomFilterTree();
+    
+    BloomFilterNode *getRoot();
+    
+    // Tree management
+    void traverse();
+    void traverseFilters();
+    double computeMinJaccard(BloomFilter *filter);
+    double computeMaxJaccard(BloomFilter *filter);
+    int getMinJaccardKey(BloomFilter *filter);
+    BloomFilter *getMinJaccardFilter(BloomFilter *filter);
+    int getMinKey();
+    int getMaxKey();
+    vector<BloomFilter> collectAllFilters();
+    int countFilters();
+    int countUnionFilters(); 
+    int computeSubsetId(BloomFilter *filter);
+    int computeSupersetId(BloomFilter *filter);
+    bool contains(int k);
+    BloomFilterNode *search(int k);
+    vector<pair<int, double>>computeAllDistances(BloomFilter *filter);
+    vector<pair<int, double>>computekDistances(BloomFilter *filter, int k);
+    int countLeaves(); 
+    
+    // Measurement and comparison
+    vector<pair<BloomFilter, double>> compare(BloomFilter *filter, int k);
+    vector<int> compareMem();
+    vector<double> compareConstrCost();
+    vector<int> compareComplSimQuery(BloomFilter *filter);
+    vector<int> compareComplSimQueryVec(BloomFilter *filter, int k);
+    
+    // Insertion
+    void insert(BloomFilter *filter);
+    void insertAsSets(BloomFilter *filter);
+    
+    // Similarity queries
+    BloomFilter *simQuery(BloomFilter *filter);
+    vector<BloomFilter*> simQueryVec(BloomFilter *filter, int k);
+};
+
+#endif
+\end{verbatim}
+}
+\section{Die Klasse \textit{BloomFilter}}\label{sec:BloomFilter.hpp}
+\small{
+\begin{verbatim}
+//  BloomFilter.hpp, Judith Greif
+//  Description: Header for class BloomFilter
+
+#ifndef BloomFilter_hpp
+#define BloomFilter_hpp
+
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <random>
+#include <math.h>
+#include <string>
+#include <functional>
+
+using namespace std;
+
+const int NUM_FILTERS = 100;
+const int NUM_ELEMENTS = 50;
+const int NUM_QUERYFILTERS = 10;
+const int seed = rand();
+
+class BloomFilter {
+    
+private:
+    int id;
+    int count;                  // # of elements inserted
+    int size;                   // # of bits
+    int d;                      // # of hash functions
+    int *data;
+    
+public:
+    BloomFilter();
+    BloomFilter(const BloomFilter& fSource);
+    BloomFilter(int _id, int _size);
+    ~BloomFilter();
+    
+    BloomFilter & operator = (const BloomFilter &fSource);
+    
+    void setId(int value);
+    int getId();
+    int getSize();
+    void setValue(int index, int value);
+    int *getData();
+    
+    void printData();
+    void printArr();
+    void initRandom();
+    double fractionOfZeros();
+    double eSize();
+    BloomFilter *logicalOr(BloomFilter *filter);
+    BloomFilter *logicalAnd(BloomFilter *filter);
+    bool isSubset(BloomFilter *filter);
+    bool isSuperset(BloomFilter *filter);
+    int mySupersetCount();
+    int mySubsetCount();
+    int binomialCoefficient(int n, int k);
+    int setOnes();
+    int setZeros();
+    int validOnes();
+    int possibleFreeZeros();
+    int possibleAddedOnes();
+    double setUnion(BloomFilter *filter) const;
+    double setIntersection(BloomFilter *filter) const;
+    double computeAmbienceJaccard(BloomFilter *filter);
+    double computeJaccard(BloomFilter *filter) const;
+    double eUnion(BloomFilter *filter);
+    double eIntersect(BloomFilter *filter);
+    void add(string &elem);
+    void increment();
+    int getNumHashes();
+    bool checkCorrectFillDegree();
+};
+
+#endif
 \end{verbatim}
 }
