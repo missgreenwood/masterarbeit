@@ -25,10 +25,15 @@
 \BOOKMARK [2][]{subsection.4.2.1}{4.2.1 Einf\374gen gem\344\337 Jaccard-Distanzen}{section.4.2}% 25
 \BOOKMARK [2][]{subsection.4.2.2}{4.2.2 Doppelt verkettete Liste}{section.4.2}% 26
 \BOOKMARK [0][]{chapter.5}{5 Evaluation}{}% 27
-\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 28
-\BOOKMARK [0][]{appendix.A}{A Anhang}{}% 29
-\BOOKMARK [1][]{section.A.1}{A.1 Die Klasse BloomFilterTree}{appendix.A}% 30
-\BOOKMARK [1][]{section.A.2}{A.2 Die Klasse BloomFilter}{appendix.A}% 31
-\BOOKMARK [1][]{section.A.3}{A.3 Die Methode computeSubsetId\(\) der Klasse BloomFilterLeaf\(\)}{appendix.A}% 32
-\BOOKMARK [0][]{appendix*.10}{Abbildungsverzeichnis}{}% 33
-\BOOKMARK [0][]{appendix*.11}{Literaturverzeichnis}{}% 34
+\BOOKMARK [1][]{section.5.1}{5.1 Datensatz}{chapter.5}% 28
+\BOOKMARK [1][]{section.5.2}{5.2 Versuchsaufbau}{chapter.5}% 29
+\BOOKMARK [1][]{section.5.3}{5.3 Ergebnisse}{chapter.5}% 30
+\BOOKMARK [1][]{section.5.4}{5.4 Interpretation}{chapter.5}% 31
+\BOOKMARK [0][]{chapter.6}{6 Zusammenfassung und Ausblick}{}% 32
+\BOOKMARK [0][]{appendix.A}{A Anhang}{}% 33
+\BOOKMARK [1][]{section.A.1}{A.1 Die Klasse BloomFilterTree}{appendix.A}% 34
+\BOOKMARK [1][]{section.A.2}{A.2 Die Klasse BloomFilter}{appendix.A}% 35
+\BOOKMARK [1][]{section.A.3}{A.3 Die Funktion computeSubsetId\(\) der Klasse BloomFilterLeaf\(\)}{appendix.A}% 36
+\BOOKMARK [1][]{section.A.4}{A.4 Die Funktion simpleSimQueryVec\(\) der Klasse BloomFilterLeaf}{appendix.A}% 37
+\BOOKMARK [0][]{chapter*.10}{Abbildungsverzeichnis}{}% 38
+\BOOKMARK [0][]{chapter*.11}{Literaturverzeichnis}{}% 39

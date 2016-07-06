@@ -1,8 +1,7 @@
 1. Ausarbeitung 
 
 	* Grafiken einheitlich
-	* 2 Grafiken zu insertAsSets(), simQuery()/simQueryVec()
-	* BloomFilterTree-Grafik fertig (ist rechts abgeschnitten)
+	* 2 Grafiken zu insertAsSets() und simQueryVec()
 	
 	* Berechnung Aufbaukosten checken/ändern
 

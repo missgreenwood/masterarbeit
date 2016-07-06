@@ -22,15 +22,20 @@
 \contentsline {subsection}{\numberline {4.1.1}Aufbau}{21}{subsection.4.1.1}
 \contentsline {subsection}{\numberline {4.1.2}Umsetzung}{22}{subsection.4.1.2}
 \contentsline {subsection}{\numberline {4.1.3}Einf\IeC {\"u}gen}{23}{subsection.4.1.3}
-\contentsline {subsection}{\numberline {4.1.4}k-N\IeC {\"a}chste-Nachbarn-Suche}{24}{subsection.4.1.4}
-\contentsline {section}{\numberline {4.2}Alternative Ans\IeC {\"a}tze}{24}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Einf\IeC {\"u}gen gem\IeC {\"a}\IeC {\ss } Jaccard-Distanzen}{24}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Doppelt verkettete Liste}{24}{subsection.4.2.2}
-\contentsline {chapter}{\numberline {5}Evaluation}{25}{chapter.5}
-\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{27}{chapter.6}
-\contentsline {chapter}{\numberline {A}Anhang}{29}{appendix.A}
-\contentsline {section}{\numberline {A.1}Die Klasse \texttt {BloomFilterTree}}{29}{section.A.1}
-\contentsline {section}{\numberline {A.2}Die Klasse \texttt {BloomFilter}}{31}{section.A.2}
-\contentsline {section}{\numberline {A.3}Die Methode \texttt {computeSubsetId()} der Klasse \texttt {BloomFilterLeaf()}}{33}{section.A.3}
-\contentsline {chapter}{Abbildungsverzeichnis}{35}{appendix*.10}
-\contentsline {chapter}{Literaturverzeichnis}{37}{appendix*.11}
+\contentsline {subsection}{\numberline {4.1.4}\textit {k}-N\IeC {\"a}chste-Nachbarn-Suche}{24}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Alternative Ans\IeC {\"a}tze}{25}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Einf\IeC {\"u}gen gem\IeC {\"a}\IeC {\ss } Jaccard-Distanzen}{25}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Doppelt verkettete Liste}{25}{subsection.4.2.2}
+\contentsline {chapter}{\numberline {5}Evaluation}{27}{chapter.5}
+\contentsline {section}{\numberline {5.1}Datensatz}{27}{section.5.1}
+\contentsline {section}{\numberline {5.2}Versuchsaufbau}{27}{section.5.2}
+\contentsline {section}{\numberline {5.3}Ergebnisse}{27}{section.5.3}
+\contentsline {section}{\numberline {5.4}Interpretation}{27}{section.5.4}
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{29}{chapter.6}
+\contentsline {chapter}{\numberline {A}Anhang}{31}{appendix.A}
+\contentsline {section}{\numberline {A.1}Die Klasse \texttt {BloomFilterTree}}{31}{section.A.1}
+\contentsline {section}{\numberline {A.2}Die Klasse \texttt {BloomFilter}}{33}{section.A.2}
+\contentsline {section}{\numberline {A.3}Die Funktion \texttt {computeSubsetId()} der Klasse \texttt {BloomFilterLeaf()}}{35}{section.A.3}
+\contentsline {section}{\numberline {A.4}Die Funktion \texttt {simpleSimQueryVec()} der Klasse \texttt {BloomFilterLeaf}}{37}{section.A.4}
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{39}{chapter*.10}
+\contentsline {chapter}{\nonumberline Literaturverzeichnis}{41}{chapter*.11}

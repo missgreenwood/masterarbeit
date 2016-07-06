@@ -1,3 +1,49 @@
 \chapter{Evaluation}\label{ch:evaluation}
-%Experimente & Ergebnisse
-%An dieser Stelle beschreiben Sie ihre Experimente. Das umfasst eine genaue Beschreibung eines eventuell vorhandenen Datensatzes, eine genaues Setup des Experiments und die Aufbereitung der Ergebnisse (Grafiken, Tabellen, Diagramme, etc.). Die Interpretation der Ergebnisse und Diagramme sollte auf keinen Fall den LeserInnen überlassen werden. Es ist Ihre Aufgabe, die Ergebnisse zu deuten und zu erklären.
+Das folgende Kapitel dient dem Vergleich zwischen der entwickelten Datenstruktur und der bisherigen Organisation der Bloom-Filter in AMBIENCE. Abschnitt \ref{sec:datensatz} beschreibt zunächst den für die Evaluation verwendeten Datensatz. Dieser stammt nicht aus AMBIENCE, sondern die Bloom-Filter wurden wie in Abschnitt \ref{sec:umsetzung} beschrieben selbst implementiert. Der Versuchsaufbau, d.h. welche Aspekte der Indexstruktur untersucht und verglichen wurden, findet sich in Abschnitt \ref{sec:versuchsaufbau}. Die erzielten Ergebnisse werden in Abschnitt \ref{sec:ergebnisse} vorgestellt und in Abschnitt \ref{sec:interpretation} ausgewertet. 
+\section{Datensatz}\label{sec:datensatz}
+Obgleich nicht mit echten AMBIENCE-Daten gearbeitet wurde, wurde ein möglichst realistisches Szenario angestrebt mit folgenden Parametern: 
+\begin{itemize}
+	\item \textbf{Anzahl Bloom-Filter:} 100
+	\item \textbf{Anzahl Anfragefilter:} 10
+	\item \textbf{Anzahl eingefügte Objekte pro Bloom-Filter:} 50 
+	\item \textbf{Größe der Bloom-Filter:} 256 bzw. 512 Bit
+\end{itemize} 
+\section{Versuchsaufbau}\label{sec:versuchsaufbau}
+\section{Ergebnisse}\label{sec:ergebnisse}
+\section{Interpretation}\label{sec:interpretation}
+%Es lassen sich auch mehrere Bilder nebeneinander platzieren wie z.B. in Abbildung
+%\ref{fig:multipic} zu sehen ist.
+%\begin{figure}[hpbt]
+% \centering
+%  %%----start of first subfigure----
+%  \subfloat[FIFO size limited to 20 entries]{
+%   \label{fig:multipic:a} %% label for first subfigure
+%   \includegraphics[width=0.48\linewidth]{pic1}}
+%  \hspace{0.01\textwidth}
+%  %%----start of second subfigure----
+%  \subfloat[FIFO size limited to 30 entries]{
+%   \label{fig:multipic:b} %% label for second subfigure
+%   \includegraphics[width=0.48\linewidth]{pic2}}\\[0pt] % horizontal break
+%  %%----start of third subfigure----
+%  \subfloat[FIFO size limited to 40 entries]{
+%   \label{fig:multipic:c} %% label for third subfigure
+%   \includegraphics[width=0.48\linewidth]{pic3}}
+%  \hspace{0.01\textwidth}
+%  %%----start of fourth subfigure----
+%  \subfloat[FIFO size limited to 50 entries]{
+%   \label{fig:multipic:d} %% label for fourth subfigure
+%   \includegraphics[width=0.48\linewidth]{pic4}}
+% \caption[Observed message fractions and 95\% confidence intervals for Chord]{Observed message fractions and 95\% confidence intervals for Chord without the influence of churn. The FIFO capacity varies from 20 (\ref{fig:multipic:a}) -- 50 (\ref{fig:multipic:d}) entries (decadic steps).}
+% \label{fig:multipic} %% label for entire figure
+%\end{figure}
+%
+%\subsection{Programm Code}
+%Eine elegante Möglichkeit, Programmtext einzubinden, lässt sich mit dem listings-Paket erreichen.
+%Das \verb|HelloWorld| Programm aus Listing \ref{lst:hw} hat in Zeile \ref{line:hw3} übrigens einen Programmierfehler.
+%\begin{lstlisting}[float=htp,caption=Hello World,label=lst:hw,language=Java, numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=8pt, escapeinside={//@}{@//},backgroundcolor=\color{yellow},xleftmargin=3ex,xrightmargin=1ex]
+%public class HelloWorld {
+%    public static void main(String[] args) {
+%        Syste.out.println("Hello, World"); //@\label{line:hw3}@//
+%    }
+%}
+%\end{lstlisting}
