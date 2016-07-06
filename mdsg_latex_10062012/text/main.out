@@ -29,5 +29,6 @@
 \BOOKMARK [0][]{appendix.A}{A Anhang}{}% 29
 \BOOKMARK [1][]{section.A.1}{A.1 Die Klasse BloomFilterTree}{appendix.A}% 30
 \BOOKMARK [1][]{section.A.2}{A.2 Die Klasse BloomFilter}{appendix.A}% 31
-\BOOKMARK [0][]{chapter*.10}{Abbildungsverzeichnis}{}% 32
-\BOOKMARK [0][]{chapter*.11}{Literaturverzeichnis}{}% 33
+\BOOKMARK [1][]{section.A.3}{A.3 Die Methode computeSubsetId\(\) der Klasse BloomFilterLeaf\(\)}{appendix.A}% 32
+\BOOKMARK [0][]{appendix*.10}{Abbildungsverzeichnis}{}% 33
+\BOOKMARK [0][]{appendix*.11}{Literaturverzeichnis}{}% 34

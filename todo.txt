@@ -1,7 +1,12 @@
 1. Ausarbeitung 
 
-	* Anpassen in main.tex: \input{text/appendix}, \input{listoftables}, \input{lstlistoflistings}, Tabellen/Programmcode (vgl. introduction.tex)
-	* Bisherige Quellen einarbeiten: Sakuma2011, Bayardo2007, Jannink1995	
+	* Grafiken einheitlich
+	* 2 Grafiken zu insertAsSets(), simQuery()/simQueryVec()
+	* BloomFilterTree-Grafik fertig (ist rechts abgeschnitten)
+	
+	* Berechnung Aufbaukosten checken/ändern
+
+	* Anpassen in main.tex: \input{listoftables}, \input{lstlistoflistings}, Programmcode (vgl. introduction.tex)
 	* Vorversion an Mirco, Änderungen einarbeiten 
 	* Korrektur lesen
 	* Abgabedatum anpassen

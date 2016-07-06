@@ -12,10 +12,10 @@
 % -------------------------------------------------------------------------------------------------
 %
 \chapter{Anhang}\label{ch:anhang}
-\section{Die Klasse \textit{BloomFilterTree}}\label{sec:BloomFilterTree.hpp}
+\section{Die Klasse \texttt{BloomFilterTree}}\label{sec:BloomFilterTree.hpp}
 \small{
 \begin{verbatim}
-//  bloom_filter_tree.hpp, Judith Greif
+//  BloomFilterTree.hpp, Judith Greif
 //  Description: Header for class BloomFilterTree
 
 #ifndef BloomFilterTree_hpp
@@ -34,11 +34,9 @@ private:
     int filtersize;                 // Size of associated Bloom filters (# of bits)
     
 public:
-    BloomFilterNode *root;          // Pointer to root node
-    
+    BloomFilterNode *root;          // Pointer to root node   
     BloomFilterTree(int _t, int _s);
-    ~BloomFilterTree();
-    
+    ~BloomFilterTree();   
     BloomFilterNode *getRoot();
     
     // Tree management
@@ -80,7 +78,8 @@ public:
 #endif
 \end{verbatim}
 }
-\section{Die Klasse \textit{BloomFilter}}\label{sec:BloomFilter.hpp}
+\newpage
+\section{Die Klasse \texttt{BloomFilter}}\label{sec:BloomFilter.hpp}
 \small{
 \begin{verbatim}
 //  BloomFilter.hpp, Judith Greif
@@ -117,16 +116,13 @@ public:
     BloomFilter();
     BloomFilter(const BloomFilter& fSource);
     BloomFilter(int _id, int _size);
-    ~BloomFilter();
-    
-    BloomFilter & operator = (const BloomFilter &fSource);
-    
+    ~BloomFilter();   
+    BloomFilter & operator = (const BloomFilter &fSource);   
     void setId(int value);
     int getId();
     int getSize();
     void setValue(int index, int value);
-    int *getData();
-    
+    int *getData();   
     void printData();
     void printArr();
     void initRandom();
@@ -157,5 +153,110 @@ public:
 };
 
 #endif
+\end{verbatim}
+\newpage
+\section{Die Methode \texttt{computeSubsetId()} der Klasse \texttt{BloomFilterLeaf()}}\label{sec:computeSubsetId()}
+\small{
+\begin{verbatim}
+int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
+    vector<pair<int, double>> subsets;
+    vector<int> freeIds;
+    vector<pair<int, int>> goodIds;
+    BloomFilterLeaf *tmp = this;
+    double jacc;
+    int minId = filters[0]->getId()-1;
+    int maxId;
+    int optId;
+    bool no_subsets = true;
+    while (tmp != NULL) {
+        
+        // Collect all filters that filter is subset of
+        for (int i=0; i<tmp->getCount(); i++) {
+            if ((tmp->filters[i])->isSubset(filter)) {
+                jacc = computeJaccard(tmp->filters[i], filter);
+                subsets.push_back(make_pair(tmp->filters[i]->getId(), jacc));
+                no_subsets = false;
+            }
+        }
+        maxId = tmp->filters[tmp->getCount()-1]->getId()+1;
+        tmp = tmp->getNext();
+    }
+    
+    // Sort subsets by jacc distances in ascending order
+    sort(subsets.begin(), subsets.end(), [](const pair<int, double> &left, 
+    const pair<int, double> &right) {
+        return left.second < right.second;
+    });
+    
+    // Collect free ids
+    tmp = this;
+    freeIds.push_back(minId);
+    freeIds.push_back(maxId);
+    while (tmp != NULL) {
+        for (int i=0; i<tmp->getCount()-2; i++) {
+            for (int j=tmp->filters[i]->getId()+1; j<tmp->filters[i+1]->getId(); j++) {
+                if (j<tmp->filters[i+1]->getId()) {
+                    freeIds.push_back(j);
+                }
+            }
+            if (tmp->getCount() < tmp->getMax()) {
+                if (tmp->getNext() != NULL) {
+                    int start = tmp->filters[tmp->getCount()-1]->getId()+1;
+                    int last = tmp->getNext()->filters[0]->getId();
+                    for (int j=start; j<last; j++) {
+                        freeIds.push_back(j);
+                    }
+                }
+            }
+            
+        }
+        tmp = tmp->getNext();
+    }
+    sort(freeIds.begin(), freeIds.end(), less<int>());
+    
+    // If there are no subsets, return smallest free id as pair with numerical distance 0
+    if (no_subsets == false) {
+        
+        // Determine optimal id
+        // Check subsets in ascending order
+        // Get next greater and smaller id
+        int distNeg = subsets[0].first - minId;
+        int distPos = maxId - subsets[0].first;
+        for (int i=0; i<subsets.size(); i++) {
+            optId = subsets[i].first;
+            int j=0;
+            while (freeIds[j] < subsets[i].first) {
+                if (optId-freeIds[j] < optId-minId) {
+                    minId = freeIds[j];
+                    distNeg = optId-minId;
+                }
+                j++;
+            }
+            
+            j=freeIds.size()-1;
+            while (freeIds[j] > subsets[i].first) {
+                if (freeIds[j]-optId < maxId-optId) {
+                    maxId = freeIds[j];
+                    distPos = maxId-optId;
+                }
+                j--;
+            }
+            goodIds.push_back(make_pair(minId, distNeg));
+            goodIds.push_back(make_pair(maxId, distPos));
+        }
+        
+        // Sort next smaller and greater ids by numerical distance in ascending order
+        sort(goodIds.begin(), goodIds.end(), [](const pair<int, int> &left, 
+        const pair<int, int> &right) {
+            return left.second < right.second;
+        });
+    }
+    else {
+        goodIds.push_back(make_pair(freeIds[0], 0));
+    }
+    
+    // Return first element
+    return goodIds[0].first;
+}
 \end{verbatim}
 }
