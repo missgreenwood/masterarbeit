@@ -1,13 +1,14 @@
 \chapter{Evaluation}\label{ch:evaluation}
 Das folgende Kapitel dient dem Vergleich zwischen der entwickelten Datenstruktur und der bisherigen Organisation der Bloom-Filter in AMBIENCE. Abschnitt \ref{sec:datensatz} beschreibt zunächst den für die Evaluation verwendeten Datensatz. Dieser stammt nicht aus AMBIENCE, sondern die Bloom-Filter wurden wie in Abschnitt \ref{sec:umsetzung} beschrieben selbst implementiert. Der Versuchsaufbau, d.h. welche Aspekte der Indexstruktur untersucht und verglichen wurden, findet sich in Abschnitt \ref{sec:versuchsaufbau}. Die erzielten Ergebnisse werden in Abschnitt \ref{sec:ergebnisse} vorgestellt und in Abschnitt \ref{sec:interpretation} ausgewertet. 
 \section{Datensatz}\label{sec:datensatz}
-Obgleich nicht mit echten AMBIENCE-Daten gearbeitet wurde, wurde ein möglichst realistisches Szenario angestrebt mit folgenden Parametern: 
+Obgleich nicht mit Echtdaten gearbeitet wurde, wurde ein möglichst realistisches Szenario gewählt mit folgenden Parametern: 
 \begin{itemize}
 	\item \textbf{Anzahl Bloom-Filter:} 100
 	\item \textbf{Anzahl Anfragefilter:} 10
 	\item \textbf{Anzahl eingefügte Objekte pro Bloom-Filter:} 50 
 	\item \textbf{Größe der Bloom-Filter:} 256 bzw. 512 Bit
 \end{itemize} 
+Als Wörterbuch diente die Standard-Unix-Datei \texttt{words}\footnote{\texttt{/usr/dict/words} oder \texttt{/usr/share/dict/words} auf Unix- und Unix-ähnlichen Systemen.}. Daraus wurden 50 zufällig gewählte Elemente in die Bloom-Filter mittels \textit{k} Hashfunktionen eingefügt. Wie in Abschnitt \ref{sec:hashfunktionen} dargestellt, wurden dazu Murmur-Hashfunktionen verwendet. Die benötigte Anzahl an Hashfunktionen wird dazu berechnet als 
 \section{Versuchsaufbau}\label{sec:versuchsaufbau}
 \section{Ergebnisse}\label{sec:ergebnisse}
 \section{Interpretation}\label{sec:interpretation}

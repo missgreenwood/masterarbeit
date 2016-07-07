@@ -11,6 +11,8 @@
 \contentsline {figure}{\numberline {\relax 3.1}{\ignorespaces Bloom-Filter-Baum bei Sakuma und Sato (Bildnachweis: \cite {Sakuma2011}: 320)}}{17}{figure.caption.8}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {\relax 4.1}{\ignorespaces Aufbau eines BloomFilterTree}}{22}{figure.caption.9}
+\contentsline {figure}{\numberline {\relax 4.2}{\ignorespaces Einf\IeC {\"u}ge-Operation im BloomFilterTree}}{24}{figure.caption.10}
+\contentsline {figure}{\numberline {\relax 4.3}{\ignorespaces \textit {k}-n\IeC {\"a}chste-Nachbarn-Suche im BloomFilterTree}}{26}{figure.caption.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

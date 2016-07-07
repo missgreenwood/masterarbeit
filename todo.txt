@@ -1,13 +1,22 @@
 1. Ausarbeitung 
 
-	* Grafiken einheitlich
-	* 2 Grafiken zu insertAsSets() und simQueryVec()
-	
-	* Berechnung Aufbaukosten checken/ändern
+	Kap. 4
+		- In Grafik: Evtl. neue Wurzel nach Einfügen 
 
+	Kap. 5
+		- Berechnung Aufbaukosten checken/ändern 
+	
+	Kap. 6
+	
+	Abstract
+	
+	* Grafiken einheitlich
+	* Grafiken positionieren 
+	* Eigene Korrektur
+	* Absätze, Umbrüche etc. 
 	* Anpassen in main.tex: \input{listoftables}, \input{lstlistoflistings}, Programmcode (vgl. introduction.tex)
 	* Vorversion an Mirco, Änderungen einarbeiten 
-	* Korrektur lesen
+	* Korrekturen von Hannah + Fabian
 	* Abgabedatum anpassen
 
 2. Abgabe
