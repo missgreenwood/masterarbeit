@@ -102,6 +102,12 @@
 \graphicspath{{./pictures/}}                      % put all graphics here
 \input{hyphenation}                               % this file holds words latex cannot split
 \interfootnotelinepenalty=10000
+\newcommand\Ceil[2][]{%
+  \ifx\relax#1\relax
+    \left\lceil#2\right\rceil
+  \else
+    #1\lceil#2 #1\rceil
+  \fi}
 %
 % =================================================================================================
 % start of document
