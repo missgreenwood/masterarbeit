@@ -5,25 +5,20 @@
 
 	Kap. 4
 		- Evtl. neue Wurzel nach Einfügen (Grafik Einfüge-Operation) 
-		- Grafik BloomFilterTree neu erstellen aus odg-Datei 
 
 	Kap. 5
 		- Evtl. Berechnung Aufbaukosten ändern 
-		- Speicherbedarf für Datenstruktur BloomFilterTree ergänzen
+		- Beschriftung multifigure
 
 	Abstract
 	
-	* Grafiken einheitlich
-	* Grafiken positionieren 
-	* Kap. 5 durchgehen
 	* Absätze, Umbrüche etc. 
-	* Anpassen in main.tex: \lmudraftdate, Abstract
-	* Vorversion an Mirco, Änderungen einarbeiten 
-	* Korrekturen von Hannah + Fabian
+	* Korrekturen von Mirco, Hannah, Fabian
 	* Abgabedatum anpassen
 
 2. Abgabe
 
 	* 3 Exemplare 
+	* Quellcode und alle Latex-Sourcen auf einer CD mit abgeben -> jedem Exemplar der Arbeit muss die CD beiliegen
 	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
 	* Abgabeort: bei Herrn Letz, u.U. auch bei Frau Roden oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin)

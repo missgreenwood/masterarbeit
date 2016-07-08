@@ -13,7 +13,8 @@ Am vielversprechendsten erschien es, wie Sakuma und Sato in ihrer Arbeit über "
 Abb. \ref{fig:pic6} veranschaulicht den Aufbau eines BloomFilterTree. Die Baumknoten sind blau markiert. Sie enhalten die Primärschlüssel der Bloom-Filter sowie Zeiger auf die Kind- bzw. Nachbarknoten. Jeder Knoten hat einen weiß markierten Vereinigungsfilter. Die violett markierten Filter repräsentieren die tatsächlichen Datensätze. Die Blätter verweisen jeweils auf die darin eingefügten Filter.
 \begin{figure}[hpbt]
   \centering
-  \includegraphics[width=1.0\textwidth]{pictures/bloom-filter-tree.png}\\
+  %\includegraphics[width=1.0\textwidth]{pictures/bloom-filter-tree.png}\\
+  \includegraphics[width=1.0\textwidth]{pictures/bloom-filter-tree2.png}\\
   \caption[Aufbau eines BloomFilterTree]{Aufbau eines BloomFilterTree mit Bloom-Filtern als Datensätzen und Vereinigungsfiltern an allen Knoten.}\label{fig:pic6}
 \end{figure}
 \subsection{Umsetzung}\label{sec:umsetzung}
