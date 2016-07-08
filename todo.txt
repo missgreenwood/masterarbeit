@@ -1,11 +1,16 @@
 1. Ausarbeitung 
+	
+	Kap. 3
+		- Evtl. Tabelle rausnehmen B-Baum vs. B+Baum 
 
 	Kap. 4
-		- In Grafik: Evtl. neue Wurzel nach Einfügen 
+		- Evtl. neue Wurzel nach Einfügen (Grafik Einfüge-Operation) 
+		- Grafik BloomFilterTree neu erstellen aus odg-Datei 
 
 	Kap. 5
-		- Berechnung Aufbaukosten checken/ändern 
-	
+		- Evtl. Berechnung Aufbaukosten ändern 
+		- Speicherbedarf für Datenstruktur BloomFilterTree ergänzen
+
 	Kap. 6
 	
 	Abstract
