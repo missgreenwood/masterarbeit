@@ -1,0 +1,34 @@
+\select@language {ngerman}
+\select@language {ngerman}
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Hintergrund}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}Kontextzentrische soziale Netze}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Bloom-Filter}{4}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Distanzma\IeC {\ss }e}{5}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Teil- und Obermengenbeziehung}{6}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}Hashfunktionen}{7}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2.2.4}Bloom-Filter-Varianten und Anwendungen}{8}{subsection.2.2.4}
+\contentsline {section}{\numberline {2.3}Indexstrukturen}{8}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}B-B\IeC {\"a}ume}{9}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}B$^+$-B\IeC {\"a}ume}{10}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}Verwandte Themen}{13}{chapter.3}
+\contentsline {section}{\numberline {3.1}Implementierung von Bloom-Filtern}{13}{section.3.1}
+\contentsline {section}{\numberline {3.2}Netzwerkanwendungen mit Bloom-Filtern}{15}{section.3.2}
+\contentsline {section}{\numberline {3.3}Indexstrukturen f\IeC {\"u}r Bloom-Filter}{16}{section.3.3}
+\contentsline {section}{\numberline {3.4}\textit {k}-n\IeC {\"a}chste-Nachbarn-Suche}{18}{section.3.4}
+\contentsline {chapter}{\numberline {4}Implementierung}{21}{chapter.4}
+\contentsline {section}{\numberline {4.1}BloomFilterTree}{21}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Aufbau}{21}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Umsetzung}{22}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}Einf\IeC {\"u}gen}{23}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}\textit {k}-n\IeC {\"a}chste-Nachbarn-Suche}{25}{subsection.4.1.4}
+\contentsline {section}{\numberline {4.2}Alternative Ans\IeC {\"a}tze}{27}{section.4.2}
+\contentsline {chapter}{\numberline {5}Evaluation}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Datensatz}{29}{section.5.1}
+\contentsline {section}{\numberline {5.2}Versuchsaufbau}{30}{section.5.2}
+\contentsline {section}{\numberline {5.3}Ergebnisse}{31}{section.5.3}
+\contentsline {section}{\numberline {5.4}Interpretation}{40}{section.5.4}
+\contentsline {chapter}{\numberline {6}Zusammenfassung und Ausblick}{43}{chapter.6}
+\contentsline {chapter}{\numberline {A}Anhang}{45}{appendix.A}
+\contentsline {chapter}{Abbildungsverzeichnis}{53}{appendix*.44}
+\contentsline {chapter}{Literaturverzeichnis}{55}{appendix*.45}

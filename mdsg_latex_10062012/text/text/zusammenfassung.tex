@@ -1,8 +1,10 @@
 \chapter{Zusammenfassung und Ausblick}\label{ch:zusammenfassung}
-%Fassen Sie Ihre gesamte Arbeit noch einmal kurz zusammen. Ziehen Sie ein Fazit und geben Sie gegebenenfalls einen Ausblick darüber, wie Ihrer Meinung nach noch offen stehende Probleme angegangen werden könnten.
+Die vorliegende Arbeit hatte das Ziel, das mengentheoretische Problem der \textit{k}-nächste-Nachbarn-Suche durch die Organisation von Bloom-Filtern für kontextzentrische soziale Netze zu optimieren. Als Schnittstelle diente das kontextzentrische soziale Netz AMBIENCE, dessen Nachrichten als Bloom-Filter kodiert, übertragen und gespeichert werden. 
 
-Zukünftige Arbeiten: 
-* Löschen aus BloomFilterTree
-* All-Pairs-Similarity-Search nach Bayardo et al. 
-* Restrukturierungskosten 
-* Andere/realistischere B+Bäume
+Dazu wurde eine speziell auf AMBIENCE zugeschnittene Indexstruktur entwickelt, der BloomFilterTree. Sie basiert auf einem B$^+$-Baum, in den Objekte an Hand ihrer Teil- und Obermengenbeziehungen eingefügt werden. Die implementierte Variante der \textit{k}-nächste-Nachbarn-Suche nutzt diese Mengenbeziehungen zwischen dem Anfrageobjekt und den Baumknoten, um nur den besten Suchpfad zu verfolgen und Teilbäume möglichst früh abzuschneiden. Als Ähnlichkeitsmaß wurde wie in AMBIENCE die Jaccard-Distanz zu Grunde gelegt, die jedoch mangels Transitivität nicht zur Organisation der Bloom-Filter herangezogen werden konnte. 
+
+Das entwickelte Verfahren zeigte auf dem Testdatensatz sehr gute Ergebnisse bezüglich Zeitkomplexität und CPU-Zeit, d.h. die \textit{k}-nächste-Nachbarn-Suche lässt sich gegenüber der bestehenden Implementierung deutlich beschleunigen. Die Stärken des Verfahrens zeigen sich umso mehr, je größer die Datenstrukturen und Bloom-Filter sind und je mehr Bloom-Filter eingefügt werden. Somit ist zu erwarten, dass das Verfahren gute Einsatzmöglichkeiten für ein Szenario der echten Welt bietet, wenn z.B. das soziale Netzwerk AMBIENCE über den Status eines Prototypen hinaus wachsen soll. 
+
+Dies wäre auch der erste Ansatzpunkt für zukünftige Arbeiten. In der vorliegenden Arbeit wurde zwar ein möglichst realistisches Szenario gewählt und implementiert. Dennoch wäre es wichtig und interessant, ein Szenario mit deutlich höheren Parameterwerten zu untersuchen. Insbesondere bliebe zu ermitteln, ob die Vorteile der B$^+$-Baum-Indexstruktur, die vor allem im Bereich großer Datenbank-Managementsysteme eingesetzt wird, dann noch stärker zum Tragen kommen. 
+
+Die Entwicklung des BloomFilterTree konzentrierte sich auf die Operationen Einfügen und Löschen. Für diese wurden vom kanonischen B$^+$-Baum abweichende, eigene Algorithmen entwickelt und implementiert. Nicht betrachtet wurden jedoch Löschoperation und Restrukturierungskosten, wenn Filter aus dem Baum entfernt werden. Auch hier wären Erweiterungen denkbar und sinnvoll. Einen zusätzlichen Ansatzpunkt bietet der von Bayardo et al. enwickelte All-Pairs-Algorithmus. Dieser optimiert ein mit der \textit{k}-nächste-Nachbarn-Suche verwandtes Problem, beruht aber auf einem abweichenden Distanzmaß und einem dynamischen Aufbau der Indexstruktur. Die Frage, ob sich All-Pairs für AMBIENCE anpassen und dort einsetzen ließe, erscheint spannend und wäre sicherlich der Untersuchung wert. 

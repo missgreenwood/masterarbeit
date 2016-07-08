@@ -12,7 +12,7 @@
 % -------------------------------------------------------------------------------------------------
 %
 \chapter{Anhang}\label{ch:anhang}
-\section{Die Klasse \texttt{BloomFilterTree}}\label{sec:BloomFilterTree.hpp}
+\paragraph*{Die Klasse \texttt{BloomFilterTree}}
 \small{
 \begin{verbatim}
 //  BloomFilterTree.hpp, Judith Greif
@@ -79,7 +79,7 @@ public:
 \end{verbatim}
 }
 \newpage
-\section{Die Klasse \texttt{BloomFilter}}\label{sec:BloomFilter.hpp}
+\paragraph*{Die Klasse \texttt{BloomFilter}}
 \small{
 \begin{verbatim}
 //  BloomFilter.hpp, Judith Greif
@@ -156,8 +156,7 @@ public:
 \end{verbatim}
 }
 \newpage
-\section{Die Funktion \texttt{computeSubsetId()} der Klasse \texttt{BloomFilterLeaf()}}\label{sec:computeSubsetId()}
-\small{
+\paragraph*{Die Funktion \texttt{computeSubsetId()} der Klasse \texttt{BloomFilterLeaf}}\small{
 \begin{verbatim}
 int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
     vector<pair<int, double>> subsets;
@@ -261,7 +260,7 @@ int BloomFilterLeaf::computeSubsetId(BloomFilter *filter) {
 }
 \end{verbatim}
 }
-\section{Die Funktion \texttt{simpleSimQueryVec()} der Klasse \texttt{BloomFilterLeaf}}\label{sec:simQueryVec()}
+\paragraph*{Die Funktion \texttt{simpleSimQueryVec()} der Klasse \texttt{BloomFilterLeaf}}
 \small{
 \begin{verbatim}
 vector<BloomFilter*> BloomFilterLeaf::simQueryVec(BloomFilter *filter, int k) {

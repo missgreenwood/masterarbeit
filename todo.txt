@@ -11,15 +11,13 @@
 		- Evtl. Berechnung Aufbaukosten ändern 
 		- Speicherbedarf für Datenstruktur BloomFilterTree ergänzen
 
-	Kap. 6
-	
 	Abstract
 	
 	* Grafiken einheitlich
 	* Grafiken positionieren 
-	* Eigene Korrektur
+	* Kap. 5 durchgehen
 	* Absätze, Umbrüche etc. 
-	* Anpassen in main.tex: \input{listoftables}, \input{lstlistoflistings}, Programmcode (vgl. introduction.tex)
+	* Anpassen in main.tex: \lmudraftdate, Abstract
 	* Vorversion an Mirco, Änderungen einarbeiten 
 	* Korrekturen von Hannah + Fabian
 	* Abgabedatum anpassen
