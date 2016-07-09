@@ -1,17 +1,5 @@
 1. Ausarbeitung 
 	
-	Kap. 3
-		- Evtl. Tabelle rausnehmen B-Baum vs. B+Baum 
-
-	Kap. 4
-		- Evtl. neue Wurzel nach Einfügen (Grafik Einfüge-Operation) 
-
-	Kap. 5
-		- Evtl. Berechnung Aufbaukosten ändern 
-		- Beschriftung multifigure
-
-	Abstract
-	
 	* Absätze, Umbrüche etc. 
 	* Korrekturen von Mirco, Hannah, Fabian
 	* Abgabedatum anpassen

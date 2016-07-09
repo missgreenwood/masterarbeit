@@ -206,7 +206,7 @@ int main(int argc, const char *argv[]) {
     cout << "1. Quality of result (NN query/3NN query)\n";
     cout << "2. CPU time for NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
     cout << "3. Memory consumption (BloomFilterTree vs. unsorted list)\n";
-    cout << "4. Complexity of NN query/NN3 query (BloomFilterTree vs. unsorted list)\n";
+    cout << "4. Complexity of NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
     cout << "5. Construction cost (BloomFilterTree vs. unsorted list)\n";
     
     cout << "\nFilters: " << NUM_FILTERS;
@@ -218,7 +218,7 @@ int main(int argc, const char *argv[]) {
     cout << "1. Quality of result (NN query/3NN query)\n";
     cout << "2. CPU time for NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
     cout << "3. Memory consumption (BloomFilterTree vs. unsorted list)\n";
-    cout << "4. Complexity of NN query/NN3 query (BloomFilterTree vs. unsorted list)\n";
+    cout << "4. Complexity of NN query/3NN query (BloomFilterTree vs. unsorted list)\n";
     cout << "5. Construction cost (BloomFilterTree vs. unsorted list)\n";
     
     // Write results

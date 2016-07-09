@@ -41,8 +41,7 @@ Zur Ermittlung der Ergebnisqualität wurde eine nächste-Nachbarn-Suche und eine
 \paragraph*{CPU-Zeit}
 Zur Messung der CPU-Zeit wurde die C++-Bibliothek \texttt{chrono} verwendet. Es wurden jeweils die Ausführungszeiten der Funktionen \texttt{simQuery()} und \texttt{simQueryVec()} für $k=1$ bzw. $k=3$ (vgl. Abschnitt \ref{sec:knn}) ermittelt und mit den Ausführungszeiten einer regulären \textit{k}-nächste-Nachbarn-Suche verglichen.
 \paragraph*{Speicherbedarf} 
-Da der BloomFilterTree nur Zeiger auf Bloom-Filter-Objekte enthält und nicht die Datenstrukturen selbst, ist sein Speicherbedarf eher gering. %TODO Angabe 
-Zur Ermittlung des Speicherbedarfs wurde daher von den tatsächlich allokierten Instanzen der Klasse \texttt{BloomFilter} ausgegangen. Das sind bei einer unsortierten Liste alle eingefügten Bloom-Filter, beim BloomFilterTree zusätzlich die Vereinigungsfilter aller Knoten. Diese Speicherbedarfe wurden für BloomFilterTree und unsortierte Liste ermittelt und gegenüber gestellt. 
+Da der BloomFilterTree nur Zeiger auf Bloom-Filter-Objekte enthält und nicht die Datenstrukturen selbst, ist sein Speicherbedarf eher gering. Zur Ermittlung des Speicherbedarfs wurde daher von den tatsächlich allokierten Instanzen der Klasse \texttt{BloomFilter} ausgegangen. Das sind bei einer unsortierten Liste alle eingefügten Bloom-Filter, beim BloomFilterTree zusätzlich die Vereinigungsfilter aller Knoten. Diese Speicherbedarfe wurden für BloomFilterTree und unsortierte Liste ermittelt und gegenüber gestellt. 
 \paragraph*{Komplexität}
 Zur Ermittlung der Komplexität der unterschiedlichen Suchalgorithmen wurde die Anzahl Vergleiche, die zur Anfragebeantwortung notwendig sind, als Maß verwendet. Diese wurden für BloomFilterTree und unsortierte Liste ermittelt und verglichen. Für den BloomFilterTree wurden dazu Varianten der Funktionen \texttt{simQuery()} und \texttt{simQueryVec()} implementiert, die die Anzahl an durchgeführten Vergleichen exakt mitprotokollieren.   
 \paragraph*{Aufbaukosten}
@@ -96,20 +95,17 @@ Abbildungen \ref{fig:pic15} und \ref{fig:pic16} stellen die CPU-Zeit zur Ausfüh
 \end{figure}
 \paragraph*{Speicherbedarf}
 Abbildung \ref{fig:pic17} stellt den Speicherbedarf für BloomFilterTree und unsortierte Liste gegenüber. Objekte vom Typ BloomFilterTree sind darin blau, Objekte vom Typ \texttt{std::vector<BloomFilter>} grün markiert. 
+\paragraph*{Komplexität}
+Abbildung \ref{fig:pic18} stellt die Komplexität der \textit{k}-nächste-Nachbarn-Suche wie in Abschnitt \ref{sec:versuchsaufbau} beschrieben als Anzahl von Vergleichen dar, die zur Anfragebearbeitung nötig sind. Die Ergebnisse sind darin für den BloomFilterTree blau, für die unsortierte Liste grün markiert.
+\paragraph*{Aufbaukosten}
+Abbildung \ref{fig:pic19} stellt die Aufbaukosten der angelegten Objekte dar. Die Aufbaukosten für Objekte vom Typ BloomFilterTree sind darin blau markiert. Die Aufbaukosten für Objekte vom Typ \texttt{std::vector<BloomFilter>} sind grün markiert. 
 \begin{figure}[hptb]
 	\centering
 	\includegraphics[scale=0.7]{pictures/mem.pdf}\\
 	\caption[Speicherbedarf für BloomFilterTree und unsortierte Liste]{Speicherbedarf für BloomFilterTree und unsortierte Liste.}\label{fig:pic17} 
-\end{figure}	
-\paragraph*{Komplexität}
-Abbildung \ref{fig:pic18} stellt die Komplexität der \textit{k}-nächste-Nachbarn-Suche wie in Abschnitt \ref{sec:versuchsaufbau} beschrieben als Anzahl von Vergleichen dar, die zur Anfragebearbeitung nötig sind. Die Ergebnisse sind darin für den BloomFilterTree blau, für die unsortierte Liste grün markiert.
-\begin{figure}[hptb]
-	\centering
 	\includegraphics[scale=0.7]{pictures/compl.pdf}\\
 	\caption[Komplexität der \textit{k}-nächste-Nachbarn-Suche auf BloomFilterTree und unsortierter Liste]{Komplexität der \textit{k}-nächste-Nachbarn-Suche auf BloomFilterTree und unsortierter Liste.}\label{fig:pic18}
 \end{figure} 
-\paragraph*{Aufbaukosten}
-Abbildung \ref{fig:pic19} stellt die Aufbaukosten der angelegten Objekte dar. Die Aufbaukosten für Objekte vom Typ BloomFilterTree sind darin blau markiert. Die Aufbaukosten für Objekte vom Typ \texttt{std::vector<BloomFilter>} sind grün markiert. 
 \begin{figure}[hptb]
 	\centering
 	\includegraphics[scale=0.7]{pictures/cost.pdf}\\
@@ -129,24 +125,24 @@ Die drastisch reduzierte CPU-Zeit ist als entscheidender Vorteil des entwickelte
 \begin{figure}[hpbt]
  \centering
   %%----start of first subfigure----
-  \subfloat[CPU-Zeitersparnis für nächste-Nachbarn-Suche mit 256-Bit-Bloom-Filtern]{
+  \subfloat[Filtergröße 256, $k=1$]{
    \label{fig:multipic1:a} %% label for first subfigure
    \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn_256.pdf}}
   \hspace{0.01\textwidth}
   %%----start of second subfigure----
-  \subfloat[CPU-Zeitersparnis für nächste-Nachbarn-Suche mit 512-Bit-Bloom-Filtern]{
+  \subfloat[Filtergröße 512, $k=1$]{
    \label{fig:multipic1:b} %% label for second subfigure
    \includegraphics[width=0.48\linewidth]{percent_time_nn_512.pdf}}\\[0pt] % horizontal break
   %%----start of third subfigure----
-  \subfloat[CPU-Zeitersparnis für 3-nächste-Nachbarn-Suche mit 256-Bit-Bloom-Filtern]{
+  \subfloat[Filtergröße 512, $k=3$]{
    \label{fig:multipic1:c} %% label for third subfigure
    \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_256.pdf}}
   \hspace{0.01\textwidth}
   %%----start of fourth subfigure----
-  \subfloat[CPU-Zeitersparnis für 3-nächste-Nachbarn-Suche mit 512-Bit-Bloom-Filtern]{
+  \subfloat[Filtergröße 512, $k=3$]{
    \label{fig:multipic1:d} %% label for fourth subfigure
    \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_512.pdf}}
- \caption[CPU-Zeitersparnis für k-nächste-Nachbarn-Suche im BloomFilterTree]{CPU-Zeitersparnis für k-nächste-Nachbarn-Suche im BloomFilterTree.}
+ \caption[CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im BloomFilterTree.]{CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im BloomFilterTree.}
  \label{fig:multipic1} %% label for entire figure
 \end{figure}
 Daran wird deutlich: Die Zeitersparnis wächst mit dem Parameter \textit{k} und der Filtergröße, doch auch bei $k=1$ wird bereits CPU-Zeit eingespart. Es ist zu erwarten, dass bei größeren BloomFilterTree-Objekten, höheren Anzahlen an Filtern und ggf. größeren Filtern die Zeitersparnis noch deutlich gesteigert werden kann: 
