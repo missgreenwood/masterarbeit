@@ -1,6 +1,6 @@
 1. Ausarbeitung 
 	
-	* Absätze, Umbrüche etc. 
+	* Absätze, Zeilenumbrüche etc. 
 	* Korrekturen von Mirco, Hannah, Fabian
 	* Abgabedatum anpassen
 
