@@ -1,12 +1,41 @@
 1. Ausarbeitung 
 	
-	* Absätze, Zeilenumbrüche etc. 
-	* Korrekturen von Mirco, Hannah, Fabian
-	* Abgabedatum anpassen
+	* Absätze, Zeilenumbrüche etc. checken
+	* Zitate checken (Fußnoten!) ab S. 9
+	* Schlusskorrektur 
+
+	HANNAH: 
+	* Plots: 
+		-> Legenden (mit Symbolen)
+		-> größere Achsenbeschriftung
+		-> sinnvolle Wahl der axis range (Abb. 5.7. etc.)
+		-> geplottete Symbole + Text größer
+		-> Bedeutung der Schattierungen erklären 
+		-> Bedeutung grün/blau erkären (Abb. 5.11.)
+		-> k kursiv
+		-> Abbildungen weiter auseinander
+		-> mehr Abstand zum unteren Rand
+	* S. 9 Schlüssel erklären
+	
+	FABIAN: 
+	* Grafiken erläutern Ende Kap. III
+
+	MIRCO: 
+	II: 
+		-> Bloom-Filter + Indexstrukturen besser erklären
+		-> FP-Rate erklären 
+	III: 
+		-> Mehr Related work (z.B. Organisation v. Mengen von Bloom-Filtern)
+	IV:  
+		-> Implementierungsdetails in Evaluation 
+	V:
+		-> Grafiken ausführlicher erklären: Was man sieht/was der Leser erkennen sollte
+		-> Plots zusammenfassen
+
 
 2. Abgabe
 
 	* 3 Exemplare 
 	* Quellcode und alle Latex-Sourcen auf einer CD mit abgeben -> jedem Exemplar der Arbeit muss die CD beiliegen
 	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
-	* Abgabeort: bei Herrn Letz, u.U. auch bei Frau Roden oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin)
+	* Abgabeort: bei Herrn Letz (Mi 13-14), u.U. auch bei Frau Roden (Mo-Do 08:30 - 12:30) oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin) 
