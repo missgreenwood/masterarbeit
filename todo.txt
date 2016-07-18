@@ -1,15 +1,11 @@
 1. Ausarbeitung 
 	
-	* Schlusskorrektur mit Absätzen, Zeilenumbrüchen etc.  
+	* Schlusskorrektur mit Absätzen, Zeilenumbrüchen etc. 
+	* Alle captions für Grafiken nach oben 
+	* "in der Regel"
 
-	MIRCO: 
-	III: 
-		-> Mehr Related work (z.B. Organisation v. Mengen von Bloom-Filtern, Bloom-Filter-Operationen)
-	V:
-		-> Grafiken ausführlicher erklären: Was man sieht/was der Leser erkennen sollte
-		-> Bedeutung der Schattierungen erklären 
-		-> Bedeutung grün/blau erkären (Abb. 5.11.)
-		
+	III: Mehr Related work (z.B. Organisation v. Mengen von Bloom-Filtern, Berechnung i-te Hashwerte)
+	
 2. Abgabe
 
 	* 3 Exemplare 
@@ -17,4 +13,3 @@
 	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
 	* Abgabeort: bei Herrn Letz (Mi 13-14), u.U. auch bei Frau Roden (Mo-Do 08:30 - 12:30) oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin) 
 
-% \enlargethispage{\baselineskip}
