@@ -1,20 +1,8 @@
 1. Ausarbeitung 
 	
-	* Absätze, Zeilenumbrüche etc. checken
-	* Zitate checken (Fußnoten!) ab S. 9
-	* Schlusskorrektur 
+	* Schlusskorrektur mit Absätzen, Zeilenumbrüchen etc.  
 
 	HANNAH: 
-	* Plots: 
-		-> Legenden (mit Symbolen)
-		-> größere Achsenbeschriftung
-		-> sinnvolle Wahl der axis range (Abb. 5.7. etc.)
-		-> geplottete Symbole + Text größer
-		-> Bedeutung der Schattierungen erklären 
-		-> Bedeutung grün/blau erkären (Abb. 5.11.)
-		-> k kursiv
-		-> Abbildungen weiter auseinander
-		-> mehr Abstand zum unteren Rand
 	* S. 9 Schlüssel erklären
 	
 	FABIAN: 
@@ -30,9 +18,9 @@
 		-> Implementierungsdetails in Evaluation 
 	V:
 		-> Grafiken ausführlicher erklären: Was man sieht/was der Leser erkennen sollte
-		-> Plots zusammenfassen
-
-
+		-> Bedeutung der Schattierungen erklären 
+		-> Bedeutung grün/blau erkären (Abb. 5.11.)
+		
 2. Abgabe
 
 	* 3 Exemplare 

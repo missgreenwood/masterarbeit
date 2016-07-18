@@ -106,7 +106,7 @@ Eine gute bzw. effektive Indexstruktur sollte folgenden Anforderungen genügen:
 \end{enumerate}
 Weitere mögliche Anforderungen sind \textit{Machbarkeit} und \textit{Implementierungskosten}. Sie sind für die vorgestellte Implementierung nachrangig in dem Sinne, dass der Nachweis der Machbarkeit durch die Implementierung selbst erfolgt. Da AMBIENCE ein Prototyp ist und im akademischen Umfeld entwickelt wurde, kann die wirtschaftliche Kalkulation der Kosten, wie sie ein Unternehmen vornehmen würde, außer Acht gelassen werden. 
 
-Für Implementierung (vgl. Kapitel \ref{ch:implementierung}) und Evaluation (vgl. \ref{ch:evaluation}) stehen daher die Anforderungen 1--4 im Mittelpunkt. Als weiteres Kriterium, das nicht zu den allgemeinen Anforderungen an Indexstrukturen zählt, wurden die Aufbaukosten der Indexstruktur betrachtet. 
+Für Implementierung (vgl. Kapitel \ref{ch:implementierung}) und Evaluation (vgl. Kapitel \ref{ch:evaluation}) stehen daher die Anforderungen 1--4 im Mittelpunkt. Als weiteres Kriterium, das nicht zu den allgemeinen Anforderungen an Indexstrukturen zählt, wurden die Aufbaukosten der Indexstruktur betrachtet. 
 \subsection{B-Bäume}\label{sec:b-bäume}
 B-Bäume sind eine weit verbreitete Form der Suchbäume und wurden zuerst 1972 von Rudolf Bayer und Edward M. McCreight vorgestellt. Sie erfüllen unter anderem folgende Eigenschaften:  
 \begin{enumerate}
@@ -115,7 +115,7 @@ B-Bäume sind eine weit verbreitete Form der Suchbäume und wurden zuerst 1972 v
 	\item \textit{Balanciertheit:} Alle Blätter sind auf demselben Level. 
 	\item \textit{Minimaler Grad/Ordnung:} B- und B$^+$-Bäume sind definiert durch die Ordnung oder den minimalen Grad \textit{t}, d.h. jeder Knoten außer der Wurzel enthält mindestens \textit{t} Schlüssel. 
 	\item \textit{Suchbaumeigenschaft:} Schlüssel sind aufsteigend sortiert.
-	\item \textit{Verzweigungsgrad:} Ein innerer Knoten mit \textit{k} Schlüsseln hat genau \textit{k+1} Kinder \cite{Ottmann2012}. Den Grad bzw. die minimale Ordnung betreffend ist die Nomenklatur in der Literatur uneinheitlich. \cite{Ottmann2012} sprechen in Anlehnung an \cite{Knuth1999}	von B-Bäumen der Ordnung \textit{m} und fordern, dass jeder Knoten mit Ausnahme der Wurzel und der Blätter mindestens $\lceil\frac{m}{2}\rceil$ Schlüssel enthalte \cite{Ottmann2012}. Stein et al. definieren den minimalen Grad wie oben beschrieben \cite{Stein2009}. Kriegel verwendet dasselbe Kriterium, bezeichnet es jedoch als Grad \textit{m} \cite{Kriegel1994--2013}.
+	\item \textit{Verzweigungsgrad:} Ein innerer Knoten mit \textit{k} Schlüsseln hat genau \textit{k+1} Kinder \cite{Ottmann2012}. Den Grad bzw. die minimale Ordnung betreffend ist die Nomenklatur in der Literatur uneinheitlich. Ottmann und Widmeyer \cite{Ottmann2012} sprechen in sprechen in Anlehnung an Knuth \cite{Knuth1999} von B-Bäumen der Ordnung \textit{m} und fordern, dass jeder Knoten mit Ausnahme der Wurzel und der Blätter mindestens $\lceil\frac{m}{2}\rceil$ Schlüssel enthalte. Stein et al. definieren den minimalen Grad wie weiter oben beschrieben \cite{Stein2009}, Kriegel verwendet dasselbe Kriterium, bezeichnet es jedoch als Grad \textit{m} \cite{Kriegel1994--2013}.
 \end{enumerate}
 \begin{figure}[hpbt]
   \centering
@@ -132,14 +132,14 @@ Das entwickelte Verfahren stützt sich stark auf \textit{B$^+$-Bäume}, eine Erw
 	\item \textit{Speicherung der Datensätze:} Alle Schlüssel werden auch in den Blättern gespeichert. Die tatsächlichen Datensätze sind mit dem entsprechen Schlüssel im Blatt verknüpft. 
 	\item \textit{Sequentielle Verkettung:} Alle Blätter sind gemäß der Ordnung auf den Primärschlüsseln verkettet. 
 \end{enumerate}
-\newpage
+% \newpage
 \begin{figure}[hpbt]
   \centering
   \includegraphics[width=1.0\textwidth]{pictures/b+baum.png}\\
   \caption[Ein B$^+$-Baum der Ordnung 2]{Ein B$^+$-Baum der Ordnung 2 \cite{Kriegel1994--2013}.}\label{fig:pic4}
 \end{figure}
 \noindent
-Die wesentlichen Vorteile gegenüber dem B-Baum sind der höhere Verzweigungsgrad und die Bereichssuche. Tab. \ref{tab:Trees} vergleicht die durchschnittlichen Laufzeiten für Einfügen, Suchen und Löschen in B-Bäumen und B$^+$-Bäumen: 
+Die wesentlichen Vorteile gegenüber dem B-Baum sind der höhere Verzweigungsgrad und die Bereichssuche. Tabelle \ref{tab:Trees} vergleicht die durchschnittlichen Laufzeiten für Einfügen, Suchen und Löschen in B-Bäumen und B$^+$-Bäumen.
 \begin{center}
 \begin{table}[htbp]
 {\small
@@ -148,9 +148,9 @@ Die wesentlichen Vorteile gegenüber dem B-Baum sind der höhere Verzweigungsgra
 \toprule
  & \textbf{Einfügen} & \textbf{Suchen} & \textbf{Löschen} & \textbf{Bereichssuche}\\
 \midrule
-\textbf{B-Baum} & $O(\text{log} (2t -1))$ & $O(\text{log} (2t -1))$ & $O(\text{log} (2t -1))$ & $\times$ \\
+\textbf{B-Baum} & $O(log (2t -1))$ & $O(log (2t -1))$ & $O(log (2t -1))$ & $\times$ \\
 \midrule
-\textbf{B$^+$-Baum} & $O(\text{log} (2t -1))$ & $O(\text{log} (2t -1))$ & $O(\text{log} (2t -1))$ & $O(\text{log} 2t-1)$\\
+\textbf{B$^+$-Baum} & $O(log (2t -1))$ & $O(log (2t -1))$ & $O(log (2t -1))$ & $O(log 2t-1)$\\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -160,4 +160,4 @@ Die wesentlichen Vorteile gegenüber dem B-Baum sind der höhere Verzweigungsgra
 \end{center}
 Daran wird deutlich, dass die Kosten für Einfügen, Suchen und Löschen in beiden Varianten vom Parameter \textit{t} abhängen. Da die inneren Knoten im B$^+$-Baum mehr Schlüssel enthalten als im B-Baum, wird der Baum breiter und flacher. Geht man davon aus, dass ein Zugriff auf einen inneren Knoten einem Plattenzugriff entspricht, wird deutlich, dass sich damit die Kosten für Einfügen, Suchen und Löschen gegenüber dem B-Baum reduzieren lassen.
 
-Die sequentielle Verkettung der Blätter im B$^+$-Baum ermöglicht zudem eine Bereichssuche. Das ist ein immenser Vorteil gegenüber dem B-Baum, bei dem jeder für eine Bereichssuche jeder einzelne Datensatz mit Kosten von $O(\text{log} (2t -1))$ gesucht werden muss. Diese Kosten fallen beim B$^+$-Baum nur für den ersten Datensatz mit dem kleinsten Primärschlüssel an. Anschließend kann eine doppelt verkettete Liste traversiert werden.
+Die sequentielle Verkettung der Blätter im B$^+$-Baum ermöglicht zudem eine Bereichssuche. Das ist ein immenser Vorteil gegenüber dem B-Baum, bei dem jeder für eine Bereichssuche jeder einzelne Datensatz mit Kosten von $O(log (2t -1))$ gesucht werden muss. Diese Kosten fallen beim B$^+$-Baum nur für den ersten Datensatz mit dem kleinsten Primärschlüssel an. Anschließend kann eine doppelt verkettete Liste traversiert werden.

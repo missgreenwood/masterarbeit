@@ -52,47 +52,28 @@ Beim BloomFilterTree setzt sich die Komplexität der Einfüge-Operation aus der 
 \section{Ergebnisse}\label{sec:ergebnisse}
 Im Folgenden werden die Ergebnisse der fünf Experimente mit den beschriebenen Parametern vorgestellt. 
 \paragraph*{Ergebnisqualität}
-Abbildungen \ref{fig:pic9} und \ref{fig:pic10} stellen die Ergebnisqualität der nächste-Nachbarn-Suche dar. Die Sollwerte sind darin grün, die Messwerte blau markiert. Stimmt der Messwert mit dem Sollwert überein, ist nur die blaue Markierung vorhanden. Der quadratische Fehler von Messwert gegenüber Sollwert ist in Rot angegeben. 
+Abbildung \ref{fig:quality} stellt die Ergebnisqualität der \textit{k}-nächste-Nachbarn-Suche dar. Die Sollwerte sind darin grün, die Messwerte blau markiert. Die Sollwerte sind darin in drei Grünstufen markiert, die Messwerte sind in drei Blaustufen markiert. Stimmt der Messwert mit dem Sollwert überein, ist nur die blaue Markierung vorhanden. Der quadratische Fehler von Messwert gegenüber Sollwert ist in Rot angegeben. 
 \begin{figure}[hpbt]
 	\centering
- 	\includegraphics[scale=0.7]{pictures/nn_256.pdf}\\
-  	\caption[Ergebnisqualität der nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter]{Ergebnisqualität der nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter.}\label{fig:pic8}
- 	\includegraphics[scale=0.7]{pictures/nn_512.pdf}\\
-  	\caption[Ergebnisqualität der nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter]{Ergebnisqualität der nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter.}\label{fig:pic9}
-\end{figure}
-
-Abbildungen \ref{fig:pic10} -- \ref{fig:pic13} stellen die Ergebnisqualität der 3-nächste-Nachbarn-Suche dar. Die Sollwerte sind darin in drei Grünstufen markiert, die Messwerte sind in drei Blaustufen markiert. Der mittlere quadratische Fehler der Messwerte gegenüber den Sollwerten ist in Rot angegeben.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.7]{pictures/nn3_256-1.pdf}\\
-	\caption[Sollwerte der 3-nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter]{Sollwerte der 3-nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter.}\label{fig:pic10}
-	\includegraphics[scale=0.7]{pictures/nn3_256-2.pdf}\\
-	\caption[Messwerte der 3-nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter]{Messwerte der 3-nächste-Nachbarn-Suche für 256 Bit-Bloom-Filter.}\label{fig:pic11}
-\end{figure}
-\begin{figure}[hptb]
-	\centering
-	\includegraphics[scale=0.7]{pictures/nn3_512-1.pdf}\\
-	\caption[Sollwerte der 3-nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter]{Sollwerte der 3-nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter.}\label{fig:pic12}
-	\includegraphics[scale=0.7]{pictures/nn3_512-2.pdf}\\
-	\caption[Messwerte der 3-nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter]{Messwerte der 3-nächste-Nachbarn-Suche für 512 Bit-Bloom-Filter.}\label{fig:pic13}
+	\captionabove[Ergebnisqualität der \textit{k}-nächste-Nachbarn-Suche]{Ergebnisqualität der \textit{k}-nächste-Nachbarn-Suche.}\label{fig:quality}
+ 	\includegraphics[width=0.48\textwidth]{pictures/nn_256.pdf}
+ 	\hspace{0.01\textwidth}
+ 	\includegraphics[width=0.48\textwidth]{pictures/nn_512.pdf}\\[0pt]
+	\includegraphics[width=0.48\textwidth]{pictures/nn3_256-2.pdf}
+	\hspace{0.01\textwidth}
+	\includegraphics[width=0.48\textwidth]{pictures/nn3_512-2.pdf}\\
 \end{figure}
 \paragraph*{CPU-Zeit}
-Abbildungen \ref{fig:pic14} und \ref{fig:pic15} stellen die CPU-Zeit zur Ausführung der nächste-Nachbarn-Suche dar. Die Ergebnisse für den BloomFilterTree sind darin blau, die Ergebnisse für die unsortierte Liste grün markiert.  
+Abbildung \ref{fig:cputime} stellt die CPU-Zeit zur Ausführung der \textit{k}-nächste-Nachbarn-Suche dar. Die Ergebnisse für den BloomFilterTree sind darin blau, die Ergebnisse für die unsortierte Liste grün markiert. 
 \begin{figure}[hptb]
 	\centering
-	\includegraphics[scale=0.7]{pictures/cputime_nn_256.pdf}\\
-	\caption[CPU-Zeit für nächste-Nachbarn-Suche mit 256 Bit-Bloom-Filtern]{CPU-Zeit für \textit{k}-nächste-Nachbarn-Suche mit 256 Bit-Bloom-Filtern.}\label{fig:pic14}
-	\includegraphics[scale=0.7]{pictures/cputime_nn_512.pdf}\\
-	\caption[CPU-Zeit für nächste-Nachbarn-Suche mit 512 Bit-Bloom-Filtern]{CPU-Zeit für \textit{k}-nächste-Nachbarn-Suche mit 512 Bit-Bloom-Filtern.}\label{fig:pic15}
-\end{figure}
-
-Abbildungen \ref{fig:pic16} und \ref{fig:pic17} stellen die CPU-Zeit zur Ausführung der 3-nächste-Nachbarn-Suche dar. Die Ergebnisse für den BloomFilterTree sind darin blau, die Ergebnisse für die unsortierte Liste grün markiert.  
-\begin{figure}[hptb]
-	\centering
-	\includegraphics[scale=0.7]{pictures/cputime_nn3_256.pdf}\\
-	\caption[CPU-Zeit für 3-nächste-Nachbarn-Suche mit 256 Bit-Bloom-Filtern]{CPU-Zeit für nächste-Nachbarn-Suche mit 256 Bit-Bloom-Filtern.}\label{fig:pic16}
-	\includegraphics[scale=0.7]{pictures/cputime_nn3_512.pdf}\\
-	\caption[CPU-Zeit für 3-nächste-Nachbarn-Suche mit 512 Bit-Bloom-Filtern]{CPU-Zeit für nächste-Nachbarn-Suche mit 512 Bit-Bloom-Filtern.}\label{fig:pic17}
+	\captionabove[CPU-Zeit für \textit{k}-nächste-Nachbarn-Suche]{CPU-Zeit für \textit{k}-nächste-Nachbarn-Suche.}\label{fig:cputime}
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_256.pdf}  
+	\hspace{0.01\textwidth}
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_256.pdf}\\[0pt] % horizontal break
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_512.pdf}
+	\hspace{0.01\textwidth}
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn3_256.pdf}
 \end{figure}
 \paragraph*{Speicherbedarf}
 Abbildung \ref{fig:pic18} stellt den Speicherbedarf für BloomFilterTree und unsortierte Liste gegenüber. Objekte vom Typ BloomFilterTree sind darin blau, Objekte vom Typ \texttt{std::vector<BloomFilter>} grün markiert. 
@@ -102,17 +83,16 @@ Abbildung \ref{fig:pic19} stellt die Komplexität der \textit{k}-nächste-Nachba
 Abbildung \ref{fig:pic20} stellt die Aufbaukosten der angelegten Objekte dar. Die Aufbaukosten für Objekte vom Typ BloomFilterTree sind darin blau markiert. Die Aufbaukosten für Objekte vom Typ \texttt{std::vector<BloomFilter>} sind grün markiert. 
 \begin{figure}[hptb]
 	\centering
+	\captionabove[Speicherbedarf für Datenstrukturen]{Speicherbedarf für Datenstrukturen.}\label{fig:pic18}
 	\includegraphics[scale=0.7]{pictures/mem.pdf}\\
-	\caption[Speicherbedarf für BloomFilterTree und unsortierte Liste]{Speicherbedarf für BloomFilterTree und unsortierte Liste.}\label{fig:pic18} 
-	\includegraphics[scale=0.7]{pictures/compl.pdf}\\
-	\caption[Komplexität der \textit{k}-nächste-Nachbarn-Suche auf BloomFilterTree und unsortierter Liste]{Komplexität der \textit{k}-nächste-Nachbarn-Suche auf BloomFilterTree und unsortierter Liste.}\label{fig:pic19}
+	\captionabove[Komplexität der \textit{k}-nächste-Nachbarn-Suche]{Komplexität der \textit{k}-nächste-Nachbarn-Suche.}\label{fig:pic19}
+	\includegraphics[scale=0.7]{pictures/compl.pdf}
 \end{figure} 
 \begin{figure}[hptb]
 	\centering
-	\includegraphics[scale=0.7]{pictures/cost.pdf}\\
-	\caption[Aufbaukosten für BloomFilterTree und unsortierte Liste]{Aufbaukosten für BloomFilterTree und unsortierte Liste.}\label{fig:pic20}
+	\captionabove[Aufbaukosten für Datenstrukturen]{Aufbaukosten für Datenstrukturen.}\label{fig:pic20}
+	\includegraphics[scale=0.7]{pictures/cost.pdf}
 \end{figure}
-\newpage
 \section{Interpretation}\label{sec:interpretation}
 Wie in Abschnitt \ref{sec:datensatz} dargestellt, wurde die Evaluation mit zehn Anfragefiltern pro Experiment durchgeführt. Die Ergebnisse sind also dazu geeignet, etwaige Ausreißer zu erkennen. Das gilt insbesondere für die Ergebnisse der CPU-Zeitmessung, die in der Regel wegen schwankender Nutzlast der verwendeten Maschine und nicht exakt vorhersehbaren CPU-Schedulings gewissen Schwankungen unterliegen. Demnach kann hierbei das Minimum der erzielten Messwerte als Benchmark angesehen werden. 
 \paragraph*{Ergebnisqualität}
@@ -122,35 +102,20 @@ Der quadratische Fehler für diese Fälle beträgt bei der nächste-Nachbarn-Suc
 
 Das bedeutet: Nächste-Nachbarn-Anfragen werden mit dem entwickelten Verfahren in den meisten Fällen korrekt beantwortet. In wenigen Fällen werden suboptimale Antworten zurückgegeben. Diese sind dennoch als zufriedenstellende Antworten bezüglich des verwendeten Datensatzes und des quadratischen Fehlers zu bezeichnen. Dieses Resultat ist essentiell für die Bewertung des entwickelten Verfahrens. Es kann nur dann zuverlässig eingesetzt werden, wenn es in einem Großteil der Fälle zufriedenstellende Ergebnisse bzw. optimale Antworten liefert. 
 \paragraph*{CPU-Zeit}
-Die drastisch reduzierte CPU-Zeit ist als entscheidender Vorteil des entwickelten Verfahrens zu betrachten. In der verwendeten Versuchsanordnung kommt sie vor allem bei der 3-nächste-Nachbarn-Suche zum Tragen. Abbildung \ref{fig:multipic1} stellt die jeweils erreichte CPU-Zeitersparnis gegenüber.
+Die drastisch reduzierte CPU-Zeit ist als entscheidender Vorteil des entwickelten Verfahrens zu betrachten. In der verwendeten Versuchsanordnung kommt sie vor allem bei der 3-nächste-Nachbarn-Suche zum Tragen. Abbildung \ref{fig:zeitersparnis} stellt die jeweils erreichte CPU-Zeitersparnis gegenüber.
 \begin{figure}[hpbt]
- \centering
-  %%----start of first subfigure----
-  \subfloat[Filtergröße 256, $k=1$]{
-   \label{fig:multipic1:a} %% label for first subfigure
-   \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn_256.pdf}}
-  \hspace{0.01\textwidth}
-  %%----start of second subfigure----
-  \subfloat[Filtergröße 512, $k=1$]{
-   \label{fig:multipic1:b} %% label for second subfigure
-   \includegraphics[width=0.48\linewidth]{percent_time_nn_512.pdf}}\\[0pt] % horizontal break
-  %%----start of third subfigure----
-  \subfloat[Filtergröße 512, $k=3$]{
-   \label{fig:multipic1:c} %% label for third subfigure
-   \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_256.pdf}}
-  \hspace{0.01\textwidth}
-  %%----start of fourth subfigure----
-  \subfloat[Filtergröße 512, $k=3$]{
-   \label{fig:multipic1:d} %% label for fourth subfigure
-   \includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_512.pdf}}
- \caption[CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im BloomFilterTree.]{CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im BloomFilterTree.}
- \label{fig:multipic1} %% label for entire figure
+	\centering
+	\captionabove[\mbox{CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im BloomFilterTree}]{CPU-Zeitersparnis für \textit{k}-nächste-Nachbarn-Suche im Bloom-Filter-Tree.}\label{fig:zeitersparnis}
+	\includegraphics[width=0.48\linewidth]{pictures/percent_time_nn_256.pdf}
+	\hspace{0.01\textwidth}
+	\includegraphics[width=0.48\linewidth]{percent_time_nn_512.pdf}\\[0pt] % horizontal break
+	\includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_256.pdf}
+	\hspace{0.01\textwidth}
+	\includegraphics[width=0.48\linewidth]{pictures/percent_time_nn3_512.pdf}
 \end{figure}
-Daran wird deutlich, dass die Zeitersparnis mit dem Parameter \textit{k} und der Filtergröße wächst, doch auch für $k=1$ wird bereits CPU-Zeit eingespart. Es ist zu erwarten, dass bei größeren BloomFilterTree-Objekten, höheren Anzahlen an Filtern und ggf. größeren Filtern die Zeitersparnis noch deutlich gesteigert werden kann: 
-
-Beim hier verwendeten Versuchsaufbau werden i.d.R. Bäume mit drei Ebenen aufgebaut, d.h. bei einer Punktanfrage wird auch bei bestehenden Teil- und Obermengenbeziehungen ein großer Teilbaum durchsucht bzw. ein großer Bereich der Blattebene traversiert. Bei größerer Höhe des Baums durch mehr eingefügte Filter kommen damit die Vorteile des entwickelten Verfahrens deutlicher zum Tragen. Wie in Abbildung \ref{fig:multipic1} erkennbar, gilt dies ebenso für höhere Filtergrößen. Die CPU-Zeitersparnis zeigt sich bei Anfragen mit $k>1$ besonders deutlich. Auch hier ist zu erwarten, dass sich die Vorteile des entwickelten Verfahrens bei höheren Bäumen und Filteranzahlen sowie größeren Filtern noch deutlich stärker zeigen.
-\newpage
-\noindent
+Daran wird deutlich, dass die Zeitersparnis mit dem Parameter \textit{k} und der Filtergröße wächst, doch auch für $k=1$ wird bereits CPU-Zeit eingespart. Es ist zu erwarten, dass bei größeren BloomFilterTree-Objekten, höheren Anzahlen an Filtern und ggf. größeren Filtern die Zeitersparnis noch deutlich gesteigert werden kann: Beim hier verwendeten Versuchsaufbau werden i.d.R. Bäume mit drei Ebenen aufgebaut, d.h. bei einer Punktanfrage wird auch bei bestehenden Teil- und Obermengenbeziehungen ein großer Teilbaum durchsucht bzw. ein großer Bereich der Blattebene traversiert. Bei größerer Höhe des Baums durch mehr eingefügte Filter kommen damit die Vorteile des entwickelten Verfahrens deutlicher zum Tragen. Wie in Abbildung \ref{fig:zeitersparnis} erkennbar, gilt dies ebenso für höhere Filtergrößen. Die CPU-Zeitersparnis zeigt sich bei Anfragen mit $k>1$ besonders deutlich. Auch hier ist zu erwarten, dass sich die Vorteile des entwickelten Verfahrens bei höheren Bäumen und Filteranzahlen sowie größeren Filtern noch deutlich stärker zeigen.
+% \newpage
+% \noindent
 Wie in Abschnitt \ref{sec:b+bäume} dargestellt, ist die Komplexität der Suchoperation im B$^+$-Baum abhängig vom Parameter \textit{t}, d.h. dem Grad des Baumes. Die hier verwendeten Bloom\-Filter\-Tree-Objekte haben Grad 3, d.h. die maximale Ausfächerung beträgt 7. Dieser Parameter kann beim Anlegen eines BloomFilterTree-Objekts frei gewählt werden. In der Praxis werden deutlich höhere Werte für \textit{t} verwendet, z.B. mit 10.000 Elementen pro Knoten beim Einsatz in Datenbank-Managementsystemen. Es ist daher davon auszugehen, dass die Anwendung für ein deutlich größeres Szenario prinzipiell gut geeignet wäre.  
 \paragraph*{Speicherbedarf}
 Der zusätzliche Speicherbedarf beim BloomFilterTree gegenüber einem Bloom-Filter-Vektor ergibt sich durch die Allokierung eines Vereinigungsfilters für jeden Knoten. Er ist somit abhängig von der Anzahl der Knoten im Baum. Mit dem verwendeten Versuchsaufbau liegt er um 32\% für den BloomFilter gegenüber einem Bloom-Filter-Vektor. Auch hier ließe sich durch eine geringere Knotenanzahl, d.h. BloomFilterTree-Objekte mit höherem Verzweigungsgrad, noch Speicherplatz einsparen. 
