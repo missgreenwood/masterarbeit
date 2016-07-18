@@ -1,11 +1,19 @@
 \chapter{Konzept}\label{ch:implementierung}
-Das folgende Kapitel beschreibt die Entwicklung einer Indexstruktur zur Optimierung der \textit{k}-nächste-Nachbarn-Suche in AMBIENCE. Sie heißt \textit{BloomFilterTree}. Abschnitt \ref{sec:aufbau} beschreibt den konzeptionellen Aufbau. Die praktische Umsetzung wird in Abschnitt \ref{sec:umsetzung} dargestellt. Die zentralen Operationen Einfügen von Bloom-Filtern und \textit{k}-nächste-Nachbarn-Suche werden in den Abschnitten \ref{sec:einfügen} und \ref{sec:knn} erläutert. Abschließend wird dargestellt, welche alternativen Ansätze während der Implementierung verfolgt und weshalb sie letztlich verworfen wurden (vgl. Abschnitt \ref{sec:alternativen}). Evaluation des Verfahrens und Gegenüberstellung mit der naiven Implementierung finden sich in Kapitel \ref{ch:evaluation}.  
+Das folgende Kapitel beschreibt die Entwicklung einer Indexstruktur zur Optimierung der \textit{k}-nächste-Nachbarn-Suche in AMBIENCE. Sie heißt \textit{BloomFilterTree}. Abschnitt \ref{sec:aufbau} beschreibt den konzeptionellen Aufbau. Die zentralen Operationen Einfügen von Bloom-Filtern und \textit{k}-nächste-Nachbarn-Suche werden in den Abschnitten \ref{sec:einfügen} und \ref{sec:knn} erläutert. Abschließend wird dargestellt, welche alternativen Ansätze zwischenzeitlich verfolgt und weshalb sie letztlich verworfen wurden (vgl. Abschnitt \ref{sec:alternativen}). Evaluation des Verfahrens und Gegenüberstellung mit der naiven Implementierung finden sich in Kapitel \ref{ch:evaluation}.  
 \section{BloomFilterTree}\label{sec:bloom-filter-tree}
-Um möglichst plattformunabhängig zu bleiben, wurde die Implementierung in C++ realisiert. Ausgewählte Codebeispiele finden sich im Anhang (vgl. \ref{ch:anhang}). Zunächst war überlegt worden, teilweise auf bestehende Bibliotheken für Bloom-Filter und Baumstrukturen zurückzugreifen wie die bekannte \textit{Open Bloom Filter}-Bibliothek von Arash Partow\footnote{Vgl. \url{https://github.com/ArashPartow/bloom} (17.07.2016) für den Quellcode.}. Darauf wurde schließlich aus zwei Gründen verzichtet: Einerseits liegt der Fokus der Arbeit nicht auf der Implementierung von Bloom-Filtern. Andererseits stünde durch die Verwendung bestehender Bibliotheken zu befürchten, dass Messergebnisse durch den Rechnenaufwand für nicht benötigte Operationen oder durch in AMBIENCE nicht vorhandene Optimierungen verfälscht würden. 
-
-Eine Bibliothek für B$^+$-Bäume ist z.B. das \textit{STX B+ Tree package} von Timo Bingmann\footnote{Vgl. \url{https://github.com/bingmann/stx-btree} (17.07.2016) für den Quellcode.}. Wie in Abschnitt \ref{sec:bloom-index} dargestellt, sind keine Varianten von Indexstrukturen bekannt, die sich unverändert für AMBIENCE übernehmen ließen. Auch eine bestehende Bibliothek müsste also stark abgewandelt werden. Gleichzeitig könnten dieselben Verfälschungen auftreten wie bei Verwendung einer Bloom-Filter-Bibliothek. So wurde auch davon abgesehen.
+In Anlehnung an die Arbeit von Sakuma und Sato über \textit{"`Structured Bloom Filters Based on Similarity"'} \cite{Sakuma2011} wurde zunächst von einem B$^+$-Baum zur Organisation der Bloom-Filter ausgegangen (vgl. Abschnitt \ref{sec:bloom-index}). Wie in Abschnitt \ref{sec:indexstrukturen} ausführlich dargestellt, handelt es sich dabei um eine Daten-organisierende Indexstruktur mit den folgenden Eigenschaften: 
+\begin{enumerate}
+	\setlength{\itemsep}{20pt}
+	\item \textit{Aufbau:} B$^+$-Bäume wachsen und schrumpfen von der Wurzel ausgehend.
+	\item \textit{Balanciertheit:} Alle Blätter sind auf demselben Level. 
+	\item \textit{Minimaler Grad/Ordnung:} B$^+$-Bäume sind definiert durch die Ordnung oder den minimalen Grad \textit{t}. Jeder innere Knoten enthält mindestens einen Schlüssel, jeder Blattknoten enthält mindestens \textit{t} Schlüssel. 
+	\item \textit{Suchbaumeigenschaft:} Schlüssel sind aufsteigend sortiert.
+	\item \textit{Ordnungsrelation:} Der Kindknoten zwischen den Schlüsseln \textit{k1} und \textit{k2} enthält alle Schlüssel $\geq$ \textit{k1} und < \textit{k2}.
+	\item \textit{Speicherung der Datensätze:} Alle Schlüssel werden auch in den Blättern gespeichert. Die tatsächlichen Datensätze sind mit dem entsprechen Schlüssel im Blatt verknüpft. 
+	\item \textit{Sequentielle Verkettung:} Alle Blätter sind gemäß der Ordnung auf den Primärschlüsseln verkettet. 
+\end{enumerate} 
 \subsection{Aufbau}\label{sec:aufbau} 
-Am vielversprechendsten erschien es, wie Sakuma und Sato in ihrer Arbeit über \textit{"`Structured Bloom Filters Based on Similarity"'} \cite{Sakuma2011} zunächst von einem B$^+$-Baum auszugehen (vgl. Abschnitt \ref{sec:bloom-index}). Dieser wurde zuerst implementiert mit allen Eigenschaften wie in Abschnitt \ref{sec:indexstrukturen} beschrieben. Anschließend wurde er schrittweise zur Organisation der Bloom-Filter erweitert: 
+Anschließend wurde die Indexstruktur schrittweise zur Organisation der Bloom-Filter in AMBIENCE erweitert.
 \begin{enumerate}
 \setlength{\itemsep}{20pt}
 	\item Die Datensätze sind Bloom-Filter, d.h. jedes Blatt hält \textit{n} Zeiger auf die \textit{n} Bloom-Filter-Objekte, die darin eingefügt wurden. Bloom-Filter-Objekte werden über ihre ID als Primärschlüssel identifiziert. 
@@ -14,26 +22,27 @@ Am vielversprechendsten erschien es, wie Sakuma und Sato in ihrer Arbeit über \
 Abbildung \ref{fig:bloomfiltertree} veranschaulicht den Aufbau eines BloomFilterTree. Die Baumknoten sind blau markiert. Sie enhalten die Primärschlüssel der Bloom-Filter sowie Zeiger auf die Kind- bzw. Nachbarknoten. Jeder Knoten hat einen weiß markierten Vereinigungsfilter. Die violett markierten Filter repräsentieren die tatsächlichen Datensätze. Die Blätter verweisen jeweils auf die darin eingefügten Filter.
 \begin{figure}[hpbt]
   \centering
-  %\includegraphics[width=1.0\textwidth]{pictures/bloom-filter-tree.png}\\
   \includegraphics[width=1.0\textwidth]{pictures/bloom-filter-tree2.png}\\
   \caption[Aufbau eines BloomFilterTree]{Aufbau eines BloomFilterTree mit Bloom-Filtern als Datensätze und Vereinigungsfiltern an allen Knoten.}\label{fig:bloomfiltertree}
 \end{figure}
-\subsection{Umsetzung}\label{sec:umsetzung}
-Die Klasse \texttt{BloomFilterTree} enthält schließlich alle notwendigen Parameter und Operationen zur Organisation der Bloom-Filter. Dazu gehören die B$^+$-Baum-Operationen wie Einfügen und Suchen von Schlüsseln, Traversieren der Blätter, boolesche Abfrage nach Enthaltensein eines Schlüssel im Baum, Zählen der Blätter etc. Darüber hinaus gibt es viele weitere Operationen: 
+
+\noindent
+Anschließend stellte sich die Frage, welche Parameter und Operationen zur Organisation der Bloom-Filter aus AMBIENCE in einem BloomFilterTree von Nöten sind. Dazu zählen zunächst B$^+$-Baum-Operationen wie Einfügen und Suchen von Schlüsseln, Traversieren der Blätter, boolesche Abfrage nach Enthaltensein eines Schlüssel im Baum, Zählen der Blätter und viele weitere. Darüber hinaus werden drei Gruppen von Operationen benötigt: 
 \begin{enumerate}
 \setlength{\itemsep}{20pt}
 	\item \textit{Management-Operationen} zum Berechnen der Jaccard-Distanzen zu allen Filtern im Baum, naive Version der \textit{k}-nächste-Nachbarn-Suche, Traversieren der Datensätze etc.
 	\item Die \textit{zentralen Operationen} des Verfahrens: Einfügen der Bloom-Filter nach Ähnlichkeit und \textit{k}-nächste-Nachbarn-Suche. 
 	\item \textit{Mess- und Vergleichsoperationen}, um z.B. Varianten der \textit{k}-nächste-Nachbarn-Suche, Aufbaukosten und Speicherbedarf der Datenstrukturen zu vergleichen. 
 \end{enumerate}
-Die Header-Datei der Klasse \texttt{BloomFilterTree} ist im Anhang abgedruckt (vgl. \ref{ch:anhang}). In der Klasse \texttt{BloomFilter} wurden alle Parameter und Operationen auf Bloom-Filtern realisiert, die sich im Laufe der Arbeit als wichtig erwiesen. Dazu gehören: 
+
+\noindent
+Der nächste Schritt ist die Konzeption der Bloom-Filter-Objekte. Sie sollen einerseits das spezifische Szenario von AMBIENCE möglichst genau abbilden. Andererseits sollen sie sich gemäß den Regeln für B$^+$-Baum und BloomFilterTree in der Indexstruktur organisieren lassen. Folgende Aspekte wurden dabei berücksichtigt: 
 \begin{enumerate}
 \setlength{\itemsep}{20pt}
 	\item \textit{Typische Bloom-Filter-Parameter und -Operationen:} Anzahl der Hashfunktionen, Daten-Array, Setzen von Bitpositionen etc.
 	\item \textit{Mathematische und Vergleichsoperationen} wie Berechnung von Teil- und Obermengen, bitweises logisches Und und Oder, Berechnung und Abschätzung von Jaccard-Distanzen.
 	\item \textit{Operationen zum Bloom-Filter-Management} wie Einfügen von zufälligen Elementen aus einem Wörterbuch oder zufällige Initialisisierung mit Werten aus $\{0,1\}$.
 \end{enumerate}
-Die Header-Datei der Klasse \texttt{BloomFilter} findet sich ebenfalls im Anhang (vgl. \ref{ch:anhang}).
 \subsection{Einfügen}\label{sec:einfügen}
 Die Einfüge-Operation zählt zu den wichtigsten Funktionen der Indexstruktur. Sie ist entscheidend für die Optimierung von Laufzeit und CPU-Zeit der \textit{k}-nächste-Nachbarn-Suche. Der Algorithmus basiert auf den Teil- und Obermengenbeziehungen zwischen Bloom-Filtern. Er verwendet die Vereinigungsfilter der bereits existierenden Knoten, um die optimale Position für den neu einzufügenden Filter zu finden. Falls der Baum noch leer ist, wird ein neuer Blattknoten erstellt und der Filter als erstes Datenobjekt dort eingefügt. Der neue Knoten wird zur Wurzel des BloomFilterTree. Andernfalls wird ausgehend vom Wurzelknoten rekursiv die optimale Position im Baum gesucht. Dazu werden optimale Teil- und Obermengen-IDs des Filters berechnet. Dem Filter wird die neue Teilmengen-ID zugewiesen und er wird gemäß der B$^+$-Baum-Regeln in den Baum eingefügt. Sind Teilmengen- und Obermengen-IDs unterschiedlich, wird ein zweites Datenobjekt mit der Obermengen-ID erstellt und ebenfalls in den Baum eingefügt. Falls der Baum während des Einfügens eine neue Ebene erhalten hat, wird der Elternknoten des alten Wurzelknoten zur neuen Wurzel. Abbildung \ref{fig:insert} verdeutlicht den Ablauf:  
 \begin{figure}[hpbt]
@@ -53,7 +62,6 @@ Die Hauptarbeit des Einfügens findet in den Blattknoten statt, wo die Teilmenge
 	\item Die "`guten"' IDs werden nach Distanz zu einem Teilmengen-Filter des Anfragefilters sortiert. 
 	\item Die ID mit der kleinsten Distanz zu einem Filter, von der der neu einzufügende Filter eine Teilmenge ist, wird als Ergebnis zurückgegeben. 
 \end{enumerate}
-Die Funktion \texttt{computeSubsetId()} der Klasse \texttt{BloomFilterLeaf}, die die optimale Teilmengen-ID für einen neu einzufügenden Bloom-Filter berechnet, ist beispielhaft im Anhang abgedruckt (vgl. \ref{ch:anhang}). Die Berechnung der optimalen Obermengen-ID geschieht analog dazu in der Funktion \texttt{computeSupersetId()}, nur dass dazu die Obermengen des neuen Filters betrachtet werden. 
 \subsection{\textit{k}-nächste-Nachbarn-Suche}\label{sec:knn}
 Das eben beschriebene Verfahren zum Einfügen von Objekten ist wesentlich aufwändiger als die Einfüge-Operation beim B$^+$-Baum. Die Berechnung der optimalen Teil- und Obermengen-IDs für einen neuen Filter dient dazu, Filter mit bestehenden Teil- und Obermengenbeziehungen nahe beieinander im Baum abzuspeichern. Die \textit{k}-nächste-Nachbarn-Suche musste natürlich darauf abgestimmt werden. Sie vergleicht nicht wie in der naiven Implementierung \textit{k}-mal die Distanzen aller Bloom-Filter im Baum zum Anfragefilter und gibt die Filter mit den \textit{k} kleinsten Distanzen zurück. Stattdessen werden die Vereinigungsfilter der Baumknoten danach untersucht, ob sie zum Anfragefilter in Teil- oder Obermengenbeziehung stehen. Ziel ist es, bei einer Anfrage nur den besten Zweig im Baum zu verfolgen.
 
@@ -78,9 +86,7 @@ Hier findet offensichtlich die hauptsächliche Arbeit in den inneren Knoten des 
   \makebox[0pt]{\includegraphics[scale=0.5]{pictures/knn.pdf}}\\
   \caption[\textit{k}-nächste-Nachbarn-Suche im BloomFilterTree]{\textit{k}-nächste-Nachbarn-Suche im BloomFilterTree.}\label{fig:knn}
 \end{figure}
-Der Quellcode der Funktion \mbox{\texttt{simQueryVec()}} der Klasse \texttt{BloomFilterTree}, mit der eine \textit{k}-nächste-Nachbarn-Suche zu einem Anfragefilter in einem BloomFilterTree durchgeführt wird, ist beispielhaft im Anhang abgedruckt (vgl. \ref{ch:anhang}). Wie die Evaluation in Kapitel \ref{ch:evaluation} zeigt, lassen sich mit den vorgestellten Methoden Laufzeit und CPU-Zeit der \textit{k}-nächste-Nachbarn-Suche deutlich reduzieren. 
-
-Es sei angemerkt, dass die B$^+$-Baum-spezifische Bereichssuche bei allen vorgestellten Funktionen von Nutzen ist. Die Einfüge-Operation wird z.B. dadurch erleichtert, dass zum Einsammeln aller freien IDs nur einmal die Blattebene traversiert werden muss. Andere Baumstrukturen benötigen dazu in der Regel eine deutlich komplexere Breiten- oder Tiefensuche. Bei der \textit{k}-nächste-Nachbarn-Suche in einem Teilbaum muss ebenfalls nur der Teilbereich zwischen einem Start- und Endwert traversiert werden. Das liegt daran, dass die Blätter eine doppelt verkettete Liste bilden und die Indexstruktur die Suchbaumeigenschaft auf den Primärschlüsseln, d.h. den Bloom-Filter-IDs, erfüllt.  
+Wie die Evaluation in Kapitel \ref{ch:evaluation} zeigt, lassen sich mit den vorgestellten Methoden Laufzeit und CPU-Zeit der \textit{k}-nächste-Nachbarn-Suche deutlich reduzieren. Es sei angemerkt, dass die B$^+$-Baum-spezifische Bereichssuche bei allen vorgestellten Funktionen von Nutzen ist. Die Einfüge-Operation wird z.B. dadurch erleichtert, dass zum Einsammeln aller freien IDs nur einmal die Blattebene traversiert werden muss. Andere Baumstrukturen benötigen dazu in der Regel eine deutlich komplexere Breiten- oder Tiefensuche. Bei der \textit{k}-nächste-Nachbarn-Suche in einem Teilbaum muss ebenfalls nur der Teilbereich zwischen einem Start- und Endwert traversiert werden. Das liegt daran, dass die Blätter eine doppelt verkettete Liste bilden und die Indexstruktur die Suchbaumeigenschaft auf den Primärschlüsseln, d.h. den Bloom-Filter-IDs, erfüllt.  
 \section{Alternative Ansätze}\label{sec:alternativen}
 Zum Abschluss des Kapitels werden zwei Ansätze vorgestellt, die alternativ zum BloomFilterTree bzw. zur Organisation nach Teil- und Obermengenbeziehungen verfolgt wurden. Letztlich erwies sich jedoch die Kombination aus Baumstruktur und Mengenbeziehungen am erfolgreichsten. 
 \subparagraph*{Einfügen gemäß Jaccard-Distanzen}
