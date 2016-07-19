@@ -1,13 +1,8 @@
-1. Ausarbeitung 
-	
-	* Schlusskorrektur mit Absätzen, Zeilenumbrüchen etc. 
-	* Alle captions für Grafiken nach oben 
-	* "in der Regel"
-	
-2. Abgabe
+Abgabe
 
 	* 3 Exemplare 
-	* Quellcode und alle Latex-Sourcen auf einer CD mit abgeben -> jedem Exemplar der Arbeit muss die CD beiliegen
+	* einseitig oder doppelseitig?
+	* Quellcode und alle Latex-Sourcen auf CD brennen -> jedem Exemplar der Arbeit muss die CD beiliegen
 	* englische Übersetzung des Titels der Masterarbeit angeben (per Email an Dr. Letz) 
 	* Abgabeort: bei Herrn Letz (Mi 13-14), u.U. auch bei Frau Roden (Mo-Do 08:30 - 12:30) oder bei Frau Kroiß (notfalls auch bei einer anderen Institutssekretärin) 
 
