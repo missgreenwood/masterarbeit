@@ -1,3 +1,5 @@
+	* Grafiken mit CPU-Zeitersparnis checken u. evtl. überall austauschen
+
 Abgabe
 
 	* 3 Exemplare 

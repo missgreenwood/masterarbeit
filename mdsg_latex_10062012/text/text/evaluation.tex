@@ -92,14 +92,14 @@ Abbildung \ref{fig:cputime} stellt die CPU-Zeit zur Ausführung der \textit{k}-n
 	\hspace{0.01\textwidth}
 	\subfloat[]{
 	\label{fig:cputime:2}
-	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_256.pdf}}\\[0pt] % horizontal break
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_512.pdf}}\\[0pt] % horizontal break
 	\subfloat[]{
 	\label{fig:cputime:3}
-	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn_512.pdf}}
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn3_256.pdf}}
 	\hspace{0.01\textwidth}
 	\subfloat[]{
 	\label{fig:cputime:4}	
-	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn3_256.pdf}}
+	\includegraphics[width=0.48\linewidth]{pictures/cputime_nn3_512.pdf}}
 \end{figure}
 \paragraph*{Speicherbedarf}
 Abbildung \ref{fig:pic18} stellt den Speicherbedarf für BloomFilterTree und unsortierte Liste gegenüber. Objekte vom Typ BloomFilterTree sind darin blau, Objekte vom Typ \texttt{std::vector<BloomFilter>} grün markiert. Ein höherer Wert ist so zu lesen, dass mehr Speicher für die jeweilige Datenstruktur benötigt wird. Das ist also ungünstiger bzw. diese Datenstruktur ist teurer. Für beide Datenstrukturen wurden jeweils Instanzen mit 256 Bit und 512 Bit Filtergröße untersucht. 
