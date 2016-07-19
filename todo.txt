@@ -3,8 +3,6 @@
 	* Schlusskorrektur mit Absätzen, Zeilenumbrüchen etc. 
 	* Alle captions für Grafiken nach oben 
 	* "in der Regel"
-
-	III: Mehr Related work (z.B. Organisation v. Mengen von Bloom-Filtern, Berechnung i-te Hashwerte)
 	
 2. Abgabe
 
